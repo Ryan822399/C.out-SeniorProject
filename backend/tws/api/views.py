@@ -15,6 +15,10 @@ from django.contrib.auth.models import User
 
 from django.shortcuts import get_object_or_404
 
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+class WorkoutViewSet(viewsets.ModelViewSet):
+    queryset = Workout.objects.all()
+    serializer_class = (WorkoutSerializer, )
+
+class RatingViewSet(viewsets.ModelViewSet):
+    queryset = Rating.objects.all()
+    serializer_class = (RatingSerializer, )
