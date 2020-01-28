@@ -2,7 +2,7 @@
 
 **BACKEND**
 
-For Backend, go to Vitality folder, CD into backend.
+For Backend, go to backend folder.
 
 Install the virtual environment if you have't done so.
 
@@ -22,7 +22,7 @@ Download the dependencies (Django and DjangoRestFramework) if you haven't done s
 pipenv install
 ```
 
-To run the server, CD into lbvitality and run:
+To run the server, CD into tws and run:
 
 ```
 python manage.py runserver
