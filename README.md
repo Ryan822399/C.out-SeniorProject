@@ -22,6 +22,12 @@ Download the dependencies (Django and DjangoRestFramework) if you haven't done s
 pipenv install
 ```
 
+Download the headers for Django
+```
+pip install django-cors-headers
+pip install Django-rest-frameworks
+```
+
 To run the server, CD into tws and run:
 
 ```
