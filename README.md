@@ -25,7 +25,7 @@ pipenv install
 Download the headers for Django
 ```
 pip install django-cors-headers
-pip install Django-rest-frameworks
+pip install Django-rest-framework
 ```
 
 To run the server, CD into tws and run:
