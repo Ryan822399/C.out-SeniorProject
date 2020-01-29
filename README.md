@@ -1,4 +1,4 @@
-# SeniorProject
+# Group: C.out
 
 **BACKEND**
 
