@@ -4,5 +4,6 @@ from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
     path('api/', include('api.urls')),
+    path('auth/', obtain_auth_token),
     path('admin/', admin.site.urls),
 ]

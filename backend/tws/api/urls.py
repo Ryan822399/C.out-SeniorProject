@@ -4,7 +4,7 @@ from django.urls import path
 from django.conf.urls import include
 
 router = routers.DefaultRouter()
-
+router.register('users', UserViewSet)
 router.register('workouts', WorkoutViewSet)
 router.register('ratings', RatingViewSet)
 

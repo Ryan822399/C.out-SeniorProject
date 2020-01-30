@@ -15,9 +15,14 @@ from django.contrib.auth.models import User
 
 from django.shortcuts import get_object_or_404
 
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
 class WorkoutViewSet(viewsets.ModelViewSet):
     queryset = Workout.objects.all()
     serializer_class = WorkoutSerializer
+    authentication_classes = (TokenAuthentication,)
 
     @action(detail=True, methods=['POST'])
     def rate_workout(self, request, pk=None):
@@ -25,8 +30,7 @@ class WorkoutViewSet(viewsets.ModelViewSet):
 
             workout = Workout.objects.get(id=pk)
             stars = request.data['stars']
-            #user = request.user
-            user = User.objects.get(id=1)
+            user = request.user
 
             try:
                 rating = Rating.objects.get(user=user.id, workout=workout.id)
@@ -47,3 +51,4 @@ class WorkoutViewSet(viewsets.ModelViewSet):
 class RatingViewSet(viewsets.ModelViewSet):
     queryset = Rating.objects.all()
     serializer_class = RatingSerializer
+    authentication_classes = (TokenAuthentication,)
