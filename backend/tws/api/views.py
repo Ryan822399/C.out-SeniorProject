@@ -17,8 +17,33 @@ from django.shortcuts import get_object_or_404
 
 class WorkoutViewSet(viewsets.ModelViewSet):
     queryset = Workout.objects.all()
-    serializer_class = (WorkoutSerializer, )
+    serializer_class = WorkoutSerializer
+
+    @action(detail=True, methods=['POST'])
+    def rate_workout(self, request, pk=None):
+        if 'stars' in request.data:
+
+            workout = Workout.objects.get(id=pk)
+            stars = request.data['stars']
+            #user = request.user
+            user = User.objects.get(id=1)
+
+            try:
+                rating = Rating.objects.get(user=user.id, workout=workout.id)
+                rating.stars = stars
+                rating.save()
+                serializer = RatingSerializer(rating, many=False)
+                response = {'message': 'Rating Updated Successfully', 'result': serializer.data}
+                return Response(response, status=status.HTTP_200_OK)
+            except:
+                 rating = Rating.objects.create(user=user, workout=workout, stars=stars)
+                 serializer = RatingSerializer(rating, many=False)
+                 response = {'message': 'Rating Created Successfully', 'result': serializer.data}
+                 return Response(response, status=status.HTTP_200_OK)
+        else:
+            response = {'message': 'Stars must be provided'}
+            return Response(response, status=status.HTTP_400_BAD_REQUEST)
 
 class RatingViewSet(viewsets.ModelViewSet):
     queryset = Rating.objects.all()
-    serializer_class = (RatingSerializer, )
+    serializer_class = RatingSerializer
