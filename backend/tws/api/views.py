@@ -23,6 +23,7 @@ class WorkoutViewSet(viewsets.ModelViewSet):
     queryset = Workout.objects.all()
     serializer_class = WorkoutSerializer
     authentication_classes = (TokenAuthentication,)
+    permissions_classes = (IsAuthenticated, )
 
     @action(detail=True, methods=['POST'])
     def rate_workout(self, request, pk=None):
@@ -47,8 +48,17 @@ class WorkoutViewSet(viewsets.ModelViewSet):
         else:
             response = {'message': 'Stars must be provided'}
             return Response(response, status=status.HTTP_400_BAD_REQUEST)
+    #disabling update and create mehtod for workout endpoint
+    def update(self, request, *args, **kwargs):
+        response = {'message': 'Rating May Not Be Updated This Way'}
+        return Response(response, status=status.HTTP_400_BAD_REQUEST)
+
+    def create(self, request, *args, **kwargs):
+        response = {'message': 'Rating May Not Be Create This Way'}
+        return Response(response, status=status.HTTP_400_BAD_REQUEST)
 
 class RatingViewSet(viewsets.ModelViewSet):
     queryset = Rating.objects.all()
     serializer_class = RatingSerializer
     authentication_classes = (TokenAuthentication,)
+    permissions_classes = (IsAuthenticated, )

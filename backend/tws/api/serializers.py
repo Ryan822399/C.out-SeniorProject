@@ -11,6 +11,7 @@ class UserSerializer(serializers.ModelSerializer):
     #overwriting create method from user view
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
+        Token.objects.create(user=user)
         return user
 
 class WorkoutSerializer(serializers.ModelSerializer):
