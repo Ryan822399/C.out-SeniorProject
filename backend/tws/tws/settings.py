@@ -28,9 +28,9 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': {
+    'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated'
-    }
+    ]
 }
 
 
@@ -60,7 +60,14 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+#for development
 CORS_ORIGIN_ALLOW_ALL = True
+
+#for production
+#CORS_ORIGIN_WHITELIST = (
+#    'localhost:3000',
+#    '127.0.0.1:3000'
+#)
 
 CORS_ALLOW_HEADERS = (
     'accept',

@@ -18,6 +18,7 @@ from django.shortcuts import get_object_or_404
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permissions_classes = (AllowAny, )
 
 class WorkoutViewSet(viewsets.ModelViewSet):
     queryset = Workout.objects.all()
@@ -53,9 +54,9 @@ class WorkoutViewSet(viewsets.ModelViewSet):
         response = {'message': 'Rating May Not Be Updated This Way'}
         return Response(response, status=status.HTTP_400_BAD_REQUEST)
 
-    def create(self, request, *args, **kwargs):
-        response = {'message': 'Rating May Not Be Create This Way'}
-        return Response(response, status=status.HTTP_400_BAD_REQUEST)
+#    def create(self, request, *args, **kwargs):
+#        response = {'message': 'Rating May Not Be Create This Way'}
+#        return Response(response, status=status.HTTP_400_BAD_REQUEST)
 
 class RatingViewSet(viewsets.ModelViewSet):
     queryset = Rating.objects.all()
