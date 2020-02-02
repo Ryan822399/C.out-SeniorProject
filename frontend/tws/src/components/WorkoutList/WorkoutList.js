@@ -13,11 +13,13 @@ function WorkoutList(props) {
   }
 
   const removeClicked = workout => {
+    console.log('DELETING');
+    console.log(props);
     fetch(`${process.env.REACT_APP_API_URL}/api/workouts/${workout.id}/`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Token ${this.props.token}`
+        'Authorization': `Token ${props.token}`
       }
     }).then( resp => this.props.workoutDeleted(workout))
     .catch( error => console.log(error))

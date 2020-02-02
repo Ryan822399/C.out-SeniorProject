@@ -76,7 +76,8 @@ class App extends Component{
           />
           <div>
             {!this.state.editedWorkout ?
-              <WorkoutDetails workout={this.state.selectedWorkout} token={this.state.token}
+              <WorkoutDetails workout={this.state.selectedWorkout}
+              token={this.state.token}
               updateWorkout={this.loadWorkout}/>
              : <WorkoutForm newWorkout={this.addWorkout}
              workout={this.state.editedWorkout}
