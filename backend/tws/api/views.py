@@ -54,12 +54,12 @@ class WorkoutViewSet(viewsets.ModelViewSet):
         response = {'message': 'Rating May Not Be Updated This Way'}
         return Response(response, status=status.HTTP_400_BAD_REQUEST)
 
-#    def create(self, request, *args, **kwargs):
-#        response = {'message': 'Rating May Not Be Create This Way'}
-#        return Response(response, status=status.HTTP_400_BAD_REQUEST)
+    def create(self, request, *args, **kwargs):
+        response = {'message': 'Rating May Not Be Create This Way'}
+        return Response(response, status=status.HTTP_400_BAD_REQUEST)
 
 class RatingViewSet(viewsets.ModelViewSet):
     queryset = Rating.objects.all()
     serializer_class = RatingSerializer
     authentication_classes = (TokenAuthentication,)
-    permissions_classes = (IsAuthenticated, )
+    permission_classes = (IsAuthenticated, )

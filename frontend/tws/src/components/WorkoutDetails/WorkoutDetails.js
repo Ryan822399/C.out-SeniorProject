@@ -18,7 +18,7 @@ class WorkoutDetails extends Component {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Token ${this.state.token}`
+        'Authorization': `Token ${this.props.token}`
       },
       body: JSON.stringify({
         stars: stars + 1
@@ -33,7 +33,7 @@ class WorkoutDetails extends Component {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Token ${this.state.token}`
+        'Authorization': `Token ${this.props.token}`
       }
     }).then( resp => resp.json())
     .then( res => this.props.updateWorkout(res))
