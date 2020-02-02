@@ -24,7 +24,7 @@ class WorkoutForm extends Component {
      method: 'POST',
      headers: {
        'Content-Type': 'application/json',
-       'Authorization': `Token ${this.state.token}`
+       'Authorization': `Token ${this.props.token}`
      },
      body: JSON.stringify(this.state.editedWorkout)
    }).then( resp => resp.json())
@@ -38,7 +38,7 @@ class WorkoutForm extends Component {
      method: 'PUT',
      headers: {
        'Content-Type': 'application/json',
-       'Authorization': `Token ${this.state.token}`
+       'Authorization': `Token ${this.props.token}`
      },
      body: JSON.stringify(this.state.editedWorkout)
    }).then( resp => resp.json())

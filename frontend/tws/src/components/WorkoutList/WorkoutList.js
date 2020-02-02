@@ -17,7 +17,7 @@ function WorkoutList(props) {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Token ${this.state.token}`
+        'Authorization': `Token ${this.props.token}`
       }
     }).then( resp => this.props.workoutDeleted(workout))
     .catch( error => console.log(error))
