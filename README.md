@@ -39,7 +39,7 @@ Server at http://localhost:8000/
 **FRONTEND**
 
 First make sure you run the backend server.
-For Frontend, go to frontend folder, CD into tws.
+For Frontend, go to frontend folder, CD into tws and run.
 
 ```
 npm start
