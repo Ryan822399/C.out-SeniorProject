@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 import {Container, Row, Col, Image} from 'react-bootstrap';
 
 class Profile extends Component {
