@@ -8,9 +8,7 @@ class Graphs extends Component {
     }
 
     render(){
-        return <div className = 'graphs-container'>
-
-        </div>
+        return <h1>Graphs</h1>;
     }
 }
 
