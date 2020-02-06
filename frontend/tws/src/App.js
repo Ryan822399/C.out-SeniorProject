@@ -7,7 +7,7 @@ import WorkoutForm from './components/WorkoutForm/WorkoutForm';
 import {Router, Route} from 'react-router';
 //import Profile from './components/Profile/Profile';
 import Graphs from './components/Graphs/Graphs';
-import { BrowserRouter } from 'react-router-dom';
+import Nav from './Nav';
 
 var FontAwesome = require('react-fontawesome');
 
@@ -67,6 +67,8 @@ class App extends Component{
 
     return (
       <div className="App">
+        <Nav />
+        <Graphs />
         <h1>
           <FontAwesome name="heartbeat" />
           <span>TWS</span>
@@ -89,11 +91,6 @@ class App extends Component{
              token={this.state.token}
              cancelForm={this.cancelForm}/> }
           </div>
-        </div>
-        <div className = "navigation">
-          <Router>
-              <Route path = {"graphs"} component = {Graphs} />
-          </Router>
         </div>
       </div>
     );

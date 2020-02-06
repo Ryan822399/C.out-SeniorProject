@@ -88,3 +88,12 @@ h1 span.fa {
   width: 50%;
   margin: 50px 25%;
 }
+
+nav{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 10vh;
+  background: rgb(203, 206, 207);
+  color: white;
+}

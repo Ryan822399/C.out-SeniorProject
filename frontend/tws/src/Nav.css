@@ -1,0 +1,18 @@
+.App {
+    text-align: center;
+    background-color: #282c34;
+    min-height: calc(100vh);
+  
+    color: white;
+    margin: 0;
+    padding: 50px;
+  }
+  
+nav{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 10vh;
+    background: rgb(73,79,82);
+    color: white;
+ }
