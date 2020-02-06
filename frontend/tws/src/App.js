@@ -4,8 +4,10 @@ import './App.css';
 import WorkoutList from './components/WorkoutList/WorkoutList';
 import WorkoutDetails from './components/WorkoutDetails/WorkoutDetails';
 import WorkoutForm from './components/WorkoutForm/WorkoutForm';
+import {Router, Route} from 'react-router';
 //import Profile from './components/Profile/Profile';
 import Graphs from './components/Graphs/Graphs';
+import { BrowserRouter } from 'react-router-dom';
 
 var FontAwesome = require('react-fontawesome');
 
@@ -86,8 +88,12 @@ class App extends Component{
              workout={this.state.editedWorkout}
              token={this.state.token}
              cancelForm={this.cancelForm}/> }
-
           </div>
+        </div>
+        <div className = "navigation">
+          <Router>
+              <Route path = {"graphs"} component = {Graphs} />
+          </Router>
         </div>
       </div>
     );
