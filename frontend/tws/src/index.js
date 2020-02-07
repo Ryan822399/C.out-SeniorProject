@@ -5,6 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Route, BrowserRouter} from 'react-router-dom';
 import Login from './components/Login/Login';
+import Profile from './components/Profile/Profile';
 import { CookiesProvider } from 'react-cookie';
 
 const routing = (
@@ -12,6 +13,7 @@ const routing = (
     <CookiesProvider>
       <Route exact path="/" component={Login}/>
       <Route exact path="/workouts" component={App}/>
+      <Route exact path="/profile" component={Profile}/>
     </CookiesProvider>
   </BrowserRouter>
 )

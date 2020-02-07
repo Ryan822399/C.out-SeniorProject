@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import {Container, Row, Col, Image} from 'react-bootstrap';
+import {Card, ListGroup, ListGroupItem} from 'react-bootstrap';
 
 class Profile extends Component {
 
@@ -10,20 +10,26 @@ class Profile extends Component {
   render() {
     return (
       <div>
-      <h1>Test Profile Page</h1>
-      <Container>
-        <Row>
-          <Col xs={6} md={4}>
-            <Image src="https://images-na.ssl-images-amazon.com/images/I/81dhrXbZyDL._AC_SY355_.jpg" rounded />
-          </Col>
-          <Col xs={6} md={4}>
-            <Image src="holder.js/171x180" roundedCircle />
-          </Col>
-          <Col xs={6} md={4}>
-            <Image src="holder.js/171x180" thumbnail />
-          </Col>
-        </Row>
-      </Container>
+      <h1>Profile</h1>
+      <Card style={{ width: '18rem' }}>
+        <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
+        <Card.Body>
+          <Card.Title>Card Title</Card.Title>
+          <Card.Text>
+            Some quick example text to build on the card title and make up the bulk of
+            the card's content.
+          </Card.Text>
+        </Card.Body>
+        <ListGroup className="list-group-flush">
+          <ListGroupItem>Cras justo odio</ListGroupItem>
+          <ListGroupItem>Dapibus ac facilisis in</ListGroupItem>
+          <ListGroupItem>Vestibulum at eros</ListGroupItem>
+        </ListGroup>
+        <Card.Body>
+          <Card.Link href="#">Card Link</Card.Link>
+          <Card.Link href="#">Another Link</Card.Link>
+        </Card.Body>
+      </Card>
       </div>
     )
   }
