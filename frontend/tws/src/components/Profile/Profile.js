@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../../css/Profile.css';
 
 import {Card, ListGroup, ListGroupItem} from 'react-bootstrap';
 
@@ -10,26 +11,29 @@ class Profile extends Component {
   render() {
     return (
       <div>
-      <h1>Profile</h1>
-      <Card style={{ width: '18rem' }}>
-        <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
-        <Card.Body>
-          <Card.Title>Card Title</Card.Title>
-          <Card.Text>
-            Some quick example text to build on the card title and make up the bulk of
-            the card's content.
-          </Card.Text>
-        </Card.Body>
-        <ListGroup className="list-group-flush">
-          <ListGroupItem>Cras justo odio</ListGroupItem>
-          <ListGroupItem>Dapibus ac facilisis in</ListGroupItem>
-          <ListGroupItem>Vestibulum at eros</ListGroupItem>
-        </ListGroup>
-        <Card.Body>
-          <Card.Link href="#">Card Link</Card.Link>
-          <Card.Link href="#">Another Link</Card.Link>
-        </Card.Body>
-      </Card>
+        <header className="Header">
+          <h1>Profile</h1>
+        </header>
+        <body className="Body">
+          <Card className="UserProfile" style={{ width: '18rem' }}>
+            <Card.Img variant="top" src="https://fyf.tac-cdn.net/images/products/large/BF116-11KM_R.jpg?auto=webp&quality=60" />
+            <Card.Body className="UserBody">
+              <Card.Title className="Username">Master</Card.Title>
+              <Card.Text className="UserBio">
+                The Master is the Master of all Masters.
+              </Card.Text>
+            </Card.Body>
+            <ListGroup className="list-group-flush">
+              <ListGroupItem>Joined February 6th, 2020</ListGroupItem>
+              <ListGroupItem>Dapibus ac facilisis in</ListGroupItem>
+              <ListGroupItem>Vestibulum at eros</ListGroupItem>
+            </ListGroup>
+            <Card.Body>
+              <Card.Link href="#">Card Link</Card.Link>
+              <Card.Link href="#">Another Link</Card.Link>
+            </Card.Body>
+          </Card>
+        </body>
       </div>
     )
   }

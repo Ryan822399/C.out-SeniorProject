@@ -1,0 +1,33 @@
+* {
+  margin: 0;
+  padding: 0;
+  background: black;
+}
+
+.Header {
+  padding: 10px;
+}
+
+.Body {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  background: lightgreen;
+}
+
+.UserProfile {
+  background: white;
+  color: black;
+}
+
+.UserBody {
+  background: white;
+}
+
+.Username {
+  background: white;
+}
+
+.UserBio {
+  background: white;
+}
