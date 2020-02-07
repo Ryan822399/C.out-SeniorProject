@@ -29,22 +29,22 @@ function WorkoutList(props) {
     props.newWorkout();
   }
 
-  return (
-    <div>
-     { props.workouts.map( workout => {
-      return (
-        <div key={workout.id} className="workout-item">
-          <h3  onClick={workoutClicked(workout)}>
-            {workout.title}
-          </h3>
-          <FontAwesome name="edit" onClick={() => editClicked(workout)}/>
-          <FontAwesome name="trash" onClick={() => removeClicked(workout)}/>
-        </div>
-      )
-      })}
-      <button onClick={newWorkout}> Add New </button>
-    </div>
-  )
+  return (null)
+    //<div>
+     // { [...Array(5)].map( workout => {
+     //  return (
+     //    <div key={workout.id} className="workout-item">
+     //      <h3  onClick={workoutClicked(workout)}>
+     //        {workout.title}
+     //      </h3>
+     //      <FontAwesome name="edit" onClick={() => editClicked(workout)}/>
+     //      <FontAwesome name="trash" onClick={() => removeClicked(workout)}/>
+     //    </div>
+     //  )
+     //  })}
+      //<button onClick={newWorkout}> Add New </button>
+    //</div>
+        //)
 }
 
 export default WorkoutList;
