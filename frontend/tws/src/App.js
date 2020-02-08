@@ -4,6 +4,8 @@ import './App.css';
 import WorkoutList from './components/WorkoutList/WorkoutList';
 import WorkoutDetails from './components/WorkoutDetails/WorkoutDetails';
 import WorkoutForm from './components/WorkoutForm/WorkoutForm';
+import Profile from './components/Profile/Profile';
+
 var FontAwesome = require('react-fontawesome');
 
 
@@ -67,6 +69,7 @@ class App extends Component{
           <span>TWS</span>
         </h1>
         <div className="layout">
+          <Profile/>
           <WorkoutList workouts={this.state.workouts}
             workoutClicked={this.loadWorkout}
             workoutDeleted={this.workoutDeleted}
