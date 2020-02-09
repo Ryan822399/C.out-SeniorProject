@@ -2,14 +2,20 @@ import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/Profile.css';
 
-import {Image, Navbar, Nav, NavDropdown, Form, FormControl, Button, Media} from 'react-bootstrap';
+import {Image, Navbar, Nav, NavDropdown, Form, FormControl, Button, Media, Card, CardGroup} from 'react-bootstrap';
 
 
 
 class Profile extends Component {
 
   render() {
+    function Color() {
+      let styles = {
+        color: 'black',
+      };
+    }
     return (
+
       <div>
         <Navbar className="navigation" bg="light" expand="lg">
           <Navbar.Brand href="#home">TWS</Navbar.Brand>
@@ -41,15 +47,56 @@ class Profile extends Component {
             alt="Joker Peter Griffin"
           />
           <Media.Body>
-            <h5>Peter Griffin (Joker)</h5>
+            <h5>
+              Peter Griffin (Joker)
+            </h5>
             <p>
-              Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque
-              ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at,
-              tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla.
-              Donec lacinia congue felis in faucibus.
+              Peter Griffin is the main character of the American animated sitcom Family Guy. He is voiced by the series' creator, Seth MacFarlane, and first appeared on television, along with the rest of the Griffin family, in the 15-minute pilot pitch of Family Guy on December 20, 1998. Peter was created and designed by MacFarlane himself. MacFarlane was asked to pitch a pilot to the Fox Broadcasting Company based on Larry & Steve, a short made by MacFarlane which featured a middle-aged character named Larry and an intellectual dog, Steve. After the pilot was given the green light, the Griffin family appeared in the episode "Death Has a Shadow".
             </p>
           </Media.Body>
         </Media>
+        <h3>
+          Posts
+        </h3>
+
+        <CardGroup>
+          <Card>
+            <Card.Img variant="top" src="https://i.ytimg.com/vi/eV5fUPU7zIU/maxresdefault.jpg" />
+            <Card.Body>
+              <Card.Title>Forcing My Wife To Eat</Card.Title>
+              <Card.Text>
+                This was a pretty fun experience even though I almost got her killed. #tbt
+              </Card.Text>
+            </Card.Body>
+            <Card.Footer>
+              <small className="text-muted">Last updated 3 mins ago</small>
+            </Card.Footer>
+          </Card>
+          <Card>
+            <Card.Img variant="top" src="https://www.nydailynews.com/resizer/n4XDpTyDGkvQpEQle3t1lwIlUaQ=/415x233/top/www.trbimg.com/img-5c3ca7a6/turbine/ny-1547478934-8c63008drk-snap-image" />
+            <Card.Body>
+              <Card.Title>Peter Griffin vs. Donald Trump</Card.Title>
+              <Card.Text>
+                What can I say? I showed him the hands.
+              </Card.Text>
+            </Card.Body>
+            <Card.Footer>
+              <small className="text-muted">Last updated 3 mins ago</small>
+            </Card.Footer>
+          </Card>
+          <Card>
+            <Card.Img variant="top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSflIQPy04nkBdQf-LAPsDmvhiKruzqPiHX-IwCjEUHxZHw4wNZ" />
+            <Card.Body>
+              <Card.Title>Peter The Hedgehog</Card.Title>
+              <Card.Text>
+                #GottaGoFast
+              </Card.Text>
+            </Card.Body>
+            <Card.Footer>
+              <small className="text-muted">Last updated 3 mins ago</small>
+            </Card.Footer>
+          </Card>
+        </CardGroup>
 
         {/*
         <header>
