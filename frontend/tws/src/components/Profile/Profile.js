@@ -19,14 +19,14 @@ class Profile extends Component {
       <div>
         <body>
           <Navbar className="navigation" bg="light" expand="lg">
-            <Navbar.Brand id="top" href="http://localhost:3000/profile">TWS</Navbar.Brand>
+            <Navbar.Brand id="top" href="http://localhost:3000/HomePage">TWS</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="mr-auto">
                 <Nav.Link href="http://localhost:3000/profile">Profile</Nav.Link>
                 <Nav.Link href="#Friends">Friends</Nav.Link>
                 <Nav.Link href="#Graphs">Graphs</Nav.Link>
-                <Nav.Link href="#Workout">Workout</Nav.Link>
+                <Nav.Link href="http://localhost:3000/workouts">Workouts</Nav.Link>
                 <Nav.Link href="#Timeline">Timeline</Nav.Link>
                 <Nav.Link href="#PublicForum">Public Forum</Nav.Link>
                 <NavDropdown title="Dropdown" id="basic-nav-dropdown">
