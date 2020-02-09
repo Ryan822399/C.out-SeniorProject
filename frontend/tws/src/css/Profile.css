@@ -1,9 +1,69 @@
+
+.navigation {
+  background-color: #222;
+}
+
+
+/*
 * {
   margin: 0;
   padding: 0;
+  color: lightgreen;
+}
+
+div {
   background: black;
 }
 
+.body {
+  background: lightgreen;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profileHeader {
+  background: white;
+  width: 75%;
+  text-align: center;
+  clear: all;
+}
+
+.profileImage {
+  margin: 2%;
+  width: 20%;
+  border-radius: 50%;
+  float: left;
+  display: inline;
+}
+
+.box {
+  float: left;
+  display: inline;
+  color: black;
+  margin: 10%;
+  background: white;
+  border: 1px solid black;
+  width: 15%;
+  height: 10%;
+}
+
+.name {
+  clear: all;
+  width: 25%;
+}
+
+.bio {
+  padding: 0 10px;
+  text-align: left;
+  width: 100%;
+}
+*/
+
+
+
+
+/*
 .Header {
   padding: 10px;
 }
@@ -15,9 +75,15 @@
   background: lightgreen;
 }
 
+.Image {
+  width: 50%;
+  float: left;
+}
+
 .UserProfile {
   background: white;
   color: black;
+  width: 100%;
 }
 
 .UserBody {
@@ -31,3 +97,4 @@
 .UserBio {
   background: white;
 }
+*/
