@@ -29,3 +29,11 @@ class Rating(models.Model):
     class Meta:
         unique_together = (('user', 'workout'),)
         index_together = (('user', 'workout'),)
+
+class User(models.Model):
+    firstName = models.CharField(max_length = 30)
+    lastName = models.CharField(max_length = 30)
+    userName = models.CharField(max_length = 30)
+    password = models.CharField(max_length = 30)
+    email = models.EmailField()
+    bio = models.TextField()
