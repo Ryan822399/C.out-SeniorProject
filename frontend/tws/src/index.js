@@ -8,6 +8,7 @@ import Login from './components/Login/Login';
 import Profile from './components/Profile/Profile';
 import { CookiesProvider } from 'react-cookie';
 import HomePage from './components/HomePage/HomePage';
+import Graphs from './components/Graphs/Graphs';
 
 const routing = (
   <BrowserRouter>
@@ -16,6 +17,7 @@ const routing = (
       <Route exact path="/HomePage" component={HomePage}/>
       <Route exact path="/workouts" component={App}/>
       <Route exact path="/profile" component={Profile}/>
+      <Route exact path="/graphs" component={Graphs}/>
     </CookiesProvider>
   </BrowserRouter>
 )
