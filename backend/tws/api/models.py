@@ -30,9 +30,16 @@ class Rating(models.Model):
         unique_together = (('user', 'workout'),)
         index_together = (('user', 'workout'),)
 
-class Post(models.Model):
-    title = models.TextField()
-    cover = models.ImageField(upload_to='images/')
+class User(models.Model):
+    firstName = models.CharField(max_length = 30)
+    lastName = models.CharField(max_length = 30)
+    userName = models.CharField(max_length = 30)
+    password = models.CharField(max_length = 30)
+    email = models.EmailField()
+    bio = models.TextField()
 
-    def __str__(self):
-        return self.title
+
+
+
+
+
