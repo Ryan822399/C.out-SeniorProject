@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/Profile.css';
 import {Line} from 'react-chartjs-2'
-//import "chartjs-plugin-lineheight-annotation";  
+import "chartjs-plugin-lineheight-annotation";  
 
 import {Image, Navbar, Nav, NavDropdown, Form, FormControl, Button, Media, Card, CardGroup} from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
@@ -104,7 +104,11 @@ class Graphs extends Component {
             <h3>Graph Samples</h3> 
             <Line 
                 options ={{
-                    responsive: true
+                    responsive: true,
+                    lineHeightAnnotation: {
+                        always: false,
+                        hover: true
+                    }
                 }}
                 data = {this.getChartData}
             />
