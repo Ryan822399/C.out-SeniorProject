@@ -6,6 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import { Route, BrowserRouter} from 'react-router-dom';
 import Login from './components/Login/Login';
 import Profile from './components/Profile/Profile';
+import Friends from './components/Friends/Friends';
 import { CookiesProvider } from 'react-cookie';
 import HomePage from './components/HomePage/HomePage';
 import Graphs from './components/Graphs/Graphs';
@@ -18,6 +19,7 @@ const routing = (
       <Route exact path="/workouts" component={App}/>
       <Route exact path="/profile" component={Profile}/>
       <Route exact path="/graphs" component={Graphs}/>
+      <Route exact path="/friends" component={Friends}/>
     </CookiesProvider>
   </BrowserRouter>
 )
