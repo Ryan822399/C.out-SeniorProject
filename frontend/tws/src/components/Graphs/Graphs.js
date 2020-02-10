@@ -5,7 +5,7 @@ import {Line} from 'react-chartjs-2'
 import "chartjs-plugin-lineheight-annotation";  
 
 import {Image, Navbar, Nav, NavDropdown, Form, FormControl, Button, Media, Card, CardGroup} from 'react-bootstrap';
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 
 
 
@@ -107,7 +107,9 @@ class Graphs extends Component {
                     responsive: true,
                     lineHeightAnnotation: {
                         always: false,
-                        hover: true
+                        hover: true,
+                        color: 'white',
+                        noDash: true
                     }
                 }}
                 data = {this.getChartData}
