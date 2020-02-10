@@ -5,6 +5,7 @@ import WorkoutList from './components/WorkoutList/WorkoutList';
 import WorkoutDetails from './components/WorkoutDetails/WorkoutDetails';
 import WorkoutForm from './components/WorkoutForm/WorkoutForm';
 import Profile from './components/Profile/Profile';
+import HomePage from './components/HomePage/HomePage';
 
 var FontAwesome = require('react-fontawesome');
 

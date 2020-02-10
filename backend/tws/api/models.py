@@ -37,3 +37,9 @@ class User(models.Model):
     password = models.CharField(max_length = 30)
     email = models.EmailField()
     bio = models.TextField()
+
+
+
+
+
+
