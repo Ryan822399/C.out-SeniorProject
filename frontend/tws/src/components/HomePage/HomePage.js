@@ -22,7 +22,7 @@ class HomePage extends Component {
                   <Nav className="mr-auto">
                     <Nav.Link href="http://localhost:3000/profile">Profile</Nav.Link>
                     <Nav.Link href="#Friends">Friends</Nav.Link>
-                    <Nav.Link href="#Graphs">Graphs</Nav.Link>
+                    <Nav.Link href="http://localhost:3000/graphs">Graphs</Nav.Link>
                     <Nav.Link href="http://localhost:3000/workouts">Workouts</Nav.Link>
                     <Nav.Link href="#Timeline">Timeline</Nav.Link>
                     <Nav.Link href="#PublicForum">Public Forum</Nav.Link>
