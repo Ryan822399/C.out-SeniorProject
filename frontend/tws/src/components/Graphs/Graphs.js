@@ -20,8 +20,9 @@ class Graphs extends Component {
                 datasets: [
                     {
                         label: "Workout #1",
-                        backgroundColor: "rgba(255, 0, 255, 0.75",
-                        data: [4, 5, 1, 12, 20, 2, 16]
+                        backgroundColor: "rgba(255, 0, 255, 0.75)",
+                        pointHoberBackgroundColor: 'white',
+                        data: [4, 5, 1, 12, 20, 2, 16],                           
                     },
                     {
                         label: "Workout #2",
@@ -104,12 +105,22 @@ class Graphs extends Component {
             <h3>Graph Samples</h3> 
             <Line 
                 options ={{
+                    title:{
+                        display: true,
+                        text: 'Workout Routine',
+                        fontSize: 25,
+                        fontColor: 'white'
+                    },
+                    label:{
+                        display: true,
+                        fontColor: 'white'
+                    },
                     responsive: true,
                     lineHeightAnnotation: {
                         always: false,
                         hover: true,
                         color: 'white',
-                        noDash: true
+                      //  noDash: true
                     }
                 }}
                 data = {this.getChartData}
