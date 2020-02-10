@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/Profile.css';
+import {Line} from 'chartjs-plugin-lineheight-annotation'
+//import "chartjs-plugin-lineheight-annotation";  
 
 import {Image, Navbar, Nav, NavDropdown, Form, FormControl, Button, Media, Card, CardGroup} from 'react-bootstrap';
 
@@ -17,9 +19,6 @@ class Graphs extends Component {
     return (
 
     <div>
-        <h1>
-            Sup
-        </h1>
         <body>
           <Navbar className="navigation" bg="light" expand="lg">
           <Navbar.Brand href="http://localhost:3000/HomePage">
@@ -55,6 +54,7 @@ class Graphs extends Component {
             </Navbar>
         </body>
         </div>
+
     )
   }
 }
