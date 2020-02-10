@@ -29,3 +29,10 @@ class Rating(models.Model):
     class Meta:
         unique_together = (('user', 'workout'),)
         index_together = (('user', 'workout'),)
+
+class Post(models.Model):
+    title = models.TextField()
+    cover = models.ImageField(upload_to='images/')
+
+    def __str__(self):
+        return self.title
