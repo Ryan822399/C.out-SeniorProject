@@ -34,6 +34,8 @@ class Graphs extends Component {
         }
     }
 
+
+
     setGradientColor = (canvas, color) => {
         const context = canvas.getContext('2d');
         const gradient = context.createLinearGradient(0, 0, 200, 400);
@@ -62,6 +64,9 @@ class Graphs extends Component {
         color: 'black',
       };
     }
+    console.log("DEBUGGING");
+    console.log(this.state.data);
+    var URL = `${process.env.FRONTEND_WEB}`;
     return (
     
     <div>
