@@ -1,14 +1,37 @@
 import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/Profile.css';
-import {Line} from 'chartjs-plugin-lineheight-annotation'
+import {Line} from 'react-chartjs-2'
 //import "chartjs-plugin-lineheight-annotation";  
 
 import {Image, Navbar, Nav, NavDropdown, Form, FormControl, Button, Media, Card, CardGroup} from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
 
 
 
 class Graphs extends Component {
+
+    constructor(props){
+        super(props);
+
+        this.state = {
+            data: {
+                labels: ["1", "2", "3", "4", "5"],
+                datasets: [
+                    {
+                        label: "Workout #1",
+                        backgroundColor: "rgba(255, 0, 255, 0.75",
+                        data: [4, 5, 1, 12, 20, 2, 16]
+                    },
+                    {
+                        label: "Workout #2",
+                        backgroundColor: "rgba(255, 0, 0, 255)",
+                        data: [14, 18, 5, 0, 22, 1, 13]
+                    }
+                ]
+            }
+        }
+    }
 
   render() {
     function Color() {
@@ -17,7 +40,8 @@ class Graphs extends Component {
       };
     }
     return (
-
+    
+    <div>
     <div>
         <body>
           <Navbar className="navigation" bg="light" expand="lg">
@@ -53,8 +77,18 @@ class Graphs extends Component {
               </Navbar.Collapse>
             </Navbar>
         </body>
-        </div>
+        </div> 
+        <div style = {{position: "relative", width: 600, height: 550}}>    
+            <h3>Graph Samples</h3> 
+            <Line 
+                options ={{
+                    responsive: true
+                }}
+                data = {this.state.data}
+            />
 
+        </div>
+    </div>
     )
   }
 }
