@@ -25,7 +25,7 @@ class Graphs extends Component {
                     },
                     {
                         label: "Workout #2",
-                        backgroundColor: "rgba(255, 0, 0, 255)",
+                        backgroundColor: "rgba(0, 255, 0, 255)",
                         data: [14, 18, 5, 0, 22, 1, 13]
                     }
                 ]
@@ -35,19 +35,20 @@ class Graphs extends Component {
 
     setGradientColor = (canvas, color) => {
         const context = canvas.getContext('2d');
-        const gradient = context.createLinearGradient(0, 0, 600, 500);
+        const gradient = context.createLinearGradient(0, 0, 200, 400);
+      //  gradient.addColorStop(0, color);
         gradient.addColorStop(0, color);
-        gradient.addColorStop(0.95, "rgba(133, 122, 144, 0.5");
+        gradient.addColorStop(0.95, "rgba(133, 122, 144, 0.5)");
         return gradient;
     }
 
     getChartData = canvas => {
         const data = this.state.data;
         if(data.datasets){
-            let colors = ["rgba(255, 0, 255, 0.75", "rgba(255, 0, 0, 255)"];
+            let colors = ["rgba(255, 0, 255, 0.75", "rgba(0, 0, 255, 0.75)"];
             data.datasets.forEach((set, i) => {
                 set.backgroundColor = this.setGradientColor(canvas, colors[i]);
-                set.borderColor = this.setGradientColor(canvas, colors[i]);
+                set.borderColor = "white";
                 set.borderWidth = 2;
             });
         }
@@ -105,7 +106,7 @@ class Graphs extends Component {
                 options ={{
                     responsive: true
                 }}
-                data = {this.state.data}
+                data = {this.getChartData}
             />
 
         </div>
