@@ -33,6 +33,27 @@ class Graphs extends Component {
         }
     }
 
+    setGradientColor = (canvas, color) => {
+        const context = canvas.getContext('2d');
+        const gradient = context.createLinearGradient(0, 0, 600, 500);
+        gradient.addColorStop(0, color);
+        gradient.addColorStop(0.95, "rgba(133, 122, 144, 0.5");
+        return gradient;
+    }
+
+    getChartData = canvas => {
+        const data = this.state.data;
+        if(data.datasets){
+            let colors = ["rgba(255, 0, 255, 0.75", "rgba(255, 0, 0, 255)"];
+            data.datasets.forEach((set, i) => {
+                set.backgroundColor = this.setGradientColor(canvas, colors[i]);
+                set.borderColor = this.setGradientColor(canvas, colors[i]);
+                set.borderWidth = 2;
+            });
+        }
+        return data;
+    }
+
   render() {
     function Color() {
       let styles = {
