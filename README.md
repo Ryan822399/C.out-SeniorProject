@@ -40,7 +40,10 @@ Server at http://localhost:8000/
 
 First make sure you run the backend server.
 For Frontend, go to frontend folder, CD into tws and run.
-
+```
+npm install
+```
+Then run
 ```
 npm start
 ```
