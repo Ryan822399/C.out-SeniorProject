@@ -14,6 +14,12 @@ class UserSerializer(serializers.ModelSerializer):
         Token.objects.create(user=user)
         return user
 
+class DummySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Dummy
+        fields = ('title')
+
+
 class WorkoutSerializer(serializers.ModelSerializer):
     class Meta:
         model = Workout

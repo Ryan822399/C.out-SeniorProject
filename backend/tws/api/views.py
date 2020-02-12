@@ -15,6 +15,11 @@ from django.contrib.auth.models import User
 
 from django.shortcuts import get_object_or_404
 
+class DummyViewSet(viewsets.ModelViewSet):
+    queryset = Dummy.objects.all()
+    permission_classes = [permissions.AllowAny]
+    serializer_class = DummySerializer
+
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
