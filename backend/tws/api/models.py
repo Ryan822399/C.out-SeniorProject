@@ -20,6 +20,10 @@ class Workout(models.Model):
         else:
             return 0
 
+class Dummy(models.Model):
+
+    title = models.CharField(max_length=32)
+
 class Rating(models.Model):
     workout = models.ForeignKey(Workout, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
