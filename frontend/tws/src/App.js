@@ -72,8 +72,8 @@ class App extends Component{
           <span>TWS</span>
         </h1>
         <div className="layout">
-          <Profile/>
-          <Friends/>
+          //<Profile/>
+          //<Friends/>
           <WorkoutList workouts={this.state.workouts}
             workoutClicked={this.loadWorkout}
             workoutDeleted={this.workoutDeleted}

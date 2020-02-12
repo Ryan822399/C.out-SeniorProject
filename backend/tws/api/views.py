@@ -20,6 +20,11 @@ class DummyViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.AllowAny]
     serializer_class = DummySerializer
 
+class UserTestViewSet(viewsets.ModelViewSet):
+    queryset = UserTest.objects.all()
+    permission_classes = [permissions.AllowAny]
+    serializer_class = UserTestSerializer
+
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer

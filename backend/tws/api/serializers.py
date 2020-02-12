@@ -19,6 +19,10 @@ class DummySerializer(serializers.ModelSerializer):
         model = Dummy
         fields = '__all__'
 
+class UserTestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserTest
+        fields = '__all__'
 
 class WorkoutSerializer(serializers.ModelSerializer):
     class Meta:

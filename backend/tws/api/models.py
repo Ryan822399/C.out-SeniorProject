@@ -24,6 +24,7 @@ class Dummy(models.Model):
 
     title = models.CharField(max_length=32)
 
+
 class Rating(models.Model):
     workout = models.ForeignKey(Workout, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -34,11 +35,10 @@ class Rating(models.Model):
         unique_together = (('user', 'workout'),)
         index_together = (('user', 'workout'),)
 
-class User(models.Model):
+class UserTest(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     firstName = models.CharField(max_length = 30)
     lastName = models.CharField(max_length = 30)
-    userName = models.CharField(max_length = 30)
-    password = models.CharField(max_length = 30)
     email = models.EmailField()
     bio = models.TextField()
 
