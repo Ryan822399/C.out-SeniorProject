@@ -2,11 +2,10 @@ import React, {Component} from 'react';
 //import { withCookies } from 'react-cookie';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/Profile.css';
-import {Container, Image, ListGroup, Button, Card, Form, FormControl, Media} from 'react-bootstrap';
-class Friends extends Component{
+import {Container, Image, ListGroup, Button, Card, Form, FormControl, Media, Navbar, Nav, NavDropdown} from 'react-bootstrap';
+function Friends(){
 
 
-  render(){
     return (
       <div>
       <Container>
@@ -95,7 +94,6 @@ class Friends extends Component{
     )
   }
 
-}
 
 
 export default Friends
