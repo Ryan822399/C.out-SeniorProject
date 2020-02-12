@@ -17,7 +17,7 @@ class UserSerializer(serializers.ModelSerializer):
 class DummySerializer(serializers.ModelSerializer):
     class Meta:
         model = Dummy
-        fields = ('title')
+        fields = '__all__'
 
 
 class WorkoutSerializer(serializers.ModelSerializer):

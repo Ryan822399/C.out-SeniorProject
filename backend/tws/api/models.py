@@ -24,9 +24,6 @@ class Dummy(models.Model):
 
     title = models.CharField(max_length=32)
 
-    def __str__(self):
-        return self.license_num
-
 class Rating(models.Model):
     workout = models.ForeignKey(Workout, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
