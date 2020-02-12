@@ -7,6 +7,7 @@ import WorkoutForm from './components/WorkoutForm/WorkoutForm';
 import Profile from './components/Profile/Profile';
 import HomePage from './components/HomePage/HomePage';
 import Graphs from './components/Graphs/Graphs';
+import Friends from './components/Friends/Friends';
 
 var FontAwesome = require('react-fontawesome');
 
@@ -72,6 +73,7 @@ class App extends Component{
         </h1>
         <div className="layout">
           <Profile/>
+          <Friends/>
           <WorkoutList workouts={this.state.workouts}
             workoutClicked={this.loadWorkout}
             workoutDeleted={this.workoutDeleted}
