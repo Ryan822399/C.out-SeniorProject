@@ -38,6 +38,7 @@ class Profile extends Component {
     console.log(this.state.firstName);
     return (
       <div>
+
         <body>
           <Navbar className="navigation" bg="light" expand="lg">
           <Navbar.Brand href="http://localhost:3000/HomePage">
@@ -82,9 +83,7 @@ class Profile extends Component {
             alt="Joker Peter Griffin"
           />
           <Media.Body>
-            <h4>
-              {this.state.firstName}
-            </h4>
+
             <h5>
               @PeterGriffin
             </h5>
@@ -135,6 +134,10 @@ class Profile extends Component {
             </Card.Footer>
           </Card>
         </CardGroup>
+
+        <div>
+          { !this.state.firstName ? <h1> {this.state.firstName} </h1> : <h1>nada</h1> }
+        </div>
       </div>
     )
   }
