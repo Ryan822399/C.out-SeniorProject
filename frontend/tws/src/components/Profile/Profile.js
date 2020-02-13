@@ -83,7 +83,9 @@ class Profile extends Component {
             alt="Joker Peter Griffin"
           />
           <Media.Body>
-
+            <h4>
+              { !this.state.firstName ? <p>{this.state.firstName}</p> : <p>Test</p> }
+            </h4>
             <h5>
               @PeterGriffin
             </h5>
@@ -134,10 +136,6 @@ class Profile extends Component {
             </Card.Footer>
           </Card>
         </CardGroup>
-
-        <div>
-          { !this.state.firstName ? <h1> {this.state.firstName} </h1> : <h1>nada</h1> }
-        </div>
       </div>
     )
   }
