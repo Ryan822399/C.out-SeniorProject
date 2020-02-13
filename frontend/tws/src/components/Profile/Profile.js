@@ -7,15 +7,36 @@ import {Image, Navbar, Nav, NavDropdown, Form, FormControl, Button, Media, Card,
 
 
 class Profile extends Component {
+  //1:
+  //const usertest = this.props.usertest;
+
+  //2:
+  /*
+  getName = () => {
+    fetch(`${process.env.REACT_APP_API_URL}/api/usertest/${this.props.usertest.firstName}/`, {
+      method: 'GET'
+    })
+  }
+  */
+  state = {
+    firstName: null
+  }
+
+  componentDidMount() {
+      fetch(`${process.env.REACT_APP_API_URL}/api/userTest/`, {
+        method: 'GET'
+      }).then( resp => resp.json())
+      .then( res => console.log(res))
+      .catch( error => console.log(error))
+    console.log("IN MOUNT");
+    console.log(this.state.firstName);
+  }
+
 
   render() {
-    function Color() {
-      let styles = {
-        color: 'black',
-      };
-    }
+    console.log("IN RENDER");
+    console.log(this.state.firstName);
     return (
-
       <div>
         <body>
           <Navbar className="navigation" bg="light" expand="lg">
@@ -62,7 +83,7 @@ class Profile extends Component {
           />
           <Media.Body>
             <h4>
-              Peter Griffin (Joker)
+              {this.state.firstName}
             </h4>
             <h5>
               @PeterGriffin
@@ -114,57 +135,6 @@ class Profile extends Component {
             </Card.Footer>
           </Card>
         </CardGroup>
-
-        {/*
-        <header>
-          <h1>TWS</h1>
-          <h2>@MemeLord</h2>
-        </header>
-        <body className="body">
-          <div className="profileHeader">
-            <img className="profileImage" src="https://i.kym-cdn.com/photos/images/original/001/582/190/6d2.png" alt=""/>
-            <div className="box">
-              <h3 className="post">Posts</h3>
-              <p>100</p>
-            </div>
-            <div className="box">
-              <h3 className="friend">Friends</h3>
-              <p>100</p>
-            </div>
-            <p className="name">Meme Lord</p>
-            <p className="bio">Something interesting that is suppose to go here</p>
-          </div>
-        </body>
-        /*}
-
-
-
-        {/*
-        <header className="Header">
-          <h1>Profile</h1>
-        </header>
-        <body className="Body">
-          <Image className="Image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQjppfA7BzNkdWvrBee98IiB3QemywIRsVfQJ0FSVMHwjvj7lTk" fluid />
-          <Card className="UserProfile" style={{ width: '18rem' }}>
-            <Card.Img variant="top" src="https://fyf.tac-cdn.net/images/products/large/BF116-11KM_R.jpg?auto=webp&quality=60" />
-            <Card.Body className="UserBody">
-              <Card.Title className="Username">Master</Card.Title>
-              <Card.Text className="UserBio">
-                The Master is the Master of all Masters.
-              </Card.Text>
-            </Card.Body>
-            <ListGroup className="list-group-flush">
-              <ListGroupItem>Joined February 6th, 2020</ListGroupItem>
-              <ListGroupItem>Dapibus ac facilisis in</ListGroupItem>
-              <ListGroupItem>Vestibulum at eros</ListGroupItem>
-            </ListGroup>
-            <Card.Body>
-              <Card.Link href="#">Card Link</Card.Link>
-              <Card.Link href="#">Another Link</Card.Link>
-            </Card.Body>
-          </Card>
-        </body>
-        */}
       </div>
     )
   }

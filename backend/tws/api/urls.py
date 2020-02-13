@@ -8,6 +8,7 @@ router.register('users', UserViewSet)
 router.register('workouts', WorkoutViewSet)
 router.register('ratings', RatingViewSet)
 router.register('dummy', DummyViewSet)
+router.register('userTest', UserTestViewSet)
 
 
 
