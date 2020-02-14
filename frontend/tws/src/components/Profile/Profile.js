@@ -7,19 +7,11 @@ import {Image, Navbar, Nav, NavDropdown, Form, FormControl, Button, Media, Card,
 
 
 class Profile extends Component {
-  //1:
-  //const usertest = this.props.usertest;
-
-  //2:
-  /*
-  getName = () => {
-    fetch(`${process.env.REACT_APP_API_URL}/api/usertest/${this.props.usertest.firstName}/`, {
-      method: 'GET'
-    })
-  }
-  */
   state = {
-    firstName: null
+    firstName: [],
+    lastName: [],
+    email: [],
+    bio: []
   }
 
   componentDidMount() {
@@ -28,18 +20,18 @@ class Profile extends Component {
       }).then( resp => resp.json())
       .then( res => console.log(res))
       .catch( error => console.log(error))
-    console.log("IN MOUNT");
-    console.log(this.state.firstName);
+      console.log(this.state.firstName)
+      console.log("FROM MOUNT")
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return true;
   }
 
 
   render() {
-    console.log("IN RENDER");
-    console.log(this.state.firstName);
     return (
       <div>
-
-        <body>
           <Navbar className="navigation" bg="light" expand="lg">
           <Navbar.Brand href="http://localhost:3000/HomePage">
             <img
@@ -72,28 +64,28 @@ class Profile extends Component {
                 </Form>
               </Navbar.Collapse>
             </Navbar>
-        </body>
-
-        <Media>
-          <img
-            width={384}
-            height={384}
-            className="mr-3"
-            src="https://s2.dmcdn.net/v/K-vxh1PQOdCNPyzJR/x1080"
-            alt="Joker Peter Griffin"
-          />
-          <Media.Body>
-            <h4>
-              { !this.state.firstName ? <p>{this.state.firstName}</p> : <p>Test</p> }
-            </h4>
-            <h5>
-              @PeterGriffin
-            </h5>
-            <p>
-              Peter Griffin is the main character of the American animated sitcom Family Guy. He is voiced by the series' creator, Seth MacFarlane, and first appeared on television, along with the rest of the Griffin family, in the 15-minute pilot pitch of Family Guy on December 20, 1998. Peter was created and designed by MacFarlane himself. MacFarlane was asked to pitch a pilot to the Fox Broadcasting Company based on Larry & Steve, a short made by MacFarlane which featured a middle-aged character named Larry and an intellectual dog, Steve. After the pilot was given the green light, the Griffin family appeared in the episode "Death Has a Shadow".
-            </p>
-          </Media.Body>
-        </Media>
+        <div className="body">
+          <Media>
+            <img
+              width={384}
+              height={384}
+              className="mr-3"
+              src="https://s2.dmcdn.net/v/K-vxh1PQOdCNPyzJR/x1080"
+              alt="Joker Peter Griffin"
+            />
+            <Media.Body>
+              <h4>
+                { !this.state.firstName ? <p>{this.state.firstName}</p> : <p>NULL First</p> } { !this.state.lastName ? <p> {this.state.lastName} </p> : <p>NULL Last</p> }
+              </h4>
+              <h5>
+                @PeterGriffin
+              </h5>
+              <p>
+                { !this.state.bio ? <p> {this.state.bio} </p> : <p>NULL Bio</p> }
+              </p>
+            </Media.Body>
+          </Media>
+        </div>
 
         <h3>
           Posts
