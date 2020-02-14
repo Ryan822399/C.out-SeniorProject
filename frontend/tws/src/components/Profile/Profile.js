@@ -7,14 +7,31 @@ import {Image, Navbar, Nav, NavDropdown, Form, FormControl, Button, Media, Card,
 
 
 class Profile extends Component {
+  /*
   state = {
     firstName: [],
     lastName: [],
     email: [],
     bio: []
   }
+  */
 
-  componentDidMount() {
+  state = {
+    info: []
+  }
+
+  async componentDidMount() {
+    try {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/userTest/`);
+      const info = await res.json();
+      this.setState({
+        info
+      });
+    }
+    catch(e) {
+      console.log(e);
+    }
+    /*
       fetch(`${process.env.REACT_APP_API_URL}/api/userTest/`, {
         method: 'GET'
       }).then( resp => resp.json())
@@ -22,6 +39,7 @@ class Profile extends Component {
       .catch( error => console.log(error))
       console.log(this.state.firstName)
       console.log("FROM MOUNT")
+      */
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -75,7 +93,7 @@ class Profile extends Component {
             />
             <Media.Body>
               <h4>
-                { !this.state.firstName ? <p>{this.state.firstName}</p> : <p>NULL First</p> } { !this.state.lastName ? <p> {this.state.lastName} </p> : <p>NULL Last</p> }
+                { !this.state.info.firstName ? <p>{this.state.info.firstName}</p> : <p>NULL First</p> } { !this.state.lastName ? <p> {this.state.lastName} </p> : <p>NULL Last</p> }
               </h4>
               <h5>
                 @PeterGriffin
