@@ -9,6 +9,10 @@ router.register('workouts', WorkoutViewSet)
 router.register('ratings', RatingViewSet)
 router.register('dummy', DummyViewSet)
 router.register('userTest', UserTestViewSet)
+router.register("feedPost", FeedPostViewSet)
+router.register("forumPost", ForumPostViewSet)
+router.register("comment", CommentViewSet)
+router.register("LikePost", LikeViewSet)
 
 
 

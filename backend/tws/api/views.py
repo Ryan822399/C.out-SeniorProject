@@ -25,6 +25,11 @@ class UserTestViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.AllowAny]
     serializer_class = UserTestSerializer
 
+class FeedPostViewSet(viewsets.ModelViewSet):
+    queryset = FeedPost.objects.all()
+    permission_classes = [permissions.AllowAny]
+    serializer_class = FeedPostSerializer
+
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -68,8 +73,23 @@ class WorkoutViewSet(viewsets.ModelViewSet):
 #        response = {'message': 'Rating May Not Be Create This Way'}
 #        return Response(response, status=status.HTTP_400_BAD_REQUEST)
 
+class ForumPostViewSet(viewsets.ModelViewSet):
+    queryset = ForumPost.objects.all()
+    permission_classes = [permissions.AllowAny]
+    serializer_class = ForumPostSerializer
+
 class RatingViewSet(viewsets.ModelViewSet):
     queryset = Rating.objects.all()
     serializer_class = RatingSerializer
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated, )
+
+class CommentViewSet(viewsets.ModelViewSet):
+    queryset = Comment.objects.all()
+    permission_classes = [permissions.AllowAny]
+    serializer_class = CommentSerializer
+
+class LikeViewSet(viewsets.ModelViewSet):
+    queryset = Like.objects.all()
+    permission_classes = [permissions.AllowAny]
+    serializer_class = LikeSerializer
