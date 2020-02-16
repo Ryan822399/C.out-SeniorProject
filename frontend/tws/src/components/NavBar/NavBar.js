@@ -9,10 +9,10 @@ function NavBar(props) {
       <Navbar bg="dark" variant="dark">
           <Navbar.Brand href="#home">
 
-          <h1>
+          <h3>
           <FontAwesome name="heartbeat" />
           <span>TWS</span>
-        </h1>
+          </h3>
           </Navbar.Brand>
           <Nav className="mr-auto">
             <Nav.Link href="http://localhost:3000/homepage/profile">Profile</Nav.Link>
