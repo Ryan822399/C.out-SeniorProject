@@ -20,9 +20,16 @@ class Workout(models.Model):
         else:
             return 0
 
+    def __str__(self):
+        return self.title
+
 class Dummy(models.Model):
 
     title = models.CharField(max_length=32)
+
+    def __str__(self):
+        return self.title
+
 
 class Rating(models.Model):
     workout = models.ForeignKey(Workout, on_delete=models.CASCADE)
@@ -34,17 +41,37 @@ class Rating(models.Model):
         unique_together = (('user', 'workout'),)
         index_together = (('user', 'workout'),)
 
-class User(models.Model):
+class UserTest(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     firstName = models.CharField(max_length = 30)
     lastName = models.CharField(max_length = 30)
-    userName = models.CharField(max_length = 30)
-    password = models.CharField(max_length = 30)
     email = models.EmailField()
     bio = models.TextField()
+    def __str__(self):
+        return self.firstName + " " + self.lastName
 
-class Post(models.Model):
+class FeedPost(models.Model):
     title = models.TextField()
-    cover = models.ImageField(upload_to='images/')
+    caption = models.TextField()
+    picture = models.ImageField(upload_to='images/')
 
     def __str__(self):
         return self.title
+
+class ForumPost(models.Model):
+    title = models.TextField()
+    caption = models.TextField()
+
+    def __str__(self):
+        return self.title
+
+class Comment(models.Model):
+    description = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    feedPost = models.ForeignKey(FeedPost, on_delete=models.CASCADE)
+    forumPost = models.ForeignKey(ForumPost, on_delete=models.CASCADE)
+
+class Like(models.Model):
+    count = models.IntegerField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)

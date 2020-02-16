@@ -19,6 +19,15 @@ class DummySerializer(serializers.ModelSerializer):
         model = Dummy
         fields = '__all__'
 
+class UserTestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserTest
+        fields = '__all__'
+
+class FeedPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FeedPost
+        fields = ('title', 'caption', 'picture')
 
 class WorkoutSerializer(serializers.ModelSerializer):
     class Meta:
@@ -29,3 +38,18 @@ class RatingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rating
         fields = ('id', 'stars', 'user', 'workout')
+
+class ForumPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ForumPost
+        fields = '__all__'
+
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = '__all__'
+
+class LikeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Like
+        fields = ('title', 'caption', 'picture')

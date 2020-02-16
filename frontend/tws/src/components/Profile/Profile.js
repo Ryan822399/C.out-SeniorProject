@@ -7,17 +7,49 @@ import {Image, Navbar, Nav, NavDropdown, Form, FormControl, Button, Media, Card,
 
 
 class Profile extends Component {
+  /*
+  state = {
+    firstName: [],
+    lastName: [],
+    email: [],
+    bio: []
+  }
+  */
+
+  state = {
+    info: []
+  }
+
+  async componentDidMount() {
+    try {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/userTest/`);
+      const info = await res.json();
+      this.setState({
+        info
+      });
+    }
+    catch(e) {
+      console.log(e);
+    }
+    /*
+      fetch(`${process.env.REACT_APP_API_URL}/api/userTest/`, {
+        method: 'GET'
+      }).then( resp => resp.json())
+      .then( res => console.log(res))
+      .catch( error => console.log(error))
+      console.log(this.state.firstName)
+      console.log("FROM MOUNT")
+      */
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return true;
+  }
+
 
   render() {
-    function Color() {
-      let styles = {
-        color: 'black',
-      };
-    }
     return (
-
       <div>
-        <body>
           <Navbar className="navigation" bg="light" expand="lg">
           <Navbar.Brand href="http://localhost:3000/HomePage">
             <img
@@ -50,28 +82,28 @@ class Profile extends Component {
                 </Form>
               </Navbar.Collapse>
             </Navbar>
-        </body>
-
-        <Media>
-          <img
-            width={384}
-            height={384}
-            className="mr-3"
-            src="https://s2.dmcdn.net/v/K-vxh1PQOdCNPyzJR/x1080"
-            alt="Joker Peter Griffin"
-          />
-          <Media.Body>
-            <h4>
-              Peter Griffin (Joker)
-            </h4>
-            <h5>
-              @PeterGriffin
-            </h5>
-            <p>
-              Peter Griffin is the main character of the American animated sitcom Family Guy. He is voiced by the series' creator, Seth MacFarlane, and first appeared on television, along with the rest of the Griffin family, in the 15-minute pilot pitch of Family Guy on December 20, 1998. Peter was created and designed by MacFarlane himself. MacFarlane was asked to pitch a pilot to the Fox Broadcasting Company based on Larry & Steve, a short made by MacFarlane which featured a middle-aged character named Larry and an intellectual dog, Steve. After the pilot was given the green light, the Griffin family appeared in the episode "Death Has a Shadow".
-            </p>
-          </Media.Body>
-        </Media>
+        <div className="body">
+          <Media>
+            <img
+              width={384}
+              height={384}
+              className="mr-3"
+              src="https://s2.dmcdn.net/v/K-vxh1PQOdCNPyzJR/x1080"
+              alt="Joker Peter Griffin"
+            />
+            <Media.Body>
+              <h4>
+                { !this.state.info.firstName ? <p>{this.state.info.firstName}</p> : <p>NULL First</p> } { !this.state.lastName ? <p> {this.state.lastName} </p> : <p>NULL Last</p> }
+              </h4>
+              <h5>
+                @PeterGriffin
+              </h5>
+              <p>
+                { !this.state.bio ? <p> {this.state.bio} </p> : <p>NULL Bio</p> }
+              </p>
+            </Media.Body>
+          </Media>
+        </div>
 
         <h3>
           Posts
@@ -114,57 +146,6 @@ class Profile extends Component {
             </Card.Footer>
           </Card>
         </CardGroup>
-
-        {/*
-        <header>
-          <h1>TWS</h1>
-          <h2>@MemeLord</h2>
-        </header>
-        <body className="body">
-          <div className="profileHeader">
-            <img className="profileImage" src="https://i.kym-cdn.com/photos/images/original/001/582/190/6d2.png" alt=""/>
-            <div className="box">
-              <h3 className="post">Posts</h3>
-              <p>100</p>
-            </div>
-            <div className="box">
-              <h3 className="friend">Friends</h3>
-              <p>100</p>
-            </div>
-            <p className="name">Meme Lord</p>
-            <p className="bio">Something interesting that is suppose to go here</p>
-          </div>
-        </body>
-        /*}
-
-
-
-        {/*
-        <header className="Header">
-          <h1>Profile</h1>
-        </header>
-        <body className="Body">
-          <Image className="Image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQjppfA7BzNkdWvrBee98IiB3QemywIRsVfQJ0FSVMHwjvj7lTk" fluid />
-          <Card className="UserProfile" style={{ width: '18rem' }}>
-            <Card.Img variant="top" src="https://fyf.tac-cdn.net/images/products/large/BF116-11KM_R.jpg?auto=webp&quality=60" />
-            <Card.Body className="UserBody">
-              <Card.Title className="Username">Master</Card.Title>
-              <Card.Text className="UserBio">
-                The Master is the Master of all Masters.
-              </Card.Text>
-            </Card.Body>
-            <ListGroup className="list-group-flush">
-              <ListGroupItem>Joined February 6th, 2020</ListGroupItem>
-              <ListGroupItem>Dapibus ac facilisis in</ListGroupItem>
-              <ListGroupItem>Vestibulum at eros</ListGroupItem>
-            </ListGroup>
-            <Card.Body>
-              <Card.Link href="#">Card Link</Card.Link>
-              <Card.Link href="#">Another Link</Card.Link>
-            </Card.Body>
-          </Card>
-        </body>
-        */}
       </div>
     )
   }

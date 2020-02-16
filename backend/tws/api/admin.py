@@ -1,6 +1,15 @@
 from django.contrib import admin
-from .models import Workout, Rating, Post, User
+from .models import Workout, Rating, FeedPost, Dummy, UserTest, ForumPost, Comment, Like
 admin.site.register(Workout)
 admin.site.register(Rating)
-admin.site.register(User)
-admin.site.register(Post)
+#admin.site.register(UserTest)
+@admin.register(UserTest)
+class UserTestAdmin(admin.ModelAdmin):
+    list_display = ['firstName', 'lastName', 'email']
+    list_filter = ['lastName']
+    search_fields = ['firstName', 'lastName']
+admin.site.register(FeedPost)
+admin.site.register(Dummy)
+admin.site.register(ForumPost)
+admin.site.register(Comment)
+admin.site.register(Like)
