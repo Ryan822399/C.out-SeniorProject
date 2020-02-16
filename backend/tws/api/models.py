@@ -31,15 +31,15 @@ class Dummy(models.Model):
         return self.title
 
 class FeedPost(models.Model):
-    title = models.TextField()
-    caption = models.TextField()
+    title = models.CharField(max_length=15)
+    caption = models.CharField(max_length=40)
     user = models.ForeignKey(User, on_delete=models.CASCADE )
     post = models.CharField(max_length=1000)
-    picture = models.ImageField(upload_to='images/')
+    picture = models.ImageField(upload_to='images/', null=True, blank=True)
 
     def __str__(self):
         return self.title
-        
+
 class FeedComment(models.Model):
     description = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
