@@ -30,6 +30,20 @@ class Dummy(models.Model):
     def __str__(self):
         return self.title
 
+class FeedPost(models.Model):
+    title = models.TextField()
+    caption = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE )
+    post = models.CharField(max_length=1000)
+    picture = models.ImageField(upload_to='images/')
+
+    def __str__(self):
+        return self.title
+        
+class FeedComment(models.Model):
+    description = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    feedpost = models.ForeignKey(FeedPost, on_delete=models.CASCADE)
 
 class Rating(models.Model):
     workout = models.ForeignKey(Workout, on_delete=models.CASCADE)
@@ -50,14 +64,6 @@ class UserTest(models.Model):
     def __str__(self):
         return self.firstName + " " + self.lastName
 
-class FeedPost(models.Model):
-    title = models.TextField()
-    caption = models.TextField()
-    picture = models.ImageField(upload_to='images/')
-
-    def __str__(self):
-        return self.title
-
 class ForumPost(models.Model):
     title = models.TextField()
     caption = models.TextField()
@@ -68,7 +74,6 @@ class ForumPost(models.Model):
 class Comment(models.Model):
     description = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    feedPost = models.ForeignKey(FeedPost, on_delete=models.CASCADE)
     forumPost = models.ForeignKey(ForumPost, on_delete=models.CASCADE)
 
 class Like(models.Model):
