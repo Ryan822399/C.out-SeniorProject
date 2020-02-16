@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './NavBar.css';
 import { Navbar, Nav, NavDropdown, Form, FormControl, Button} from 'react-bootstrap';
 var FontAwesome = require('react-fontawesome');
 
