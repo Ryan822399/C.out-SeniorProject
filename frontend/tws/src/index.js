@@ -10,19 +10,18 @@ import Friends from './components/Friends/Friends';
 import { CookiesProvider } from 'react-cookie';
 import HomePage from './components/HomePage/HomePage';
 import Graphs from './components/Graphs/Graphs';
-
+//<Route exact path="/workouts" component={App}/>
 const routing = (
   <BrowserRouter>
     <CookiesProvider>
       <Route exact path="/" component={Login}/>
-      <Route exact path="/HomePage" component={HomePage}/>
-      <Route exact path="/workouts" component={App}/>
-      <Route exact path="/profile" component={Profile}/>
-      <Route exact path="/graphs" component={Graphs}/>
-      <Route exact path="/friends" component={Friends}/>
+      <Route path="/homepage" component={App}/>
+      <Route exact path="/homepage/profile" component={Profile}/>
+      <Route exact path="/homepage/graphs" component={Graphs}/>
+      <Route exact path="/homepage/friends" component={Friends}/>
     </CookiesProvider>
   </BrowserRouter>
-)
+);
 
 ReactDOM.render(routing, document.getElementById('root'));
 

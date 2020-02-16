@@ -5,6 +5,7 @@ import {Image, Navbar, Nav, NavDropdown, Form, FormControl, Button, Container, R
 
 class HomePage extends Component {
   render() {
+    console.log(this.props)
       return (
         <div>
           <body>
