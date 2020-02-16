@@ -16,7 +16,6 @@ const routing = (
     <CookiesProvider>
       <Route exact path="/" component={Login}/>
       <Route path="/homepage" component={App}/>
-
       <Route exact path="/homepage/profile" component={Profile}/>
       <Route exact path="/homepage/graphs" component={Graphs}/>
       <Route exact path="/homepage/friends" component={Friends}/>

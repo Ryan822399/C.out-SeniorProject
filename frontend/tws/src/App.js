@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { withCookies } from 'react-cookie';
-
 import Workouts from './containers/Workouts/Workouts';
 import NavBar from './components/NavBar/NavBar';
 
@@ -25,8 +24,6 @@ class App extends Component{
     return (
       <div >
         <NavBar />
-
-
       </div>
     );
   }
