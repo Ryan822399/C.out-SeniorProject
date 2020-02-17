@@ -1,7 +1,9 @@
-import React from 'react';
+import React,{useState, useRef} from "react";
 import './NavBar.css';
-import { Navbar, Nav, NavDropdown, Form, FormControl, Button} from 'react-bootstrap';
+import PostButton from '../PostButton/PostButton';
+import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Overlay, Tooltip, Modal} from 'react-bootstrap';
 var FontAwesome = require('react-fontawesome');
+
 
 function NavBar(props) {
     return (
@@ -17,11 +19,9 @@ function NavBar(props) {
               <Nav.Link href="http://localhost:3000/homepage/profile">Profile</Nav.Link>
               <Nav.Link href="http://localhost:3000/homepage/graphs">Progress</Nav.Link>
               <Nav.Link href="http://localhost:3000/homepage/friends">Friends</Nav.Link>
+              <Nav.Link href="http://localhost:3000/homepage/timeline">Timeline</Nav.Link>
             </Nav>
-            <Form inline>
-              <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-              <Button variant="outline-info">Search</Button>
-            </Form>
+            <PostButton />
         </Navbar>
       </div>
 

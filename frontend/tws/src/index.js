@@ -10,6 +10,8 @@ import Friends from './containers/Friends/Friends';
 import { CookiesProvider } from 'react-cookie';
 import Feed from './containers/Feed/Feed';
 import Graphs from './containers/Graphs/Graphs';
+import TimelineDetails from './containers/TimelineDetails/TimelineDetails';
+//<Route exact path="/workouts" component={App}/>
 import Footer from './components/Footer/Footer';
 
 const routing = (
@@ -21,6 +23,7 @@ const routing = (
       <Route exact path="/homepage/profile" component={Profile}/>
       <Route exact path="/homepage/graphs" component={Graphs}/>
       <Route exact path="/homepage/friends" component={Friends}/>
+      <Route exact path="/homepage/timeline" component={TimelineDetails}/>
     </CookiesProvider>
     <Footer />
   </BrowserRouter>

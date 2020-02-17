@@ -8,7 +8,6 @@ class HomePage extends Component {
     console.log(this.props)
       return (
         <div>
-          
           <Container>
             <Row>
               <Col></Col>
@@ -46,7 +45,7 @@ class HomePage extends Component {
                   <Card.Img variant="top" src="https://images.askmen.com/1080x540/2016/01/25-021526-facebook_profile_picture_affects_chances_of_getting_hired.jpg" />
                   <Card.Body>
                     <Card.Text>
-                      Figured I shoudl post a picture of myself!
+                      Figured I should post a picture of myself!
                     </Card.Text>
                   </Card.Body>
                 </Card>
