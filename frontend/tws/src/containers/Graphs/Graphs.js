@@ -8,7 +8,6 @@ import {Image, Navbar, Nav, NavDropdown, Form, FormControl, Button, Media, Card,
 import { Redirect, withRouter } from 'react-router-dom';
 
 
-
 class Graphs extends Component {
 
     constructor(props){
@@ -34,6 +33,30 @@ class Graphs extends Component {
         }
     }
 
+    getWeight = () => {
+        fetch(`${process.env.REACT_APP_API_URL}/api/workouts/${this.props.workout.weight}/`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Token ${this.props.token}`
+          }
+        }).then( resp => resp.json())
+        .then( res => this.props.updateWorkout(res))
+        .catch( error => console.log(error))
+      }
+
+  getDate = () => {
+    fetch(`${process.env.REACT_APP_API_URL}/api/workouts/${this.props.workout.id}/`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${this.props.token}`
+      }
+    }).then( resp => resp.json())
+    .then( res => this.props.updateWorkout(res))
+    .catch( error => console.log(error))
+  }
+
     setGradientColor = (canvas, color) => {
         const context = canvas.getContext('2d');
         const gradient = context.createLinearGradient(0, 0, 200, 400);
@@ -43,7 +66,12 @@ class Graphs extends Component {
         return gradient;
     }
 
+    updateState = () => {
+    //    this.state.data.labels = this.getDate();
+    }
+
     getChartData = canvas => {
+   //     this.updateState();
         const data = this.state.data;
         if(data.datasets){
             let colors = ["rgba(255, 0, 255, 0.75", "rgba(0, 0, 255, 0.75)"];
@@ -51,6 +79,7 @@ class Graphs extends Component {
                 set.backgroundColor = this.setGradientColor(canvas, colors[i]);
                 set.borderColor = "white";
                 set.borderWidth = 2;
+        //        set.data = this.getWeight();
             });
         }
         return data;
