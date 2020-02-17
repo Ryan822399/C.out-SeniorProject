@@ -43,13 +43,13 @@ class Profile extends Component {
             />
             <Media.Body>
               <h4>
-                { this.state.info[0] ? <p>{this.state.info[0].firstName}</p> : <p>NULL First</p> } { !this.state.lastName ? <p> {this.state.lastName} </p> : <p>NULL Last</p> }
+                { this.state.info[0] ? <p>{this.state.info[0].firstName}</p> : <p>NULL First</p> } { this.state.info[0] ? <p> {this.state.info[0].lastName} </p> : <p>NULL Last</p> }
               </h4>
               <h5>
                 @PeterGriffin
               </h5>
               <p>
-                { !this.state.bio ? <p> {this.state.bio} </p> : <p>NULL Bio</p> }
+                { this.state.info[0]? <p> {this.state.info[0].bio} </p> : <p>NULL Bio</p> }
               </p>
             </Media.Body>
           </Media>
