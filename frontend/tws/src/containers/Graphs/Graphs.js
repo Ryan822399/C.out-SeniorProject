@@ -15,19 +15,21 @@ class Graphs extends Component {
 
         this.state = {
             data: {
-                labels: ["1", "2", "3", "4", "5"],
+               // labels: ["1", "2", "3", "4", "5"]
+                labels:["2020-02-08", "2020-02-09", "2020-02-11", "2020-02-14"],
                 datasets: [
                     {
                         label: "Workout #1",
                         backgroundColor: "rgba(255, 0, 255, 0.75)",
                         pointHoberBackgroundColor: 'white',
-                        data: [4, 5, 1, 12, 20, 2, 16],
-                    },
-                    {
-                        label: "Workout #2",
-                        backgroundColor: "rgba(0, 255, 0, 255)",
-                        data: [14, 18, 5, 0, 22, 1, 13]
+                    //    data: [4, 5, 1, 12, 20, 2, 16],
+                        data: [10, 15, 20, 25]
                     }
+                    // {
+                    //     label: "Workout #2",
+                    //     backgroundColor: "rgba(0, 255, 0, 255)",
+                    //     data: [14, 18, 5, 0, 22, 1, 13]
+                    // }
                 ]
             }
         }
