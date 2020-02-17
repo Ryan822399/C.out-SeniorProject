@@ -36,7 +36,7 @@ class Graphs extends Component {
     }
 
     getWeight = () => {
-        fetch(`${process.env.REACT_APP_API_URL}/api/workouts/${this.props.workout.weight}/`, {
+        fetch(`${process.env.REACT_APP_API_URL}/api/workouts/${this.props.workout.id}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -52,10 +52,10 @@ class Graphs extends Component {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Token ${this.props.token}`
+        'Accept': 'application/json'
       }
     }).then( resp => resp.json())
-    .then( res => this.props.updateWorkout(res))
+    .then( res => this.setState({info:res}))
     .catch( error => console.log(error))
   }
 
@@ -70,10 +70,12 @@ class Graphs extends Component {
 
     updateState = () => {
     //    this.state.data.labels = this.getDate();
+     //   this.state.data.datasets.data = this.getWeight();
     }
 
+
     getChartData = canvas => {
-   //     this.updateState();
+      //  this.updateState();
         const data = this.state.data;
         if(data.datasets){
             let colors = ["rgba(255, 0, 255, 0.75", "rgba(0, 0, 255, 0.75)"];
@@ -81,26 +83,28 @@ class Graphs extends Component {
                 set.backgroundColor = this.setGradientColor(canvas, colors[i]);
                 set.borderColor = "white";
                 set.borderWidth = 2;
-        //        set.data = this.getWeight();
+            //    set.data = this.getWeight();
             });
         }
         return data;
     }
 
   render() {
+    console.log(this.state.info)
     function Color() {
       let styles = {
         color: 'black',
       };
     }
     return (
-
+        
+        
     <div>
     <div>
       
         </div>
         <div style = {{position: "relative", width: 600, height: 550}}>
-            <h3>Graph Samples</h3>
+            <h3>Alternating Bicep Curls</h3>
             <Line
                 options ={{
                     title:{
