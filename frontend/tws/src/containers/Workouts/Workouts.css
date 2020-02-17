@@ -74,15 +74,8 @@ h2 {
   color: crimson;
 }
 
-h1 {
-  color: lightgreen;
-  font-size: 5em;
-}
 
-h1 span.fa {
-  color: white;
-  transform: rotate(30deg);
-}
+
 
 .login-container {
   width: 50%;

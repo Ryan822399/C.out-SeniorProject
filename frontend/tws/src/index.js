@@ -4,18 +4,19 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Route, BrowserRouter} from 'react-router-dom';
-import Login from './components/Login/Login';
-import Profile from './components/Profile/Profile';
-import Friends from './components/Friends/Friends';
+import Login from './containers/Login/Login';
+import Profile from './containers/Profile/Profile';
+import Friends from './containers/Friends/Friends';
 import { CookiesProvider } from 'react-cookie';
-import HomePage from './components/HomePage/HomePage';
-import Graphs from './components/Graphs/Graphs';
+import HomePage from './containers/HomePage/HomePage';
+import Graphs from './containers/Graphs/Graphs';
 //<Route exact path="/workouts" component={App}/>
 const routing = (
   <BrowserRouter>
     <CookiesProvider>
       <Route exact path="/" component={Login}/>
       <Route path="/homepage" component={App}/>
+      <Route exact path="/homepage/feed" component={HomePage}/>
       <Route exact path="/homepage/profile" component={Profile}/>
       <Route exact path="/homepage/graphs" component={Graphs}/>
       <Route exact path="/homepage/friends" component={Friends}/>
