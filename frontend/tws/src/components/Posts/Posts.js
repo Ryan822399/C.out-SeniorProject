@@ -4,12 +4,12 @@ import {Spinner, ListGroup,Container, Card, Button} from 'react-bootstrap';
 function Posts(props) {
   return(
     <div>
-      <ListGroup>
+
           { props.posts.map( post => {
            return (
              <div key={post.id} className="post-item">
-                <ListGroup.Item>
-                  <Card style={{ width: '18rem' }}>
+
+                  <Card style={{ padding: '40px', border: '3px solid black', margin: 'auto', width: '20rem' }}>
                     <Card.Img variant="top" src={post.picture} />
                     <Card.Body>
                         <Card.Title>{post.title}</Card.Title>
@@ -20,13 +20,13 @@ function Posts(props) {
                         <Button variant="primary">Go somewhere</Button>
                     </Card.Body>
                   </Card>
-                </ListGroup.Item>
+
              </div>
            )
            })}
 
 
-      </ListGroup>
+
     </div>
   )
 }
