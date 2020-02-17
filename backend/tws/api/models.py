@@ -14,8 +14,8 @@ class Profile(models.Model):
 class Workout(models.Model):
     title = models.CharField(max_length=32)
     description = models.TextField(max_length=360)
-    weight = models.FloatField(max_length=3000)
-    date = models.DateField()
+    weight = models.FloatField(default=0)
+    date = models.DateField(auto_now=False, blank=True)
 
     def no_of_ratings(self):
         ratings = Rating.objects.filter(workout=self)

@@ -32,7 +32,7 @@ class FeedPostSerializer(serializers.ModelSerializer):
 class WorkoutSerializer(serializers.ModelSerializer):
     class Meta:
         model = Workout
-        fields = ('id', 'title', 'description', 'no_of_ratings', 'avg_rating')
+        fields = ('id', 'title', 'description', 'no_of_ratings', 'avg_rating', 'weight', 'date')
 
 class RatingSerializer(serializers.ModelSerializer):
     class Meta:
