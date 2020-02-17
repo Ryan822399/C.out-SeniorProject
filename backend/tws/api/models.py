@@ -15,6 +15,7 @@ class Workout(models.Model):
     title = models.CharField(max_length=32)
     description = models.TextField(max_length=360)
     weight = models.FloatField(max_length=3000)
+    date = models.DateField()
 
     def no_of_ratings(self):
         ratings = Rating.objects.filter(workout=self)
