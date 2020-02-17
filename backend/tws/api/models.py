@@ -2,6 +2,15 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    firstName = models.CharField(max_length = 30)
+    lastName = models.CharField(max_length = 30)
+    email = models.EmailField()
+    bio = models.TextField()
+    def __str__(self):
+        return self.firstName + " " + self.lastName
+
 class Workout(models.Model):
     title = models.CharField(max_length=32)
     description = models.TextField(max_length=360)
@@ -48,21 +57,13 @@ class FeedComment(models.Model):
 class Rating(models.Model):
     workout = models.ForeignKey(Workout, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     stars = models.IntegerField(validators=[MinValueValidator(1),
      MaxValueValidator(5)])
      #unique and index together prevents rating from the user on workout plan
     class Meta:
         unique_together = (('user', 'workout'),)
         index_together = (('user', 'workout'),)
-
-class UserTest(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    firstName = models.CharField(max_length = 30)
-    lastName = models.CharField(max_length = 30)
-    email = models.EmailField()
-    bio = models.TextField()
-    def __str__(self):
-        return self.firstName + " " + self.lastName
 
 class ForumPost(models.Model):
     title = models.TextField()
@@ -73,10 +74,10 @@ class ForumPost(models.Model):
 
 class Comment(models.Model):
     description = models.TextField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     forumPost = models.ForeignKey(ForumPost, on_delete=models.CASCADE)
 
 class Like(models.Model):
     count = models.IntegerField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
