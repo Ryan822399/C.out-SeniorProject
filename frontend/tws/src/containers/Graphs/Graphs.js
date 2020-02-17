@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/Profile.css';
 import {Line} from 'react-chartjs-2'
 import "chartjs-plugin-lineheight-annotation";
+import { withCookies } from 'react-cookie';
 
 import {Image, Navbar, Nav, NavDropdown, Form, FormControl, Button, Media, Card, CardGroup} from 'react-bootstrap';
 import { Redirect, withRouter } from 'react-router-dom';
@@ -10,10 +11,13 @@ import { Redirect, withRouter } from 'react-router-dom';
 
 class Graphs extends Component {
 
-    constructor(props){
-        super(props);
+    
+        
 
-        this.state = {
+        state = {
+          token: this.props.cookies.get('tws-token'),
+          workouts: [],
+
             data: {
                // labels: ["1", "2", "3", "4", "5"]
                 labels:["2020-02-08", "2020-02-09", "2020-02-11", "2020-02-14"],
@@ -33,29 +37,30 @@ class Graphs extends Component {
                 ]
             }
         }
-    }
+    
 
-    getWeight = () => {
-        fetch(`${process.env.REACT_APP_API_URL}/api/workouts/${this.props.workout.id}`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Token ${this.props.token}`
-          }
-        }).then( resp => resp.json())
-        .then( res => this.props.updateWorkout(res))
-        .catch( error => console.log(error))
-      }
+    // getWeight = () => {
+    //     fetch(`${process.env.REACT_APP_API_URL}/api/workouts/`, {
+    //       method: 'GET',
+    //       headers: {
+    //         'Content-Type': 'application/json',
+    //         'Authorization': `Token ${this.state.token}`
+    //       }
+    //     }).then( resp => resp.json())
+    //     .then( res => this.props.updateWorkout(res))
+    //     .catch( error => console.log(error))
+    //   }
 
-  getDate = () => {
-    fetch(`${process.env.REACT_APP_API_URL}/api/workouts/${this.props.workout.id}/`, {
+  componentDidMount() {
+    fetch(`${process.env.REACT_APP_API_URL}/api/workouts/`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        'Authorization': `Token ${this.state.token}`,
+        
       }
     }).then( resp => resp.json())
-    .then( res => this.setState({info:res}))
+    .then( res => console.log(res))
     .catch( error => console.log(error))
   }
 
@@ -83,14 +88,15 @@ class Graphs extends Component {
                 set.backgroundColor = this.setGradientColor(canvas, colors[i]);
                 set.borderColor = "white";
                 set.borderWidth = 2;
-            //    set.data = this.getWeight();
+            
             });
         }
         return data;
     }
 
   render() {
-    console.log(this.state.info)
+    console.log("William")
+    console.log(this.state.workouts)
     function Color() {
       let styles = {
         color: 'black',
@@ -134,5 +140,5 @@ class Graphs extends Component {
   }
 }
 
-export default Graphs;
+export default withCookies(Graphs);
 
