@@ -17,6 +17,7 @@ function NavBar(props) {
               <Nav.Link href="http://localhost:3000/homepage/profile">Profile</Nav.Link>
               <Nav.Link href="http://localhost:3000/homepage/graphs">Progress</Nav.Link>
               <Nav.Link href="http://localhost:3000/homepage/friends">Friends</Nav.Link>
+              <Nav.Link href="http://localhost:3000/homepage/timeline">Timeline</Nav.Link>
             </Nav>
             <Form inline>
               <FormControl type="text" placeholder="Search" className="mr-sm-2" />
