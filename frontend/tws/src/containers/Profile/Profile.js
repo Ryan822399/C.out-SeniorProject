@@ -17,7 +17,6 @@ class Profile extends Component {
     fetch(`${process.env.REACT_APP_API_URL}/api/profile/`, {
       method: 'GET',
       headers: {
-        'Content-Type': 'application/json',
         'Accept': 'application/json'
       }
     }).then( resp => resp.json())
