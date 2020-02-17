@@ -2,9 +2,20 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    firstName = models.CharField(max_length = 30)
+    lastName = models.CharField(max_length = 30)
+    email = models.EmailField()
+    bio = models.TextField()
+    def __str__(self):
+        return self.firstName + " " + self.lastName
+
 class Workout(models.Model):
     title = models.CharField(max_length=32)
     description = models.TextField(max_length=360)
+    weight = models.FloatField(default=0)
+    date = models.DateField(auto_now=False, blank=True)
 
     def no_of_ratings(self):
         ratings = Rating.objects.filter(workout=self)
@@ -20,9 +31,35 @@ class Workout(models.Model):
         else:
             return 0
 
+    def __str__(self):
+        return self.title
+
+class Dummy(models.Model):
+
+    title = models.CharField(max_length=32)
+
+    def __str__(self):
+        return self.title
+
+class FeedPost(models.Model):
+    title = models.CharField(max_length=15)
+    caption = models.CharField(max_length=40)
+    user = models.ForeignKey(User, on_delete=models.CASCADE )
+    post = models.CharField(max_length=1000)
+    picture = models.ImageField(upload_to='images', null=True, blank=True)
+
+    def __str__(self):
+        return self.title
+
+class FeedComment(models.Model):
+    description = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    feedpost = models.ForeignKey(FeedPost, on_delete=models.CASCADE)
+
 class Rating(models.Model):
     workout = models.ForeignKey(Workout, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     stars = models.IntegerField(validators=[MinValueValidator(1),
      MaxValueValidator(5)])
      #unique and index together prevents rating from the user on workout plan
@@ -30,17 +67,19 @@ class Rating(models.Model):
         unique_together = (('user', 'workout'),)
         index_together = (('user', 'workout'),)
 
-class User(models.Model):
-    firstName = models.CharField(max_length = 30)
-    lastName = models.CharField(max_length = 30)
-    userName = models.CharField(max_length = 30)
-    password = models.CharField(max_length = 30)
-    email = models.EmailField()
-    bio = models.TextField()
-
-class Post(models.Model):
+class ForumPost(models.Model):
     title = models.TextField()
-    cover = models.ImageField(upload_to='images/')
+    caption = models.TextField()
 
     def __str__(self):
         return self.title
+
+class Comment(models.Model):
+    description = models.TextField()
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    forumPost = models.ForeignKey(ForumPost, on_delete=models.CASCADE)
+
+class Like(models.Model):
+    count = models.IntegerField()
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)

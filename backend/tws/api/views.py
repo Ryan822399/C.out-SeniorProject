@@ -15,10 +15,32 @@ from django.contrib.auth.models import User
 
 from django.shortcuts import get_object_or_404
 
+class DummyViewSet(viewsets.ModelViewSet):
+    queryset = Dummy.objects.all()
+    permission_classes = [permissions.AllowAny]
+    serializer_class = DummySerializer
+
+class ProfileViewSet(viewsets.ModelViewSet):
+    queryset = Profile.objects.all()
+    permission_classes = [permissions.AllowAny]
+    serializer_class = ProfileSerializer
+
+class FeedPostViewSet(viewsets.ModelViewSet):
+    queryset = FeedPost.objects.all()
+    permission_classes = [permissions.AllowAny]
+    serializer_class = FeedPostSerializer
+
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = (AllowAny, )
+
+class FeedPostViewSet(viewsets.ModelViewSet):
+    queryset = FeedPost.objects.all()
+    serializer_class = FeedPostSerializer
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated, )
+
 
 class WorkoutViewSet(viewsets.ModelViewSet):
     queryset = Workout.objects.all()
@@ -58,8 +80,23 @@ class WorkoutViewSet(viewsets.ModelViewSet):
 #        response = {'message': 'Rating May Not Be Create This Way'}
 #        return Response(response, status=status.HTTP_400_BAD_REQUEST)
 
+class ForumPostViewSet(viewsets.ModelViewSet):
+    queryset = ForumPost.objects.all()
+    permission_classes = [permissions.AllowAny]
+    serializer_class = ForumPostSerializer
+
 class RatingViewSet(viewsets.ModelViewSet):
     queryset = Rating.objects.all()
     serializer_class = RatingSerializer
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated, )
+
+class CommentViewSet(viewsets.ModelViewSet):
+    queryset = Comment.objects.all()
+    permission_classes = [permissions.AllowAny]
+    serializer_class = CommentSerializer
+
+class LikeViewSet(viewsets.ModelViewSet):
+    queryset = Like.objects.all()
+    permission_classes = [permissions.AllowAny]
+    serializer_class = LikeSerializer

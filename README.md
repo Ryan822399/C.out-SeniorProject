@@ -22,10 +22,11 @@ Download the dependencies (Django and DjangoRestFramework) if you haven't done s
 pipenv install
 ```
 
-Download the headers for Django
+Download the libraries for Django
 ```
 pip install django-cors-headers
 pip install Django-rest-framework
+pip install pillow
 ```
 
 To run the server, CD into tws and run:
@@ -40,9 +41,15 @@ Server at http://localhost:8000/
 
 First make sure you run the backend server.
 For Frontend, go to frontend folder, CD into tws and run.
-
+```
+npm install
+```
+Then run
 ```
 npm start
 ```
 
 If you get a Node error, just delete your node_modules file and npm install.
+
+
+Dev Server at http://localhost:3000/
