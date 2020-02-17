@@ -20,37 +20,31 @@ class Profile extends Component {
     info: []
   }
 
-  async componentDidMount() {
-    try {
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/userTest/`);
-      const info = await res.json();
-      this.setState({
-        info
-      });
-    }
-    catch(e) {
-      console.log(e);
-    }
-    /*
-      fetch(`${process.env.REACT_APP_API_URL}/api/userTest/`, {
-        method: 'GET'
-      }).then( resp => resp.json())
-      .then( res => console.log(res))
-      .catch( error => console.log(error))
-      console.log(this.state.firstName)
-      console.log("FROM MOUNT")
-      */
+  componentDidMount() {
+    fetch(`${process.env.REACT_APP_API_URL}/api/profile/`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    }).then( resp => resp.json())
+    .then( res => this.setState({info: res}))
+    .catch(error => console.log(error))
+    console.log(this.state.info);
   }
 
+/*
   shouldComponentUpdate(nextProps, nextState) {
     return true;
   }
+*/
+
 
 
   render() {
     return (
       <div>
-        
+
         <div className="body">
           <Media>
             <img
@@ -62,7 +56,8 @@ class Profile extends Component {
             />
             <Media.Body>
               <h4>
-                { !this.state.info.firstName ? <p>{this.state.info.firstName}</p> : <p>NULL First</p> } { !this.state.lastName ? <p> {this.state.lastName} </p> : <p>NULL Last</p> }
+                //{ this.state.info.firstName }
+                { this.state.info ? <p>{this.state.info.firstName}</p> : <p>NULL First</p> } { !this.state.lastName ? <p> {this.state.lastName} </p> : <p>NULL Last</p> }
               </h4>
               <h5>
                 @PeterGriffin
