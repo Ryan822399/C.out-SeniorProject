@@ -5,7 +5,6 @@ import NavBar from './components/NavBar/NavBar';
 
 var FontAwesome = require('react-fontawesome');
 
-
 class App extends Component{
 
   state = {
@@ -27,7 +26,6 @@ class App extends Component{
       </div>
     );
   }
-
 }
 
 export default withCookies(App);
