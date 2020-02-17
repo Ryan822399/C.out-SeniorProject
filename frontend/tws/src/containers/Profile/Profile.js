@@ -7,14 +7,7 @@ import {Image, Navbar, Nav, NavDropdown, Form, FormControl, Button, Media, Card,
 
 
 class Profile extends Component {
-  /*
-  state = {
-    firstName: [],
-    lastName: [],
-    email: [],
-    bio: []
-  }
-  */
+
 
   state = {
     info: []
@@ -33,15 +26,9 @@ class Profile extends Component {
     console.log(this.state.info);
   }
 
-/*
-  shouldComponentUpdate(nextProps, nextState) {
-    return true;
-  }
-*/
-
-
 
   render() {
+    console.log(this.state.info)
     return (
       <div>
 
@@ -56,8 +43,7 @@ class Profile extends Component {
             />
             <Media.Body>
               <h4>
-                //{ this.state.info.firstName }
-                { this.state.info ? <p>{this.state.info.firstName}</p> : <p>NULL First</p> } { !this.state.lastName ? <p> {this.state.lastName} </p> : <p>NULL Last</p> }
+                { this.state.info[0] ? <p>{this.state.info[0].firstName}</p> : <p>NULL First</p> } { !this.state.lastName ? <p> {this.state.lastName} </p> : <p>NULL Last</p> }
               </h4>
               <h5>
                 @PeterGriffin
