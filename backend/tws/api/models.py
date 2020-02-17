@@ -44,7 +44,7 @@ class Dummy(models.Model):
 class FeedPost(models.Model):
     title = models.CharField(max_length=15)
     caption = models.CharField(max_length=40)
-    user = models.ForeignKey(User, on_delete=models.CASCADE )
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.CharField(max_length=1000)
     picture = models.ImageField(upload_to='images', null=True, blank=True)
 
