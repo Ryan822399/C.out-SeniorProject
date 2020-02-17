@@ -11,7 +11,7 @@ function NavBar(props) {
         <Navbar bg="dark" variant="dark">
             <Navbar.Brand href="http://localhost:3000/homepage/feed">
             <h3>
-            <FontAwesome name="heartbeat" />
+              <FontAwesome name="heartbeat" />
             <span>TWS</span>
             </h3>
             </Navbar.Brand>
@@ -19,6 +19,7 @@ function NavBar(props) {
               <Nav.Link href="http://localhost:3000/homepage/profile">Profile</Nav.Link>
               <Nav.Link href="http://localhost:3000/homepage/graphs">Progress</Nav.Link>
               <Nav.Link href="http://localhost:3000/homepage/friends">Friends</Nav.Link>
+              <Nav.Link href="http://localhost:3000/homepage/timeline">Timeline</Nav.Link>
             </Nav>
             <PostButton />
         </Navbar>

@@ -1,56 +1,37 @@
 import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/Profile.css';
-
 import {Image, Navbar, Nav, NavDropdown, Form, FormControl, Button, Media, Card, CardGroup} from 'react-bootstrap';
+//import Fri from '../src/components/Friends.js';
 
 
 
 class Profile extends Component {
-  /*
-  state = {
-    firstName: [],
-    lastName: [],
-    email: [],
-    bio: []
-  }
-  */
+
 
   state = {
     info: []
   }
 
-  async componentDidMount() {
-    try {
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/userTest/`);
-      const info = await res.json();
-      this.setState({
-        info
-      });
-    }
-    catch(e) {
-      console.log(e);
-    }
-    /*
-      fetch(`${process.env.REACT_APP_API_URL}/api/userTest/`, {
-        method: 'GET'
-      }).then( resp => resp.json())
-      .then( res => console.log(res))
-      .catch( error => console.log(error))
-      console.log(this.state.firstName)
-      console.log("FROM MOUNT")
-      */
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return true;
+  componentDidMount() {
+    fetch(`${process.env.REACT_APP_API_URL}/api/profile/`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    }).then( resp => resp.json())
+    .then( res => this.setState({info: res}))
+    .catch(error => console.log(error))
+    console.log(this.state.info);
   }
 
 
   render() {
+    console.log(this.state.info)
     return (
       <div>
-        
+
         <div className="body">
           <Media>
             <img
@@ -62,13 +43,13 @@ class Profile extends Component {
             />
             <Media.Body>
               <h4>
-                { !this.state.info.firstName ? <p>{this.state.info.firstName}</p> : <p>NULL First</p> } { !this.state.lastName ? <p> {this.state.lastName} </p> : <p>NULL Last</p> }
+                { this.state.info[0] ? <p>{this.state.info[0].firstName}</p> : <p>NULL First</p> } { this.state.info[0] ? <p> {this.state.info[0].lastName} </p> : <p>NULL Last</p> }
               </h4>
               <h5>
                 @PeterGriffin
               </h5>
               <p>
-                { !this.state.bio ? <p> {this.state.bio} </p> : <p>NULL Bio</p> }
+                { this.state.info[0]? <p> {this.state.info[0].bio} </p> : <p>NULL Bio</p> }
               </p>
             </Media.Body>
           </Media>
