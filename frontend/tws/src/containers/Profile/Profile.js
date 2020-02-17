@@ -4,10 +4,7 @@ import '../../css/Profile.css';
 import {Image, Navbar, Nav, NavDropdown, Form, FormControl, Button, Media, Card, CardGroup} from 'react-bootstrap';
 //import Fri from '../src/components/Friends.js';
 
-
-
 class Profile extends Component {
-
 
   state = {
     info: []
