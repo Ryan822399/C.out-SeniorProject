@@ -19,9 +19,9 @@ class DummySerializer(serializers.ModelSerializer):
         model = Dummy
         fields = '__all__'
 
-class UserTestSerializer(serializers.ModelSerializer):
+class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
-        model = UserTest
+        model = Profile
         fields = '__all__'
 
 class FeedPostSerializer(serializers.ModelSerializer):
@@ -32,7 +32,7 @@ class FeedPostSerializer(serializers.ModelSerializer):
 class WorkoutSerializer(serializers.ModelSerializer):
     class Meta:
         model = Workout
-        fields = ('id', 'title', 'description', 'no_of_ratings', 'avg_rating')
+        fields = ('id', 'title', 'description', 'no_of_ratings', 'avg_rating', 'weight', 'date')
 
 class RatingSerializer(serializers.ModelSerializer):
     class Meta:

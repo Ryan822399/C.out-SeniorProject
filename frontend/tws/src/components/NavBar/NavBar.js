@@ -9,7 +9,7 @@ function NavBar(props) {
         <Navbar bg="dark" variant="dark">
             <Navbar.Brand href="http://localhost:3000/homepage/feed">
             <h3>
-            <FontAwesome name="heartbeat" />
+              <FontAwesome name="heartbeat" />
             <span>TWS</span>
             </h3>
             </Navbar.Brand>

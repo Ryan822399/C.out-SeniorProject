@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { withCookies } from 'react-cookie';
 import Workouts from './containers/Workouts/Workouts';
 import NavBar from './components/NavBar/NavBar';
+import Footer from './components/Footer/Footer';
 
 var FontAwesome = require('react-fontawesome');
 

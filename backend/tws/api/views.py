@@ -20,10 +20,10 @@ class DummyViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.AllowAny]
     serializer_class = DummySerializer
 
-class UserTestViewSet(viewsets.ModelViewSet):
-    queryset = UserTest.objects.all()
+class ProfileViewSet(viewsets.ModelViewSet):
+    queryset = Profile.objects.all()
     permission_classes = [permissions.AllowAny]
-    serializer_class = UserTestSerializer
+    serializer_class = ProfileSerializer
 
 class FeedPostViewSet(viewsets.ModelViewSet):
     queryset = FeedPost.objects.all()
@@ -41,7 +41,7 @@ class FeedPostViewSet(viewsets.ModelViewSet):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated, )
 
-    
+
 class WorkoutViewSet(viewsets.ModelViewSet):
     queryset = Workout.objects.all()
     serializer_class = WorkoutSerializer
