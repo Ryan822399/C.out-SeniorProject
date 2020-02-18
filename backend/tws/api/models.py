@@ -4,10 +4,18 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    userName = models.CharField(max_length = 15)
     firstName = models.CharField(max_length = 30)
     lastName = models.CharField(max_length = 30)
     email = models.EmailField()
-    bio = models.TextField()
+    bio = models.TextField(blank=True, default="")
+    heightFeet = models.IntegerField(validators=[MinValueValidator(0),
+     MaxValueValidator(10)], blank=True, default=0)
+    heightInches = models.IntegerField(validators=[MinValueValidator(0),
+      MaxValueValidator(11)], blank=True, default=0)
+    dob = models.DateField()
+    location = models.CharField(max_length = 30)
+    picture = models.ImageField(upload_to='images/profileImages', null=True, blank=True)
     def __str__(self):
         return self.firstName + " " + self.lastName
 
@@ -44,9 +52,9 @@ class Dummy(models.Model):
 class FeedPost(models.Model):
     title = models.CharField(max_length=15)
     caption = models.CharField(max_length=40)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE )
     post = models.CharField(max_length=1000)
-    picture = models.ImageField(upload_to='images', null=True, blank=True)
+    picture = models.ImageField(upload_to='images/', null=True, blank=True)
 
     def __str__(self):
         return self.title
