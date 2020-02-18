@@ -7,6 +7,7 @@ function Posts(props) {
           { props.posts.map( post => {
            return (
              <div key={post.id} className="post-item">
+
                   <Card style={{ padding: '40px', border: '3px solid black', margin: 'auto', width: '20rem' }}>
                     <Card.Img variant="top" src={post.picture} />
                     <Card.Body>
