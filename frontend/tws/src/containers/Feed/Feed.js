@@ -13,7 +13,6 @@ class Feed extends Component {
   }
 
   componentDidMount() {
-
       fetch(`${process.env.REACT_APP_API_URL}/api/feedposts/`, {
         method: 'GET',
         headers: {
@@ -22,9 +21,7 @@ class Feed extends Component {
       }).then( resp => resp.json())
       .then( res => this.setState({posts: res}))
       .catch( error => console.log(error))
-
   }
-
 
   render() {
     console.log(this.state.posts)
@@ -40,4 +37,5 @@ class Feed extends Component {
       )
     }
   }
+  
 export default withCookies(Feed);
