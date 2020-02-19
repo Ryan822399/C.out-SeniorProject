@@ -39,18 +39,6 @@ class Graphs extends Component {
         }
     
 
-    // getWeight = () => {
-    //     fetch(`${process.env.REACT_APP_API_URL}/api/workouts/`, {
-    //       method: 'GET',
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         'Authorization': `Token ${this.state.token}`
-    //       }
-    //     }).then( resp => resp.json())
-    //     .then( res => this.props.updateWorkout(res))
-    //     .catch( error => console.log(error))
-    //   }
-
   componentDidMount() {
     fetch(`${process.env.REACT_APP_API_URL}/api/workouts/`, {
       method: 'GET',
@@ -60,9 +48,11 @@ class Graphs extends Component {
         
       }
     }).then( resp => resp.json())
-    .then( res => console.log(res))
+    .then( resp => this.setState({workouts: resp}))
     .catch( error => console.log(error))
   }
+
+  
 
   
 
@@ -75,22 +65,44 @@ class Graphs extends Component {
         return gradient;
     }
 
-    updateState = () => {
-    //    this.state.data.labels = this.getDate();
-     //   this.state.data.datasets.data = this.getWeight();
-    }
-
 
     getChartData = canvas => {
-      //  this.updateState();
+
+        //Obtains the data from workouts
         const data = this.state.data;
+       
+
+        //Initialize all filtration variables and arrays
+        var chosenWorkout = "Alternating Bicep Curls";
+        var filterIndex;
+        var filteredDataWeight = [];
+        var filteredDataDate = [];
+        var counter = 0;
+
+        //Filters the data by looking for the specific workout title
+        for(filterIndex = 0; filterIndex < this.state.workouts.length; filterIndex++)
+        {
+          var workoutTitle = this.state.workouts[filterIndex].title;
+
+          if(chosenWorkout == workoutTitle)
+          {
+            filteredDataWeight[counter] = this.state.workouts[filterIndex].weight;
+            filteredDataDate[counter] = this.state.workouts[filterIndex].date;
+            counter++;
+          }
+        }
+        
+
+        //Stores filtered data into state
+        this.state.data.labels = filteredDataDate
         if(data.datasets){
             let colors = ["rgba(255, 0, 255, 0.75", "rgba(0, 0, 255, 0.75)"];
             data.datasets.forEach((set, i) => {
                 set.backgroundColor = this.setGradientColor(canvas, colors[i]);
                 set.borderColor = "white";
                 set.borderWidth = 2;
-            
+                set.label = chosenWorkout;
+                set.data = filteredDataWeight;
             });
         }
         return data;
@@ -106,12 +118,11 @@ class Graphs extends Component {
     }
     return (
         
-        
+        //If a set of elements exist, render it
     <div>
-    <div>
-      
-        </div>
-        <div style = {{position: "relative", width: 600, height: 550}}>
+      {this.state.workouts[0] ? (
+
+        <div style = {{position: "relative", width: 700, height: 550}}>
             <h3>Alternating Bicep Curls</h3>
             <Line
                 options ={{
@@ -135,8 +146,10 @@ class Graphs extends Component {
                 }}
                 data = {this.getChartData}
             />
-
         </div>
+      ) 
+      : (<h3>Rendering Lost</h3>) 
+      }
     </div>
     )
   }
