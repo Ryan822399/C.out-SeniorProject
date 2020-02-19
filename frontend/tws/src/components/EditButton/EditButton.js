@@ -10,7 +10,7 @@ function EditButton(props) {
   const handleShow = () => setShow(true);
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="dark" onClick={handleShow}>
         Edit
       </Button>
 

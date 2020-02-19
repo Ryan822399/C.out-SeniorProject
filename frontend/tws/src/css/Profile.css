@@ -1,11 +1,13 @@
 
 * {
-  color: lightgreen;
+  color: #1BFFFF
 }
 
+/*
 .body {
   background-color: #222;
 }
+*/
 
 h4 {
   padding: 5px 0;
@@ -13,7 +15,13 @@ h4 {
 
 h3 {
   padding: 5px;
-  border-top: 1px lightgreen solid;
+  /*border-top: 1px lightgreen solid;*/
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 
