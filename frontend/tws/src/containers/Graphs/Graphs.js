@@ -123,7 +123,6 @@ class Graphs extends Component {
       {this.state.workouts[0] ? (
 
         <div style = {{position: "relative", width: 700, height: 550}}>
-            <h3>Alternating Bicep Curls</h3>
             <Line
                 options ={{
                     title:{
@@ -148,7 +147,7 @@ class Graphs extends Component {
             />
         </div>
       ) 
-      : (<h3>Rendering Lost</h3>) 
+      : (<h3>No Data Detected</h3>) 
       }
     </div>
     )

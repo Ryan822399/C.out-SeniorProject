@@ -45,7 +45,7 @@ class Profile extends Component {
                   { this.state.info[0] ? <p>{this.state.info[0].firstName}</p> : <p>NULL First</p> } { this.state.info[0] ? <p> {this.state.info[0].lastName} </p> : <p>NULL Last</p> }
                 </h4>
                 <h5>
-                  @PeterGriffin
+                  { this.state.info[0]? <p> @{this.state.info[0].userName} </p> : <p>NULL Bio</p> }
                 </h5>
                 <p>
                   { this.state.info[0]? <p> {this.state.info[0].bio} </p> : <p>NULL Bio</p> }
