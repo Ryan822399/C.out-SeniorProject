@@ -60,9 +60,11 @@ class Graphs extends Component {
         
       }
     }).then( resp => resp.json())
-    .then( res => console.log(res))
+    .then( resp => this.setState({workouts: resp}))
     .catch( error => console.log(error))
   }
+
+  
 
   
 
@@ -76,21 +78,45 @@ class Graphs extends Component {
     }
 
     updateState = () => {
-    //    this.state.data.labels = this.getDate();
-     //   this.state.data.datasets.data = this.getWeight();
+   //   workouts = res.weight;
+  //    console.log(workouts)
+  
     }
 
 
     getChartData = canvas => {
-      //  this.updateState();
+
+        //Obtains the data from workouts
         const data = this.state.data;
+
+
+        var j;
+        var dataWeight = [];    
+
+        //Inserts Date values into an array
+        for(j = 0; j < this.state.workouts.length; j++)
+        {
+          const testWeight2 = this.state.workouts[j].weight;
+          dataWeight[j] = this.state.workouts[j].weight;
+        }
+
+        var dataDate = [];
+        var k;
+         for(k = 0; k <  this.state.workouts.length; k++)
+         {
+           var dateString = this.state.workouts[k].date.toString();
+           dataDate[k] = dateString;
+         }
+ 
+
+        this.state.data.labels = dataDate
         if(data.datasets){
             let colors = ["rgba(255, 0, 255, 0.75", "rgba(0, 0, 255, 0.75)"];
             data.datasets.forEach((set, i) => {
                 set.backgroundColor = this.setGradientColor(canvas, colors[i]);
                 set.borderColor = "white";
                 set.borderWidth = 2;
-            
+                set.data = dataWeight;
             });
         }
         return data;
@@ -108,10 +134,9 @@ class Graphs extends Component {
         
         
     <div>
-    <div>
-      
-        </div>
-        <div style = {{position: "relative", width: 600, height: 550}}>
+      {this.state.workouts[0] ? (
+
+        <div style = {{position: "relative", width: 700, height: 550}}>
             <h3>Alternating Bicep Curls</h3>
             <Line
                 options ={{
@@ -135,8 +160,10 @@ class Graphs extends Component {
                 }}
                 data = {this.getChartData}
             />
-
         </div>
+      ) 
+      : (<h3>Rendering Lost</h3>) 
+      }
     </div>
     )
   }
