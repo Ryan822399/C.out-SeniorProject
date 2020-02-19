@@ -1,18 +1,23 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './EditButton.css';
-import { ButtonToolbar, Button } from 'react-bootstrap';
+import { ButtonToolbar, Button, Modal } from 'react-bootstrap';
 import EditProfile from '../EditProfile/EditProfile';
 var FontAwesome = require('react-fontawesome');
 
 function EditButton(props) {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   return (
-    <form>
-      <ButtonToolbar>
-        <Button onClick={<EditProfile />} className="edit" variant="primary" size="lg" active>
-          Edit
-        </Button>
-      </ButtonToolbar>
-    </form>
+    <>
+      <Button variant="primary" onClick={handleShow}>
+        Edit
+      </Button>
+
+      <Modal show={show} onHide={handleClose} animation={false}>
+        <EditProfile />
+      </Modal>
+    </>
   )
 }
 

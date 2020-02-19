@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/Profile.css';
 import {Image, Navbar, Nav, NavDropdown, Form, FormControl, Button, Media, Card, CardGroup, ButtonToolbar, Modal} from 'react-bootstrap';
 //import Fri from '../src/components/Friends.js';
-import EditProfile from '../../components/EditProfile/EditProfile';
+import EditButton from '../../components/EditButton/EditButton';
 
 class Profile extends Component {
 
@@ -23,23 +23,7 @@ class Profile extends Component {
     console.log(this.state.info);
   }
 
-  EditButton() {
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
-    return (
-      <>
-        <Button variant="primary" onClick={handleShow}>
-          Edit
-        </Button>
-
-        <Modal show={show} onHide={handleClose} animation={false}>
-          <EditProfile />
-        </Modal>
-      </>
-    );
-  }
+  
 
   render() {
     console.log(this.state.info)
@@ -71,7 +55,7 @@ class Profile extends Component {
             </Media>
           </div>
 
-          <this.EditButton />
+          <EditButton />
 
           <h3>
             Posts
