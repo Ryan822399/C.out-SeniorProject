@@ -64,6 +64,8 @@ class Graphs extends Component {
     .catch( error => console.log(error))
   }
 
+  
+
     setGradientColor = (canvas, color) => {
         const context = canvas.getContext('2d');
         const gradient = context.createLinearGradient(0, 0, 200, 400);
