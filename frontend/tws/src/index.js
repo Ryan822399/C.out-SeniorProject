@@ -11,6 +11,9 @@ import { CookiesProvider } from 'react-cookie';
 import Feed from './containers/Feed/Feed';
 import Graphs from './containers/Graphs/Graphs';
 import TimelineDetails from './containers/TimelineDetails/TimelineDetails';
+import PublicForum from './containers/PublicForum/PublicForum';
+
+
 //<Route exact path="/workouts" component={App}/>
 import Footer from './components/Footer/Footer';
 
@@ -24,6 +27,7 @@ const routing = (
       <Route exact path="/homepage/graphs" component={Graphs}/>
       <Route exact path="/homepage/friends" component={Friends}/>
       <Route exact path="/homepage/timeline" component={TimelineDetails}/>
+      <Route exact path="/homepage/forum" component={PublicForum}/>
     </CookiesProvider>
     <Footer />
   </BrowserRouter>
