@@ -27,7 +27,7 @@ class Profile extends Component {
     return (
       <Media>
         <Media.Body>
-          <h3 style={{color: "#1BFFFF"}}> @{this.state.info[0].userName} </h3>
+          <h2 style={{color: "#1BFFFF"}}> @{this.state.info[0].userName} </h2>
         </Media.Body>
       </Media>
     )
@@ -39,11 +39,29 @@ class Profile extends Component {
         width={300}
         height={300}
         className="mr-3"
-        src="http://localhost:8000/media/images/profileImages/Joe_Goldberg.png"
+        src= { this.state.info[0].picture }
         alt="Profile Picture"
         class="center"
         style={{borderRadius: 300/2}}
       />
+    )
+  }
+
+  profileInformation = evt => {
+    return (
+      <Media>
+        <Media.Body>
+          <h4>
+            { <h4>{this.state.info[0].firstName} {this.state.info[0].lastName}</h4> }
+          </h4>
+          <p>
+            { <p> { this.state.info[0].location} </p>}
+          </p>
+          <p>
+            { this.state.info[0]? <p> {this.state.info[0].bio} </p> : <p>NULL Bio</p> }
+          </p>
+        </Media.Body>
+      </Media>
     )
   }
 
@@ -53,26 +71,16 @@ class Profile extends Component {
       <div style={{background: "#222", textAlign: "center", color: "#1BFFFF"}}>
         { this.state.info[0] ? (
           <div>
-          <this.profileUserName />
-          <div className="body">
-            <this.profilePicture />
-            <Media>
-              <Media.Body>
-                <h4>
-                  { this.state.info[0] ? <p>{this.state.info[0].firstName}</p> : <p>NULL First</p> } { this.state.info[0] ? <p> {this.state.info[0].lastName} </p> : <p>NULL Last</p> }
-                </h4>
-                <p>
-                  { this.state.info[0]? <p> {this.state.info[0].bio} </p> : <p>NULL Bio</p> }
-                </p>
-              </Media.Body>
-            </Media>
-          </div>
+            <div className="body" style={{paddingBottom: "1%", borderBottom: "5px solid #1BFFFF"}}>
+              <this.profileUserName />
+              <this.profilePicture />
+              <this.profileInformation />
+              <EditButton />
+            </div>
 
-          <EditButton />
 
-          <h3 style={{color: "#1BFFFF"}}>
-            Posts
-          </h3>
+
+
           <CardGroup id="posts">
             <Card style={{background: "#222"}}>
               <Card.Img variant="top" src="https://i.ytimg.com/vi/eV5fUPU7zIU/maxresdefault.jpg" />

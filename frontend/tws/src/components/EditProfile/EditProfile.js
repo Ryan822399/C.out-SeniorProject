@@ -4,7 +4,7 @@ var FontAwesome = require('react-fontawesome');
 
 function EditProfile(props) {
   return (
-    <div>
+    <div style={{background: "#222", padding: "5%"}}>
       <Form>
         <Form.Row>
           <Form.Group as={Col} controlId="formGridEmail">
