@@ -15,7 +15,7 @@ function EditButton(props) {
       </Button>
 
       <Modal show={show} onHide={handleClose} animation={false}>
-        <EditProfile />
+        <EditProfile /*user={this.props.user} *//>
       </Modal>
     </>
   )

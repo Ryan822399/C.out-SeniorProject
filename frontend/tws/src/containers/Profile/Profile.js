@@ -51,14 +51,14 @@ class Profile extends Component {
     return (
       <Media>
         <Media.Body>
-          <h4>
+          <h4 style={{padding: "0"}}>
             { <h4>{this.state.info[0].firstName} {this.state.info[0].lastName}</h4> }
           </h4>
           <p>
-            { <p> { this.state.info[0].location} </p>}
+            { <p> { this.state.info[0].location} </p> }
           </p>
           <p>
-            { this.state.info[0]? <p> {this.state.info[0].bio} </p> : <p>NULL Bio</p> }
+            { <p> {this.state.info[0].bio} </p> }
           </p>
         </Media.Body>
       </Media>
@@ -75,11 +75,8 @@ class Profile extends Component {
               <this.profileUserName />
               <this.profilePicture />
               <this.profileInformation />
-              <EditButton />
+              <EditButton user={this.state.info}/>
             </div>
-
-
-
 
           <CardGroup id="posts">
             <Card style={{background: "#222"}}>
