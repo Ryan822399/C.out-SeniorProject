@@ -23,43 +23,61 @@ class Profile extends Component {
     console.log(this.state.info);
   }
 
-  
+  profileUserName = evt => {
+    return (
+      <Media>
+        <Media.Body>
+          <h2 style={{color: "#1BFFFF"}}> @{this.state.info[0].userName} </h2>
+        </Media.Body>
+      </Media>
+    )
+  }
+
+  profilePicture = evt => {
+    return (
+      <img
+        width={300}
+        height={300}
+        className="mr-3"
+        src= { this.state.info[0].picture }
+        alt="Profile Picture"
+        class="center"
+        style={{borderRadius: 300/2}}
+      />
+    )
+  }
+
+  profileInformation = evt => {
+    return (
+      <Media>
+        <Media.Body>
+          <h4 style={{padding: "0"}}>
+            { <h4>{this.state.info[0].firstName} {this.state.info[0].lastName}</h4> }
+          </h4>
+          <p>
+            { <p> { this.state.info[0].location} </p> }
+          </p>
+          <p>
+            { <p> {this.state.info[0].bio} </p> }
+          </p>
+        </Media.Body>
+      </Media>
+    )
+  }
 
   render() {
     console.log(this.state.info)
     return (
-      <div>
-
-        { this.state.info ? (
+      <div style={{background: "#222", textAlign: "center", color: "#1BFFFF"}}>
+        { this.state.info[0] ? (
           <div>
-          <div className="body">
-            <Media>
-              <img
-                width={384}
-                height={384}
-                className="mr-3"
-                src="http://localhost:8000/media/images/profileImages/Joe_Goldberg.png"
-                alt="Joker Peter Griffin"
-              />
-              <Media.Body>
-                <h4>
-                  { this.state.info[0] ? <p>{this.state.info[0].firstName}</p> : <p>NULL First</p> } { this.state.info[0] ? <p> {this.state.info[0].lastName} </p> : <p>NULL Last</p> }
-                </h4>
-                <h5>
-                  { this.state.info[0]? <p> @{this.state.info[0].userName} </p> : <p>NULL Bio</p> }
-                </h5>
-                <p>
-                  { this.state.info[0]? <p> {this.state.info[0].bio} </p> : <p>NULL Bio</p> }
-                </p>
-              </Media.Body>
-            </Media>
-          </div>
+            <div className="body" style={{paddingBottom: "1%", borderBottom: "5px solid #1BFFFF"}}>
+              <this.profileUserName />
+              <this.profilePicture />
+              <this.profileInformation />
+              <EditButton user={this.state.info}/>
+            </div>
 
-          <EditButton />
-
-          <h3>
-            Posts
-          </h3>
           <CardGroup id="posts">
             <Card style={{background: "#222"}}>
               <Card.Img variant="top" src="https://i.ytimg.com/vi/eV5fUPU7zIU/maxresdefault.jpg" />

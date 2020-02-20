@@ -10,12 +10,12 @@ function EditButton(props) {
   const handleShow = () => setShow(true);
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="dark" onClick={handleShow}>
         Edit
       </Button>
 
       <Modal show={show} onHide={handleClose} animation={false}>
-        <EditProfile />
+        <EditProfile /*user={this.props.user} *//>
       </Modal>
     </>
   )
