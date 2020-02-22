@@ -8,7 +8,7 @@ function Posts(props) {
            return (
              <div key={post.id} className="post-item">
 
-                  <Card style={{ padding: '40px', border: '3px solid black', margin: 'auto', width: '20rem' }}>
+                  <Card bg="dark" style={{ padding: '40px', border: '3px solid black', margin: 'auto', width: '40rem' }}>
                     <Card.Img variant="top" src={post.picture} />
                     <Card.Body>
                         <Card.Title>{post.title}</Card.Title>
@@ -16,9 +16,10 @@ function Posts(props) {
                         <Card.Text>
                           {post.post}
                         </Card.Text>
-                        <Button variant="primary">Profile</Button>
+                        <Button variant="primary">Go somewhere</Button>
                     </Card.Body>
                   </Card>
+                <br/>
              </div>
            )
            })}

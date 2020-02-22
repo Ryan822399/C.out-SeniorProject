@@ -37,5 +37,5 @@ class Feed extends Component {
       )
     }
   }
-  
+
 export default withCookies(Feed);
