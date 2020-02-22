@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import Transformation from 'react';
-import '../../css/HomePage.css';
 import { withCookies } from 'react-cookie';
-import {Spinner, NavDropdown, Container} from 'react-bootstrap';
+import {Spinner, NavDropdown, Container, Row, Col} from 'react-bootstrap';
 import Posts from '../../components/Posts/Posts';
+import PostButton from '../../components/PostButton/PostButton';
 
 class Feed extends Component {
 
@@ -26,7 +26,10 @@ class Feed extends Component {
   render() {
     console.log(this.state.posts)
       return (
+
         <div>
+        <br/>
+        <PostButton />
         <br/>
           <Container>
             { this.state.posts[0] ? <Posts posts={this.state.posts}/>
