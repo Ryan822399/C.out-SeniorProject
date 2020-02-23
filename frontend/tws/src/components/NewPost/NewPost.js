@@ -9,7 +9,7 @@ function NewPost(props){
 
   return(
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="secondary" block onClick={handleShow}>
         Create a Post
       </Button>
 
@@ -20,8 +20,12 @@ function NewPost(props){
               <Form.Label>Post Title</Form.Label>
               <Form.Control type="text" />
             </Form.Group>
-            <Form.Group controlId="Post Text">
+            <Form.Group controlId="Post Caption">
               <Form.Label>Post Caption</Form.Label>
+              <Form.Control type="text" />
+            </Form.Group>
+            <Form.Group controlId="Post Text">
+              <Form.Label>Post Text</Form.Label>
               <Form.Control type="text" />
             </Form.Group>
             <Button variant="primary" type="submit" >

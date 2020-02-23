@@ -6,16 +6,21 @@ class PostButton extends Component {
     state = {
       title: "",
       caption: "",
-      post: "",
-      picture: ""
+      post: ""
+      //picture: ""
     }
 
-  handleFormSubmit() {
-  // Form submission logic
-  }
-
-  handleClearForm() {
-    // Logic for resetting the form
+  handleFormSubmit = event => {
+    console.log('submitting new post');
+    fetch(`http://localhost:8000/admin/api/feedpost/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${this.props.token}`
+      },
+      body: JSON.stringify(this.state.title, this.state.caption, this.state.post)
+    }).then( resp => resp.json())
+    .catch( error => console.log(error))
   }
 
   render(){

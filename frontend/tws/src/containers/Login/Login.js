@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { withCookies } from 'react-cookie';
+import {Row, Col, Container} from 'react-bootstrap';
 
 class Login extends Component{
 
@@ -54,21 +55,29 @@ class Login extends Component{
 
   render(){
     return <div className="login-container">
-    <h1>
-      {this.state.isLoginView ? 'Login' : 'Register'}
-    </h1>
-    <span>Username</span> <br/>
-      <input type="text" name="username" value={this.state.credentials.username}
-      onChange={this.inputChanged}/><br/>
-    <span>Password</span> <br/>
-      <input type="password" name="password" value={this.state.credentials.password}
-        onChange={this.inputChanged}/><br/>
-      <button onClick={this.login} >
-        {this.state.isLoginView ? 'Login' : 'Register'}
-      </button>
-      <p onClick={this.toggleView}>
-      {this.state.isLoginView ? 'Create Account' : 'Back to Login'}
-      </p>
+      <Container>
+        <Row>
+          <Col></Col>
+          <Col xs={6}>
+            <h1>
+              {this.state.isLoginView ? 'Login' : 'Register'}
+            </h1>
+            <span>Username</span> <br/>
+              <input type="text" name="username" value={this.state.credentials.username}
+              onChange={this.inputChanged}/><br/>
+            <span>Password</span> <br/>
+              <input type="password" name="password" value={this.state.credentials.password}
+                onChange={this.inputChanged}/><br/>
+              <button onClick={this.login} >
+                {this.state.isLoginView ? 'Login' : 'Register'}
+              </button>
+              <p onClick={this.toggleView}>
+              {this.state.isLoginView ? 'Create Account' : 'Back to Login'}
+              </p>
+          </Col>
+          <Col></Col>
+        </Row>
+      </Container>
     </div>
 
   }

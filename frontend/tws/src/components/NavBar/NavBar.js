@@ -1,6 +1,5 @@
 import React,{useState, useRef} from "react";
 import './NavBar.css';
-import PostButton from '../PostButton/PostButton';
 import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Overlay, Tooltip, Modal} from 'react-bootstrap';
 var FontAwesome = require('react-fontawesome');
 
@@ -22,7 +21,6 @@ function NavBar(props) {
               <Nav.Link href="http://localhost:3000/homepage/timeline">Timeline</Nav.Link>
               <Nav.Link href="http://localhost:3000/homepage/forum">Public Forum</Nav.Link>
             </Nav>
-            <PostButton />
         </Navbar>
       </div>
 

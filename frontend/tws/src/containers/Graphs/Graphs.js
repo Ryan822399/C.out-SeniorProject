@@ -4,6 +4,7 @@ import '../../css/Profile.css';
 import {Line} from 'react-chartjs-2'
 import "chartjs-plugin-lineheight-annotation";
 import { withCookies } from 'react-cookie';
+import ProgressTabs from '../../components/ProgressTabs/ProgressTabs';
 
 import {Image, Navbar, Nav, NavDropdown, Form, FormControl, Button, Media, Card, CardGroup} from 'react-bootstrap';
 import { Redirect, withRouter } from 'react-router-dom';
@@ -11,10 +12,11 @@ import { Redirect, withRouter } from 'react-router-dom';
 
 class Graphs extends Component {
 
-    
-        
+
+
 
         state = {
+          currTab: "first",
           token: this.props.cookies.get('tws-token'),
           workouts: [],
 
@@ -37,7 +39,7 @@ class Graphs extends Component {
                 ]
             }
         }
-    
+
 
   componentDidMount() {
     fetch(`${process.env.REACT_APP_API_URL}/api/workouts/`, {
@@ -45,16 +47,18 @@ class Graphs extends Component {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Token ${this.state.token}`,
-        
+
       }
     }).then( resp => resp.json())
     .then( resp => this.setState({workouts: resp}))
     .catch( error => console.log(error))
   }
 
-  
 
-  
+
+  changeTabs = tab =>  {
+      this.setState({currTab: tab});
+  }
 
     setGradientColor = (canvas, color) => {
         const context = canvas.getContext('2d');
@@ -70,7 +74,7 @@ class Graphs extends Component {
 
         //Obtains the data from workouts
         const data = this.state.data;
-       
+
 
         //Initialize all filtration variables and arrays
         var chosenWorkout = "Alternating Bicep Curls"; //Change here to determine which workout to show
@@ -91,7 +95,7 @@ class Graphs extends Component {
             counter++;
           }
         }
-        
+
 
         //Stores filtered data into state
         this.state.data.labels = filteredDataDate
@@ -117,9 +121,12 @@ class Graphs extends Component {
       };
     }
     return (
-        
+
         //If a set of elements exist, render it
     <div>
+    <div style={styles.progress}>
+    <ProgressTabs changeTabs={this.changeTabs} act={this.state.currTab}/>
+    </div>
       {this.state.workouts[0] ? (
 
         <div style = {{position: "relative", width: 700, height: 550}}>
@@ -146,13 +153,18 @@ class Graphs extends Component {
                 data = {this.getChartData}
             />
         </div>
-      ) 
-      : (<h3>No Data Detected</h3>) 
+      )
+      : (<h3>No Data Detected</h3>)
       }
     </div>
     )
   }
 }
+const styles = {
+    progress: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
+    }}
 
 export default withCookies(Graphs);
-
