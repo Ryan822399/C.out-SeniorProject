@@ -9,13 +9,19 @@ class EditProfile extends Component {
   }
 
   render() {
+    console.log("CHECKING");
+    console.log(this.props.user[0].userName);
+    let firstName;
+    if (this.props.user[0] !== "") {
+      firstName = "this.props.user[0].firstName;";
+    }
     return (
       <div style={{background: "#222", padding: "5%"}}>
         <Form>
           <Form.Row>
             <Form.Group as={Col} controlId="formGridFirstName">
               <Form.Label>First name</Form.Label>
-              <Form.Control type="firstName" /*placeholder={this.props.user.firstName}*/ />
+              <Form.Control type="firstName" placeholder={firstName} />
             </Form.Group>
             <Form.Group as={Col} controlId="formGridEmail">
               <Form.Label>Last name</Form.Label>
