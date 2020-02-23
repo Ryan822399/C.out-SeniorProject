@@ -3,12 +3,11 @@ import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/Profile.css';
 import { Timeline, TimelineItem }  from 'vertical-timeline-component-for-react';
-import {Container, Image, ListGroup, Button, ButtonToolbar, Card, CardGroup, Form, FormControl, Media, Navbar, Nav, NavDropdown} from 'react-bootstrap';
+import {Container, Image, ListGroup, Button, ButtonToolbar, Card, CardGroup, Form, FormControl, Media, Navbar, Nav} from 'react-bootstrap';
 import { withCookies } from 'react-cookie';
 class Friends extends Component{
   state = {
     info: [],
-    posts: [],
     token: this.props.cookies.get('tws-token')
   }
 
@@ -23,20 +22,10 @@ class Friends extends Component{
     .then( res => this.setState({info: res}))
     .catch(error => console.log(error))
     console.log(this.state.info);
-
-    fetch(`${process.env.REACT_APP_API_URL}/api/feedposts/`, {
-      method: 'GET',
-      headers: {
-        'Authorization': `Token ${this.state.token}`
-      }
-    }).then( resp => resp.json())
-    .then( res => this.setState({posts: res}))
-    .catch(error => console.log(error))
-    console.log("TESTING");
-    console.log(this.state.posts);
   }
 
   UserName = evt => {
+    console.log(this.state.info[0].firstName)
     return (
       <h4>
         { this.state.info[0] ? <p>{this.state.info[0].firstName}</p> : <p>NULL First</p> }
@@ -45,17 +34,22 @@ class Friends extends Component{
     )
   }
 
+  handleClick(){
+    console.log("Checking Click")
+  }
+
+
   render(){
       return (
-
         <div>
+        <input name="firstName" onChange={this.UserName}/>
         {/*
         <h4>
           { this.state.info[0] ? <p>{this.state.info[0].firstName}</p> : <p>NULL First</p> }
           { this.state.info[0] ? <p>{this.state.info[0].lastName}</p> : <p>NULL Last</p> }
         </h4>
         */}
-        <this.UserName />
+        {/*<this.UserName />*/}
         <Container>
           <Card style = {{ width: '20rem'}}>
             <Card.Header>Friend's List</Card.Header>
@@ -129,7 +123,7 @@ class Friends extends Component{
             <Form.Group controlId="formBasicInput">
               <Form.Control type="text" placeholder="Enter name" />
             </Form.Group>
-            <Button variant="outline-success" type="submit" block>
+            <Button variant="outline-success" type="submit" block onChange={this.UserName}>
               Add Friend
             </Button>
             <Button variant="outline-success" type="submit" block>

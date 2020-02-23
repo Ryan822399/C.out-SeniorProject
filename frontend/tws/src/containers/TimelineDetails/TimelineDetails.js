@@ -6,10 +6,8 @@ import {Container, Image, ListGroup, Button, ButtonToolbar, Card, CardGroup, For
 
 
 
-class TimelineDetails extends Component {
+function TimelineDetails(props) {
 
-  render() {
-    console.log("helllllloosSs")
     return (
       <div>
       <Timeline lineColor={'#ddd'}>
@@ -287,7 +285,7 @@ class TimelineDetails extends Component {
       </Timeline>
       </div>
     )
-  }
+
 }
 
 export default TimelineDetails;
