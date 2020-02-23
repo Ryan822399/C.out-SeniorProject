@@ -29,7 +29,9 @@ const routing = (
       <Route exact path="/homepage/timeline" component={TimelineDetails}/>
       <Route exact path="/homepage/forum" component={PublicForum}/>
     </CookiesProvider>
+    
     <Footer />
+
   </BrowserRouter>
 );
 
