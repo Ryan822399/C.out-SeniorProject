@@ -36,16 +36,26 @@ class Friends extends Component{
     console.log(this.state.posts);
   }
 
-  
+  UserName = evt => {
+    return (
+      <h4>
+        { this.state.info[0] ? <p>{this.state.info[0].firstName}</p> : <p>NULL First</p> }
+        { this.state.info[0] ? <p>{this.state.info[0].lastName}</p> : <p>NULL Last</p> }
+      </h4>
+    )
+  }
 
   render(){
       return (
 
         <div>
+        {/*
         <h4>
           { this.state.info[0] ? <p>{this.state.info[0].firstName}</p> : <p>NULL First</p> }
           { this.state.info[0] ? <p>{this.state.info[0].lastName}</p> : <p>NULL Last</p> }
         </h4>
+        */}
+        <this.UserName />
         <Container>
           <Card style = {{ width: '20rem'}}>
             <Card.Header>Friend's List</Card.Header>
