@@ -37,7 +37,7 @@ class Graphs extends Component {
                 ]
             },
             value: "coconut",
-            workoutTitles: []
+            workoutTitles: ["Workout 1", "Workout 2"]
         };
         this.handleSubmit = this.handleSubmit.bind(this);
       }
@@ -62,7 +62,7 @@ class Graphs extends Component {
       }
     }).then( resp => resp.json())
     .then( resp => this.setState({workouts: resp}))
-    .then (resp => this.setState({workoutTitle: resp}))
+  //  .then (resp => this.setState({workoutTitle: }))
     .catch( error => console.log(error))
   }
 
@@ -81,6 +81,20 @@ class Graphs extends Component {
         return gradient;
     }
 
+
+    getDistinctTitles = titles => {
+      var filterIndex;
+      var seenTitles = [];
+      for(filterIndex = 0; filterIndex < this.state.workouts.length; filterIndex++)
+      {
+        var workoutTitle = this.state.workouts[filterIndex].title;
+        seenTitles[filterIndex] = workoutTitle;
+      }
+
+      const distinctTitles = Array.from(new Set(seenTitles));
+    //  this.setState({workoutTitles: distinctTitles})
+      return distinctTitles;
+    }
 
     getChartData = canvas => {
 
@@ -121,8 +135,6 @@ class Graphs extends Component {
         //Stores filtered data into state
         this.state.data.labels = filteredDataDate
         this.state.workoutTitles = distinctTitles
-        console.log("this is a test")
-        console.log(this.state.workoutTitles)
         if(data.datasets){
             let colors = ["rgba(255, 0, 255, 0.75", "rgba(0, 0, 255, 0.75)"];
             data.datasets.forEach((set, i) => {
@@ -149,16 +161,16 @@ class Graphs extends Component {
 
         //If a set of elements exist, render it
     <div>
+
+      
       <div dropdown>
       <label>Looping through array</label>
       <select>
         {this.state.workoutTitles.map(workoutTitles => (
-          <option key = {this.state.workoutTitles} value = {this.state.workoutTitles}>
-            {this.state.workoutTitles}
+          <option key = {workoutTitles}  value = {workoutTitles}>
+            {workoutTitles}
           </option>
         ))}
-        {console.log("To test workout tites")}
-        {console.log(this.state.workoutTitles)}
     </select>
  
       </div>
