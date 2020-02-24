@@ -4,14 +4,19 @@ import '../../css/Profile.css';
 import {Image, Navbar, Nav, NavDropdown, Form, FormControl, Button, Media, Card, CardGroup, ButtonToolbar, Modal} from 'react-bootstrap';
 //import Fri from '../src/components/Friends.js';
 import EditButton from '../../components/EditButton/EditButton';
+import { withCookies } from 'react-cookie';
+//import {TimelineDetails} from '../../containers/TimelineDetails/TimelineDetails'
 
 class Profile extends Component {
 
   state = {
-    info: []
+    info: [],
+    posts: [],
+    token: this.props.cookies.get('tws-token')
   }
 
   componentDidMount() {
+
     fetch(`${process.env.REACT_APP_API_URL}/api/profile/`, {
       method: 'GET',
       headers: {
@@ -21,7 +26,31 @@ class Profile extends Component {
     .then( res => this.setState({info: res}))
     .catch(error => console.log(error))
     console.log(this.state.info);
+
+    fetch(`${process.env.REACT_APP_API_URL}/api/feedposts/`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Token ${this.state.token}`
+      }
+    }).then( resp => resp.json())
+    .then( res => this.setState({posts: res}))
+    .catch(error => console.log(error))
+    console.log("TESTING");
+    console.log(this.state.posts);
+
+    /*
+    Promise.all([
+            fetch('${process.env.REACT_APP_API_URL}/api/profile/'),
+            fetch('${process.env.REACT_APP_API_UR}/api/feedpost/')
+        ])
+        .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
+        .then(([data1, data2]) => this.setState({
+            info: data1,
+            posts: data2
+        }));
+    */
   }
+
 
   profileUserName = evt => {
     return (
@@ -65,7 +94,35 @@ class Profile extends Component {
     )
   }
 
+  profilePost = evt => {
+    return (
+      <div>
+        { this.state.posts.map(post => {
+          return (
+            <div key={post.id}>
+              <CardGroup id="posts">
+                <Card style={{background: "#222"}}>
+                  <Card.Img height={300} variant="top" src={post.picture} style={{width: "25%"}} />
+                  <Card.Body>
+                    <Card.Title>{post.title}</Card.Title>
+                    <Card.Text>
+                      {post.caption}
+                    </Card.Text>
+                  </Card.Body>
+                  <Card.Footer>
+                    <small className="text-muted">Posted 2 days ago</small>
+                  </Card.Footer>
+                </Card>
+              </CardGroup>
+            </div>
+          )
+        }) }
+      </div>
+    )
+  }
+
   render() {
+    console.log("HEY");
     console.log(this.state.info)
     return (
       <div style={{background: "#222", textAlign: "center", color: "#1BFFFF"}}>
@@ -77,45 +134,7 @@ class Profile extends Component {
               <this.profileInformation />
               <EditButton user={this.state.info}/>
             </div>
-
-          <CardGroup id="posts">
-            <Card style={{background: "#222"}}>
-              <Card.Img variant="top" src="https://i.ytimg.com/vi/eV5fUPU7zIU/maxresdefault.jpg" />
-              <Card.Body>
-                <Card.Title>Forcing My Wife To Eat</Card.Title>
-                <Card.Text>
-                  This was a pretty fun experience even though I almost got her killed. #tbt
-                </Card.Text>
-              </Card.Body>
-              <Card.Footer>
-                <small className="text-muted">Posted 2 days ago</small>
-              </Card.Footer>
-            </Card>
-            <Card style={{background: "#222"}}>
-              <Card.Img variant="top" src="https://www.nydailynews.com/resizer/n4XDpTyDGkvQpEQle3t1lwIlUaQ=/415x233/top/www.trbimg.com/img-5c3ca7a6/turbine/ny-1547478934-8c63008drk-snap-image" />
-              <Card.Body>
-                <Card.Title>Peter Griffin vs. Donald Trump</Card.Title>
-                <Card.Text>
-                  He got salty.
-                </Card.Text>
-              </Card.Body>
-              <Card.Footer>
-                <small className="text-muted">Posted 4 days ago</small>
-              </Card.Footer>
-            </Card>
-            <Card style={{background: "#222"}}>
-              <Card.Img variant="top" src="https://cdn1.thr.com/sites/default/files/imagecache/768x433/2016/05/family_guy_trump_emmy_campaign_0.jpg" />
-              <Card.Body>
-                <Card.Title>DJ</Card.Title>
-                <Card.Text>
-                  #NoCaptionNeeded
-                </Card.Text>
-              </Card.Body>
-              <Card.Footer>
-                <small className="text-muted">Posted 5 days ago</small>
-              </Card.Footer>
-            </Card>
-          </CardGroup>
+            <this.profilePost />
           </div>
         )
           : <h3>Loading</h3>
@@ -125,4 +144,4 @@ class Profile extends Component {
   }
 }
 
-export default Profile;
+export default withCookies(Profile);
