@@ -25,12 +25,22 @@ class Friends extends Component{
   }
 
   UserName = evt => {
-    console.log(this.state.info[0].firstName)
     return (
       <h4>
-        { this.state.info[0] ? <p>{this.state.info[0].firstName}</p> : <p>NULL First</p> }
-        { this.state.info[0] ? <p>{this.state.info[0].lastName}</p> : <p>NULL Last</p> }
+        { this.state.info[0] ? <p>{this.state.info[0].userName}</p> : <p>NULL First</p> }
       </h4>
+    )
+  }
+
+  profilePicture = evt => {
+    return (
+      <img
+        width={64}
+        height={64}
+        className="mr-3"
+        src= { this.state.info[0] ? <p>{this.state.info[0].picture}</p> : <p>NULL First</p> }
+        alt="Profile Picture"
+      />
     )
   }
 
@@ -56,14 +66,9 @@ class Friends extends Component{
             <ListGroup variant="flush">
               <ListGroup.Item>
               <Media>
-                <img
-                  width={64}
-                  height={64}
-                  className="mr-3"
-                  src="https://s2.dmcdn.net/v/K-vxh1PQOdCNPyzJR/x1080"
-                />
+                <this.profilePicture/>
                 <Media.Body>
-                  <h5>Bob Joe</h5>
+                  <this.UserName />
                   <p>
                     Online
                   </p>
