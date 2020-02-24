@@ -120,15 +120,24 @@ class Graphs extends Component {
         color: 'black',
       };
     }
+    
     return (
 
         //If a set of elements exist, render it
     <div>
+      <div dropdown>
+      <select>
+       <option value="grapefruit">Grapefruit</option>
+       <option value="lime">Lime</option>
+       <option selected value="coconut">Coconut</option>
+       <option value="mango">Mango</option>
+    </select>
+ 
+      </div>
     <div style={styles.progress}>
     <ProgressTabs changeTabs={this.changeTabs} act={this.state.currTab}/>
     </div>
       {this.state.workouts[0] ? (
-
         <div style = {{position: "relative", width: 700, height: 550}}>
             <Line
                 options ={{
