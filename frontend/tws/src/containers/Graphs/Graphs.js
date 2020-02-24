@@ -12,14 +12,12 @@ import { Redirect, withRouter } from 'react-router-dom';
 
 class Graphs extends Component {
 
-
-
-
-        state = {
+    constructor(props){
+        super(props);
+        this.state = {
           currTab: "first",
           token: this.props.cookies.get('tws-token'),
           workouts: [],
-
             data: {
                // labels: ["1", "2", "3", "4", "5"]
                 labels:["2020-02-08", "2020-02-09", "2020-02-11", "2020-02-14"],
@@ -37,9 +35,22 @@ class Graphs extends Component {
                     //     data: [14, 18, 5, 0, 22, 1, 13]
                     // }
                 ]
-            }
-        }
+            },
+            value: "coconut",
+            workoutTitles: []
+        };
+        this.handleSubmit = this.handleSubmit.bind(this);
+      }
 
+
+  handleSubmit(event){
+    alert("This is a test alert: " + this.state.value);
+    event.preventDefault();
+  }
+
+  handleChange = event => {
+    this.setState( {value: event.target.value} )
+  }
 
   componentDidMount() {
     fetch(`${process.env.REACT_APP_API_URL}/api/workouts/`, {
@@ -51,6 +62,7 @@ class Graphs extends Component {
       }
     }).then( resp => resp.json())
     .then( resp => this.setState({workouts: resp}))
+    .then (resp => this.setState({workoutTitle: resp}))
     .catch( error => console.log(error))
   }
 
@@ -81,12 +93,14 @@ class Graphs extends Component {
         var filterIndex;
         var filteredDataWeight = [];
         var filteredDataDate = [];
+        var seenTitles = [];
         var counter = 0;
 
         //Filters the data by looking for the specific workout title
         for(filterIndex = 0; filterIndex < this.state.workouts.length; filterIndex++)
         {
           var workoutTitle = this.state.workouts[filterIndex].title;
+          seenTitles[filterIndex] = workoutTitle;
 
           if(chosenWorkout == workoutTitle)
           {
@@ -96,9 +110,19 @@ class Graphs extends Component {
           }
         }
 
+        console.log("I am here")
+        const distinctTitles = Array.from(new Set(seenTitles));
+        console.log(distinctTitles)
+
+
+        
+
 
         //Stores filtered data into state
         this.state.data.labels = filteredDataDate
+        this.state.workoutTitles = distinctTitles
+        console.log("this is a test")
+        console.log(this.state.workoutTitles)
         if(data.datasets){
             let colors = ["rgba(255, 0, 255, 0.75", "rgba(0, 0, 255, 0.75)"];
             data.datasets.forEach((set, i) => {
@@ -126,11 +150,15 @@ class Graphs extends Component {
         //If a set of elements exist, render it
     <div>
       <div dropdown>
+      <label>Looping through array</label>
       <select>
-       <option value="grapefruit">Grapefruit</option>
-       <option value="lime">Lime</option>
-       <option selected value="coconut">Coconut</option>
-       <option value="mango">Mango</option>
+        {this.state.workoutTitles.map(workoutTitles => (
+          <option key = {this.state.workoutTitles} value = {this.state.workoutTitles}>
+            {this.state.workoutTitles}
+          </option>
+        ))}
+        {console.log("To test workout tites")}
+        {console.log(this.state.workoutTitles)}
     </select>
  
       </div>
