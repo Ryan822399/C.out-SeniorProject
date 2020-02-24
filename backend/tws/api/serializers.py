@@ -27,7 +27,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 class FeedPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = FeedPost
-        fields = ('id', 'title', 'caption', 'post', 'picture')
+        fields = ('__all__')
 
 class WorkoutSerializer(serializers.ModelSerializer):
     class Meta:
