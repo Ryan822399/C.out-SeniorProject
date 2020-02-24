@@ -52,7 +52,7 @@ class Friends extends Component{
   render(){
       return (
         <div>
-        <input name="firstName" onChange={this.UserName}/>
+        {/*<input name="firstName" onChange={this.UserName}/>*/}
         {/*
         <h4>
           { this.state.info[0] ? <p>{this.state.info[0].firstName}</p> : <p>NULL First</p> }
@@ -64,6 +64,7 @@ class Friends extends Component{
           <Card style = {{ width: '20rem'}}>
             <Card.Header>Friend's List</Card.Header>
             <ListGroup variant="flush">
+            {/*
               <ListGroup.Item>
               <Media>
                 <this.profilePicture/>
@@ -75,6 +76,7 @@ class Friends extends Component{
                 </Media.Body>
                 </Media>
               </ListGroup.Item>
+              */}
               <ListGroup.Item>
               <Media>
                 <img
