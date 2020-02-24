@@ -37,7 +37,7 @@ class Graphs extends Component {
                 ]
             },
             value: "coconut",
-            workoutTitles: ["Workout 1", "Workout 2"]
+            workoutTitles: []
         };
         this.handleSubmit = this.handleSubmit.bind(this);
       }
