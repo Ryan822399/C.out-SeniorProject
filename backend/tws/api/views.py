@@ -35,11 +35,13 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     permission_classes = (AllowAny, )
 
+#removing security for testing
 class FeedPostViewSet(viewsets.ModelViewSet):
     queryset = FeedPost.objects.all()
     serializer_class = FeedPostSerializer
-    authentication_classes = (TokenAuthentication,)
-    permission_classes = (IsAuthenticated, )
+    permission_classes = [permissions.AllowAny]
+    #authentication_classes = (TokenAuthentication,)
+    #permission_classes = (IsAuthenticated, )
 
 
 class WorkoutViewSet(viewsets.ModelViewSet):

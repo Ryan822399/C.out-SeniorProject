@@ -54,7 +54,7 @@ class FeedPost(models.Model):
     caption = models.CharField(max_length=40)
     user = models.ForeignKey(User, on_delete=models.CASCADE )
     post = models.CharField(max_length=1000)
-    picture = models.ImageField(upload_to='images/', null=True, blank=True)
+    picture = models.ImageField(upload_to='images/')
 
     def __str__(self):
         return self.title

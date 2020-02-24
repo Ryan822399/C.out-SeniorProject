@@ -26,12 +26,10 @@ class Feed extends Component {
   render() {
     console.log(this.state.posts)
       return (
-
         <div>
         <br/>
-        <PostButton />
-        <br/>
           <Container>
+            <PostButton /> <br/><hr></hr>
             { this.state.posts[0] ? <Posts posts={this.state.posts}/>
                   :  <Spinner animation="border" variant="success" />
             }
