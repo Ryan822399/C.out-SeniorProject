@@ -31,7 +31,7 @@ class Feed extends Component {
           <Container>
             <PostButton /> <br/><hr></hr>
             { this.state.posts[0] ? <Posts posts={this.state.posts}/>
-                  :  <Spinner animation="border" variant="success" />
+                  :  <div style={styles.spinners}> <Spinner  animation="border" variant="success" /> </div>
             }
           </Container>
         </div>
@@ -40,3 +40,10 @@ class Feed extends Component {
   }
 
 export default withCookies(Feed);
+
+const styles = {
+  spinners: {
+    display: "flex",
+    justifyContent: "center"
+  }
+}

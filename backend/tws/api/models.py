@@ -78,7 +78,8 @@ class Rating(models.Model):
 class ForumPost(models.Model):
     title = models.TextField()
     caption = models.TextField()
-
+    user = models.ForeignKey(User, on_delete=models.CASCADE )
+    
     def __str__(self):
         return self.title
 

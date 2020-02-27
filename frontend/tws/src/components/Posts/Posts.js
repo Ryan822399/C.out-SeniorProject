@@ -16,7 +16,7 @@ function Posts(props) {
                         <Card.Text>
                           {post.post}
                         </Card.Text>
-                        <Button variant="primary">Go somewhere</Button>
+                        <Button variant="primary">View Profile</Button>
                     </Card.Body>
                   </Card>
                 <br/>

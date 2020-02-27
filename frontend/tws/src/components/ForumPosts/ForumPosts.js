@@ -6,10 +6,9 @@ function ForumPosts(props) {
 <CardGroup>
   <Card>
     <Card.Body>
-      <Card.Title>Card title</Card.Title>
+      <Card.Title>How does cardio effect your bod</Card.Title>
       <Card.Text>
-        This is a wider card with supporting text below as a natural lead-in to
-        additional content. This content is a little bit longer.
+        How often should I do cardio if I want to be fit like Lebron James?
       </Card.Text>
     </Card.Body>
     <Card.Footer>
@@ -18,9 +17,9 @@ function ForumPosts(props) {
   </Card>
   <Card>
     <Card.Body>
-      <Card.Title>Card title</Card.Title>
+      <Card.Title>Are pull ups good for your health?</Card.Title>
       <Card.Text>
-        This card has supporting text below as a natural lead-in to additional
+        Why is it so hard to do a pull and why can't I reach the bar after a meal or two.
         content.{' '}
       </Card.Text>
     </Card.Body>
@@ -31,11 +30,9 @@ function ForumPosts(props) {
   <Card>
 
     <Card.Body>
-      <Card.Title>Card title</Card.Title>
+      <Card.Title>What is good form for lunges?</Card.Title>
       <Card.Text>
-        This is a wider card with supporting text below as a natural lead-in to
-        additional content. This card has even longer content than the first to
-        show that equal height action.
+        Is it true lunges are for the strong and not for the weak or can you be in between.
       </Card.Text>
     </Card.Body>
     <Card.Footer>

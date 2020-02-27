@@ -2,9 +2,10 @@ import React, {Component} from 'react';
 import ForumTabs from '../../components/ForumTabs/ForumTabs';
 import WordCloud from 'react-wordcloud';
 import { Resizable } from 're-resizable';
-import { Row, Col, Tab, Card  } from 'react-bootstrap';
+import { ButtonToolbar, Row, Col, Tab, Card, Button, Accordion } from 'react-bootstrap';
 import words from './words';
 import ForumPosts from '../../components/ForumPosts/ForumPosts';
+import ForumButton from '../../components/ForumButton/ForumButton';
 
 
 export default class PublicForum extends Component {
@@ -16,7 +17,7 @@ export default class PublicForum extends Component {
       this.setState({currTab: tab});
   }
 
-  render() {
+render() {
     let content;
     if(this.state.currTab==="first")
     {
@@ -33,11 +34,12 @@ export default class PublicForum extends Component {
     }
     return (
         <div>
-        <Card>
-            <div style={styles.forum}>
+          <div style={styles.forum}>
             <ForumTabs changeTabs={this.changeTabs} act={this.state.currTab}/>
-            </div>
-            <Card.Body>
+          </div>
+          <div style={styles.forbutton}>
+            <ForumButton  />
+          </div>
           <Row>
             <Col >
                   <Resizable
@@ -51,20 +53,35 @@ export default class PublicForum extends Component {
                         <WordCloud words={words} style={styles.cloud} />
                     </Card.Body>
                     </Card>
-
                   </Resizable>
             </Col>
             <Col>
-            <Card style={styles.contentCard}>
-            <Card.Body>
-                {content }
-            </Card.Body>
-            </Card>
-
+              <Accordion  defaultActiveKey="0">
+                  <Card style={styles.contentCard}>
+                    <Card.Header>
+                      <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                        Popular Forum Questions This Month
+                      </Accordion.Toggle>
+                    </Card.Header>
+                    <Accordion.Collapse eventKey="0">
+                    <Card.Body>
+                        {content}
+                    </Card.Body>
+                    </Accordion.Collapse>
+                  </Card>
+                  <Card>
+                    <Card.Header>
+                      <Accordion.Toggle as={Button} variant="link" eventKey="1">
+                        Recent Forum Questions
+                      </Accordion.Toggle>
+                    </Card.Header>
+                    <Accordion.Collapse eventKey="1">
+                      <Card.Body>Hello! I'm another body</Card.Body>
+                    </Accordion.Collapse>
+                  </Card>
+              </Accordion>
             </Col>
           </Row>
-          </Card.Body>
-          </Card>
         </div>
     );
   }
@@ -77,13 +94,10 @@ const styles = {
         alignItems: "center"
     },
     cloud: {
-      display: 'center',
-      alignItems: 'center',
-      justifyContent: 'center',
       background: '#FFFFF'
     },
-    cloudCard: {
-    },
-    contentCard: {
+    forbutton: {
+        display: 'flex',
+        justifyContent: 'center'
     }
 };
