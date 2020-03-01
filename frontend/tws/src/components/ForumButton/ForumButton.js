@@ -4,20 +4,14 @@ import { Form, Modal, Button, ButtonToolbar  } from 'react-bootstrap';
 
 
 function NewPostButton(props) {
-  // console.log("INSIDE NEW POST BUTTON BUTTON")
-  // console.log(props);
+
   const postTitleSubmited = event => {
-   console.log("IN THE postSubmitted")
-   console.log(event.target.value)
-  // console.log(props.post)
-   //props.post.currTab.title =  event.target.title;
+  props.updateTitle(event.target.value)
+
   }
 
   const postDescSubmited = event => {
-   console.log("IN THE postSubmitted")
-    console.log(event.target.value)
-
-  // props.post.currTab.description = event.target.desc;
+    props.updateDesc(event.target.value)
   }
   return (
     <Modal
@@ -55,7 +49,7 @@ function NewPostButton(props) {
              placeholder="Enter a Description"
              name="desc"/>
           </Form.Group>
-          <Button type="button"  variant="primary" >
+          <Button type="button" onClick={props.formSubmitted}  variant="primary" type="submit">
             Submit
           </Button>
       </Form>
@@ -78,6 +72,9 @@ const [modalShow, setModalShow] = React.useState(false);
           Ask a Question
         </Button>
         <NewPostButton
+          formSubmitted={props.formSubmitted}
+          updateTitle={props.updateTitle}
+          updateDesc={props.updateDesc}
           post={props.post}
           show={modalShow}
           onHide={() => setModalShow(false)}

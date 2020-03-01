@@ -2,23 +2,55 @@ import React, {Component} from 'react';
 import ForumTabs from '../../components/ForumTabs/ForumTabs';
 import WordCloud from 'react-wordcloud';
 import { Resizable } from 're-resizable';
+import { withCookies } from 'react-cookie';
 import { ButtonToolbar, Row, Col, Tab, Card, Button, Accordion } from 'react-bootstrap';
 import words from './words';
 import ForumPosts from '../../components/ForumPosts/ForumPosts';
 import ForumButton from '../../components/ForumButton/ForumButton';
 
 
-export default class PublicForum extends Component {
+class PublicForum extends Component {
+
   state = {
     currTab: "first",
-    newPost: {
-      title: '',
-      description: ''
-    }
+    title: '',
+    description: '',
+    token: this.props.cookies.get('tws-token')
   }
 
   changeTabs = tab =>  {
       this.setState({currTab: tab});
+  }
+
+  updateTitle = title =>  {
+      this.setState({
+        title: title
+      });
+  }
+
+  updateDesc = desc =>  {
+    this.setState({
+        description: desc
+    });
+  }
+
+  formSubmitted = () => {
+    let postBody = {
+      title: this.state.title,
+      caption: this.state.description,
+      user: this.props.cookies.get('tws-id')
+    }
+    
+    fetch(`${process.env.REACT_APP_API_URL}/api/forumposts/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${this.state.token}`
+      },
+      body: JSON.stringify(postBody)
+    }).then( resp => resp.json())
+    .then( res => this.props.editedWorkout(res))
+    .catch( error => console.log(error))
   }
 
 render() {
@@ -42,7 +74,10 @@ render() {
             <ForumTabs changeTabs={this.changeTabs} act={this.state.currTab}/>
           </div>
           <div style={styles.forbutton}>
-            <ForumButton  post={this.state.newPost}/>
+            <ForumButton  formSubmitted={this.formSubmitted}
+            updateDesc={this.updateDesc}
+            updateTitle={this.updateTitle}
+            post={this.state.newPost}/>
           </div>
           <Row>
             <Col >
@@ -90,6 +125,8 @@ render() {
     );
   }
 }
+
+export default withCookies(PublicForum);
 
 const styles = {
     forum: {
