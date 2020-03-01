@@ -16,8 +16,11 @@ class Profile(models.Model):
     dob = models.DateField()
     location = models.CharField(max_length = 30)
     picture = models.ImageField(upload_to='images/profileImages', null=True, blank=True)
+
+
     def __str__(self):
         return self.firstName + " " + self.lastName
+
 
 class Workout(models.Model):
     title = models.CharField(max_length=32)
@@ -79,7 +82,7 @@ class ForumPost(models.Model):
     title = models.TextField()
     caption = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE )
-    
+
     def __str__(self):
         return self.title
 

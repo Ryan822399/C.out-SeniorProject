@@ -1,7 +1,24 @@
 import React, { useState} from 'react';
 import { Form, Modal, Button, ButtonToolbar  } from 'react-bootstrap';
 
+
+
 function NewPostButton(props) {
+  // console.log("INSIDE NEW POST BUTTON BUTTON")
+  // console.log(props);
+  const postTitleSubmited = event => {
+   console.log("IN THE postSubmitted")
+   console.log(event.target.value)
+  // console.log(props.post)
+   //props.post.currTab.title =  event.target.title;
+  }
+
+  const postDescSubmited = event => {
+   console.log("IN THE postSubmitted")
+    console.log(event.target.value)
+
+  // props.post.currTab.description = event.target.desc;
+  }
   return (
     <Modal
       {...props}
@@ -18,7 +35,12 @@ function NewPostButton(props) {
       <Form>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Title</Form.Label>
-            <Form.Control  placeholder="Enter a Title" />
+            <Form.Control
+            placeholder="Enter a Title"
+            as="input"
+            name="title"
+            onChange={postTitleSubmited}
+            />
             <Form.Text className="text-muted">
               Please no profanities
             </Form.Text>
@@ -26,10 +48,14 @@ function NewPostButton(props) {
 
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Question</Form.Label>
-            <Form.Control placeholder="Enter a Description" />
+            <Form.Control
+             as="input"
+             type="username"
+             onChange={postDescSubmited}
+             placeholder="Enter a Description"
+             name="desc"/>
           </Form.Group>
-          
-          <Button variant="primary" type="submit">
+          <Button type="button"  variant="primary" >
             Submit
           </Button>
       </Form>
@@ -42,6 +68,8 @@ function NewPostButton(props) {
 }
 
 function ForumButton(props) {
+  // console.log("INSIDE FORUM BUTTON MAIN")
+  // console.log(props);
 const [modalShow, setModalShow] = React.useState(false);
   return(
     <div>
@@ -49,8 +77,8 @@ const [modalShow, setModalShow] = React.useState(false);
         <Button  style={styles.forbutton} variant="primary" onClick={() => setModalShow(true)}>
           Ask a Question
         </Button>
-
         <NewPostButton
+          post={props.post}
           show={modalShow}
           onHide={() => setModalShow(false)}
         />

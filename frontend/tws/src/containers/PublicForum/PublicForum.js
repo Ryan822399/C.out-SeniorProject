@@ -10,7 +10,11 @@ import ForumButton from '../../components/ForumButton/ForumButton';
 
 export default class PublicForum extends Component {
   state = {
-    currTab: "first"
+    currTab: "first",
+    newPost: {
+      title: '',
+      description: ''
+    }
   }
 
   changeTabs = tab =>  {
@@ -38,7 +42,7 @@ render() {
             <ForumTabs changeTabs={this.changeTabs} act={this.state.currTab}/>
           </div>
           <div style={styles.forbutton}>
-            <ForumButton  />
+            <ForumButton  post={this.state.newPost}/>
           </div>
           <Row>
             <Col >

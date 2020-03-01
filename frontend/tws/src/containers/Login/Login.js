@@ -30,6 +30,7 @@ class Login extends Component{
       }).then( resp => resp.json())
       .then( res => {
         this.props.cookies.set('tws-token', res.token);
+        this.props.cookies.set('tws-id', res.id);
         window.location.href = "/homepage/feed";
       })
       .catch( error => console.log(error))
