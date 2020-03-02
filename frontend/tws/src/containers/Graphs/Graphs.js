@@ -36,22 +36,24 @@ class Graphs extends Component {
                     // }
                 ]
             },
-            value: "coconut",
+            value: '',
             workoutTitles: [],
-            selectedWorkoutTitle: ''
         };
+        this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
       }
 
+
+  handleChange = event => {
+    this.setState( {value: event.target.value} )
+   }
 
   handleSubmit(event){
     alert("This is a test alert: " + this.state.value);
     event.preventDefault();
   }
 
-  handleChange = event => {
-    this.setState( {value: event.target.value} )
-  }
+
 
   componentDidMount() {
     fetch(`${process.env.REACT_APP_API_URL}/api/workouts/`, {
@@ -93,7 +95,8 @@ class Graphs extends Component {
       }
 
       const distinctTitles = Array.from(new Set(seenTitles));
-      return(this.state.workoutTitles = distinctTitles)
+      this.state.workoutTitles = distinctTitles
+      return(<h3>Choose a Workout</h3>)
     }
 
 
@@ -118,7 +121,8 @@ class Graphs extends Component {
 
 
         //Initialize all filtration variables and arrays
-        var chosenWorkout = "asdf"; //Change here to determine which workout to show
+        var chosenWorkout = this.state.value; //Change here to determine which workout to show
+        console.log(chosenWorkout)
         var filterIndex;
         var filteredDataWeight = [];
         var filteredDataDate = [];
@@ -174,18 +178,27 @@ class Graphs extends Component {
     </div>
       {this.state.workouts[0] ? (
         <div style = {{position: "relative", width: 700, height: 550}}>
+
+
+
           <div dropdown>
             {this.loadWorkoutSelector()}
-            <label>Looping through array</label>
-              <select>
-              {this.state.workoutTitles.map(workoutTitles => (
-              <option key = {workoutTitles}  value = {workoutTitles}>
-              {workoutTitles}
-              </option>
-               ))}
-              </select>
-                 
-          </div>
+            <form onSubmit={this.handleSubmit}>
+              <label>
+                Workout Titles
+                <select value={this.state.value} onChange={this.handleChange}>
+                  {this.state.workoutTitles.map(workoutTitles => (
+                    <option key = {workoutTitles} value ={workoutTitles}>
+                      {workoutTitles}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <input type= "submit" value="Submit"/>
+              </form>
+            </div>
+
+
             <Line
                 options ={{
                     title:{
