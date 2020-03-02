@@ -37,7 +37,8 @@ class Graphs extends Component {
                 ]
             },
             value: "coconut",
-            workoutTitles: []
+            workoutTitles: [],
+            selectedWorkoutTitle: ''
         };
         this.handleSubmit = this.handleSubmit.bind(this);
       }
@@ -82,7 +83,7 @@ class Graphs extends Component {
     }
 
 
-    getDistinctTitles = titles => {
+    loadWorkoutSelector(){
       var filterIndex;
       var seenTitles = [];
       for(filterIndex = 0; filterIndex < this.state.workouts.length; filterIndex++)
@@ -92,9 +93,23 @@ class Graphs extends Component {
       }
 
       const distinctTitles = Array.from(new Set(seenTitles));
-    //  this.setState({workoutTitles: distinctTitles})
-      return distinctTitles;
+      return(this.state.workoutTitles = distinctTitles)
     }
+
+
+    // renderWorkoutSelector(){
+    //   return(
+    //     <div className="form-group top-margin-small">
+    //       <label className="workout-selector-label">Select Workout</label>
+    //       <select classname="workout-selector form-control"
+    //         onChange={(e) => {this.setState({selectedWorkoutTitle: e.target.value})}}>
+    //       <option key = {workoutTitles} value = {workoutTitles}>
+    //         {workoutTitles}
+    //       </option>
+    //         </select>
+    //     </div> 
+    //   )
+    // }
 
     getChartData = canvas => {
 
@@ -103,18 +118,16 @@ class Graphs extends Component {
 
 
         //Initialize all filtration variables and arrays
-        var chosenWorkout = "Alternating Bicep Curls"; //Change here to determine which workout to show
+        var chosenWorkout = "asdf"; //Change here to determine which workout to show
         var filterIndex;
         var filteredDataWeight = [];
         var filteredDataDate = [];
-        var seenTitles = [];
         var counter = 0;
 
         //Filters the data by looking for the specific workout title
         for(filterIndex = 0; filterIndex < this.state.workouts.length; filterIndex++)
         {
           var workoutTitle = this.state.workouts[filterIndex].title;
-          seenTitles[filterIndex] = workoutTitle;
 
           if(chosenWorkout == workoutTitle)
           {
@@ -124,17 +137,12 @@ class Graphs extends Component {
           }
         }
 
-        console.log("I am here")
-        const distinctTitles = Array.from(new Set(seenTitles));
-        console.log(distinctTitles)
-
 
         
 
 
         //Stores filtered data into state
         this.state.data.labels = filteredDataDate
-        this.state.workoutTitles = distinctTitles
         if(data.datasets){
             let colors = ["rgba(255, 0, 255, 0.75", "rgba(0, 0, 255, 0.75)"];
             data.datasets.forEach((set, i) => {
@@ -161,24 +169,23 @@ class Graphs extends Component {
 
         //If a set of elements exist, render it
     <div>
-
-      
-      <div dropdown>
-      <label>Looping through array</label>
-      <select>
-        {this.state.workoutTitles.map(workoutTitles => (
-          <option key = {workoutTitles}  value = {workoutTitles}>
-            {workoutTitles}
-          </option>
-        ))}
-    </select>
- 
-      </div>
     <div style={styles.progress}>
     <ProgressTabs changeTabs={this.changeTabs} act={this.state.currTab}/>
     </div>
       {this.state.workouts[0] ? (
         <div style = {{position: "relative", width: 700, height: 550}}>
+          <div dropdown>
+            {this.loadWorkoutSelector()}
+            <label>Looping through array</label>
+              <select>
+              {this.state.workoutTitles.map(workoutTitles => (
+              <option key = {workoutTitles}  value = {workoutTitles}>
+              {workoutTitles}
+              </option>
+               ))}
+              </select>
+                 
+          </div>
             <Line
                 options ={{
                     title:{
