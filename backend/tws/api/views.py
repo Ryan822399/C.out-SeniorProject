@@ -8,6 +8,8 @@ from rest_framework.decorators import action
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.http import JsonResponse
 from django.core import serializers
@@ -24,6 +26,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
     permission_classes = [permissions.AllowAny]
     serializer_class = ProfileSerializer
+
 
 class FeedPostViewSet(viewsets.ModelViewSet):
     queryset = FeedPost.objects.all()
@@ -42,7 +45,6 @@ class FeedPostViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.AllowAny]
     #authentication_classes = (TokenAuthentication,)
     #permission_classes = (IsAuthenticated, )
-
 
 class WorkoutViewSet(viewsets.ModelViewSet):
     queryset = Workout.objects.all()
@@ -81,6 +83,12 @@ class WorkoutViewSet(viewsets.ModelViewSet):
 #    def create(self, request, *args, **kwargs):
 #        response = {'message': 'Rating May Not Be Create This Way'}
 #        return Response(response, status=status.HTTP_400_BAD_REQUEST)
+
+class CustomObtainAuthToken(ObtainAuthToken):
+    def post(self, request, *args, **kwargs):
+        response = super(CustomObtainAuthToken, self).post(request, *args, **kwargs)
+        token = Token.objects.get(key=response.data['token'])
+        return Response({'token': token.key, 'id': token.user_id})
 
 class ForumPostViewSet(viewsets.ModelViewSet):
     queryset = ForumPost.objects.all()
