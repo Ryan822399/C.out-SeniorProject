@@ -45,11 +45,12 @@ class Graphs extends Component {
 
 
   handleChange = event => {
-    this.setState( {value: event.target.value} )
+    this.setState( {value: event.target.value} )  
    }
 
   handleSubmit(event){
     alert("This is a test alert: " + this.state.value);
+    this.state.data.update();
     event.preventDefault();
   }
 
@@ -99,20 +100,8 @@ class Graphs extends Component {
       return(<h3>Choose a Workout</h3>)
     }
 
+    
 
-    // renderWorkoutSelector(){
-    //   return(
-    //     <div className="form-group top-margin-small">
-    //       <label className="workout-selector-label">Select Workout</label>
-    //       <select classname="workout-selector form-control"
-    //         onChange={(e) => {this.setState({selectedWorkoutTitle: e.target.value})}}>
-    //       <option key = {workoutTitles} value = {workoutTitles}>
-    //         {workoutTitles}
-    //       </option>
-    //         </select>
-    //     </div> 
-    //   )
-    // }
 
     getChartData = canvas => {
 
@@ -140,9 +129,6 @@ class Graphs extends Component {
             counter++;
           }
         }
-
-
-        
 
 
         //Stores filtered data into state
@@ -185,7 +171,7 @@ class Graphs extends Component {
             {this.loadWorkoutSelector()}
             <form onSubmit={this.handleSubmit}>
               <label>
-                Workout Titles
+                Workout Titles: 
                 <select value={this.state.value} onChange={this.handleChange}>
                   {this.state.workoutTitles.map(workoutTitles => (
                     <option key = {workoutTitles} value ={workoutTitles}>
@@ -194,7 +180,7 @@ class Graphs extends Component {
                   ))}
                 </select>
               </label>
-              <input type= "submit" value="Submit"/>
+              <input type= "submit" value="+"/>
               </form>
             </div>
 
