@@ -1,15 +1,13 @@
-import React, {Component} from 'react';
-//import { withCookies } from 'react-cookie';
+import React, {Component, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/Profile.css';
-import {Container, Image, ListGroup, Button, ButtonToolbar, Card, CardGroup, Form, FormControl, Media, Navbar, Nav} from 'react-bootstrap';
+import {Container, Image, ListGroup, Button, ButtonToolbar, Card, CardGroup, Form, FormControl, Media, Navbar, Nav, Modal} from 'react-bootstrap';
 import { withCookies } from 'react-cookie';
 import EditButton from '../../components/EditButton/EditButton';
 import axios from 'axios';
 class Friends extends Component{
   state = {
     info: [],
-    name: "",
     token: this.props.cookies.get('tws-token')
   }
 
@@ -35,19 +33,8 @@ class Friends extends Component{
     .catch(error => console.log(error))
     console.log("TESTING");
     console.log(this.state.posts);
-
-    /*
-    Promise.all([
-            fetch('${process.env.REACT_APP_API_URL}/api/profile/'),
-            fetch('${process.env.REACT_APP_API_UR}/api/feedpost/')
-        ])
-        .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
-        .then(([data1, data2]) => this.setState({
-            info: data1,
-            posts: data2
-        }));
-    */
   }
+
   handleChange = event => {
     this.setState({ name: event.target.value });
   }
@@ -67,8 +54,6 @@ class Friends extends Component{
   }
 
   UserName = event => {
-    console.log("Checking UserName")
-    console.log(this.state.info)
     return (
       <h4>
         { this.state.info[0] ? <p>{this.state.info[0].userName}</p> : <p>NULL First</p> }
@@ -77,16 +62,13 @@ class Friends extends Component{
   }
 
   profilePicture = evt => {
-    console.log(this.state.info[0]);
     return (
       <img
-        width={300}
-        height={300}
+        width={64}
+        height={64}
         className="mr-3"
-        //src= { this.state.info[0].picture }
+        src= { this.state.info[0] ? <p>{this.state.info[0].picture}</p> : <p>NULL First</p> }
         alt="Profile Picture"
-        class="center"
-        style={{borderRadius: 300/2}}
       />
     )
   }
@@ -97,7 +79,7 @@ class Friends extends Component{
 
 
   render(){
-      console.log(this.state.name);
+    console.log(this.state.info);
       return (
         <div>
         {/*<input name="firstName" onChange={this.UserName}/>*/}
@@ -112,11 +94,9 @@ class Friends extends Component{
           <Card style = {{ width: '20rem'}}>
             <Card.Header>Friend's List</Card.Header>
             <ListGroup variant="flush">
-
               <ListGroup.Item>
               <Media>
-                {<this.profilePicture/>}
-                {/*{ this.state.info[0] ? <p>{this.state.info[0].picture}</p> : <p>NULL First</p> }*/}
+                <this.profilePicture/>
                 <Media.Body>
                   <this.UserName />
                   <p>

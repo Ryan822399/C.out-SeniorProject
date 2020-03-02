@@ -5,7 +5,7 @@ import {Image, Navbar, Nav, NavDropdown, Form, FormControl, Button, Media, Card,
 //import Fri from '../src/components/Friends.js';
 import EditButton from '../../components/EditButton/EditButton';
 import { withCookies } from 'react-cookie';
-//import {TimelineDetails} from '../../containers/TimelineDetails/TimelineDetails'
+import {TimelineDetails} from '../../containers/TimelineDetails/TimelineDetails'
 
 class Profile extends Component {
 
