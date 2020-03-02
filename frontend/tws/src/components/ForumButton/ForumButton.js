@@ -1,7 +1,18 @@
 import React, { useState} from 'react';
 import { Form, Modal, Button, ButtonToolbar  } from 'react-bootstrap';
 
+
+
 function NewPostButton(props) {
+
+  const postTitleSubmited = event => {
+  props.updateTitle(event.target.value)
+
+  }
+
+  const postDescSubmited = event => {
+    props.updateDesc(event.target.value)
+  }
   return (
     <Modal
       {...props}
@@ -18,7 +29,12 @@ function NewPostButton(props) {
       <Form>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Title</Form.Label>
-            <Form.Control  placeholder="Enter a Title" />
+            <Form.Control
+            placeholder="Enter a Title"
+            as="input"
+            name="title"
+            onChange={postTitleSubmited}
+            />
             <Form.Text className="text-muted">
               Please no profanities
             </Form.Text>
@@ -26,10 +42,14 @@ function NewPostButton(props) {
 
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Question</Form.Label>
-            <Form.Control placeholder="Enter a Description" />
+            <Form.Control
+             as="input"
+             type="username"
+             onChange={postDescSubmited}
+             placeholder="Enter a Description"
+             name="desc"/>
           </Form.Group>
-          
-          <Button variant="primary" type="submit">
+          <Button type="button" onClick={props.formSubmitted}  variant="primary" type="submit">
             Submit
           </Button>
       </Form>
@@ -42,6 +62,8 @@ function NewPostButton(props) {
 }
 
 function ForumButton(props) {
+  // console.log("INSIDE FORUM BUTTON MAIN")
+  // console.log(props);
 const [modalShow, setModalShow] = React.useState(false);
   return(
     <div>
@@ -49,8 +71,11 @@ const [modalShow, setModalShow] = React.useState(false);
         <Button  style={styles.forbutton} variant="primary" onClick={() => setModalShow(true)}>
           Ask a Question
         </Button>
-
         <NewPostButton
+          formSubmitted={props.formSubmitted}
+          updateTitle={props.updateTitle}
+          updateDesc={props.updateDesc}
+          post={props.post}
           show={modalShow}
           onHide={() => setModalShow(false)}
         />

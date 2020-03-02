@@ -16,6 +16,7 @@ class PostButton extends Component {
     }
 
     inputChanged = event => {
+      console.log(event.target.value)
       let att = this.state.attributes;
       att[event.target.name] = event.target.value;
       this.setState({attributes: att});

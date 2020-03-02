@@ -4,8 +4,10 @@ from rest_framework.authtoken.views import obtain_auth_token
 from django.conf.urls.static import static
 from django.conf import settings
 
+from api.views import CustomObtainAuthToken
+
 urlpatterns = [
     path('api/', include('api.urls')),
-    path('auth/', obtain_auth_token),
+    path('auth/',  CustomObtainAuthToken.as_view()),
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -12,14 +12,12 @@ import { Redirect, withRouter } from 'react-router-dom';
 
 class Graphs extends Component {
 
-
-
-
-        state = {
+    constructor(props){
+        super(props);
+        this.state = {
           currTab: "first",
           token: this.props.cookies.get('tws-token'),
           workouts: [],
-
             data: {
                // labels: ["1", "2", "3", "4", "5"]
                 labels:["2020-02-08", "2020-02-09", "2020-02-11", "2020-02-14"],
@@ -37,8 +35,25 @@ class Graphs extends Component {
                     //     data: [14, 18, 5, 0, 22, 1, 13]
                     // }
                 ]
-            }
-        }
+            },
+            value: '',
+            workoutTitles: [],
+        };
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+      }
+
+
+  handleChange = event => {
+    this.setState( {value: event.target.value} )  
+   }
+
+  handleSubmit(event){
+    alert("This is a test alert: " + this.state.value);
+    this.state.data.update();
+    event.preventDefault();
+  }
+
 
 
   componentDidMount() {
@@ -51,6 +66,7 @@ class Graphs extends Component {
       }
     }).then( resp => resp.json())
     .then( resp => this.setState({workouts: resp}))
+  //  .then (resp => this.setState({workoutTitle: }))
     .catch( error => console.log(error))
   }
 
@@ -70,6 +86,23 @@ class Graphs extends Component {
     }
 
 
+    loadWorkoutSelector(){
+      var filterIndex;
+      var seenTitles = [];
+      for(filterIndex = 0; filterIndex < this.state.workouts.length; filterIndex++)
+      {
+        var workoutTitle = this.state.workouts[filterIndex].title;
+        seenTitles[filterIndex] = workoutTitle;
+      }
+
+      const distinctTitles = Array.from(new Set(seenTitles));
+      this.state.workoutTitles = distinctTitles
+      return(<h3>Choose a Workout</h3>)
+    }
+
+    
+
+
     getChartData = canvas => {
 
         //Obtains the data from workouts
@@ -77,7 +110,8 @@ class Graphs extends Component {
 
 
         //Initialize all filtration variables and arrays
-        var chosenWorkout = "Alternating Bicep Curls"; //Change here to determine which workout to show
+        var chosenWorkout = this.state.value; //Change here to determine which workout to show
+        console.log(chosenWorkout)
         var filterIndex;
         var filteredDataWeight = [];
         var filteredDataDate = [];
@@ -120,6 +154,7 @@ class Graphs extends Component {
         color: 'black',
       };
     }
+    
     return (
 
         //If a set of elements exist, render it
@@ -128,8 +163,28 @@ class Graphs extends Component {
     <ProgressTabs changeTabs={this.changeTabs} act={this.state.currTab}/>
     </div>
       {this.state.workouts[0] ? (
-
         <div style = {{position: "relative", width: 700, height: 550}}>
+
+
+
+          <div dropdown>
+            {this.loadWorkoutSelector()}
+            <form onSubmit={this.handleSubmit}>
+              <label>
+                Workout Titles: 
+                <select value={this.state.value} onChange={this.handleChange}>
+                  {this.state.workoutTitles.map(workoutTitles => (
+                    <option key = {workoutTitles} value ={workoutTitles}>
+                      {workoutTitles}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <input type= "submit" value="+"/>
+              </form>
+            </div>
+
+
             <Line
                 options ={{
                     title:{

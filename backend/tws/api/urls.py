@@ -15,7 +15,6 @@ router.register("comment", CommentViewSet)
 router.register("LikePost", LikeViewSet)
 
 
-
 urlpatterns = [
 path('', include(router.urls)),
 ]
