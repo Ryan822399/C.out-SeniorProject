@@ -33,6 +33,7 @@ class Friends extends Component{
     .catch(error => console.log(error))
     console.log("TESTING");
     console.log(this.state.posts);
+    console.log(this.state.info);
   }
 
   handleChange = event => {
@@ -67,7 +68,7 @@ class Friends extends Component{
         width={64}
         height={64}
         className="mr-3"
-        src= { this.state.info[0] ? <p>{this.state.info[0].picture}</p> : <p>NULL First</p> }
+        src= {this.state.info[0].picture}
         alt="Profile Picture"
       />
     )
@@ -81,45 +82,41 @@ class Friends extends Component{
   render(){
     console.log(this.state.info);
       return (
-        <div>
-        {/*<input name="firstName" onChange={this.UserName}/>*/}
-        {/*
-        <h4>
-          { this.state.info[0] ? <p>{this.state.info[0].firstName}</p> : <p>NULL First</p> }
-          { this.state.info[0] ? <p>{this.state.info[0].lastName}</p> : <p>NULL Last</p> }
-        </h4>
-        */}
-        {/*<this.UserName />*/}
-        <Container>
-          <Card style = {{ width: '20rem'}}>
-            <Card.Header>Friend's List</Card.Header>
-            <ListGroup variant="flush">
-              <ListGroup.Item>
-              <Media>
-                <this.profilePicture/>
-                <Media.Body>
-                  <this.UserName />
-                  <p>
-                    Online
-                  </p>
-                </Media.Body>
-                </Media>
-              </ListGroup.Item>
-            </ListGroup>
-            <Form>
-            <Form.Group controlId="formBasicInput">
-              <Form.Control type="text" placeholder="Enter name" value={this.state.name} onChange={this.handleChange}/>
-            </Form.Group>
-            <Button onClick={this.handleFormSubmit} variant="outline-success" type="submit" block>
-              Add Friend
-            </Button>
-            <Button variant="outline-success" type="submit" block>
-              Remove Friend
-            </Button>
-            </Form>
-          </Card>
-        </Container>
-        </div>
+        <React.Fragment>
+      {
+        this.state.info[0] ? (
+          <Container>
+            <Card style = {{ width: '20rem'}}>
+              <Card.Header>Friend's List</Card.Header>
+              <ListGroup variant="flush">
+                <ListGroup.Item>
+                <Media>
+                  <this.profilePicture/>
+                  <Media.Body>
+                    <this.UserName />
+                    <p>
+                      Online
+                    </p>
+                  </Media.Body>
+                  </Media>
+                </ListGroup.Item>
+              </ListGroup>
+              <Form>
+              <Form.Group controlId="formBasicInput">
+                <Form.Control type="text" placeholder="Enter name" value={this.state.name} onChange={this.handleChange}/>
+              </Form.Group>
+              <Button onClick={this.handleFormSubmit} variant="outline-success" type="submit" block>
+                Add Friend
+              </Button>
+              <Button variant="outline-success" type="submit" block>
+                Remove Friend
+              </Button>
+              </Form>
+            </Card>
+          </Container>
+        ) : (<h3>loading </h3>)
+      }
+      </React.Fragment>
       )
     }
   }

@@ -48,6 +48,11 @@ class ForumPostSerializer(serializers.ModelSerializer):
         model = ForumPost
         fields = '__all__'
 
+class FriendsListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FriendsList
+        fields = '__all__'
+
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment

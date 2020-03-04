@@ -13,6 +13,7 @@ router.register("feedposts", FeedPostViewSet)
 router.register("forumposts", ForumPostViewSet)
 router.register("comment", CommentViewSet)
 router.register("LikePost", LikeViewSet)
+router.register("friendslist", FriendsListViewSet)
 
 
 urlpatterns = [

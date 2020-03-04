@@ -56,20 +56,62 @@ class TimelineDetails extends Component {
         { this.state.posts.map(post => {
           return (
             <div key={post.id}>
-              <CardGroup id="posts">
-                <Card style={{background: "#222"}}>
-                  <Card.Img height={300} variant="top" src={post.picture} style={{width: "25%"}} />
-                  <Card.Body>
-                    <Card.Title>{post.title}</Card.Title>
-                    <Card.Text>
-                      {post.caption}
-                    </Card.Text>
-                  </Card.Body>
-                  <Card.Footer>
-                    <small className="text-muted">Posted 2 days ago</small>
-                  </Card.Footer>
+              <TimelineItem
+                key="001"
+                dateComponent={(
+                  <div
+                    style={{
+                      display: 'block',
+                      float: 'left',
+                      padding: '10px',
+                      background: 'rgb(150, 150, 150)',
+                      color: '#fff',
+                    }}
+                  >
+                  <Media>
+                    <img
+                      width={64}
+                      height={64}
+                      className="mr-3"
+                      src="https://s2.dmcdn.net/v/K-vxh1PQOdCNPyzJR/x1080"
+                    />
+                    <Media.Body>
+                      <h5>{ this.state.info[0] ? <p>{this.state.info[0].userName}</p> : <p>NULL First</p> }</h5>
+                    </Media.Body>
+                    </Media>
+                  </div>
+                )}
+                >
+                <Card style = {{ width: '35rem'}}>
+                <ListGroup variant="flush">
+                  <ListGroup.Item>
+                  <CardGroup id="posts">
+                    <Card style={{background: "#222"}}>
+                      <Card.Img height={300} variant="top" src={post.picture} />
+                      <Card.Body>
+                        <Card.Title>{post.title}</Card.Title>
+                        <Card.Text>
+                          {post.caption}
+                        </Card.Text>
+                      </Card.Body>
+                      <Card.Footer>
+                        <small className="text-muted">Posted Today</small>
+                      </Card.Footer>
+                    </Card>
+                  </CardGroup>
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    <p>
+                    <ButtonToolbar>
+                    <Button variant="outline-primary">Like</Button>
+                    <Button variant="outline-secondary">Comment</Button>
+                    <Button variant="outline-success">Share</Button>
+                    </ButtonToolbar>
+                    </p>
+                  </ListGroup.Item>
+                </ListGroup>
                 </Card>
-              </CardGroup>
+                </TimelineItem>
             </div>
           )
         }) }
@@ -80,49 +122,7 @@ class TimelineDetails extends Component {
     return (
       <div>
       <Timeline lineColor={'#ddd'}>
-      <TimelineItem
-        key="001"
-        dateComponent={(
-          <div
-            style={{
-              display: 'block',
-              float: 'left',
-              padding: '10px',
-              background: 'rgb(150, 150, 150)',
-              color: '#fff',
-            }}
-          >
-          <Media>
-            <img
-              width={64}
-              height={64}
-              className="mr-3"
-              src="https://s2.dmcdn.net/v/K-vxh1PQOdCNPyzJR/x1080"
-            />
-            <Media.Body>
-              <h5>{ this.state.info[0] ? <p>{this.state.info[0].userName}</p> : <p>NULL First</p> }</h5>
-            </Media.Body>
-            </Media>
-          </div>
-        )}
-        >
-        <Card style = {{ width: '35rem'}}>
-        <ListGroup variant="flush">
-          <ListGroup.Item>
-            <this.profilePost />
-          </ListGroup.Item>
-          <ListGroup.Item>
-            <p>
-            <ButtonToolbar>
-            <Button variant="outline-primary">Like</Button>
-            <Button variant="outline-secondary">Comment</Button>
-            <Button variant="outline-success">Share</Button>
-            </ButtonToolbar>
-            </p>
-          </ListGroup.Item>
-        </ListGroup>
-        </Card>
-        </TimelineItem>
+        <this.profilePost />
         <TimelineItem
         key="002"
         dateComponent={(
