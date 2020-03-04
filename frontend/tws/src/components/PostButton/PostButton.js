@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {useState, useRef, setShow, Component}  from "react";
 import NewPost from '../NewPost/NewPost';
 import { Container, Navbar, Nav, NavDropdown, Form, FormControl, Button, Overlay, Tooltip, Modal, Row, Col} from 'react-bootstrap';
 import { withCookies } from 'react-cookie';
@@ -28,8 +28,8 @@ class PostButton extends Component {
     };
 
   handleFormSubmit = event => {
-    event.preventDefault()
-    console.log(this.state.attributes);
+    //event.preventDefault()
+    //console.log(this.state.attributes);
     let form_data = new FormData();
     form_data.append('title', this.state.attributes.title);
     form_data.append('caption', this.state.attributes.caption);
@@ -51,8 +51,8 @@ class PostButton extends Component {
 
   render(){
     return (
-
         <Form>
+          <h1>Create a Post</h1>
           <Form.Group controlId="formGroupTitle">
             <Form.Control as="input" size="sm" name="title" type="title" placeholder="Enter title" value={this.state.title} onChange={this.inputChanged}/>
           </Form.Group>

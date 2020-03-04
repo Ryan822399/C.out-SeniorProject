@@ -77,7 +77,7 @@ class Graphs extends Component {
 
 
         //Initialize all filtration variables and arrays
-        var chosenWorkout = "Alternating Bicep Curls"; //Change here to determine which workout to show
+        var chosenWorkout = "Extreme Workout"; //Change here to determine which workout to show
         var filterIndex;
         var filteredDataWeight = [];
         var filteredDataDate = [];

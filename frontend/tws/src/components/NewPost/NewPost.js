@@ -1,6 +1,7 @@
 import React,{useState, useRef, Component} from "react";
 import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Overlay, Tooltip, Modal} from 'react-bootstrap';
 
+
 function NewPost(props){
 
   const [show, setShow] = useState(false);
