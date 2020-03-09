@@ -14,6 +14,10 @@ router.register("forumposts", ForumPostViewSet)
 router.register("comment", CommentViewSet)
 router.register("LikePost", LikeViewSet)
 router.register("friendslist", FriendsListViewSet)
+router.register("top3flexforums", TopThreeFlexForumViewSet)
+router.register("top3dietforums", TopThreeDietForumViewSet)
+router.register("top3cardioforums", TopThreeCardioForumViewSet)
+router.register("top3weightforums", TopThreeWeightForumViewSet)
 
 
 urlpatterns = [

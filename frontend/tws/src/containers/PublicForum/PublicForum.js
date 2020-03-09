@@ -1,21 +1,64 @@
 import React, {Component} from 'react';
 import ForumTabs from '../../components/ForumTabs/ForumTabs';
-import WordCloud from 'react-wordcloud';
-import { Resizable } from 're-resizable';
+
 import { withCookies } from 'react-cookie';
-import { ButtonToolbar, Row, Col, Tab, Card, Button, Accordion } from 'react-bootstrap';
-import words from './words';
+import { Spinner, ButtonToolbar, Row, Col, Tab, Card, Button, Accordion } from 'react-bootstrap';
+
 import ForumPosts from '../../components/ForumPosts/ForumPosts';
 import ForumButton from '../../components/ForumButton/ForumButton';
-
+import WordCloud from '../../components/Visuals/WordCloud/WordCloud';
 
 class PublicForum extends Component {
 
   state = {
-    currTab: "first",
+    currTab: "flex",
     title: '',
     description: '',
+    category: '',
+    flexposts: [],
+    dietposts: [],
+    cardioposts: [],
+    weightposts: [],
     token: this.props.cookies.get('tws-token')
+
+  }
+
+  componentDidMount() {
+      fetch(`${process.env.REACT_APP_API_URL}/api/top3flexforums/`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Token ${this.state.token}`
+        }
+      }).then( resp => resp.json())
+      .then( res => this.setState({flexposts: res}))
+      .catch( error => console.log(error))
+
+      fetch(`${process.env.REACT_APP_API_URL}/api/top3dietforums/`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Token ${this.state.token}`
+        }
+      }).then( resp => resp.json())
+      .then( res => this.setState({dietposts: res}))
+      .catch( error => console.log(error))
+
+      fetch(`${process.env.REACT_APP_API_URL}/api/top3cardioforums/`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Token ${this.state.token}`
+        }
+      }).then( resp => resp.json())
+      .then( res => this.setState({cardioposts: res}))
+      .catch( error => console.log(error))
+
+      fetch(`${process.env.REACT_APP_API_URL}/api/top3weightforums/`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Token ${this.state.token}`
+        }
+      }).then( resp => resp.json())
+      .then( res => this.setState({weightposts: res}))
+      .catch( error => console.log(error))
   }
 
   changeTabs = tab =>  {
@@ -34,13 +77,20 @@ class PublicForum extends Component {
     });
   }
 
+  updateCat = event => {
+    this.setState({
+      category: event.target.name
+    });
+  }
+
   formSubmitted = () => {
     let postBody = {
       title: this.state.title,
       caption: this.state.description,
-      user: this.props.cookies.get('tws-id')
+      user: this.props.cookies.get('tws-id'),
+      category: this.state.category
     }
-    
+
     fetch(`${process.env.REACT_APP_API_URL}/api/forumposts/`, {
       method: 'POST',
       headers: {
@@ -54,45 +104,38 @@ class PublicForum extends Component {
   }
 
 render() {
+
     let content;
-    if(this.state.currTab==="first")
+    if(this.state.currTab==="flex")
     {
-      content = <ForumPosts/>
-    }else if (this.state.currTab==="second")
+      content = this.state.flexposts
+    }else if (this.state.currTab==="diet")
     {
-      content = <ForumPosts/>
-    }else if (this.state.currTab==="third")
+      content = this.state.dietposts
+    }else if (this.state.currTab==="cardio")
     {
-      content = <ForumPosts/>
-    }else if (this.state.currTab==="forth")
+      content = this.state.cardioposts
+    }else if (this.state.currTab==="weight")
     {
-      content = <ForumPosts/>
+      content = this.state.weightposts
     }
     return (
         <div>
           <div style={styles.forum}>
-            <ForumTabs changeTabs={this.changeTabs} act={this.state.currTab}/>
+            <ForumTabs
+            changeTabs={this.changeTabs} act={this.state.currTab}/>
           </div>
           <div style={styles.forbutton}>
             <ForumButton  formSubmitted={this.formSubmitted}
             updateDesc={this.updateDesc}
             updateTitle={this.updateTitle}
-            post={this.state.newPost}/>
+            post={this.state.newPost}
+            updateCat={this.updateCat}
+            />
           </div>
           <Row>
             <Col >
-                  <Resizable
-                      defaultSize={{
-                        width: 'auto',
-                        height: 'auto',
-                      }}
-                    >
-                    <Card style={styles.cloudCard}>
-                    <Card.Body>
-                        <WordCloud words={words} style={styles.cloud} />
-                    </Card.Body>
-                    </Card>
-                  </Resizable>
+                  <WordCloud/>
             </Col>
             <Col>
               <Accordion  defaultActiveKey="0">
@@ -104,7 +147,13 @@ render() {
                     </Card.Header>
                     <Accordion.Collapse eventKey="0">
                     <Card.Body>
-                        {content}
+                    { (this.state.flexposts[0]
+                      && this.state.dietposts[0]
+                      && this.state.cardioposts[0]
+                      && this.state.weightposts[0])
+                       ? <ForumPosts forumposts={content}/>
+                          :  <div style={styles.spinners}> <Spinner  animation="border" variant="success" /> </div>
+                    }
                     </Card.Body>
                     </Accordion.Collapse>
                   </Card>
@@ -134,11 +183,12 @@ const styles = {
         justifyContent: "center",
         alignItems: "center"
     },
-    cloud: {
-      background: '#FFFFF'
-    },
     forbutton: {
         display: 'flex',
         justifyContent: 'center'
+    },
+    spinners: {
+      display: "flex",
+      justifyContent: "center"
     }
 };
