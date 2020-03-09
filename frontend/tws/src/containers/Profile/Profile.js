@@ -20,7 +20,8 @@ class Profile extends Component {
     fetch(`${process.env.REACT_APP_API_URL}/api/profile/`, {
       method: 'GET',
       headers: {
-        'Accept': 'application/json'
+        'Accept': 'application/json',
+        'Authorization': `Token ${this.state.token}`
       }
     }).then( resp => resp.json())
     .then( res => this.setState({info: res}))
@@ -37,6 +38,8 @@ class Profile extends Component {
     .catch(error => console.log(error))
     console.log("TESTING");
     console.log(this.state.posts);
+    console.log("TOKEN");
+    console.log(this.state.token);
 
     /*
     Promise.all([
@@ -132,12 +135,12 @@ class Profile extends Component {
               <this.profileUserName />
               <this.profilePicture />
               <this.profileInformation />
-              <EditButton user={this.state.info}/>
+              <EditButton user={this.state.info} token={this.state.token}/>
             </div>
             <this.profilePost />
           </div>
         )
-          : <h3>Loading</h3>
+          : <h3 style={{color: "#1BFFFF"}}>Loading</h3>
         }
       </div>
     )

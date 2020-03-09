@@ -21,6 +21,13 @@ class Profile(models.Model):
     def __str__(self):
         return self.firstName + " " + self.lastName
 
+class FriendsList(models.Model):
+    userName = models.CharField(max_length = 15)
+    firstName = models.CharField(max_length = 30)
+    lastName = models.CharField(max_length = 30)
+    picture = models.ImageField(upload_to='images/profileImages', null=True, blank=True)
+    def __str__(self):
+        return self.userName
 
 class Workout(models.Model):
     title = models.CharField(max_length=32)
@@ -83,7 +90,7 @@ class ForumPost(models.Model):
     title = models.TextField()
     caption = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE )
-
+    category = models.CharField(max_length=10)
     def __str__(self):
         return self.title
 
