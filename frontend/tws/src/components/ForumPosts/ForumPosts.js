@@ -3,6 +3,8 @@ import { CardGroup, Card, Accordion, Button  } from 'react-bootstrap';
 import ForumComments from '../ForumComments/ForumComments';
 
 function ForumPosts(props) {
+  console.log("lookkkkk")
+  console.log(props.forumposts)
   return (
 <CardGroup>
 { props.forumposts.map( post => {
