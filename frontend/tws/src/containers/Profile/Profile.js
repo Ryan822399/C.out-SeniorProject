@@ -1,9 +1,10 @@
 import React, {Component, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/Profile.css';
-import {Image, Navbar, Nav, NavDropdown, Form, FormControl, Button, Media, Card, CardGroup, ButtonToolbar, Modal} from 'react-bootstrap';
+import {Image, Navbar, Nav, NavDropdown, Form, FormControl, Button, Media, Card, CardGroup, ButtonToolbar, Modal, Carousel} from 'react-bootstrap';
 //import Fri from '../src/components/Friends.js';
 import EditButton from '../../components/EditButton/EditButton';
+import CarouselPics from '../../components/CarouselPics/CarouselPics';
 import { withCookies } from 'react-cookie';
 import {TimelineDetails} from '../../containers/TimelineDetails/TimelineDetails'
 
@@ -124,20 +125,35 @@ class Profile extends Component {
     )
   }
 
+
+  carousel = evt => {
+    return (
+      <div>
+        <Carousel>
+          <CarouselPics posts={this.state.posts}/>
+        </Carousel>
+
+      </div>
+    )
+  }
+
   render() {
     console.log("HEY");
-    console.log(this.state.info)
+    console.log(this.state.info);
     return (
       <div style={{background: "#222", textAlign: "center", color: "#1BFFFF"}}>
-        { this.state.info[0] ? (
+        { this.state.info[0] && this.state.posts[0] ? (
           <div>
             <div className="body" style={{paddingBottom: "1%", borderBottom: "5px solid #1BFFFF"}}>
-              <this.profileUserName />
-              <this.profilePicture />
-              <this.profileInformation />
+            <this.profileUserName />
+            <this.profilePicture />
+            <this.profileInformation />
               <EditButton user={this.state.info} token={this.state.token}/>
             </div>
+            
+            <CarouselPics posts={this.state.posts}/>
             <this.profilePost />
+
           </div>
         )
           : <h3 style={{color: "#1BFFFF"}}>Loading</h3>
@@ -146,5 +162,5 @@ class Profile extends Component {
     )
   }
 }
-
+//<this.profilePost />
 export default withCookies(Profile);

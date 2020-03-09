@@ -27,7 +27,6 @@ class ProfileViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.AllowAny]
     serializer_class = ProfileSerializer
 
-
 class FeedPostViewSet(viewsets.ModelViewSet):
     queryset = FeedPost.objects.all()
     permission_classes = [permissions.AllowAny]
@@ -45,6 +44,30 @@ class FeedPostViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.AllowAny]
     #authentication_classes = (TokenAuthentication,)
     #permission_classes = (IsAuthenticated, )
+
+class TopThreeFlexForumViewSet(viewsets.ModelViewSet):
+    queryset = ForumPost.objects.filter(category="flex").reverse()[:3]
+    serializer_class = ForumPostSerializer
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated, )
+
+class TopThreeDietForumViewSet(viewsets.ModelViewSet):
+    queryset = ForumPost.objects.filter(category="diet")[:3]
+    serializer_class = ForumPostSerializer
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated, )
+
+class TopThreeCardioForumViewSet(viewsets.ModelViewSet):
+    queryset = ForumPost.objects.filter(category="cardio")[:3]
+    serializer_class = ForumPostSerializer
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated, )
+
+class TopThreeWeightForumViewSet(viewsets.ModelViewSet):
+    queryset = ForumPost.objects.filter(category="weight")[:3]
+    serializer_class = ForumPostSerializer
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated, )
 
 class WorkoutViewSet(viewsets.ModelViewSet):
     queryset = Workout.objects.all()
@@ -92,8 +115,9 @@ class CustomObtainAuthToken(ObtainAuthToken):
 
 class ForumPostViewSet(viewsets.ModelViewSet):
     queryset = ForumPost.objects.all()
-    permission_classes = [permissions.AllowAny]
     serializer_class = ForumPostSerializer
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated, )
 
 class RatingViewSet(viewsets.ModelViewSet):
     queryset = Rating.objects.all()
