@@ -4,6 +4,7 @@ import '../../css/Profile.css';
 import {Container, Image, ListGroup, Button, ButtonToolbar, Card, CardGroup, Form, FormControl, Media, Navbar, Nav, Modal} from 'react-bootstrap';
 import { withCookies } from 'react-cookie';
 import EditButton from '../../components/EditButton/EditButton';
+import AddFriendButton from '../../components/AddFriendButton/AddFriendButton';
 import axios from 'axios';
 class Friends extends Component{
   state = {
@@ -13,7 +14,7 @@ class Friends extends Component{
 
   componentDidMount() {
 
-    fetch(`${process.env.REACT_APP_API_URL}/api/profile/`, {
+    fetch(`${process.env.REACT_APP_API_URL}/api/friendslist/`, {
       method: 'GET',
       headers: {
         'Accept': 'application/json'
@@ -22,42 +23,14 @@ class Friends extends Component{
     .then( res => this.setState({info: res}))
     .catch(error => console.log(error))
     console.log(this.state.info);
-
-    fetch(`${process.env.REACT_APP_API_URL}/api/feedposts/`, {
-      method: 'GET',
-      headers: {
-        'Authorization': `Token ${this.state.token}`
-      }
-    }).then( resp => resp.json())
-    .then( res => this.setState({posts: res}))
-    .catch(error => console.log(error))
-    console.log("TESTING");
-    console.log(this.state.posts);
-    console.log(this.state.info);
   }
 
-  handleChange = event => {
-    this.setState({ name: event.target.value });
-  }
 
-  handleSubmit = event => {
-    event.preventDefault();
-
-    const user = {
-      name: this.state.name
-    };
-
-    axios.post(`https://jsonplaceholder.typicode.com/users`, { user })
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-      })
-  }
 
   UserName = event => {
     return (
       <h4>
-        { this.state.info[0] ? <p>{this.state.info[0].userName}</p> : <p>NULL First</p> }
+        {this.state.info[0].userName}
       </h4>
     )
   }
@@ -73,9 +46,25 @@ class Friends extends Component{
       />
     )
   }
-
-  handleClick(){
-    console.log("Checking Click")
+  friendPost = evt => {
+    return (
+      <div>
+        { this.state.info.map(info => {
+          return (
+            <div key={info.id}>
+              <CardGroup id="posts">
+                <Card style={{background: "#222"}}>
+                  <Card.Img height={300} variant="top" src={info.picture} style={{width: "25%"}} />
+                  <Card.Body>
+                    <Card.Title>{info.userName}</Card.Title>
+                  </Card.Body>
+                </Card>
+              </CardGroup>
+            </div>
+          )
+        }) }
+      </div>
+    )
   }
 
 
@@ -105,7 +94,7 @@ class Friends extends Component{
               <Form.Group controlId="formBasicInput">
                 <Form.Control type="text" placeholder="Enter name" value={this.state.name} onChange={this.handleChange}/>
               </Form.Group>
-              <Button onClick={this.handleFormSubmit} variant="outline-success" type="submit" block>
+              <Button variant="outline-success" type="submit" block>
                 Add Friend
               </Button>
               <Button variant="outline-success" type="submit" block>
@@ -113,6 +102,7 @@ class Friends extends Component{
               </Button>
               </Form>
             </Card>
+            <AddFriendButton /> <br/><hr></hr>
           </Container>
         ) : (<h3>loading </h3>)
       }
