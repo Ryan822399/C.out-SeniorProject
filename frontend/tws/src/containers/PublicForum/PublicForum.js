@@ -14,7 +14,7 @@ class PublicForum extends Component {
     currTab: "flex",
     title: '',
     description: '',
-    category: '',
+    category: 'flex',
     flexposts: [],
     dietposts: [],
     cardioposts: [],
@@ -90,6 +90,8 @@ class PublicForum extends Component {
       user: this.props.cookies.get('tws-id'),
       category: this.state.category
     }
+    console.log("LOOKY HERE ")
+    console.log(postBody)
 
     fetch(`${process.env.REACT_APP_API_URL}/api/forumposts/`, {
       method: 'POST',
@@ -99,8 +101,9 @@ class PublicForum extends Component {
       },
       body: JSON.stringify(postBody)
     }).then( resp => resp.json())
-    .then( res => this.props.editedWorkout(res))
+    .then( res => console.log(res))
     .catch( error => console.log(error))
+    alert("hello")
   }
 
 render() {
