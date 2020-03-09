@@ -6,10 +6,6 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('api', '0003_delete_currentuserview'),
-    ]
-
     operations = [
         migrations.AddField(
             model_name='feedpost',
