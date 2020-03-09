@@ -11,8 +11,10 @@ class PostButton extends Component {
         caption: "",
         post: "",
         picture: null,
-        user:1
-      }
+        user: this.props.cookies.get('tws-id')
+      },
+      token: this.props.cookies.get('tws-token'),
+      username: ""
     }
 
     inputChanged = event => {
@@ -51,6 +53,7 @@ class PostButton extends Component {
 
   render(){
     return (
+      <div style={{background: "#999", padding: "5%"}}>
         <Form>
           <h1>Create a Post</h1>
           <Form.Group controlId="formGroupTitle">
@@ -70,6 +73,7 @@ class PostButton extends Component {
             Submit
           </Button>
         </Form>
+      </div>
     );
   }
 }

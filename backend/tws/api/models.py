@@ -16,8 +16,11 @@ class Profile(models.Model):
     dob = models.DateField()
     location = models.CharField(max_length = 30)
     picture = models.ImageField(upload_to='images/profileImages', null=True, blank=True)
+
+
     def __str__(self):
         return self.firstName + " " + self.lastName
+
 
 class Workout(models.Model):
     title = models.CharField(max_length=32)
@@ -55,6 +58,7 @@ class FeedPost(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE )
     post = models.CharField(max_length=1000)
     picture = models.ImageField(upload_to='images/')
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.title
@@ -78,6 +82,7 @@ class Rating(models.Model):
 class ForumPost(models.Model):
     title = models.TextField()
     caption = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE )
 
     def __str__(self):
         return self.title

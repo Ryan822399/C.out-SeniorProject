@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
-//import { withCookies } from 'react-cookie';
+import React, {Component, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/Profile.css';
-import { Timeline, TimelineItem }  from 'vertical-timeline-component-for-react';
-import {Container, Image, ListGroup, Button, ButtonToolbar, Card, CardGroup, Form, FormControl, Media, Navbar, Nav} from 'react-bootstrap';
+import {Container, Image, ListGroup, Button, ButtonToolbar, Card, CardGroup, Form, FormControl, Media, Navbar, Nav, Modal} from 'react-bootstrap';
 import { withCookies } from 'react-cookie';
+import EditButton from '../../components/EditButton/EditButton';
+import axios from 'axios';
 class Friends extends Component{
   state = {
     info: [],
@@ -22,9 +22,38 @@ class Friends extends Component{
     .then( res => this.setState({info: res}))
     .catch(error => console.log(error))
     console.log(this.state.info);
+
+    fetch(`${process.env.REACT_APP_API_URL}/api/feedposts/`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Token ${this.state.token}`
+      }
+    }).then( resp => resp.json())
+    .then( res => this.setState({posts: res}))
+    .catch(error => console.log(error))
+    console.log("TESTING");
+    console.log(this.state.posts);
   }
 
-  UserName = evt => {
+  handleChange = event => {
+    this.setState({ name: event.target.value });
+  }
+
+  handleSubmit = event => {
+    event.preventDefault();
+
+    const user = {
+      name: this.state.name
+    };
+
+    axios.post(`https://jsonplaceholder.typicode.com/users`, { user })
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+      })
+  }
+
+  UserName = event => {
     return (
       <h4>
         { this.state.info[0] ? <p>{this.state.info[0].userName}</p> : <p>NULL First</p> }
@@ -50,9 +79,10 @@ class Friends extends Component{
 
 
   render(){
+    console.log(this.state.info);
       return (
         <div>
-        <input name="firstName" onChange={this.UserName}/>
+        {/*<input name="firstName" onChange={this.UserName}/>*/}
         {/*
         <h4>
           { this.state.info[0] ? <p>{this.state.info[0].firstName}</p> : <p>NULL First</p> }
@@ -75,60 +105,12 @@ class Friends extends Component{
                 </Media.Body>
                 </Media>
               </ListGroup.Item>
-              <ListGroup.Item>
-              <Media>
-                <img
-                  width={64}
-                  height={64}
-                  className="mr-3"
-                  src="https://cdn1.thr.com/sites/default/files/imagecache/768x433/2016/05/family_guy_trump_emmy_campaign_0.jpg"
-                />
-                <Media.Body>
-                  <h5>Joe Bob</h5>
-                  <p>
-                    Online
-                  </p>
-                </Media.Body>
-                </Media>
-              </ListGroup.Item>
-              <ListGroup.Item>
-              <Media>
-                <img
-                  width={64}
-                  height={64}
-                  className="mr-3"
-                  src="https://www.nydailynews.com/resizer/n4XDpTyDGkvQpEQle3t1lwIlUaQ=/415x233/top/www.trbimg.com/img-5c3ca7a6/turbine/ny-1547478934-8c63008drk-snap-image"
-                />
-                <Media.Body>
-                  <h5>Bobby Jr.</h5>
-                  <p>
-                    Offline
-                  </p>
-                </Media.Body>
-                </Media>
-              </ListGroup.Item>
-              <ListGroup.Item>
-              <Media>
-                <img
-                  width={64}
-                  height={64}
-                  className="mr-3"
-                  src="https://i.ytimg.com/vi/eV5fUPU7zIU/maxresdefault.jpg"
-                />
-                <Media.Body>
-                  <h5>Bobby Sr.</h5>
-                  <p>
-                    Offline
-                  </p>
-                </Media.Body>
-                </Media>
-              </ListGroup.Item>
             </ListGroup>
             <Form>
             <Form.Group controlId="formBasicInput">
-              <Form.Control type="text" placeholder="Enter name" />
+              <Form.Control type="text" placeholder="Enter name" value={this.state.name} onChange={this.handleChange}/>
             </Form.Group>
-            <Button variant="outline-success" type="submit" block onChange={this.UserName}>
+            <Button onClick={this.handleFormSubmit} variant="outline-success" type="submit" block>
               Add Friend
             </Button>
             <Button variant="outline-success" type="submit" block>

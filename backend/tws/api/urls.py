@@ -10,10 +10,9 @@ router.register('ratings', RatingViewSet)
 router.register('dummy', DummyViewSet)
 router.register('profile', ProfileViewSet)
 router.register("feedposts", FeedPostViewSet)
-router.register("forumPost", ForumPostViewSet)
+router.register("forumposts", ForumPostViewSet)
 router.register("comment", CommentViewSet)
 router.register("LikePost", LikeViewSet)
-
 
 
 urlpatterns = [
