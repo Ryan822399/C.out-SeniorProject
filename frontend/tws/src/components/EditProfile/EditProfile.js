@@ -1,67 +1,119 @@
 import React, {Component} from 'react';
 import { Form, Button, Col } from 'react-bootstrap';
+import { withCookies } from 'react-cookie';
 var FontAwesome = require('react-fontawesome');
 
 class EditProfile extends Component {
 
   state = {
     editedProfile: this.props.user[0],
+    userName: this.props.user[0].userName,
+    firstName: "",
+    lastName: "",
+    bio: "",
+    location: "",
+    email: this.props.user[0].email,
+    dob: this.props.user[0].dob,
+    user: this.props.user[0].user,
+    heightFeet: this.props.user[0].heightFeet,
+    heightInches: this.props.user[0].heightInches
     /*
     profile: {
-      userName: "",
+      userName: this.props.user[0].userName,
       firstName: "",
       lastName: "",
+      password: "",
       bio: "",
       location: "",
-      email: "",
-      dob: "",
-      id: 0,
-      user: 0
+      email: this.props.user[0].email,
+      dob: this.props.user[0].dob,
+      id: this.props.user[0].id,
+      user: this.props.user[0].user
     }
     */
-  }
 
-  change = evt => {
+  }
+  change = val => evt => {
     console.log("EVENT TARGET");
-    console.log(evt.target);
-
-    /*
-    this.setState({profile.userName: this.props.user[0].userName});
-    this.setState({profile.firstName: evt.target.firstName})
-    this.setState({profile.lastName: evt.target.lastName})
-    this.setState({profile.bio: evt.target.bio})
-    this.setState({profile.location: evt.target.location})
-    this.setState({profile.email: this.props.user[0].email})
-    this.setState({profile.dob: this.props.user[0].dob})
-    this.setState({profile.id: this.props.user[0].id})
-    this.setState({profile.user: this.props.user[0].user})
-    */
-
-    let profile = this.state.editedProfile;
-    profile[evt.target.name] = evt.target.value;
-    this.setState({editedProfile: profile});
+    console.log(evt.target.value);
+    if(val == "firstName") {
+      this.setState({firstName: evt.target.value});
+    }
+    else if(val == "lastName") {
+      this.setState({lastName: evt.target.value});
+    }
+    else if(val == "bio") {
+      this.setState({bio: evt.target.value});
+    }
+    else if(val == "location") {
+      this.setState({location: evt.target.value});
+      console.log(evt.target.value);
+    }
+    console.log(this.state.firstName);
+    console.log(this.state.lastName);
+    console.log(this.state.bio);
+    console.log(this.state.location);
   }
+/*
+  change = val => evt => {
+    console.log("EVENT TARGET");
+    console.log(evt.target.value);
+    if(val == "firstName") {
+      this.setState({profile: {userName: this.state.editedProfile.userName, firstName: evt.target.value, email: this.state.editedProifle.email, dob: this.state.editedProfile.dob, id: this.state.editedProfile.id, user: this.state.editedProfile.user}});
+    }
+    else if(val == "lastName") {
+      this.setState({profile: {lastName: evt.target.value}});
+    }
+    else if(val == "password") {
+      this.setState({profile: {password: evt.target.value}});
+    }
+    else if(val == "bio") {
+      this.setState({profile: {bio: evt.target.value}});
+    }
+    else if(val == "location") {
+      this.setState({profile: {location: evt.target.value}});
+    }
+    console.log("NEW PROFILE");
+    console.log(this.state.profile);
+  }
+  */
+
 
   update = evt => {
-    fetch(`${process.env.REACT_APP_API_URL}/api/profile/`, {
-      method: 'POST',
+    let profile = {
+      userName: this.state.userName,
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      bio: this.state.bio,
+      location: this.state.location,
+      email: this.state.email,
+      dob: this.state.dob,
+      user: this.props.cookies.get('tws-id'),
+      heightFeet: this.state.heightFeet,
+      heightInches: this.state.heightInches
+    }
+    console.log("TESTING PROFILE");
+    console.log(profile);
+    fetch(`${process.env.REACT_APP_API_URL}/api/profile/${profile.user}/`, {
+      method: 'PUT',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        userName: "Diaz 48",
-        firstName: "Anthony",
-        lastName: "Diaz",
-        bio: "Fuck everything",
-        location: "Hell",
-        email: "bitch@bitch.com",
-        dob: "1997-05-28",
-        id: 7,
-        user: 3
-      })
+      body: JSON.stringify(profile)
     }).then( resp => resp.json())
-    .then( res => console.log("UPDATING TO DATABASE"))
+    .then( res => console.log(res))
     .catch(error => console.log(error))
+    console.log(this.state.token);
+    console.log(profile.userName);
+    console.log(profile.firstName);
+    console.log(profile.lastName);
+    console.log(profile.bio);
+    console.log(profile.location);
+    console.log(profile.email);
+    console.log(profile.dob);
+    console.log(profile.user);
+    console.log(profile.heightFeet);
+    console.log(profile.heightInches);
   }
 
   submit = evt => {
@@ -71,7 +123,7 @@ class EditProfile extends Component {
 
   render() {
     console.log("CHECKING");
-    console.log(this.props.user[0].userName);
+    console.log(this.state.userName);
     let firstName, lastName, password, bio, location, picture;
     if (this.props.user[0] !== "") {
       firstName = this.props.user[0].firstName;;
@@ -86,31 +138,35 @@ class EditProfile extends Component {
           <Form.Row>
             <Form.Group as={Col} controlId="formGridFirstName">
               <Form.Label>First name</Form.Label>
-              <Form.Control name="firstName" type="firstName" placeholder={firstName} onChange={this.change}/>
+              <Form.Control name="firstName" type="firstName" placeholder={firstName} onChange={this.change("firstName")}/>
             </Form.Group>
             <Form.Group as={Col} controlId="formGridLastName">
               <Form.Label>Last name</Form.Label>
-              <Form.Control name="lastName" type="lastName" placeholder={lastName} onChange={this.change}/>
-            </Form.Group>
-            <Form.Group as={Col} controlId="formGridPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control name="email" type="password" placeholder="" onChange={this.change}/>
+              <Form.Control name="lastName" type="lastName" placeholder={lastName} onChange={this.change("lastName")}/>
             </Form.Group>
           </Form.Row>
 
           <Form.Group controlId="formGridBio">
             <Form.Label>Bio</Form.Label>
-            <Form.Control name="bio" placeholder={bio} onChange={this.change}/>
+            <Form.Control name="bio" placeholder={bio} onChange={this.change("bio")}/>
           </Form.Group>
 
           <Form.Group controlId="formGridLocation">
             <Form.Label>Location</Form.Label>
-            <Form.Control name="location" placeholder={location} onChange={this.change}/>
+            <Form.Control name="location" placeholder={location} onChange={this.change("location")}/>
           </Form.Group>
           <Form.Row>
             <Form.Group as={Col} controlId="formGridPicture">
               <Form.Label>Picture</Form.Label>
-              <Form.Control placeholder={picture}/>
+              <Form.Control placeholder={<img
+                width={300}
+                height={300}
+                className="mr-3"
+                src= { picture }
+                alt="Profile Picture"
+                class="center"
+                style={{borderRadius: 300/2}}
+              />}/>
             </Form.Group>
           </Form.Row>
 
@@ -123,4 +179,4 @@ class EditProfile extends Component {
   }
 }
 
-export default EditProfile;
+export default withCookies(EditProfile);
