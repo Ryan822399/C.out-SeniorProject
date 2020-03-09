@@ -103,7 +103,7 @@ class PublicForum extends Component {
     }).then( resp => resp.json())
     .then( res => console.log(res))
     .catch( error => console.log(error))
-    alert("hello")
+    
   }
 
 render() {
