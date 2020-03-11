@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import NewPost from '../NewPost/NewPost';
-import { Container, Navbar, Nav, NavDropdown, Form, FormControl, Button, Overlay, Tooltip, Modal, Row, Col} from 'react-bootstrap';
+import { Container, Navbar, Nav, NavDropdown, Form, FormControl, Button, Overlay, Tooltip, Modal, Row, Col, Card, CardGroup} from 'react-bootstrap';
 import { withCookies } from 'react-cookie';
 import axios from 'axios';
 
@@ -47,10 +47,11 @@ class AddFriendButton extends Component {
         })
         .catch(err => console.log(err))
   };
+  AddFriend = evt => {
 
+  }
   render(){
     return (
-
         <Form>
           <Form.Group controlId="formGroupUserName">
             <Form.Control as="input" size="sm" name="userName" type="userName" placeholder="Enter User Name" value={this.state.userName} onChange={this.inputChanged}/>
@@ -65,8 +66,11 @@ class AddFriendButton extends Component {
                    id="picture"
                    name="picture"
                    accept="image/png, image/jpeg, image/JPG"  onChange={this.handleImageChange} required/>
-          <Button onClick={this.handleFormSubmit} variant="secondary" type="submit" >
-            Submit
+          <Button onClick={this.handleFormSubmit} variant="outline-success" type="submit" block>
+            Add Friend
+          </Button>
+          <Button variant="outline-success" type="submit" block>
+            Remove Friend
           </Button>
         </Form>
     );

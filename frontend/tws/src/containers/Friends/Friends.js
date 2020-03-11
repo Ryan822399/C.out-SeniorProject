@@ -52,14 +52,27 @@ class Friends extends Component{
         { this.state.info.map(info => {
           return (
             <div key={info.id}>
-              <CardGroup id="posts">
-                <Card style={{background: "#222"}}>
-                  <Card.Img height={300} variant="top" src={info.picture} style={{width: "25%"}} />
-                  <Card.Body>
-                    <Card.Title>{info.userName}</Card.Title>
-                  </Card.Body>
-                </Card>
-              </CardGroup>
+            <ListGroup variant="flush">
+              <ListGroup.Item>
+              <Media>
+                <img
+                  width={64}
+                  height={64}
+                  className="mr-3"
+                  src= {info.picture}
+                  alt="Profile Picture"
+                />
+                <Media.Body>
+                  <h4>
+                    {info.userName}
+                  </h4>
+                  <p>
+                    Online
+                  </p>
+                </Media.Body>
+                </Media>
+              </ListGroup.Item>
+            </ListGroup>
             </div>
           )
         }) }
@@ -77,32 +90,11 @@ class Friends extends Component{
           <Container>
             <Card style = {{ width: '20rem'}}>
               <Card.Header>Friend's List</Card.Header>
-              <ListGroup variant="flush">
-                <ListGroup.Item>
-                <Media>
-                  <this.profilePicture/>
-                  <Media.Body>
-                    <this.UserName />
-                    <p>
-                      Online
-                    </p>
-                  </Media.Body>
-                  </Media>
-                </ListGroup.Item>
-              </ListGroup>
               <Form>
-              <Form.Group controlId="formBasicInput">
-                <Form.Control type="text" placeholder="Enter name" value={this.state.name} onChange={this.handleChange}/>
-              </Form.Group>
-              <Button variant="outline-success" type="submit" block>
-                Add Friend
-              </Button>
-              <Button variant="outline-success" type="submit" block>
-                Remove Friend
-              </Button>
+                <this.friendPost />
               </Form>
+              <AddFriendButton /> <br/><hr></hr>
             </Card>
-            <AddFriendButton /> <br/><hr></hr>
           </Container>
         ) : (<h3>loading </h3>)
       }
