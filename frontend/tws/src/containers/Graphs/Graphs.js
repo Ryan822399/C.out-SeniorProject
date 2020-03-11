@@ -5,6 +5,7 @@ import {Line} from 'react-chartjs-2'
 import "chartjs-plugin-lineheight-annotation";
 import { withCookies } from 'react-cookie';
 import ProgressTabs from '../../components/ProgressTabs/ProgressTabs';
+import GraphButton from '../../components/GraphButton/GraphButton';
 
 import {Image, Navbar, Nav, NavDropdown, Form, FormControl, Button, Media, Card, CardGroup} from 'react-bootstrap';
 import { Redirect, withRouter } from 'react-router-dom';
@@ -38,6 +39,10 @@ class Graphs extends Component {
             },
             value: '',
             workoutTitles: [],
+            title: '',
+            description: '',
+            weight: '',
+            date: ''
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -54,6 +59,49 @@ class Graphs extends Component {
     event.preventDefault();
   }
 
+  updateTitle = title =>  {
+    this.setState({
+      title: title
+    });
+}
+
+  updateDesc = desc =>  {
+    this.setState({
+        description: desc
+    });
+  }
+
+  updateWeight = weight =>  {
+    this.setState({
+        weight: weight
+    });
+  }
+
+  updateDate = date =>  {
+    this.setState({
+        date: date
+    });
+  }
+
+  formSubmitted = () => {
+    let postBody = {
+      title: this.state.title,
+      description: this.state.description,
+      weight: this.state.weight,
+      date: this.state.date
+    }
+    
+    fetch(`${process.env.REACT_APP_API_URL}/api/workouts/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${this.state.token}`
+      },
+      body: JSON.stringify(postBody)
+    }).then( resp => resp.json())
+    .then( res => this.props.editedWorkout(res))
+    .catch( error => console.log(error))
+  }
 
 
   componentDidMount() {
@@ -183,6 +231,15 @@ class Graphs extends Component {
               <input type= "submit" value="+"/>
               </form>
             </div>
+
+          <div style={styles.forbutton}>
+            <GraphButton  formSubmitted={this.formSubmitted}
+            updateDesc={this.updateDesc}
+            updateTitle={this.updateTitle}
+            updateWeight={this.updateWeight}
+            updateDate={this.updateDate}
+            post={this.state.newPost}/>
+          </div>
 
 
             <Line

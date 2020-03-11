@@ -1,5 +1,5 @@
 import React, { useState} from 'react';
-import { Form, Modal, Button, ButtonToolbar  } from 'react-bootstrap';
+import { Form, Modal, Button, ButtonToolbar, ListGroup, Tab  } from 'react-bootstrap';
 
 
 
@@ -21,13 +21,35 @@ function NewPostButton(props) {
       centered
     >
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
+        <Modal.Title  id="contained-modal-title-vcenter">
           Ask a Question!
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
       <Form>
           <Form.Group controlId="formBasicEmail">
+          <Tab.Container id="list-group-tabs-example" defaultActiveKey="#flex">
+              <ListGroup horizontal>
+                <ListGroup.Item onClick={props.updateCat}
+                style={styles.modelcat} action
+                href="#flex"
+                name="flex">
+                   Flexibility
+                </ListGroup.Item>
+                <ListGroup.Item name="diet"
+                onClick={props.updateCat} style={styles.modelcat} action href="#Diet">
+                  Diet
+                </ListGroup.Item>
+                <ListGroup.Item name="cardio"
+                  style={styles.modelcat} onClick={props.updateCat} action href="#Cardio">
+                  Cardio
+                </ListGroup.Item>
+                <ListGroup.Item name="weight"
+                style={styles.modelcat} onClick={props.updateCat} action href="#Weight">
+                  Weights
+                </ListGroup.Item>
+              </ListGroup>
+            </Tab.Container>
             <Form.Label>Title</Form.Label>
             <Form.Control
             placeholder="Enter a Title"
@@ -76,6 +98,7 @@ const [modalShow, setModalShow] = React.useState(false);
           updateTitle={props.updateTitle}
           updateDesc={props.updateDesc}
           post={props.post}
+          updateCat={props.updateCat}
           show={modalShow}
           onHide={() => setModalShow(false)}
         />
@@ -89,6 +112,17 @@ const [modalShow, setModalShow] = React.useState(false);
 export default ForumButton;
 
 const styles = {
+    text: {
+      alignText: "center"
+    },
+    modelcat: {
+      display: "flex",
+      justifyContent: 'center',
+      position: 'center',
+      alignItems: "center",
+      height: '40px',
+      width: '100px'
+    },
     forbutton: {
         width: '500px',
         marginBottom: '20px',

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './EditButton.css';
 import { ButtonToolbar, Button, Modal } from 'react-bootstrap';
 import EditProfile from '../EditProfile/EditProfile';
+import { withCookies } from 'react-cookie';
 var FontAwesome = require('react-fontawesome');
 
 function EditButton(props) {
@@ -17,10 +18,10 @@ function EditButton(props) {
       </Button>
 
       <Modal show={show} onHide={handleClose} animation={false}>
-        <EditProfile user={props.user} />
+        <EditProfile user={props.user} token={props.token}/>
       </Modal>
     </>
   )
 }
 
-export default EditButton;
+export default withCookies(EditButton);
