@@ -46,7 +46,7 @@ class FeedPostViewSet(viewsets.ModelViewSet):
     #permission_classes = (IsAuthenticated, )
 
 class TopThreeFlexForumViewSet(viewsets.ModelViewSet):
-    queryset = ForumPost.objects.filter(category="flex").reverse()[:3]
+    queryset = ForumPost.objects.filter(category="flex")[:3]
     serializer_class = ForumPostSerializer
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated, )

@@ -78,6 +78,7 @@ class PublicForum extends Component {
   }
 
   updateCat = event => {
+    console.log(event.target.name)
     this.setState({
       category: event.target.name
     });
@@ -90,8 +91,7 @@ class PublicForum extends Component {
       user: this.props.cookies.get('tws-id'),
       category: this.state.category
     }
-    console.log("LOOKY HERE ")
-    console.log(postBody)
+console.log(postBody)
 
     fetch(`${process.env.REACT_APP_API_URL}/api/forumposts/`, {
       method: 'POST',
@@ -103,7 +103,7 @@ class PublicForum extends Component {
     }).then( resp => resp.json())
     .then( res => console.log(res))
     .catch( error => console.log(error))
-    alert("hello")
+alert("stop")
   }
 
 render() {
@@ -122,6 +122,11 @@ render() {
     {
       content = this.state.weightposts
     }
+    console.log("LOOKY HERE ")
+    console.log(this.state.flexposts)
+    console.log(this.state.dietposts)
+    console.log(this.state.cardioposts)
+    console.log(this.state.weightposts)
     return (
         <div>
           <div style={styles.forum}>
