@@ -19,6 +19,7 @@ class Graphs extends Component {
           currTab: "first",
           token: this.props.cookies.get('tws-token'),
           workouts: [],
+          groupWorkouts: [],
             data: {
                // labels: ["1", "2", "3", "4", "5"]
                 labels:["2020-02-08", "2020-02-09", "2020-02-11", "2020-02-14"],
@@ -36,6 +37,16 @@ class Graphs extends Component {
                     //     data: [14, 18, 5, 0, 22, 1, 13]
                     // }
                 ]
+            },
+            groupData: {
+              labels: ["1","2", "3"],
+              groupdatasets: [
+                {
+                  label: "Group Workout #1",
+                  backgroundColor: "rgba(255, 0, 255, 0.75)",
+                  groupData: [10,15,20,25]
+                }
+              ]
             },
             value: '',
             workoutTitles: [],
@@ -91,16 +102,36 @@ class Graphs extends Component {
       date: this.state.date
     }
     
-    fetch(`${process.env.REACT_APP_API_URL}/api/workouts/`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Token ${this.state.token}`
-      },
-      body: JSON.stringify(postBody)
-    }).then( resp => resp.json())
-    .then( res => this.props.editedWorkout(res))
-    .catch( error => console.log(error))
+    if(this.state.currTab == "first")
+    {
+      fetch(`${process.env.REACT_APP_API_URL}/api/workouts/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Token ${this.state.token}`
+        },
+        body: JSON.stringify(postBody)
+      }).then( resp => resp.json())
+      .then( res => this.props.editedWorkout(res))
+      .catch( error => console.log(error))
+    }
+
+
+        //IMPLEMENT ONCE GROUP WORKOUT TABLE IS CREATED AND POST IS WORKING
+    // else if(this.state.currTab == "second")
+    // {
+    //   fetch(`${process.env.REACT_APP_API_URL}/api/groupworkouts/`, {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       'Authorization': `Token ${this.state.token}`
+    //     },
+    //     body: JSON.stringify(postBody)
+    //   }).then( resp => resp.json())
+    //   .then( res => this.props.editedWorkout(res))
+    //   .catch( error => console.log(error))
+    // }
+
   }
 
 
@@ -116,7 +147,20 @@ class Graphs extends Component {
     .then( resp => this.setState({workouts: resp}))
   //  .then (resp => this.setState({workoutTitle: }))
     .catch( error => console.log(error))
-  }
+
+    //UNCOMMENT ONCE GROUPWORKOUT TABLE IS WORKING
+  //   fetch(`${process.env.REACT_APP_API_URL}/api/groupworkouts/`, {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Authorization': `Token ${this.state.token}`,
+
+  //     }
+  //   }).then( resp => resp.json())
+  //   .then( resp => this.setState({workouts: resp}))
+  // //  .then (resp => this.setState({workoutTitle: }))
+  //   .catch( error => console.log(error))
+   }
 
 
 
@@ -135,17 +179,36 @@ class Graphs extends Component {
 
 
     loadWorkoutSelector(){
-      var filterIndex;
-      var seenTitles = [];
-      for(filterIndex = 0; filterIndex < this.state.workouts.length; filterIndex++)
+      if(this.state.currTab == "first")
       {
-        var workoutTitle = this.state.workouts[filterIndex].title;
-        seenTitles[filterIndex] = workoutTitle;
+        var filterIndex;
+        var seenTitles = [];
+        for(filterIndex = 0; filterIndex < this.state.workouts.length; filterIndex++)
+        {
+          var workoutTitle = this.state.workouts[filterIndex].title;
+          seenTitles[filterIndex] = workoutTitle;
+        }
+  
+        const distinctTitles = Array.from(new Set(seenTitles));
+        this.state.workoutTitles = distinctTitles
+        return(<h3>Choose a Workout</h3>)
+
+      }
+      else if(this.state.currTab == "second")
+      {
+        var filterIndex;
+        var seenTitles = [];
+        for(filterIndex = 0; filterIndex < this.state.groupWorkouts.length; filterIndex++)
+        {
+          var workoutTitle = this.state.groupWorkouts[filterIndex].title;
+          seenTitles[filterIndex] = workoutTitle;
+        }
+  
+        const distinctTitles = Array.from(new Set(seenTitles));
+        this.state.workoutTitles = distinctTitles
+        return(<h3>Choose a Workout</h3>)
       }
 
-      const distinctTitles = Array.from(new Set(seenTitles));
-      this.state.workoutTitles = distinctTitles
-      return(<h3>Choose a Workout</h3>)
     }
 
     
@@ -154,10 +217,14 @@ class Graphs extends Component {
     getChartData = canvas => {
 
         //Obtains the data from workouts
-        const data = this.state.data;
+       // const data = this.state.data;
+       let data = this.state.data;
+       //Selects My Progress Tab
+        if(this.state.currTab == "first")
+        {
+           data = this.state.data;
 
-
-        //Initialize all filtration variables and arrays
+          //Initialize all filtration variables and arrays
         var chosenWorkout = this.state.value; //Change here to determine which workout to show
         console.log(chosenWorkout)
         var filterIndex;
@@ -192,9 +259,61 @@ class Graphs extends Component {
             });
         }
         return data;
+        }
+
+        
+        //Selects Group Progress Tab
+        else if(this.state.currTab == "second")
+        {
+           data = this.state.groupData;
+        //Initialize all filtration variables and arrays
+        var chosenWorkout = this.state.value; //Change here to determine which workout to show
+        console.log(chosenWorkout)
+        var filterIndex;
+        var filteredDataWeight = [];
+        var filteredDataDate = [];
+        var counter = 0;
+
+        //Filters the data by looking for the specific workout title
+        for(filterIndex = 0; filterIndex < this.state.groupWorkouts.length; filterIndex++)
+        {
+          var workoutTitle = this.state.groupWorkouts[filterIndex].title;
+
+          if(chosenWorkout == workoutTitle)
+          {
+            filteredDataWeight[counter] = this.state.groupWorkouts[filterIndex].weight;
+            filteredDataDate[counter] = this.state.groupWorkouts[filterIndex].date;
+            counter++;
+          }
+        }
+
+        if(data.groupdatasets){
+          let colors = ["rgba(255, 0, 255, 0.75", "rgba(0, 0, 255, 0.75)"];
+          data.groupdatasets.forEach((set, i) => {
+              set.backgroundColor = this.setGradientColor(canvas, colors[i]);
+              set.borderColor = "white";
+              set.borderWidth = 2;
+              set.label = chosenWorkout;
+              set.data = filteredDataWeight;
+          });
+      }
+      return data;
+        }
+
+
+
     }
 
   render() {
+    let content;
+    if(this.state.currTab == "first")
+    {
+      content = this.state.data;
+    }
+    else if(this.state.currTab == "second")
+    {
+      content = this.state.groupData;
+    }
     console.log("William")
     console.log(this.state.workouts)
     function Color() {
