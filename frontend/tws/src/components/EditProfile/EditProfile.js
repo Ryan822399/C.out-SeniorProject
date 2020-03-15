@@ -34,8 +34,8 @@ class EditProfile extends Component {
 
   }
   change = val => evt => {
-    console.log("EVENT TARGET");
-    console.log(evt.target.value);
+    // console.log("EVENT TARGET");
+    // console.log(evt.target.value);
     if(val == "firstName") {
       this.setState({firstName: evt.target.value});
     }
@@ -49,10 +49,10 @@ class EditProfile extends Component {
       this.setState({location: evt.target.value});
       console.log(evt.target.value);
     }
-    console.log(this.state.firstName);
-    console.log(this.state.lastName);
-    console.log(this.state.bio);
-    console.log(this.state.location);
+    // console.log(this.state.firstName);
+    // console.log(this.state.lastName);
+    // console.log(this.state.bio);
+    // console.log(this.state.location);
   }
 /*
   change = val => evt => {
@@ -92,8 +92,8 @@ class EditProfile extends Component {
       heightFeet: this.state.heightFeet,
       heightInches: this.state.heightInches
     }
-    console.log("TESTING PROFILE");
-    console.log(profile);
+    // console.log("TESTING PROFILE");
+    // console.log(profile);
     fetch(`${process.env.REACT_APP_API_URL}/api/profile/${profile.user}/`, {
       method: 'PUT',
       headers: {
@@ -103,17 +103,17 @@ class EditProfile extends Component {
     }).then( resp => resp.json())
     .then( res => console.log(res))
     .catch(error => console.log(error))
-    console.log(this.state.token);
-    console.log(profile.userName);
-    console.log(profile.firstName);
-    console.log(profile.lastName);
-    console.log(profile.bio);
-    console.log(profile.location);
-    console.log(profile.email);
-    console.log(profile.dob);
-    console.log(profile.user);
-    console.log(profile.heightFeet);
-    console.log(profile.heightInches);
+    // console.log(this.state.token);
+    // console.log(profile.userName);
+    // console.log(profile.firstName);
+    // console.log(profile.lastName);
+    // console.log(profile.bio);
+    // console.log(profile.location);
+    // console.log(profile.email);
+    // console.log(profile.dob);
+    // console.log(profile.user);
+    // console.log(profile.heightFeet);
+    // console.log(profile.heightInches);
   }
 
   submit = evt => {
@@ -122,8 +122,8 @@ class EditProfile extends Component {
   }
 
   render() {
-    console.log("CHECKING");
-    console.log(this.state.userName);
+    // console.log("CHECKING");
+    // console.log(this.state.userName);
     let firstName, lastName, password, bio, location, picture;
     if (this.props.user[0] !== "") {
       firstName = this.props.user[0].firstName;;

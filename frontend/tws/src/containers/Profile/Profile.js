@@ -27,7 +27,7 @@ class Profile extends Component {
     }).then( resp => resp.json())
     .then( res => this.setState({info: res}))
     .catch(error => console.log(error))
-    console.log(this.state.info);
+    //console.log(this.state.info);
 
     fetch(`${process.env.REACT_APP_API_URL}/api/feedposts/`, {
       method: 'GET',
@@ -37,10 +37,10 @@ class Profile extends Component {
     }).then( resp => resp.json())
     .then( res => this.setState({posts: res}))
     .catch(error => console.log(error))
-    console.log("TESTING");
-    console.log(this.state.posts);
-    console.log("TOKEN");
-    console.log(this.state.token);
+    // console.log("TESTING");
+    // console.log(this.state.posts);
+    // console.log("TOKEN");
+    // console.log(this.state.token);
 
     /*
     Promise.all([
@@ -138,8 +138,10 @@ class Profile extends Component {
   }
 
   render() {
-    console.log("HEY");
-    console.log(this.state.info);
+    // console.log("HEY");
+    // console.log(this.state.info);
+    console.log("TOKEN");
+    console.log(this.props.cookies.get('tws-id'));
     return (
       <div style={{background: "#222", textAlign: "center", color: "#1BFFFF"}}>
         { this.state.info[0] && this.state.posts[0] ? (
@@ -150,7 +152,7 @@ class Profile extends Component {
             <this.profileInformation />
               <EditButton user={this.state.info} token={this.state.token}/>
             </div>
-            
+
             <CarouselPics posts={this.state.posts}/>
             <this.profilePost />
 

@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import { Carousel  } from 'react-bootstrap';
 import EditProfile from '../EditProfile/EditProfile';
+import './CarouselPics.css';
 
 function CarouselPics(props) {
-  console.log("POSTS");
-  console.log(props.posts);
+  // console.log("POSTS");
+  // console.log(props.posts);
 
   return (
 
@@ -14,6 +15,7 @@ function CarouselPics(props) {
           className="d-block"
           src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60"
           alt="First slide"
+          height={400}
         />
         <Carousel.Caption>
           <h3 style={{color: "#1BFFFF"}}>First slide</h3>
@@ -24,7 +26,8 @@ function CarouselPics(props) {
         <img
           className="d-block"
           src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60"
-          alt="Third slide"
+          alt="Second slide"
+          height={400}
         />
 
         <Carousel.Caption>
@@ -37,6 +40,7 @@ function CarouselPics(props) {
           className="d-block"
           src="https://images.unsplash.com/photo-1547919307-1ecb10702e6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60"
           alt="Third slide"
+          height={400}
         />
 
         <Carousel.Caption>

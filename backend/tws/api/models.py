@@ -65,6 +65,7 @@ class FeedPost(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE )
     post = models.CharField(max_length=1000)
     picture = models.ImageField(upload_to='images/')
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.title
