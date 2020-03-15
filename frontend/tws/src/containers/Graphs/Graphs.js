@@ -102,16 +102,36 @@ class Graphs extends Component {
       date: this.state.date
     }
     
-    fetch(`${process.env.REACT_APP_API_URL}/api/workouts/`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Token ${this.state.token}`
-      },
-      body: JSON.stringify(postBody)
-    }).then( resp => resp.json())
-    .then( res => this.props.editedWorkout(res))
-    .catch( error => console.log(error))
+    if(this.state.currTab == "first")
+    {
+      fetch(`${process.env.REACT_APP_API_URL}/api/workouts/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Token ${this.state.token}`
+        },
+        body: JSON.stringify(postBody)
+      }).then( resp => resp.json())
+      .then( res => this.props.editedWorkout(res))
+      .catch( error => console.log(error))
+    }
+
+
+        //IMPLEMENT ONCE GROUP WORKOUT TABLE IS CREATED AND POST IS WORKING
+    // else if(this.state.currTab == "second")
+    // {
+    //   fetch(`${process.env.REACT_APP_API_URL}/api/groupworkouts/`, {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       'Authorization': `Token ${this.state.token}`
+    //     },
+    //     body: JSON.stringify(postBody)
+    //   }).then( resp => resp.json())
+    //   .then( res => this.props.editedWorkout(res))
+    //   .catch( error => console.log(error))
+    // }
+
   }
 
 
@@ -128,6 +148,7 @@ class Graphs extends Component {
   //  .then (resp => this.setState({workoutTitle: }))
     .catch( error => console.log(error))
 
+    //UNCOMMENT ONCE GROUPWORKOUT TABLE IS WORKING
   //   fetch(`${process.env.REACT_APP_API_URL}/api/groupworkouts/`, {
   //     method: 'GET',
   //     headers: {
