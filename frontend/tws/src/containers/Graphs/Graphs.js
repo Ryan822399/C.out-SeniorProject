@@ -19,6 +19,7 @@ class Graphs extends Component {
           currTab: "first",
           token: this.props.cookies.get('tws-token'),
           workouts: [],
+          groupWorkouts: [],
             data: {
                // labels: ["1", "2", "3", "4", "5"]
                 labels:["2020-02-08", "2020-02-09", "2020-02-11", "2020-02-14"],
@@ -36,6 +37,16 @@ class Graphs extends Component {
                     //     data: [14, 18, 5, 0, 22, 1, 13]
                     // }
                 ]
+            },
+            groupData: {
+              labels: [],
+              groupdata: [
+                {
+                  label: "Group Workout #1",
+                  backgroundColor: "rgba(255, 0, 255, 0.75)",
+                  groupData: []
+                }
+              ]
             },
             value: '',
             workoutTitles: [],
