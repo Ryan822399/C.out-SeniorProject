@@ -109,7 +109,7 @@ class Login extends Component{
       .catch( error => console.log(error))
     }
 
-    alert("LOGIN MESSAGE");
+    alert("You're logging in to the next experience", 100);
 
 
   }
