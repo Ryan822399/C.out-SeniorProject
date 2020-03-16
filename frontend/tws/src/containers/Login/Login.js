@@ -109,7 +109,7 @@ class Login extends Component{
       .catch( error => console.log(error))
     }
 
-    alert("You're logging in to the next experience", 100);
+    console.log("Welcome to the jungle");
 
 
   }
