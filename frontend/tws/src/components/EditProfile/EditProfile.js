@@ -6,17 +6,18 @@ var FontAwesome = require('react-fontawesome');
 class EditProfile extends Component {
 
   state = {
-    editedProfile: this.props.user[0],
-    userName: this.props.user[0].userName,
+    editedProfile: this.props.user,
+    userName: this.props.user.userName,
     firstName: "",
     lastName: "",
     bio: "",
     location: "",
-    email: this.props.user[0].email,
-    dob: this.props.user[0].dob,
-    user: this.props.user[0].user,
-    heightFeet: this.props.user[0].heightFeet,
-    heightInches: this.props.user[0].heightInches
+    email: this.props.user.email,
+    dob: this.props.user.dob,
+    user: this.props.user.user,
+    heightFeet: this.props.user.heightFeet,
+    heightInches: this.props.user.heightInches,
+    picture: this.props.user.picture
     /*
     profile: {
       userName: this.props.user[0].userName,
@@ -47,6 +48,10 @@ class EditProfile extends Component {
     }
     else if(val == "location") {
       this.setState({location: evt.target.value});
+      console.log(evt.target.value);
+    }
+    else if(val == "image") {
+      this.setState({picture: evt.target.value});
       console.log(evt.target.value);
     }
     // console.log(this.state.firstName);
@@ -90,7 +95,8 @@ class EditProfile extends Component {
       dob: this.state.dob,
       user: this.props.cookies.get('tws-id'),
       heightFeet: this.state.heightFeet,
-      heightInches: this.state.heightInches
+      heightInches: this.state.heightInches,
+      picture: this.state.picture
     }
     // console.log("TESTING PROFILE");
     // console.log(profile);
@@ -116,6 +122,7 @@ class EditProfile extends Component {
     // console.log(profile.heightInches);
   }
 
+
   submit = evt => {
     console.log("CHECKING SUBMIT")
     console.log(this.state.editedProfile);
@@ -125,12 +132,12 @@ class EditProfile extends Component {
     // console.log("CHECKING");
     // console.log(this.state.userName);
     let firstName, lastName, password, bio, location, picture;
-    if (this.props.user[0] !== "") {
-      firstName = this.props.user[0].firstName;;
-      lastName = this.props.user[0].lastName;
-      bio = this.props.user[0].bio;
-      location = this.props.user[0].location;
-      picture = this.props.user[0].picture;
+    if (this.props.user !== null) {
+      firstName = this.props.user.firstName;;
+      lastName = this.props.user.lastName;
+      bio = this.props.user.bio;
+      location = this.props.user.location;
+      picture = this.props.user.picture;
     }
     return (
       <div style={{background: "#222", padding: "5%"}}>
@@ -156,18 +163,10 @@ class EditProfile extends Component {
             <Form.Control name="location" placeholder={location} onChange={this.change("location")}/>
           </Form.Group>
           <Form.Row>
-            <Form.Group as={Col} controlId="formGridPicture">
-              <Form.Label>Picture</Form.Label>
-              <Form.Control placeholder={<img
-                width={300}
-                height={300}
-                className="mr-3"
-                src= { picture }
-                alt="Profile Picture"
-                class="center"
-                style={{borderRadius: 300/2}}
-              />}/>
-            </Form.Group>
+          <input type="file"
+                   id="picture"
+                   name="picture"
+                   accept="image/png, image/jpeg, image/JPG"  onChange={this.change("image")}/>
           </Form.Row>
 
           <Button variant="dark" type="submit" onClick={this.submit, this.update}>

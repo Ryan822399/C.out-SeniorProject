@@ -11,14 +11,15 @@ import {TimelineDetails} from '../../containers/TimelineDetails/TimelineDetails'
 class Profile extends Component {
 
   state = {
-    info: [],
+    info: null,
     posts: [],
-    token: this.props.cookies.get('tws-token')
+    token: this.props.cookies.get('tws-token'),
+    currentID: this.props.cookies.get('tws-id')
   }
 
   componentDidMount() {
 
-    fetch(`${process.env.REACT_APP_API_URL}/api/profile/`, {
+    fetch(`${process.env.REACT_APP_API_URL}/api/profile/${this.state.currentID}/`, {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -60,7 +61,7 @@ class Profile extends Component {
     return (
       <Media>
         <Media.Body>
-          <h2 style={{color: "#1BFFFF"}}> @{this.state.info[0].userName} </h2>
+          <h2 style={{color: "#1BFFFF"}}> @{this.state.info.userName} </h2>
         </Media.Body>
       </Media>
     )
@@ -72,7 +73,7 @@ class Profile extends Component {
         width={300}
         height={300}
         className="mr-3"
-        src= { this.state.info[0].picture }
+        src= { this.state.info.picture }
         alt="Profile Picture"
         class="center"
         style={{borderRadius: 300/2}}
@@ -85,13 +86,13 @@ class Profile extends Component {
       <Media>
         <Media.Body>
           <h4 style={{padding: "0"}}>
-            { <h4>{this.state.info[0].firstName} {this.state.info[0].lastName}</h4> }
+            { <h4>{this.state.info.firstName} {this.state.info.lastName}</h4> }
           </h4>
           <p>
-            { <p> { this.state.info[0].location} </p> }
+            { <p> { this.state.info.location} </p> }
           </p>
           <p>
-            { <p> {this.state.info[0].bio} </p> }
+            { <p> {this.state.info.bio} </p> }
           </p>
         </Media.Body>
       </Media>
@@ -138,13 +139,16 @@ class Profile extends Component {
   }
 
   render() {
-    // console.log("HEY");
-    // console.log(this.state.info);
+    console.log("HEY");
+    console.log(this.state.info);
+
+    console.log(this.state.posts[0]);
+
     console.log("TOKEN");
     console.log(this.props.cookies.get('tws-id'));
     return (
       <div style={{background: "#222", textAlign: "center", color: "#1BFFFF"}}>
-        { this.state.info[0] && this.state.posts[0] ? (
+        { this.state.info ? (
           <div>
             <div className="body" style={{paddingBottom: "1%", borderBottom: "5px solid #1BFFFF"}}>
             <this.profileUserName />
