@@ -35,8 +35,8 @@ class EditProfile extends Component {
 
   }
   change = val => evt => {
-    // console.log("EVENT TARGET");
-    // console.log(evt.target.value);
+    console.log("EVENT TARGET");
+    console.log(evt.target.value);
     if(val == "firstName") {
       this.setState({firstName: evt.target.value});
     }

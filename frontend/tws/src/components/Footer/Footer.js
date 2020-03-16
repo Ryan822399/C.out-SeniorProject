@@ -5,13 +5,13 @@ var FontAwesome = require('react-fontawesome');
 const style = {
     position: "bottom",
     background: "#222",
-    textAlign: "center"
+    textAlign: "center",
 }
 function Footer(props) {
   return (
     <footer>
 
-      <Jumbotron style={style}>
+      <Jumbotron style={style, {background: "#222", color: "#1BFFFF", position: "bottom", textAlign: "center"}}>
         <h4>TWS</h4>
         <div>Ryan Hennes</div>
         <div>Anthony Diaz</div>
