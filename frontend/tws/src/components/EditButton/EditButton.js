@@ -9,8 +9,8 @@ function EditButton(props) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  console.log("CHECKING 1234");
-  console.log(props.user);
+  // console.log("CHECKING 1234");
+  // console.log(props.user);
   return (
     <>
       <Button variant="dark" onClick={handleShow}>
