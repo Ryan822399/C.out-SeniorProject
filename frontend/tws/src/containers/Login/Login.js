@@ -116,15 +116,15 @@ class Login extends Component{
 
   twsInfo = () => {
     return (
-      <Card border="info" style={{ width: '30%', marginLeft: "auto", marginRight: "auto"}}>
+      <Card border="info" style={{ width: '30%', marginLeft: "auto", marginRight: "auto", background: "white", color: "#222"}}>
         <Card.Img variant="top" src="https://image-us.samsung.com/SamsungUS/support/solutions/mobile/wearables/smartwatches/WRBLS_GWA_woman-lifting.png" />
         <Card.Body style={{ display: 'flex', flexDirection: 'row' }}>
           <Card.Title>Connect with your friends and share your workout progress!</Card.Title>
         </Card.Body>
         <ListGroup className="list-group-flush">
-          <ListGroupItem style={{padding: "5%"}} >See photos and updates from friends in news feed.</ListGroupItem>
-          <ListGroupItem style={{padding: "5%"}} >Share what's new in your life on your timeline.</ListGroupItem>
-          <ListGroupItem style={{padding: "5%"}} >Track your workout progress and show it off.</ListGroupItem>
+          <ListGroupItem style={{padding: "5%", background: "#1BFFFF", color: "#222"}} >See photos and updates from friends in news feed.</ListGroupItem>
+          <ListGroupItem style={{padding: "5%", background: "#1BFFFF", color: "#222"}} >Share what's new in your life on your timeline.</ListGroupItem>
+          <ListGroupItem style={{padding: "5%", background: "#1BFFFF", color: "#222"}} >Track your workout progress and show it off.</ListGroupItem>
         </ListGroup>
       </Card>
     )
@@ -143,7 +143,7 @@ class Login extends Component{
           <span>TWS</span>
         </h1>
         <div style ={{ display: 'flex', flexDirection: 'row', paddingTop: '1%' }}>
-
+          <this.twsInfo />
           <Card border="info" style={{ width: '30%', height: '30%', color: '#222', background: "white", marginLeft: "auto", marginRight: "auto" /*display: "flex", alignItems: "center", justifyContent: "center"*/ }}>
             <Card.Header>
               <h2>
