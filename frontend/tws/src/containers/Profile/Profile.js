@@ -6,12 +6,13 @@ import {Image, Navbar, Nav, NavDropdown, Form, FormControl, Button, Media, Card,
 import EditButton from '../../components/EditButton/EditButton';
 import CarouselPics from '../../components/CarouselPics/CarouselPics';
 import { withCookies } from 'react-cookie';
-import {TimelineDetails} from '../../containers/TimelineDetails/TimelineDetails'
+import TimelineDetails from '../../components/TimelineDetails/TimelineDetails';
+
 
 class Profile extends Component {
 
   state = {
-    info: null,
+    info: [],
     posts: [],
     token: this.props.cookies.get('tws-token'),
     currentID: this.props.cookies.get('tws-id')
@@ -156,7 +157,7 @@ class Profile extends Component {
             <this.profileInformation />
               <EditButton user={this.state.info} token={this.state.token}/>
             </div>
-
+            <TimelineDetails /> <br/><hr></hr>
             <CarouselPics posts={this.state.posts}/>
             <this.profilePost />
 

@@ -4,7 +4,7 @@ import { Container, Navbar, Nav, NavDropdown, Form, FormControl, Button, Overlay
 import { withCookies } from 'react-cookie';
 import axios from 'axios';
 
-class AddFriendButton extends Component {
+class RemoveFriendButton extends Component {
     state = {
       attributes: {
         userName: "",
@@ -37,7 +37,7 @@ class AddFriendButton extends Component {
     form_data.append('picture', this.state.attributes.picture);
     let url = 'http://localhost:8000/api/friendslist/';
 
-    axios.post(url, form_data, {
+    axios.delete(url, {data: form_data}, {
       headers: {
         'content-type': 'multipart/form-data'
       }
@@ -65,11 +65,11 @@ class AddFriendButton extends Component {
                    name="picture"
                    accept="image/png, image/jpeg, image/JPG"  onChange={this.handleImageChange} required/>
           <Button onClick={this.handleFormSubmit} variant="outline-success" type="submit" block>
-            Add Friend
+            Remove Friend
           </Button>
         </Form>
     );
   }
 }
 
-export default withCookies(AddFriendButton);
+export default withCookies(RemoveFriendButton);

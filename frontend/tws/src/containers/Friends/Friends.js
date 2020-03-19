@@ -5,6 +5,7 @@ import {Container, Image, ListGroup, Button, ButtonToolbar, Card, CardGroup, For
 import { withCookies } from 'react-cookie';
 import EditButton from '../../components/EditButton/EditButton';
 import AddFriendButton from '../../components/AddFriendButton/AddFriendButton';
+import RemoveFriendButton from '../../components/RemoveFriendButton/RemoveFriendButton';
 import axios from 'axios';
 class Friends extends Component{
   state = {
@@ -94,6 +95,7 @@ class Friends extends Component{
                 <this.friendPost />
               </Form>
               <AddFriendButton /> <br/><hr></hr>
+              <RemoveFriendButton /> <br/><hr></hr>
             </Card>
           </Container>
         ) : (<h3>loading </h3>)

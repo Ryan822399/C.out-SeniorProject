@@ -73,7 +73,7 @@ class TimelineDetails extends Component {
                       width={64}
                       height={64}
                       className="mr-3"
-                      src="https://s2.dmcdn.net/v/K-vxh1PQOdCNPyzJR/x1080"
+                      src={this.state.info[0].picture}
                     />
                     <Media.Body>
                       <h5>{ this.state.info[0] ? <p>{this.state.info[0].userName}</p> : <p>NULL First</p> }</h5>
