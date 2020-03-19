@@ -1,6 +1,7 @@
 import React, {Component, useState} from 'react';
 import { withCookies } from 'react-cookie';
 import {Row, Col, Container, Card, Form, Button, ListGroup, ListGroupItem} from 'react-bootstrap';
+import axios from 'axios';
 var FontAwesome = require('react-fontawesome');
 
 class Login extends Component{
@@ -10,8 +11,8 @@ class Login extends Component{
       username: '',
       password: ''
     },
-    // username: '',
-    // password: '',
+    user: [],
+    firstName: '',
     isLoginView: true
   }
 
@@ -96,6 +97,8 @@ class Login extends Component{
       })
       .catch( error => console.log(error))
     } else {
+
+      //creating user
       fetch(`${process.env.REACT_APP_API_URL}/api/users/`, {
         method: 'POST',
         headers: {
@@ -108,7 +111,6 @@ class Login extends Component{
       })
       .catch( error => console.log(error))
     }
-
     alert("Welcome to the jungle");
 
 
