@@ -116,17 +116,58 @@ class Login extends Component{
 
   }
 
+  login = evt => {
+    return (
+      <div>
+        <Card border="info" style={{ color: '#222', background: "white", marginLeft: "auto", marginRight: "auto" /*display: "flex", alignItems: "center", justifyContent: "center"*/ }}>
+          <Card.Header>
+            <h2>
+              {this.state.isLoginView ? 'Login' : 'Register'}
+            </h2>
+          </Card.Header>
+          <Card.Body>
+            <Form>
+              <Form.Group controlId="formBasicUserName">
+                <Form.Label>Username</Form.Label>
+                <Form.Control
+                style={{background: "#222", color: "#1BFFFF"}}
+                type="userName"
+                name="username" value={this.state.credentials.username}
+                placeholder="Enter Username"
+                onChange={this.inputChanged}/>
+              </Form.Group>
+
+              <Form.Group controlId="formBasicPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                style={{background: "#222", color: "#1BFFFF"}}
+                type="password"
+                name="password"
+                value={this.state.credentials.password}
+                placeholder="Password"
+                onChange={this.inputChanged}/>
+              </Form.Group>
+              <Button onClick={this.login} variant="dark" type="submit">
+                {this.state.isLoginView ? 'Login' : 'Register'}
+              </Button>
+              <p onClick={this.toggleView}>
+                {this.state.isLoginView ? 'Create Account' : 'Back to Login'}
+              </p>
+            </Form>
+          </Card.Body>
+        </Card>
+      </div>
+    )
+  }
+
   twsInfo = () => {
     return (
-      <Card border="info" style={{ width: '30%', marginLeft: "auto", marginRight: "auto", background: "white", color: "#222"}}>
-        <Card.Img variant="top" src="https://image-us.samsung.com/SamsungUS/support/solutions/mobile/wearables/smartwatches/WRBLS_GWA_woman-lifting.png" />
-        <Card.Body style={{ display: 'flex', flexDirection: 'row' }}>
-          <Card.Title>Connect with your friends and share your workout progress!</Card.Title>
-        </Card.Body>
+      <Card border="info" style={{ marginLeft: "auto", marginRight: "auto", background: "white", color: "#222"}}>
+        <Card.Header><h2>Connect with your friends and share your workout progress!</h2></Card.Header>
         <ListGroup className="list-group-flush">
-          <ListGroupItem style={{padding: "5%", background: "#1BFFFF", color: "#222"}} >See photos and updates from friends in news feed.</ListGroupItem>
-          <ListGroupItem style={{padding: "5%", background: "#1BFFFF", color: "#222"}} >Share what's new in your life on your timeline.</ListGroupItem>
-          <ListGroupItem style={{padding: "5%", background: "#1BFFFF", color: "#222"}} >Track your workout progress and show it off.</ListGroupItem>
+          <ListGroupItem style={{padding: "2%"}} ><h4 style={{color: "#222"}}>See photos and updates from friends in news feed.</h4></ListGroupItem>
+          <ListGroupItem style={{padding: "2%"}} ><h4 style={{color: "#222"}}>Share what's new in your life on your timeline.</h4></ListGroupItem>
+          <ListGroupItem style={{padding: "2%"}} ><h4 style={{color: "#222"}}>Track your workout progress and show it off.</h4></ListGroupItem>
         </ListGroup>
       </Card>
     )
@@ -138,52 +179,28 @@ class Login extends Component{
 
   render(){
     return (
-      <div className="login-container" style={{background: "#222", padding: '1%'}}>
+      <div className="login-container">
 
-        <h1 style={{color: "#1BFFFF", textAlign: "center"}}>
-          <FontAwesome name="heartbeat" style={{color: "white"}}/>
-          <span>TWS</span>
-        </h1>
-        <div style ={{ display: 'flex', flexDirection: 'row', paddingTop: '1%' }}>
-          <this.twsInfo />
-          <Card border="info" style={{ width: '30%', height: '30%', color: '#222', background: "white", marginLeft: "auto", marginRight: "auto" /*display: "flex", alignItems: "center", justifyContent: "center"*/ }}>
-            <Card.Header>
-              <h2>
-                {this.state.isLoginView ? 'Login' : 'Register'}
-              </h2>
-            </Card.Header>
-            <Card.Body>
-              <Form>
-                <Form.Group controlId="formBasicUserName">
-                  <Form.Label>Username</Form.Label>
-                  <Form.Control
-                  style={{background: "#222", color: "#1BFFFF"}}
-                  type="userName"
-                  name="username" value={this.state.credentials.username}
-                  placeholder="Enter Username"
-                  onChange={this.inputChanged}/>
-                </Form.Group>
-
-                <Form.Group controlId="formBasicPassword">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control
-                  style={{background: "#222", color: "#1BFFFF"}}
-                  type="password"
-                  name="password"
-                  value={this.state.credentials.password}
-                  placeholder="Password"
-                  onChange={this.inputChanged}/>
-                </Form.Group>
-                <Button onClick={this.login} variant="dark" type="submit">
-                  {this.state.isLoginView ? 'Login' : 'Register'}
-                </Button>
-                <p onClick={this.toggleView}>
-                  {this.state.isLoginView ? 'Create Account' : 'Back to Login'}
-                </p>
-              </Form>
-            </Card.Body>
-          </Card>
-        </div>
+        <Card border = "info" style={{background: "#222"}}>
+          <Card.Body>
+            <Card.Title style={{textAlign: "center"}}>
+              <h1 style={{color: "#1BFFFF", textAlign: "center"}}>
+                <FontAwesome name="heartbeat" style={{color: "white"}}/>
+                <span>TWS</span>
+              </h1>
+            </Card.Title>
+            <Card.Text style={{paddingTop: "1%"}}>
+              <Row>
+                <Col style={{padding: "2%"}}>
+                  <this.twsInfo />
+                </Col>
+                <Col xs="5" style={{padding: "2%"}}>
+                  <this.login/>
+                </Col>
+              </Row>
+            </Card.Text>
+          </Card.Body>
+        </Card>
       </div>
       // <div className="login-container" style={{background: "#222", color: "#1BFFFF"}}>
       //

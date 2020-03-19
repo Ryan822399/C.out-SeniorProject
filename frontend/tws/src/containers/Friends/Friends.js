@@ -126,7 +126,7 @@ class Friends extends Component{
         {this.state.info[0] ? (
 
             <Card style = {{color: "#222"}}>
-              <Card.Header>Friend's List</Card.Header>
+              <Card.Header><h2>Friend's List</h2></Card.Header>
               <this.search/>
               <ListGroup>
                 <this.existingFriend/>
@@ -144,7 +144,7 @@ class Friends extends Component{
         {this.state.info[0] ? (
 
           <Card style = {{color: "#222"}}>
-            <Card.Header>Search A Friend</Card.Header>
+            <Card.Header><h2>Search A Friend</h2></Card.Header>
             <this.search/>
             <ListGroup>
               <this.searchedFriends/>

@@ -11,7 +11,7 @@ function Footer(props) {
   return (
     <footer>
 
-      <Jumbotron style={style, {background: "#222", color: "#1BFFFF", position: "bottom", textAlign: "center"}}>
+      <Jumbotron style={{background: "#222", color: "#1BFFFF", position: "bottom", textAlign: "center"}}>
         <h4>TWS</h4>
         <div>Ryan Hennes</div>
         <div>Anthony Diaz</div>
