@@ -188,6 +188,7 @@ class Profile extends Component {
                   </Col>
                 </Row>
                 <Row>
+                  <TimelineDetails />
                   <this.profilePost />
                 </Row>
             </Card.Body>
