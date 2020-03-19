@@ -1,22 +1,23 @@
 import React, {Component} from 'react';
-import { Form, Button, Col } from 'react-bootstrap';
+import { Form, Button, Col, Card } from 'react-bootstrap';
 import { withCookies } from 'react-cookie';
 var FontAwesome = require('react-fontawesome');
 
 class EditProfile extends Component {
 
   state = {
-    editedProfile: this.props.user[0],
-    userName: this.props.user[0].userName,
+    editedProfile: this.props.user,
+    userName: this.props.user.userName,
     firstName: "",
     lastName: "",
     bio: "",
     location: "",
-    email: this.props.user[0].email,
-    dob: this.props.user[0].dob,
-    user: this.props.user[0].user,
-    heightFeet: this.props.user[0].heightFeet,
-    heightInches: this.props.user[0].heightInches
+    email: this.props.user.email,
+    dob: this.props.user.dob,
+    user: this.props.user.user,
+    heightFeet: this.props.user.heightFeet,
+    heightInches: this.props.user.heightInches,
+    picture: this.props.user.picture
     /*
     profile: {
       userName: this.props.user[0].userName,
@@ -49,10 +50,14 @@ class EditProfile extends Component {
       this.setState({location: evt.target.value});
       console.log(evt.target.value);
     }
-    console.log(this.state.firstName);
-    console.log(this.state.lastName);
-    console.log(this.state.bio);
-    console.log(this.state.location);
+    else if(val == "image") {
+      this.setState({picture: evt.target.value});
+      console.log(evt.target.value);
+    }
+    // console.log(this.state.firstName);
+    // console.log(this.state.lastName);
+    // console.log(this.state.bio);
+    // console.log(this.state.location);
   }
 /*
   change = val => evt => {
@@ -90,10 +95,11 @@ class EditProfile extends Component {
       dob: this.state.dob,
       user: this.props.cookies.get('tws-id'),
       heightFeet: this.state.heightFeet,
-      heightInches: this.state.heightInches
+      heightInches: this.state.heightInches,
+      picture: this.state.picture
     }
-    console.log("TESTING PROFILE");
-    console.log(profile);
+    // console.log("TESTING PROFILE");
+    // console.log(profile);
     fetch(`${process.env.REACT_APP_API_URL}/api/profile/${profile.user}/`, {
       method: 'PUT',
       headers: {
@@ -103,18 +109,19 @@ class EditProfile extends Component {
     }).then( resp => resp.json())
     .then( res => console.log(res))
     .catch(error => console.log(error))
-    console.log(this.state.token);
-    console.log(profile.userName);
-    console.log(profile.firstName);
-    console.log(profile.lastName);
-    console.log(profile.bio);
-    console.log(profile.location);
-    console.log(profile.email);
-    console.log(profile.dob);
-    console.log(profile.user);
-    console.log(profile.heightFeet);
-    console.log(profile.heightInches);
+    // console.log(this.state.token);
+    // console.log(profile.userName);
+    // console.log(profile.firstName);
+    // console.log(profile.lastName);
+    // console.log(profile.bio);
+    // console.log(profile.location);
+    // console.log(profile.email);
+    // console.log(profile.dob);
+    // console.log(profile.user);
+    // console.log(profile.heightFeet);
+    // console.log(profile.heightInches);
   }
+
 
   submit = evt => {
     console.log("CHECKING SUBMIT")
@@ -122,58 +129,64 @@ class EditProfile extends Component {
   }
 
   render() {
-    console.log("CHECKING");
-    console.log(this.state.userName);
+    // console.log("CHECKING");
+    // console.log(this.state.userName);
     let firstName, lastName, password, bio, location, picture;
-    if (this.props.user[0] !== "") {
-      firstName = this.props.user[0].firstName;;
-      lastName = this.props.user[0].lastName;
-      bio = this.props.user[0].bio;
-      location = this.props.user[0].location;
-      picture = this.props.user[0].picture;
+    if (this.props.user !== null) {
+      firstName = this.props.user.firstName;;
+      lastName = this.props.user.lastName;
+      bio = this.props.user.bio;
+      location = this.props.user.location;
+      picture = this.props.user.picture;
     }
     return (
-      <div style={{background: "#222", padding: "5%"}}>
-        <Form>
-          <Form.Row>
-            <Form.Group as={Col} controlId="formGridFirstName">
-              <Form.Label>First name</Form.Label>
-              <Form.Control name="firstName" type="firstName" placeholder={firstName} onChange={this.change("firstName")}/>
-            </Form.Group>
-            <Form.Group as={Col} controlId="formGridLastName">
-              <Form.Label>Last name</Form.Label>
-              <Form.Control name="lastName" type="lastName" placeholder={lastName} onChange={this.change("lastName")}/>
-            </Form.Group>
-          </Form.Row>
+      <div style={{background: "white", color: "#222", padding: "5%"}}>
+        <Card border="info" style={{marginLeft: "auto", marginRight: "auto" /*display: "flex", alignItems: "center", justifyContent: "center"*/ }}>
+          <Card.Header>
+            <h2>
+              Edit
+            </h2>
+          </Card.Header>
+          <Card.Body>
+            <Form>
+              <Form.Row>
+                <Form.Group as={Col} controlId="formGridFirstName">
+                  <Form.Label>First name</Form.Label>
+                  <Form.Control style={{background: "#222", color: "#1BFFFF"}} name="firstName" type="firstName" placeholder={firstName} onChange={this.change("firstName")}/>
+                </Form.Group>
+                <Form.Group as={Col} controlId="formGridLastName">
+                  <Form.Label>Last name</Form.Label>
+                  <Form.Control style={{background: "#222", color: "#1BFFFF"}} name="lastName" type="lastName" placeholder={lastName} onChange={this.change("lastName")}/>
+                </Form.Group>
+              </Form.Row>
 
-          <Form.Group controlId="formGridBio">
-            <Form.Label>Bio</Form.Label>
-            <Form.Control name="bio" placeholder={bio} onChange={this.change("bio")}/>
-          </Form.Group>
+              <Form.Group controlId="formGridBio">
+                <Form.Label>Bio</Form.Label>
+                <Form.Control style={{background: "#222", color: "#1BFFFF"}} name="bio" placeholder={bio} onChange={this.change("bio")}/>
+              </Form.Group>
 
-          <Form.Group controlId="formGridLocation">
-            <Form.Label>Location</Form.Label>
-            <Form.Control name="location" placeholder={location} onChange={this.change("location")}/>
-          </Form.Group>
-          <Form.Row>
-            <Form.Group as={Col} controlId="formGridPicture">
-              <Form.Label>Picture</Form.Label>
-              <Form.Control placeholder={<img
-                width={300}
-                height={300}
-                className="mr-3"
-                src= { picture }
-                alt="Profile Picture"
-                class="center"
-                style={{borderRadius: 300/2}}
-              />}/>
-            </Form.Group>
-          </Form.Row>
+              <Form.Group controlId="formGridLocation">
+                <Form.Label>Location</Form.Label>
+                <Form.Control style={{background: "#222", color: "#1BFFFF"}} name="location" placeholder={location} onChange={this.change("location")}/>
+              </Form.Group>
+              <Form.Group controlId="formGridPicture">
+                <Form.Label>Picture</Form.Label>
+                  <br/>
+                  <input
+                    style={{padding: "5px"}}
+                    type="file"
+                    id="picture"
+                    name="picture"
+                    accept="image/png, image/jpeg, image/JPG"  onChange={this.change("image")}/>
 
-          <Button variant="dark" type="submit" onClick={this.submit, this.update}>
-            Submit
-          </Button>
-        </Form>
+              </Form.Group>
+
+              <Button variant="dark" type="submit" onClick={this.submit, this.update}>
+                Submit
+              </Button>
+            </Form>
+          </Card.Body>
+        </Card>
       </div>
     )
   }

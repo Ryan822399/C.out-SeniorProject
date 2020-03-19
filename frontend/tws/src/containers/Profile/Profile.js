@@ -1,23 +1,25 @@
 import React, {Component, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/Profile.css';
-import {Image, Navbar, Nav, NavDropdown, Form, FormControl, Button, Media, Card, CardGroup, ButtonToolbar, Modal} from 'react-bootstrap';
+import {Image, Navbar, Nav, NavDropdown, Form, FormControl, Button, Media, Card, CardGroup, ButtonToolbar, Modal, Carousel} from 'react-bootstrap';
 //import Fri from '../src/components/Friends.js';
 import EditButton from '../../components/EditButton/EditButton';
+import CarouselPics from '../../components/CarouselPics/CarouselPics';
 import { withCookies } from 'react-cookie';
 import {TimelineDetails} from '../../containers/TimelineDetails/TimelineDetails'
 
 class Profile extends Component {
 
   state = {
-    info: [],
+    info: null,
     posts: [],
-    token: this.props.cookies.get('tws-token')
+    token: this.props.cookies.get('tws-token'),
+    currentID: this.props.cookies.get('tws-id')
   }
 
   componentDidMount() {
 
-    fetch(`${process.env.REACT_APP_API_URL}/api/profile/`, {
+    fetch(`${process.env.REACT_APP_API_URL}/api/profile/${this.state.currentID}/`, {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -26,7 +28,7 @@ class Profile extends Component {
     }).then( resp => resp.json())
     .then( res => this.setState({info: res}))
     .catch(error => console.log(error))
-    console.log(this.state.info);
+    //console.log(this.state.info);
 
     fetch(`${process.env.REACT_APP_API_URL}/api/feedposts/`, {
       method: 'GET',
@@ -36,10 +38,10 @@ class Profile extends Component {
     }).then( resp => resp.json())
     .then( res => this.setState({posts: res}))
     .catch(error => console.log(error))
-    console.log("TESTING");
-    console.log(this.state.posts);
-    console.log("TOKEN");
-    console.log(this.state.token);
+    // console.log("TESTING");
+    // console.log(this.state.posts);
+    // console.log("TOKEN");
+    // console.log(this.state.token);
 
     /*
     Promise.all([
@@ -59,7 +61,7 @@ class Profile extends Component {
     return (
       <Media>
         <Media.Body>
-          <h2 style={{color: "#1BFFFF"}}> @{this.state.info[0].userName} </h2>
+          <h2 style={{color: "#1BFFFF"}}> @{this.state.info.userName} </h2>
         </Media.Body>
       </Media>
     )
@@ -71,7 +73,7 @@ class Profile extends Component {
         width={300}
         height={300}
         className="mr-3"
-        src= { this.state.info[0].picture }
+        src= { this.state.info.picture }
         alt="Profile Picture"
         class="center"
         style={{borderRadius: 300/2}}
@@ -84,13 +86,13 @@ class Profile extends Component {
       <Media>
         <Media.Body>
           <h4 style={{padding: "0"}}>
-            { <h4>{this.state.info[0].firstName} {this.state.info[0].lastName}</h4> }
+            { <h4>{this.state.info.firstName} {this.state.info.lastName}</h4> }
           </h4>
           <p>
-            { <p> { this.state.info[0].location} </p> }
+            { <p> { this.state.info.location} </p> }
           </p>
           <p>
-            { <p> {this.state.info[0].bio} </p> }
+            { <p> {this.state.info.bio} </p> }
           </p>
         </Media.Body>
       </Media>
@@ -124,20 +126,40 @@ class Profile extends Component {
     )
   }
 
+
+  carousel = evt => {
+    return (
+      <div>
+        <Carousel>
+          <CarouselPics posts={this.state.posts}/>
+        </Carousel>
+
+      </div>
+    )
+  }
+
   render() {
     console.log("HEY");
-    console.log(this.state.info)
+    console.log(this.state.info);
+
+    console.log(this.state.posts[0]);
+
+    console.log("TOKEN");
+    console.log(this.props.cookies.get('tws-id'));
     return (
       <div style={{background: "#222", textAlign: "center", color: "#1BFFFF"}}>
-        { this.state.info[0] ? (
+        { this.state.info ? (
           <div>
             <div className="body" style={{paddingBottom: "1%", borderBottom: "5px solid #1BFFFF"}}>
-              <this.profileUserName />
-              <this.profilePicture />
-              <this.profileInformation />
+            <this.profileUserName />
+            <this.profilePicture />
+            <this.profileInformation />
               <EditButton user={this.state.info} token={this.state.token}/>
             </div>
+
+            <CarouselPics posts={this.state.posts}/>
             <this.profilePost />
+
           </div>
         )
           : <h3 style={{color: "#1BFFFF"}}>Loading</h3>
@@ -146,5 +168,5 @@ class Profile extends Component {
     )
   }
 }
-
+//<this.profilePost />
 export default withCookies(Profile);

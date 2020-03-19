@@ -1,6 +1,7 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import { withCookies } from 'react-cookie';
-import {Row, Col, Container} from 'react-bootstrap';
+import {Row, Col, Container, Card, Form, Button, ListGroup, ListGroupItem} from 'react-bootstrap';
+var FontAwesome = require('react-fontawesome');
 import axios from 'axios';
 
 class Login extends Component{
@@ -15,13 +16,71 @@ class Login extends Component{
     isLoginView: true
   }
 
+  // inputChanged = val => event => {
+  //   console.log(event.target.value);
+  //   if(val == "username") {
+  //     this.setState({username: event.target.value});
+  //     console.log(this.state.username);
+  //   }
+  //   else if(val == "password") {
+  //     this.setState({password: event.target.value});
+  //     console.log(this.state.password);
+  //   }
+  // }
+
   inputChanged = event => {
     let cred = this.state.credentials;
     cred[event.target.name] = event.target.value;
     this.setState({credentials: cred});
+    console.log("TESTING THIS BITCH");
+    console.log(this.state.credentials);
+
   }
 
+  // login = event => {
+  //   let credentials = {
+  //     username: this.state.username,
+  //     password: this.state.password
+  //   }
+  //   console.log("USERNAME");
+  //   console.log(credentials.username);
+  //   console.log("PASSWORD");
+  //   console.log(credentials.password);
+  //   if(this.state.isLoginView)
+  //   {
+  //     fetch(`${process.env.REACT_APP_API_URL}/auth/`, {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json'
+  //       },
+  //       body: JSON.stringify(credentials)
+  //     }).then( resp => resp.json())
+  //     .then( res => {
+  //       this.props.cookies.set('tws-token', res.token);
+  //       this.props.cookies.set('tws-id', res.id);
+  //       window.location.href = "/homepage/feed";
+  //     })
+  //     .catch( error => console.log(error))
+  //   } else {
+  //     fetch(`${process.env.REACT_APP_API_URL}/api/users/`, {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json'
+  //       },
+  //       body: JSON.stringify(credentials)
+  //     }).then( resp => resp.json())
+  //     .then( res => {
+  //       this.setState({isLoginView: true})
+  //     })
+  //     .catch( error => console.log(error))
+  //   }
+  //
+  // }
+
   login = event => {
+    console.log("LOGIN");
+    console.log(this.state.credentials);
+    console.log(this.state.isLoginView);
     if(this.state.isLoginView)
     {
       fetch(`${process.env.REACT_APP_API_URL}/auth/`, {
@@ -52,6 +111,25 @@ class Login extends Component{
       })
       .catch( error => console.log(error))
     }
+    alert("Welcome to the jungle");
+
+
+  }
+
+  twsInfo = () => {
+    return (
+      <Card border="info" style={{ width: '30%', marginLeft: "auto", marginRight: "auto", background: "white", color: "#222"}}>
+        <Card.Img variant="top" src="https://image-us.samsung.com/SamsungUS/support/solutions/mobile/wearables/smartwatches/WRBLS_GWA_woman-lifting.png" />
+        <Card.Body style={{ display: 'flex', flexDirection: 'row' }}>
+          <Card.Title>Connect with your friends and share your workout progress!</Card.Title>
+        </Card.Body>
+        <ListGroup className="list-group-flush">
+          <ListGroupItem style={{padding: "5%", background: "#1BFFFF", color: "#222"}} >See photos and updates from friends in news feed.</ListGroupItem>
+          <ListGroupItem style={{padding: "5%", background: "#1BFFFF", color: "#222"}} >Share what's new in your life on your timeline.</ListGroupItem>
+          <ListGroupItem style={{padding: "5%", background: "#1BFFFF", color: "#222"}} >Track your workout progress and show it off.</ListGroupItem>
+        </ListGroup>
+      </Card>
+    )
   }
 
   toggleView = () => {
@@ -59,31 +137,82 @@ class Login extends Component{
   }
 
   render(){
-    return <div className="login-container">
-      <Container>
-        <Row>
-          <Col></Col>
-          <Col xs={6}>
-            <h1>
-              {this.state.isLoginView ? 'Login' : 'Register'}
-            </h1>
-            <span>Username</span> <br/>
-              <input type="text" name="username" value={this.state.credentials.username}
-              onChange={this.inputChanged}/><br/>
-            <span>Password</span> <br/>
-              <input type="password" name="password" value={this.state.credentials.password}
-                onChange={this.inputChanged}/><br/>
-              <button onClick={this.login} >
+    return (
+      <div className="login-container" style={{background: "#222", padding: '1%'}}>
+
+        <h1 style={{color: "#1BFFFF", textAlign: "center"}}>
+          <FontAwesome name="heartbeat" style={{color: "white"}}/>
+          <span>TWS</span>
+        </h1>
+        <div style ={{ display: 'flex', flexDirection: 'row', paddingTop: '1%' }}>
+          <this.twsInfo />
+          <Card border="info" style={{ width: '30%', height: '30%', color: '#222', background: "white", marginLeft: "auto", marginRight: "auto" /*display: "flex", alignItems: "center", justifyContent: "center"*/ }}>
+            <Card.Header>
+              <h2>
                 {this.state.isLoginView ? 'Login' : 'Register'}
-              </button>
-              <p onClick={this.toggleView}>
-              {this.state.isLoginView ? 'Create Account' : 'Back to Login'}
-              </p>
-          </Col>
-          <Col></Col>
-        </Row>
-      </Container>
-    </div>
+              </h2>
+            </Card.Header>
+            <Card.Body>
+              <Form>
+                <Form.Group controlId="formBasicUserName">
+                  <Form.Label>Username</Form.Label>
+                  <Form.Control
+                  style={{background: "#222", color: "#1BFFFF"}}
+                  type="userName"
+                  name="username" value={this.state.credentials.username}
+                  placeholder="Enter Username"
+                  onChange={this.inputChanged}/>
+                </Form.Group>
+
+                <Form.Group controlId="formBasicPassword">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control
+                  style={{background: "#222", color: "#1BFFFF"}}
+                  type="password"
+                  name="password"
+                  value={this.state.credentials.password}
+                  placeholder="Password"
+                  onChange={this.inputChanged}/>
+                </Form.Group>
+                <Button onClick={this.login} variant="dark" type="submit">
+                  {this.state.isLoginView ? 'Login' : 'Register'}
+                </Button>
+                <p onClick={this.toggleView}>
+                  {this.state.isLoginView ? 'Create Account' : 'Back to Login'}
+                </p>
+              </Form>
+            </Card.Body>
+          </Card>
+        </div>
+      </div>
+      // <div className="login-container" style={{background: "#222", color: "#1BFFFF"}}>
+      //
+      //   <Container>
+      //     <Row>
+      //       <Col></Col>
+      //       <Col xs={6}>
+      //         <h1>
+      //           {this.state.isLoginView ? 'Login' : 'Register'}
+      //         </h1>
+      //         <span>Username</span> <br/>
+      //           <input type="text" name="username" value={this.state.credentials.username}
+      //           onChange={this.inputChanged}/><br/>
+      //         <span>Password</span> <br/>
+      //           <input type="password" name="password" value={this.state.credentials.password}
+      //             onChange={this.inputChanged}/><br/>
+      //           <button onClick={this.login} >
+      //             {this.state.isLoginView ? 'Login' : 'Register'}
+      //           </button>
+      //           <p onClick={this.toggleView}>
+      //           {this.state.isLoginView ? 'Create Account' : 'Back to Login'}
+      //           </p>
+      //       </Col>
+      //       <Col></Col>
+      //     </Row>
+      //   </Container>
+      //
+      // </div>
+  )
 
   }
 }
