@@ -1,7 +1,7 @@
 import React, {Component, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/Profile.css';
-import {Container, Image, ListGroup, Button, ButtonToolbar, Card, CardGroup, Form, FormControl, Media, Navbar, Nav, Modal} from 'react-bootstrap';
+import {Container, Image, ListGroup, Button, ButtonToolbar, Card, CardGroup, Form, FormControl, Media, Navbar, Nav, Modal, CardDeck, Row, Col, InputGroup} from 'react-bootstrap';
 import { withCookies } from 'react-cookie';
 import EditButton from '../../components/EditButton/EditButton';
 import AddFriendButton from '../../components/AddFriendButton/AddFriendButton';
@@ -9,7 +9,12 @@ import axios from 'axios';
 class Friends extends Component{
   state = {
     info: [],
-    token: this.props.cookies.get('tws-token')
+    token: this.props.cookies.get('tws-token'),
+    users: {
+      user: ["AD"],
+      first: ["Anthony"],
+      last: ["Diaz"]
+    }
   }
 
   componentDidMount() {
@@ -46,67 +51,150 @@ class Friends extends Component{
       />
     )
   }
-  friendPost = evt => {
+
+  searchedFriends = evt => {
     return (
       <div>
-        { this.state.info.map(info => {
+        { this.state.info.map(user => {
           return (
-            <div key={info.id}>
-              <CardGroup id="posts">
-                <Card style={{background: "#222"}}>
-                  <Card.Img height={300} variant="top" src={info.picture} style={{width: "25%"}} />
-                  <Card.Body>
-                    <Card.Title>{info.userName}</Card.Title>
-                  </Card.Body>
-                </Card>
-              </CardGroup>
+            <div key={user.id}>
+              <ListGroup.Item>
+                <Media>
+                  <img
+                    width={64}
+                    height={64}
+                    className="mr-3"
+                    src= {user.picture}
+                    alt="Profile Picture"
+                  />
+                  <Media.Body>
+                    <h5>{user.userName}</h5>
+                    <p>{user.firstName} {user.lastName}</p>
+                    <p></p>
+                  </Media.Body>
+                </Media>
+                <Form>
+                  <Button variant="dark" type="submit" block>
+                    Add Friend
+                  </Button>
+                </Form>
+              </ListGroup.Item>
             </div>
           )
-        }) }
+        })}
       </div>
     )
   }
+
+  existingFriend = evt => {
+    return (
+      <div>
+        { this.state.info.map(friend => {
+          return (
+            <div key={friend.id}>
+              <ListGroup.Item>
+                <Media>
+                  <img
+                    width={64}
+                    height={64}
+                    className="mr-3"
+                    src= {friend.picture}
+                    alt="Profile Picture"
+                  />
+                  <Media.Body>
+                    <h5>{friend.userName}</h5>
+                    <p>{friend.firstName} {friend.lastName}</p>
+                    <p></p>
+                  </Media.Body>
+                </Media>
+                <Form>
+                  <Button variant="dark" type="submit" block>
+                    Remove Friend
+                  </Button>
+                </Form>
+              </ListGroup.Item>
+            </div>
+          )
+        })}
+      </div>
+    )
+  }
+
+  friendList = evt => {
+    return (
+      <div>
+        {this.state.info[0] ? (
+
+            <Card style = {{color: "#222"}}>
+              <Card.Header>Friend's List</Card.Header>
+              <this.search/>
+              <ListGroup>
+                <this.existingFriend/>
+              </ListGroup>
+            </Card>
+
+        ) : (<h3>No friends found! </h3>)}
+      </div>
+    )
+  }
+
+  addFriendsList = evt => {
+    return (
+      <div>
+        {this.state.info[0] ? (
+
+          <Card style = {{color: "#222"}}>
+            <Card.Header>Search A Friend</Card.Header>
+            <this.search/>
+            <ListGroup>
+              <this.searchedFriends/>
+            </ListGroup>
+            <Form>
+            </Form>
+          </Card>
+
+        ) : (<h3>No friends found! </h3>)}
+      </div>
+    )
+  }
+
+search = evt => {
+  return (
+    <div>
+      <Form style={{padding: "5px"}}>
+          <Form.Group as={Col} controlId="formGridUsername">
+            <Form.Control style={{background: "#222", color: "#1BFFFF"}} type="userName" placeholder="Search Username" />
+          </Form.Group>
+        <Button variant="dark" type="submit">
+          Submit
+        </Button>
+      </Form>
+    </div>
+  )
+}
+
 
 
   render(){
     console.log(this.state.info);
       return (
-        <React.Fragment>
-      {
-        this.state.info[0] ? (
-          <Container>
-            <Card style = {{ width: '20rem'}}>
-              <Card.Header>Friend's List</Card.Header>
-              <ListGroup variant="flush">
-                <ListGroup.Item>
-                <Media>
-                  <this.profilePicture/>
-                  <Media.Body>
-                    <this.UserName />
-                    <p>
-                      Online
-                    </p>
-                  </Media.Body>
-                  </Media>
-                </ListGroup.Item>
-              </ListGroup>
-              <Form>
-              <Form.Group controlId="formBasicInput">
-                <Form.Control type="text" placeholder="Enter name" value={this.state.name} onChange={this.handleChange}/>
-              </Form.Group>
-              <Button variant="outline-success" type="submit" block>
-                Add Friend
-              </Button>
-              <Button variant="outline-success" type="submit" block>
-                Remove Friend
-              </Button>
-              </Form>
+        <div style={{background: "#222"}}>
+            <Card border="info" style={{ width: '100%', background: "#222", color: "#1BFFFF", height: "100%"}}>
+              <Card.Body>
+                <Card.Title style={{textAlign: "center"}}><h1>Friends</h1></Card.Title>
+                <Card.Text style={{textAlign: "left"}}>
+                  <Row>
+                    <Col>
+                      <this.friendList/>
+                    </Col>
+                    <Col xs = "5">
+                      <this.addFriendsList/>
+                    </Col>
+                  </Row>
+                </Card.Text>
+              </Card.Body>
             </Card>
-            <AddFriendButton /> <br/><hr></hr>
-          </Container>
-        ) : (<h3>loading </h3>)
-      }
-      </React.Fragment>
+        </div>
       )
     }
   }
