@@ -1,8 +1,8 @@
 import React, {Component, useState} from 'react';
 import { withCookies } from 'react-cookie';
 import {Row, Col, Container, Card, Form, Button, ListGroup, ListGroupItem} from 'react-bootstrap';
-var FontAwesome = require('react-fontawesome');
 import axios from 'axios';
+var FontAwesome = require('react-fontawesome');
 
 class Login extends Component{
 
