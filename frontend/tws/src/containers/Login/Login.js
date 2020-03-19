@@ -116,7 +116,7 @@ class Login extends Component{
 
   }
 
-  login = evt => {
+  signIn = evt => {
     return (
       <div>
         <Card border="info" style={{ color: '#222', background: "white", marginLeft: "auto", marginRight: "auto" /*display: "flex", alignItems: "center", justifyContent: "center"*/ }}>
@@ -195,7 +195,7 @@ class Login extends Component{
                   <this.twsInfo />
                 </Col>
                 <Col xs="5" style={{padding: "2%"}}>
-                  <this.login/>
+                  <this.signIn/>
                 </Col>
               </Row>
             </Card.Text>
