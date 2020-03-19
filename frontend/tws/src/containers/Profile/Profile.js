@@ -185,15 +185,14 @@ class Profile extends Component {
                     <this.profile/>
                   </Col>
                   <Col>
-                    <CarouselPics posts={this.state.posts}/>
+                    <Friends />
                   </Col>
                 </Row>
                 <Row>
-                  <TimelineDetails />
-                  <this.profilePost />
-                </Row>
-                <Row>
-                  <Friends />
+                  <Col>
+                    <TimelineDetails />
+                  </Col>
+
                 </Row>
             </Card.Body>
           </Card>

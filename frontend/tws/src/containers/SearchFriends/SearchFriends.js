@@ -1,13 +1,12 @@
 import React, {Component, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../../css/Profile.css';
 import {Container, Image, ListGroup, Button, ButtonToolbar, Card, CardGroup, Form, FormControl, Media, Navbar, Nav, Modal, CardDeck, Row, Col, InputGroup} from 'react-bootstrap';
 import { withCookies } from 'react-cookie';
 import EditButton from '../../components/EditButton/EditButton';
 import AddFriendButton from '../../components/AddFriendButton/AddFriendButton';
 import RemoveFriendButton from '../../components/RemoveFriendButton/RemoveFriendButton';
 import axios from 'axios';
-class Friends extends Component{
+class SearchFriends extends Component{
   state = {
     info: [],
     token: this.props.cookies.get('tws-token'),
@@ -53,30 +52,30 @@ class Friends extends Component{
     )
   }
 
-  existingFriend = evt => {
+  searchedFriends = evt => {
     return (
       <div>
-        { this.state.info.map(friend => {
+        { this.state.info.map(user => {
           return (
-            <div key={friend.id}>
-              <ListGroup.Item style={{textAlign: "left"}}>
+            <div key={user.id}>
+              <ListGroup.Item>
                 <Media>
                   <img
                     width={64}
                     height={64}
                     className="mr-3"
-                    src= {friend.picture}
+                    src= {user.picture}
                     alt="Profile Picture"
                   />
                   <Media.Body>
-                    <h5>{friend.userName}</h5>
-                    <p>{friend.firstName} {friend.lastName}</p>
+                    <h5>{user.userName}</h5>
+                    <p>{user.firstName} {user.lastName}</p>
                     <p></p>
                   </Media.Body>
                 </Media>
                 <Form>
                   <Button variant="dark" type="submit" block>
-                    Remove Friend
+                    Add Friend
                   </Button>
                 </Form>
               </ListGroup.Item>
@@ -87,18 +86,20 @@ class Friends extends Component{
     )
   }
 
-  friendList = evt => {
+  addFriendsList = evt => {
     return (
       <div>
         {this.state.info[0] ? (
 
-            <Card style = {{color: "#222"}}>
-              <Card.Header><h2>Friend's List</h2></Card.Header>
-              <this.search/>
-              <ListGroup>
-                <this.existingFriend/>
-              </ListGroup>
-            </Card>
+          <Card style = {{color: "#222"}}>
+            <Card.Header><h2>Search A Friend</h2></Card.Header>
+            <this.search/>
+            <ListGroup>
+              <this.searchedFriends/>
+            </ListGroup>
+            <Form>
+            </Form>
+          </Card>
 
         ) : (<h3>No friends found! </h3>)}
       </div>
@@ -126,11 +127,22 @@ search = evt => {
     console.log(this.state.info);
       return (
         <div style={{background: "#222"}}>
-          <this.friendList/>
+            <Card border="info" style={{ width: '100%', background: "#222", color: "#1BFFFF", height: "100%"}}>
+              <Card.Body>
+                <Card.Title style={{textAlign: "center"}}><h1>Friends</h1></Card.Title>
+                <Card.Text style={{textAlign: "left"}}>
+                  <Row>
+                    <Col>
+                      <this.addFriendsList/>
+                    </Col>
+                  </Row>
+                </Card.Text>
+              </Card.Body>
+            </Card>
         </div>
       )
     }
   }
 
 
-export default withCookies(Friends);
+export default withCookies(SearchFriends);

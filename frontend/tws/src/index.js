@@ -6,11 +6,11 @@ import * as serviceWorker from './serviceWorker';
 import { Route, BrowserRouter} from 'react-router-dom';
 import Login from './containers/Login/Login';
 import Profile from './containers/Profile/Profile';
-import Friends from './containers/Friends/Friends';
+import SearchFriends from './containers/SearchFriends/SearchFriends';
 import { CookiesProvider } from 'react-cookie';
 import Feed from './containers/Feed/Feed';
 import Graphs from './containers/Graphs/Graphs';
-import TimelineDetails from './containers/TimelineDetails/TimelineDetails';
+import TimelineDetails from './components/TimelineDetails/TimelineDetails';
 import PublicForum from './containers/PublicForum/PublicForum';
 
 
@@ -25,7 +25,7 @@ const routing = (
       <Route exact path="/homepage/feed" component={Feed}/>
       <Route exact path="/homepage/profile" component={Profile}/>
       <Route exact path="/homepage/graphs" component={Graphs}/>
-      <Route exact path="/homepage/friends" component={Friends}/>
+      <Route exact path="/homepage/friends" component={SearchFriends}/>
       <Route exact path="/homepage/timeline" component={TimelineDetails}/>
       <Route exact path="/homepage/forum" component={PublicForum}/>
     </CookiesProvider>
