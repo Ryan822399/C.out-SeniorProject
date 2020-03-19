@@ -114,6 +114,10 @@ class Graphs extends Component {
       }).then( resp => resp.json())
       .then( res => this.props.editedWorkout(res))
       .catch( error => console.log(error))
+      console.log(postBody.title);
+      console.log(postBody.description);
+      console.log(postBody.weight);
+      console.log(postBody.date);
     }
 
 
@@ -287,6 +291,8 @@ class Graphs extends Component {
           }
         }
 
+
+        this.state.groupData.labels = filteredDataDate
         if(data.groupdatasets){
           let colors = ["rgba(255, 0, 255, 0.75", "rgba(0, 0, 255, 0.75)"];
           data.groupdatasets.forEach((set, i) => {
@@ -322,6 +328,7 @@ class Graphs extends Component {
       };
     }
     
+    
     return (
 
         //If a set of elements exist, render it
@@ -347,7 +354,6 @@ class Graphs extends Component {
                   ))}
                 </select>
               </label>
-              <input type= "submit" value="+"/>
               </form>
             </div>
 
