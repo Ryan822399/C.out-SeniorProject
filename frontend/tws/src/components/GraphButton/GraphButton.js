@@ -52,7 +52,7 @@ function NewPostButton(props) {
             placeholder="Describe your Workout"
             as="input"
             name="desc"
-            onChange={postTitleSubmited}
+            onChange={postDescSubmited}
             />
           </Form.Group>
 
@@ -62,7 +62,7 @@ function NewPostButton(props) {
             placeholder="Enter a Weight"
             as="input"
             name="weight"
-            onChange={postTitleSubmited}
+            onChange={postWeightSubmited}
             />
           </Form.Group>
 
@@ -72,7 +72,7 @@ function NewPostButton(props) {
             placeholder="Enter a Date"
             as="input"
             name="date"
-            onChange={postTitleSubmited}
+            onChange={postDateSubmited}
             />
           </Form.Group>
           <Button type="button" onClick={props.formSubmitted}  variant="primary" type="submit">
