@@ -7,6 +7,7 @@ import EditButton from '../../components/EditButton/EditButton';
 import CarouselPics from '../../components/CarouselPics/CarouselPics';
 import { withCookies } from 'react-cookie';
 import TimelineDetails from '../../components/TimelineDetails/TimelineDetails';
+import Friends from '../../components/Friends/Friends';
 
 
 class Profile extends Component {
@@ -190,6 +191,9 @@ class Profile extends Component {
                 <Row>
                   <TimelineDetails />
                   <this.profilePost />
+                </Row>
+                <Row>
+                  <Friends />
                 </Row>
             </Card.Body>
           </Card>
