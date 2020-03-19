@@ -14,7 +14,7 @@ function EditButton(props) {
   return (
     <>
       <Button variant="dark" onClick={handleShow}>
-        Edit
+        Edit Profile
       </Button>
 
       <Modal show={show} onHide={handleClose} animation={false}>

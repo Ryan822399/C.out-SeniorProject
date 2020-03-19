@@ -41,9 +41,9 @@ class Feed extends Component {
       return (
         <div>
           <br/>
-          <NewPost /> <br/><hr></hr>
-          <div className='rowC'>
+          <div>
             <Container>
+              <NewPost /> <br/>
                   { this.state.posts[0]
                     && this.state.info[0] ? <Posts posts={this.state.posts} profile={this.state.info}/>
                         :  <div style={styles.spinners}> <Spinner  animation="border" variant="success" /> </div>
