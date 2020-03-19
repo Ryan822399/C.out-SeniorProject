@@ -1,7 +1,7 @@
 import React, {Component, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/Profile.css';
-import {Image, Navbar, Nav, NavDropdown, Form, FormControl, Button, Media, Card, CardGroup, ButtonToolbar, Modal, Carousel} from 'react-bootstrap';
+import {Image, Navbar, Nav, NavDropdown, Form, FormControl, Button, Media, Card, CardGroup, ButtonToolbar, Modal, Carousel, Row, Col, ListGroup, ListGroupItem} from 'react-bootstrap';
 //import Fri from '../src/components/Friends.js';
 import EditButton from '../../components/EditButton/EditButton';
 import CarouselPics from '../../components/CarouselPics/CarouselPics';
@@ -76,7 +76,7 @@ class Profile extends Component {
         src= { this.state.info.picture }
         alt="Profile Picture"
         class="center"
-        style={{borderRadius: 300/2}}
+        style={{borderRadius: 300/2, padding: "2%"}}
       />
     )
   }
@@ -138,6 +138,31 @@ class Profile extends Component {
     )
   }
 
+  profile = evt => {
+    return (
+        <Card style={{ background: "white", color: "#222" }}>
+          <Card.Header><h2>@{this.state.info.userName}</h2></Card.Header>
+          <Media>
+            <this.profilePicture/>
+            <Media.Body>
+            <Card.Body style={{textAlign: "left"}}>
+              <Card style={{ background: "#222", color: "#1BFFFF" }}>
+                <Card.Header><h3 style={{ color: "#1BFFFF" }}>{this.state.info.firstName} {this.state.info.lastName}</h3></Card.Header>
+                <Card.Body>
+                  <Card.Subtitle><h4>{this.state.info.location}</h4></Card.Subtitle>
+                  <Card.Text>
+                    {this.state.info.bio}
+                  </Card.Text>
+                  <EditButton style={{marginLeft: "auto", marginRight: "auto"}}user={this.state.info} token={this.state.token}/>
+                </Card.Body>
+              </Card>
+            </Card.Body>
+            </Media.Body>
+          </Media>
+        </Card>
+    )
+  }
+
   render() {
     console.log("HEY");
     console.log(this.state.info);
@@ -147,20 +172,25 @@ class Profile extends Component {
     console.log("TOKEN");
     console.log(this.props.cookies.get('tws-id'));
     return (
-      <div style={{background: "#222", textAlign: "center", color: "#1BFFFF"}}>
+      <div>
         { this.state.info ? (
-          <div>
-            <div className="body" style={{paddingBottom: "1%", borderBottom: "5px solid #1BFFFF"}}>
-            <this.profileUserName />
-            <this.profilePicture />
-            <this.profileInformation />
-              <EditButton user={this.state.info} token={this.state.token}/>
-            </div>
+          <Card border="info" style={{background: "#222", textAlign: "center", color: "#1BFFFF"}}>
+            <Card.Body>
+              <Card.Title style={{textAlign: "center"}}><h1>Profile</h1></Card.Title>
 
-            <CarouselPics posts={this.state.posts}/>
-            <this.profilePost />
-
-          </div>
+                <Row>
+                  <Col xs="5">
+                    <this.profile/>
+                  </Col>
+                  <Col>
+                    <CarouselPics posts={this.state.posts}/>
+                  </Col>
+                </Row>
+                <Row>
+                  <this.profilePost />
+                </Row>
+            </Card.Body>
+          </Card>
         )
           : <h3 style={{color: "#1BFFFF"}}>Loading</h3>
         }

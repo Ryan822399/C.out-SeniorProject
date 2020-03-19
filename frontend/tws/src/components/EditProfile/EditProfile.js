@@ -140,7 +140,7 @@ class EditProfile extends Component {
       picture = this.props.user.picture;
     }
     return (
-      <div style={{background: "white", color: "#222", padding: "5%"}}>
+      <div style={{background: "#222", color: "#222", padding: "5%"}}>
         <Card border="info" style={{marginLeft: "auto", marginRight: "auto" /*display: "flex", alignItems: "center", justifyContent: "center"*/ }}>
           <Card.Header>
             <h2>
