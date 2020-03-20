@@ -7,7 +7,7 @@ class EditProfile extends Component {
 
   state = {
     editedProfile: this.props.user,
-    userName: this.props.user.userName,
+    userName: "",
     firstName: "",
     lastName: "",
     bio: "",
@@ -15,9 +15,9 @@ class EditProfile extends Component {
     email: this.props.user.email,
     dob: this.props.user.dob,
     user: this.props.user.user,
-    heightFeet: this.props.user.heightFeet,
-    heightInches: this.props.user.heightInches,
-    picture: this.props.user.picture
+    heightFeet: 0,
+    heightInches: 0,
+    picture: null
     /*
     profile: {
       userName: this.props.user[0].userName,
@@ -37,7 +37,10 @@ class EditProfile extends Component {
   change = val => evt => {
     console.log("EVENT TARGET");
     console.log(evt.target.value);
-    if(val == "firstName") {
+    if(val == "userName") {
+      this.setState({userName: evt.target.value});
+    }
+    else if(val == "firstName") {
       this.setState({firstName: evt.target.value});
     }
     else if(val == "lastName") {
@@ -52,6 +55,14 @@ class EditProfile extends Component {
     }
     else if(val == "image") {
       this.setState({picture: evt.target.value});
+      console.log(evt.target.value);
+    }
+    else if(val == "heightFeet") {
+      this.setState({heightFeet: evt.target.value});
+      console.log(evt.target.value);
+    }
+    else if(val == "heightInches") {
+      this.setState({heightInches: evt.target.value});
       console.log(evt.target.value);
     }
     // console.log(this.state.firstName);
@@ -131,14 +142,19 @@ class EditProfile extends Component {
   render() {
     // console.log("CHECKING");
     // console.log(this.state.userName);
-    let firstName, lastName, password, bio, location, picture;
+    let userName, firstName, lastName, password, bio, location, picture, heightFeet, heightInches;
     if (this.props.user !== null) {
-      firstName = this.props.user.firstName;;
+      userName = this.props.user.userName;
+      firstName = this.props.user.firstName;
       lastName = this.props.user.lastName;
       bio = this.props.user.bio;
       location = this.props.user.location;
       picture = this.props.user.picture;
+      heightFeet = this.props.user.heightFeet;
+      heightInches = this.props.user.heightInches;
     }
+    console.log("THE USER");
+    console.log(this.props.user);
     return (
       <div style={{background: "#222", color: "#222", padding: "5%"}}>
         <Card border="info" style={{marginLeft: "auto", marginRight: "auto" /*display: "flex", alignItems: "center", justifyContent: "center"*/ }}>
@@ -149,6 +165,11 @@ class EditProfile extends Component {
           </Card.Header>
           <Card.Body>
             <Form>
+              <Form.Group controlId="formGridUserName">
+                <Form.Label>Username</Form.Label>
+                <Form.Control style={{background: "#222", color: "#1BFFFF"}} name="userName" type="userName" placeholder={userName} onChange={this.change("userName")}/>
+              </Form.Group>
+
               <Form.Row>
                 <Form.Group as={Col} controlId="formGridFirstName">
                   <Form.Label>First name</Form.Label>
@@ -169,6 +190,7 @@ class EditProfile extends Component {
                 <Form.Label>Location</Form.Label>
                 <Form.Control style={{background: "#222", color: "#1BFFFF"}} name="location" placeholder={location} onChange={this.change("location")}/>
               </Form.Group>
+
               <Form.Group controlId="formGridPicture">
                 <Form.Label>Picture</Form.Label>
                   <br/>
@@ -178,8 +200,34 @@ class EditProfile extends Component {
                     id="picture"
                     name="picture"
                     accept="image/png, image/jpeg, image/JPG"  onChange={this.change("image")}/>
-
               </Form.Group>
+
+              <Form.Row>
+                <Form.Group as={Col} controlId="formGridHeightFeet">
+                  <Form.Label>Height (Feet)</Form.Label>
+                  <Form.Control style={{background: "#222", color: "#1BFFFF"}} name="heightFeet" type="heightFeet" placeholder={heightFeet} onChange={this.change("heightFeet")}/>
+                </Form.Group>
+                <Form.Group as={Col} controlId="formGridHeightInches">
+                  <Form.Label>Height (inches)</Form.Label>
+                  <Form.Control style={{background: "#222", color: "#1BFFFF"}} name="heightInches" type="heightInches" placeholder={heightInches} onChange={this.change("heightInches")}/>
+                </Form.Group>
+                <Form.Group as={Col} controlId="formGridState">
+                  <Form.Label>Account Type</Form.Label>
+                  <Form.Control as="select" value="Choose...">
+                    {(this.props.user.accountType === 'private') ?
+                      <div>
+                        <option>Private</option>
+                        <option>Public</option>
+                      </div>
+                    :
+                      <div>
+                        <option>Public</option>
+                        <option>Private</option>
+                      </div>
+                    }
+                  </Form.Control>
+                </Form.Group>
+              </Form.Row>
 
               <Button variant="dark" type="submit" onClick={this.submit, this.update}>
                 Submit

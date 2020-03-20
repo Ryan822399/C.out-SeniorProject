@@ -5,6 +5,11 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 class Profile(models.Model):
+    TYPES = (
+        ('private', 'private'),
+        ('public', 'public')
+    )
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     userName = models.CharField(max_length = 15)
     firstName = models.CharField(max_length = 30, blank=True)
@@ -18,6 +23,7 @@ class Profile(models.Model):
     dob = models.DateField(null=True, blank=True)
     location = models.CharField(max_length = 30, blank=True)
     picture = models.ImageField(upload_to='images/profileImages', null=True, blank=True)
+    accountType = models.CharField(max_length = 10, choices=TYPES, default='private')
 
 
     def __str__(self):
