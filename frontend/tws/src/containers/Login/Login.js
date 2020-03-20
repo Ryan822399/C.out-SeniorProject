@@ -116,10 +116,10 @@ class Login extends Component{
 
   }
 
-  signIn = evt => {
+  register = evt => {
     return (
       <div>
-        <Card border="info" style={{ color: '#222', background: "white", marginLeft: "auto", marginRight: "auto" /*display: "flex", alignItems: "center", justifyContent: "center"*/ }}>
+        <Card border="info" style={{marginLeft: "auto", marginRight: "auto" /*display: "flex", alignItems: "center", justifyContent: "center"*/ }}>
           <Card.Header>
             <h2>
               {this.state.isLoginView ? 'Login' : 'Register'}
@@ -127,28 +127,58 @@ class Login extends Component{
           </Card.Header>
           <Card.Body>
             <Form>
-              <Form.Group controlId="formBasicUserName">
+              <Form.Group controlId="formGridUserName">
                 <Form.Label>Username</Form.Label>
-                <Form.Control
-                style={{background: "#222", color: "#1BFFFF"}}
-                type="userName"
-                name="username" value={this.state.credentials.username}
-                placeholder="Enter Username"
-                onChange={this.inputChanged}/>
+                <Form.Control style={{background: "#222", color: "#1BFFFF"}} name="userName" type="userName" placeholder={"Enter Username"} onChange={this.inputChanged}/>
               </Form.Group>
 
-              <Form.Group controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                style={{background: "#222", color: "#1BFFFF"}}
-                type="password"
-                name="password"
-                value={this.state.credentials.password}
-                placeholder="Password"
-                onChange={this.inputChanged}/>
+              <Form.Row>
+                <Form.Group as={Col} controlId="formGridFirstName">
+                  <Form.Label>First name</Form.Label>
+                  <Form.Control style={{background: "#222", color: "#1BFFFF"}} name="firstName" type="firstName" placeholder={"Enter First Name"} onChange={this.inputChanged}/>
+                </Form.Group>
+                <Form.Group as={Col} controlId="formGridLastName">
+                  <Form.Label>Last name</Form.Label>
+                  <Form.Control style={{background: "#222", color: "#1BFFFF"}} name="lastName" type="lastName" placeholder={"Enter Last Name"} onChange={this.inputChanged}/>
+                </Form.Group>
+              </Form.Row>
+
+              <Form.Group controlId="formGridLocation">
+                <Form.Label>Location</Form.Label>
+                <Form.Control style={{background: "#222", color: "#1BFFFF"}} name="location" placeholder={"Enter Location"} onChange={this.inputChanged}/>
               </Form.Group>
-              <Button onClick={this.login} variant="dark" type="submit">
-                {this.state.isLoginView ? 'Login' : 'Register'}
+
+              <Form.Group controlId="formGridPicture">
+                <Form.Label>Picture</Form.Label>
+                  <br/>
+                  <input
+                    style={{padding: "5px"}}
+                    type="file"
+                    id="picture"
+                    name="picture"
+                    accept="image/png, image/jpeg, image/JPG"  onChange={this.inputChanged}/>
+              </Form.Group>
+
+              <Form.Row>
+                <Form.Group as={Col} controlId="formGridHeightFeet">
+                  <Form.Label>Height (Feet)</Form.Label>
+                  <Form.Control style={{background: "#222", color: "#1BFFFF"}} name="heightFeet" type="heightFeet" placeholder={"Enter Height (Feet)"} onChange={this.inputChanged}/>
+                </Form.Group>
+                <Form.Group as={Col} controlId="formGridHeightInches">
+                  <Form.Label>Height (inches)</Form.Label>
+                  <Form.Control style={{background: "#222", color: "#1BFFFF"}} name="heightInches" type="heightInches" placeholder={"Enter Height (Inches)"} onChange={this.inputChanged}/>
+                </Form.Group>
+                <Form.Group as={Col} controlId="formGridState">
+                  <Form.Label>Account Type</Form.Label>
+                  <Form.Control style={{background: "#222", color: "#1BFFFF"}} as="select" value="Choose...">
+                    <option>Private</option>
+                    <option>Public</option>
+                  </Form.Control>
+                </Form.Group>
+              </Form.Row>
+
+              <Button variant="dark" type="submit" onClick={this.submit, this.update}>
+                Register
               </Button>
               <p onClick={this.toggleView}>
                 {this.state.isLoginView ? 'Create Account' : 'Back to Login'}
@@ -156,6 +186,58 @@ class Login extends Component{
             </Form>
           </Card.Body>
         </Card>
+      </div>
+    )
+  }
+
+  signIn = evt => {
+    return (
+      <div>
+      <Card border="info" style={{ color: '#222', background: "white", marginLeft: "auto", marginRight: "auto" /*display: "flex", alignItems: "center", justifyContent: "center"*/ }}>
+        <Card.Header>
+          <h2>
+            {this.state.isLoginView ? 'Login' : 'Register'}
+          </h2>
+        </Card.Header>
+        <Card.Body>
+          <Form>
+            <Form.Group controlId="formBasicUserName">
+              <Form.Label>Username</Form.Label>
+              <Form.Control
+              style={{background: "#222", color: "#1BFFFF"}}
+              type="userName"
+              name="username" value={this.state.credentials.username}
+              placeholder="Enter Username"
+              onChange={this.inputChanged}/>
+            </Form.Group>
+
+            <Form.Group controlId="formBasicPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+              style={{background: "#222", color: "#1BFFFF"}}
+              type="password"
+              name="password"
+              value={this.state.credentials.password}
+              placeholder="Password"
+              onChange={this.inputChanged}/>
+            </Form.Group>
+            <Button onClick={this.login} variant="dark" type="submit">
+              {this.state.isLoginView ? 'Login' : 'Register'}
+            </Button>
+            <p onClick={this.toggleView}>
+              {this.state.isLoginView ? 'Create Account' : 'Back to Login'}
+            </p>
+          </Form>
+        </Card.Body>
+      </Card>
+      </div>
+    )
+  }
+
+  option = evt => {
+    return (
+      <div>
+        {this.state.isLoginView ? <this.signIn /> : <this.register />}
       </div>
     )
   }
@@ -195,7 +277,7 @@ class Login extends Component{
                   <this.twsInfo />
                 </Col>
                 <Col xs="5" style={{padding: "2%"}}>
-                  <this.signIn/>
+                  <this.option/>
                 </Col>
               </Row>
             </Card.Text>
