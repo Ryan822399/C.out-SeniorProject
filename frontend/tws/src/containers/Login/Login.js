@@ -1,6 +1,6 @@
 import React, {Component, useState} from 'react';
 import { withCookies } from 'react-cookie';
-import {Row, Col, Container, Card, Form, Button, ListGroup, ListGroupItem} from 'react-bootstrap';
+import {Row, Col, Container, Card, Form, Button, ListGroup, ListGroupItem, Alert} from 'react-bootstrap';
 import axios from 'axios';
 var FontAwesome = require('react-fontawesome');
 
@@ -77,6 +77,31 @@ class Login extends Component{
   //
   // }
 
+  alertDismissible = evt => {
+    const [show, setShow] = useState(true);
+
+    return (
+      <div>
+        <Alert show={show} variant="success">
+          <Alert.Heading>How's it going?!</Alert.Heading>
+          <p>
+            Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget
+            lacinia odio sem nec elit. Cras mattis consectetur purus sit amet
+            fermentum.
+          </p>
+          <hr />
+          <div className="d-flex justify-content-end">
+            <Button onClick={() => setShow(false)} variant="outline-success">
+              Close me ya'll!
+            </Button>
+          </div>
+        </Alert>
+
+        {!show && <Button onClick={() => setShow(true)}>Show Alert</Button>}
+      </div>
+    )
+  }
+
   login = event => {
     console.log("LOGIN");
     console.log(this.state.credentials);
@@ -111,10 +136,10 @@ class Login extends Component{
       })
       .catch( error => console.log(error))
     }
-    alert("Welcome to the jungle");
-
+    alert("Welcome");
 
   }
+
 
   register = evt => {
     return (

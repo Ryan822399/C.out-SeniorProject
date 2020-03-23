@@ -66,6 +66,16 @@ class Workout(models.Model):
     def __str__(self):
         return self.title
 
+class GroupWorkout(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    title = models.CharField(max_length=32)
+    description = models.TextField(max_length=360)
+    weight = models.FloatField(default=0)
+    date = models.DateField(auto_now=False, blank=True)
+
+    def __str__(self):
+        return self.title
+
 class Dummy(models.Model):
 
     title = models.CharField(max_length=32)

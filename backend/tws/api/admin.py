@@ -1,7 +1,8 @@
 from django.contrib import admin
-from .models import Workout, Rating, FeedPost, Dummy, Profile, ForumPost, Comment, Like, FriendsList
+from .models import Workout, Rating, FeedPost, Dummy, Profile, ForumPost, Comment, Like, FriendsList, GroupWorkout
 admin.site.register(Workout)
 admin.site.register(Rating)
+admin.site.register(GroupWorkout)
 #admin.site.register(UserTest)
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
