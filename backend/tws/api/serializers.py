@@ -38,6 +38,11 @@ class WorkoutSerializer(serializers.ModelSerializer):
         model = Workout
         fields = ('id', 'title', 'description', 'no_of_ratings', 'avg_rating', 'weight', 'date')
 
+class GroupWorkoutSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GroupWorkout
+        fields = ('id', 'title', 'description', 'weight', 'date')
+
 class RatingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rating

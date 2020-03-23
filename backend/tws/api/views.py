@@ -107,6 +107,12 @@ class WorkoutViewSet(viewsets.ModelViewSet):
 #        response = {'message': 'Rating May Not Be Create This Way'}
 #        return Response(response, status=status.HTTP_400_BAD_REQUEST)
 
+class GroupWorkoutViewSet(viewsets.ModelViewSet):
+    queryset = GroupWorkout.objects.all()
+    serializer_class = GroupWorkoutSerializer
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated, )
+
 class CustomObtainAuthToken(ObtainAuthToken):
     def post(self, request, *args, **kwargs):
         response = super(CustomObtainAuthToken, self).post(request, *args, **kwargs)
