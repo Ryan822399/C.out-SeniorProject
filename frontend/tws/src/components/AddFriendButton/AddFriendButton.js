@@ -54,7 +54,17 @@ class AddFriendButton extends Component {
           <Form.Group controlId="formGroupUserName">
             <Form.Control as="input" size="sm" name="userName" type="userName" placeholder="Enter User Name" value={this.state.userName} onChange={this.inputChanged}/>
           </Form.Group>
-          <Button onClick={this.handleFormSubmit} variant="dark" type="submit" >
+          <Form.Group controlId="formGroupFirstName">
+            <Form.Control size="sm" name="firstName" type="firstName" placeholder="Enter First Name" value={this.state.firstName} onChange={this.inputChanged}/>
+          </Form.Group>
+          <Form.Group controlId="formGroupLastName">
+            <Form.Control size="sm" name="lastName" type="lastName" placeholder="Enter Last Name" value={this.state.lastName} onChange={this.inputChanged}/>
+          </Form.Group>
+          <input type="file"
+                   id="picture"
+                   name="picture"
+                   accept="image/png, image/jpeg, image/JPG"  onChange={this.handleImageChange} required/>
+          <Button onClick={this.handleFormSubmit} variant="dark" type="submit">
             Submit
           </Button>
         </Form>
