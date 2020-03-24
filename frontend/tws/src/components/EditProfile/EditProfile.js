@@ -17,7 +17,8 @@ class EditProfile extends Component {
     user: this.props.user.user,
     heightFeet: 0,
     heightInches: 0,
-    picture: null
+    picture: null,
+    accountType: null
     /*
     profile: {
       userName: this.props.user[0].userName,
@@ -65,6 +66,10 @@ class EditProfile extends Component {
       this.setState({heightInches: evt.target.value});
       console.log(evt.target.value);
     }
+    else if(val == "accountType") {
+      this.setState({accountType: evt.target.value});
+      console.log(evt.target.value);
+    }
     // console.log(this.state.firstName);
     // console.log(this.state.lastName);
     // console.log(this.state.bio);
@@ -107,7 +112,8 @@ class EditProfile extends Component {
       user: this.props.cookies.get('tws-id'),
       heightFeet: this.state.heightFeet,
       heightInches: this.state.heightInches,
-      picture: this.state.picture
+      picture: this.state.picture,
+      accountType: this.state.accountType
     }
     // console.log("TESTING PROFILE");
     // console.log(profile);
@@ -142,7 +148,7 @@ class EditProfile extends Component {
   render() {
     // console.log("CHECKING");
     // console.log(this.state.userName);
-    let userName, firstName, lastName, password, bio, location, picture, heightFeet, heightInches;
+    let userName, firstName, lastName, password, bio, location, picture, heightFeet, heightInches, accountType;
     if (this.props.user !== null) {
       userName = this.props.user.userName;
       firstName = this.props.user.firstName;
@@ -152,6 +158,7 @@ class EditProfile extends Component {
       picture = this.props.user.picture;
       heightFeet = this.props.user.heightFeet;
       heightInches = this.props.user.heightInches;
+      accountType = this.props.user.accountType;
     }
     console.log("THE USER");
     console.log(this.props.user);
@@ -213,18 +220,26 @@ class EditProfile extends Component {
                 </Form.Group>
                 <Form.Group as={Col} controlId="formGridState">
                   <Form.Label>Account Type</Form.Label>
-                  <Form.Control as="select" value="Choose...">
-                    {(this.props.user.accountType === 'private') ?
+                  <Form.Control as="select" style={{background: "#222", color: "#1BFFFF"}} onChange={this.change("accountType")}>
+
+                    /*
+                    { this.props.user.accountType === "private" ? (
                       <div>
                         <option>Private</option>
                         <option>Public</option>
-                      </div>
-                    :
+                      </div> )
+                    : (
                       <div>
                         <option>Public</option>
                         <option>Private</option>
-                      </div>
+                      </div> )
                     }
+                    */
+
+                    <option>Private</option>
+                    <option>Public</option>
+
+
                   </Form.Control>
                 </Form.Group>
               </Form.Row>

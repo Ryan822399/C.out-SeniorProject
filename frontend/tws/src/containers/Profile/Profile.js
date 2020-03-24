@@ -166,10 +166,11 @@ class Profile extends Component {
   }
 
   render() {
-    console.log("HEY");
+    console.log("User logged (Profile Page)");
     console.log(this.state.info);
 
-    console.log(this.state.posts[0]);
+    console.log("Account Type");
+    console.log(this.state.info.accountType);
 
     console.log("TOKEN");
     console.log(this.props.cookies.get('tws-id'));

@@ -5,9 +5,6 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('api', '0005_auto_20200319_1831'),
-    ]
 
     operations = [
         migrations.CreateModel(
@@ -21,4 +18,3 @@ class Migration(migrations.Migration):
             ],
         ),
     ]
-

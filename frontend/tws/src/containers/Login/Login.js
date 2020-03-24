@@ -195,7 +195,7 @@ class Login extends Component{
                 </Form.Group>
                 <Form.Group as={Col} controlId="formGridState">
                   <Form.Label>Account Type</Form.Label>
-                  <Form.Control style={{background: "#222", color: "#1BFFFF"}} as="select" value="Choose...">
+                  <Form.Control style={{background: "#222", color: "#1BFFFF"}} as="select">
                     <option>Private</option>
                     <option>Public</option>
                   </Form.Control>

@@ -69,7 +69,7 @@ class Friends extends Component{
                     alt="Profile Picture"
                   />
                   <Media.Body>
-                    <h5>{friend.userName}</h5>
+                    <h5><a>{friend.userName}</a></h5>
                     <p>{friend.firstName} {friend.lastName}</p>
                     <p></p>
                   </Media.Body>
@@ -100,7 +100,7 @@ class Friends extends Component{
               </ListGroup>
             </Card>
 
-        ) : (<h3>No friends found! </h3>)}
+        ) : (<h3 style={{color: "#1BFFFF"}}>No friends found! </h3>)}
       </div>
     )
   }
