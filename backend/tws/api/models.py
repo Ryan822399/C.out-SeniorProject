@@ -31,9 +31,11 @@ class Profile(models.Model):
         return self.firstName + " " + self.lastName
 
 class FriendShip(models.Model):
-    friendID = models.IntegerField()
-    userOne = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, blank=True, related_name="creator")
-    userTwo = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, blank=True, related_name="acceptor")
+    userID = models.IntegerField()
+    friedID = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, blank=True)
+    class Meta:
+        unique_together = (('userID', 'friedID'),)
+        index_together = (('userID', 'friedID'),)
 
 class Groups(models.Model):
     groupID = models.IntegerField()
