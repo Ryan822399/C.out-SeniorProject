@@ -18,12 +18,7 @@ function Footer(props) {
         <div>Tristan Chen-Cota</div>
         <div>William Jorgensen</div>
         <div>Andre Barajas</div>
-        <p></p>
-        <p>
-          1250 Bellflower Boulevard
-          Long Beach, California 90840
-          562.985.4111
-        </p>
+      
       </Jumbotron>
 
     </footer>

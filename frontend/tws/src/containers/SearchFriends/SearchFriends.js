@@ -70,7 +70,7 @@ class SearchFriends extends Component{
                   <Media.Body>
                     <h5>{user.userName}</h5>
                     <p>{user.firstName} {user.lastName}</p>
-                    <p></p>
+                    
                   </Media.Body>
                 </Media>
                 <Form>

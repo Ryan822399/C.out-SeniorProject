@@ -104,13 +104,13 @@ class TimelineDetails extends Component {
                   </CardGroup>
                   </ListGroup.Item>
                   <ListGroup.Item>
-                    <p>
+
                     <ButtonToolbar>
                     <Button variant="outline-primary">Like</Button>
                     <Button variant="outline-secondary">Comment</Button>
                     <Button variant="outline-success">Share</Button>
                     </ButtonToolbar>
-                    </p>
+                    
                   </ListGroup.Item>
                 </ListGroup>
                 </Card>

@@ -32,7 +32,7 @@ const routing = (
       <Route exact path="/homepage/friend" component={Friend}/>
     </CookiesProvider>
 
-    <Footer />
+
 
   </BrowserRouter>
 );
