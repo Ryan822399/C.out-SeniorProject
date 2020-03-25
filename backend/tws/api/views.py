@@ -136,6 +136,18 @@ class FriendShipViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.AllowAny]
     serializer_class = FriendShipSerializer
 
+    @action(detail=True, methods=['GET'])
+    def get_friends(self, request, pk=None):
+        if 'userID' in request.data:
+            user_id = request.data['userID']
+            friends = friendShip.objects.filter(userID=user_id)
+            serializer = FriendShipSerializer(friends, many=True)
+            response = { 'message': 'Request was successful compa', 'result': serializer.data}
+            return Response(response, status=status.HTTP_200_OK)
+            
+        else:
+            response = {'message': 'User ID must be provided compa'}
+            return Response(response, status=status.HTTP_400_BAD_REQUEST)
 
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
