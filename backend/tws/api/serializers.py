@@ -64,3 +64,8 @@ class LikeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Like
         fields = ('title', 'caption', 'picture')
+
+class GroupsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Like
+        fields = ('__all__')

@@ -19,6 +19,7 @@ router.register("top3dietforums", TopThreeDietForumViewSet)
 router.register("top3cardioforums", TopThreeCardioForumViewSet)
 router.register("top3weightforums", TopThreeWeightForumViewSet)
 router.register("forumposts", ForumPostViewSet)
+router.register("groups", GroupsViewSet)
 
 
 urlpatterns = [
