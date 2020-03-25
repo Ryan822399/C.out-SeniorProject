@@ -86,7 +86,7 @@ class Friends extends Component{
                   <Media.Body>
                     <h5><a>{friend.userName}</a></h5>
                     <p>{friend.firstName} {friend.lastName}</p>
-                    <p></p>
+                    
                   </Media.Body>
                 </Media>
                 <Form>

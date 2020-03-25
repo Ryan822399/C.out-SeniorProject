@@ -91,12 +91,12 @@ class Profile extends Component {
           <h4 style={{padding: "0"}}>
             { <h4>{this.state.info.firstName} {this.state.info.lastName}</h4> }
           </h4>
-          <p>
+          
             { <p> { this.state.info.location} </p> }
-          </p>
-          <p>
+          
+          
             { <p> {this.state.info.bio} </p> }
-          </p>
+        
         </Media.Body>
       </Media>
     )

@@ -1,0 +1,9 @@
+h1 span.fa {
+  color: white;
+  transform: rotate(30deg);
+}
+
+h1 {
+  color: lightgreen;
+  font-size: 5em;
+}
