@@ -140,11 +140,24 @@ class FriendShipViewSet(viewsets.ModelViewSet):
     def get_friends(self, request, pk=None):
         if 'userID' in request.data:
             user_id = request.data['userID']
-            friends = friendShip.objects.filter(userID=user_id)
-            serializer = FriendShipSerializer(friends, many=True)
+            friends = FriendShip.objects.filter(userID=user_id)
+            friends0 = FriendShip.objects.filter(friedID=user_id)
+            friend_profiles = []
+
+            for friend in friends:
+                friend_profiles.append(friend.friedID.id)
+                print(friend.friedID.id)
+            print("loop2")
+            for friend in friends0:
+                friend_profiles.append(friend.userID)
+                print(friend.friedID.id)
+            print("look")
+            print(friend_profiles)
+            profiles_data = Profile.objects.filter(id__in=friend_profiles)
+            serializer = ProfileSerializer(profiles_data, many=True)
             response = { 'message': 'Request was successful compa', 'result': serializer.data}
             return Response(response, status=status.HTTP_200_OK)
-            
+
         else:
             response = {'message': 'User ID must be provided compa'}
             return Response(response, status=status.HTTP_400_BAD_REQUEST)
