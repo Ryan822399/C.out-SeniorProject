@@ -4,6 +4,12 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+class Friends(models.Model):
+    friendID = models.IntegerField()
+    userID = models.IntegerField()
+    def __str__(self):
+        return self.friendID
+
 class Profile(models.Model):
     TYPES = (
         ('private', 'private'),
@@ -24,6 +30,8 @@ class Profile(models.Model):
     location = models.CharField(max_length = 30, blank=True)
     picture = models.ImageField(upload_to='images/profileImages', null=True, blank=True)
     accountType = models.CharField(max_length = 10, choices=TYPES, default='private')
+    groupID = models.IntegerField(null=True, blank=True)
+    friendID = models.ForeignKey(Friends, on_delete=models.CASCADE, null=True, blank=True)
 
 
     def __str__(self):
@@ -34,14 +42,6 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance, firstName="temp")
     instance.profile.save()
-
-class FriendsList(models.Model):
-    userName = models.CharField(max_length = 15)
-    firstName = models.CharField(max_length = 30)
-    lastName = models.CharField(max_length = 30)
-    picture = models.ImageField(upload_to='images/profileImages', null=True, blank=True)
-    def __str__(self):
-        return self.userName
 
 class Workout(models.Model):
     title = models.CharField(max_length=32)
