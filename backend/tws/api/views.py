@@ -131,10 +131,10 @@ class RatingViewSet(viewsets.ModelViewSet):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated, )
 
-class FriendsViewSet(viewsets.ModelViewSet):
-    queryset = Friends.objects.all()
+class FriendShipViewSet(viewsets.ModelViewSet):
+    queryset = FriendShip.objects.all()
     permission_classes = [permissions.AllowAny]
-    serializer_class = FriendsSerializer
+    serializer_class = FriendShipSerializer
 
 
 class CommentViewSet(viewsets.ModelViewSet):

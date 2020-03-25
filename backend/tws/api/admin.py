@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Workout, Rating, FeedPost, Dummy, Profile, ForumPost, Comment, Like, Friends, GroupWorkout, Groups
+from .models import Workout, Rating, FeedPost, Dummy, Profile, ForumPost, Comment, Like, FriendShip, GroupWorkout, Groups
 admin.site.register(Workout)
 admin.site.register(Rating)
 admin.site.register(GroupWorkout)
@@ -14,5 +14,5 @@ admin.site.register(Dummy)
 admin.site.register(ForumPost)
 admin.site.register(Comment)
 admin.site.register(Like)
-admin.site.register(Friends)
+admin.site.register(FriendShip)
 admin.site.register(Groups)

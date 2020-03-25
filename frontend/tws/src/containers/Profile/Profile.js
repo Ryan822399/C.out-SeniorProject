@@ -40,6 +40,7 @@ class Profile extends Component {
     }).then( resp => resp.json())
     .then( res => this.setState({posts: res}))
     .catch(error => console.log(error))
+
     // console.log("TESTING");
     // console.log(this.state.posts);
     // console.log("TOKEN");
@@ -169,11 +170,9 @@ class Profile extends Component {
     console.log("User logged (Profile Page)");
     console.log(this.state.info);
 
-    console.log("Account Type");
-    console.log(this.state.info.accountType);
-
     console.log("TOKEN");
     console.log(this.props.cookies.get('tws-id'));
+
     return (
       <div>
         { this.state.info ? (
@@ -186,7 +185,7 @@ class Profile extends Component {
                     <this.profile/>
                   </Col>
                   <Col>
-                    <Friends />
+                    <Friends user={this.state.info}/>
                   </Col>
                 </Row>
                 <Row>

@@ -30,9 +30,10 @@ class Profile(models.Model):
     def __str__(self):
         return self.firstName + " " + self.lastName
 
-class Friends(models.Model):
+class FriendShip(models.Model):
     friendID = models.IntegerField()
-    userID = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, blank=True)
+    userOne = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, blank=True, related_name="creator")
+    userTwo = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, blank=True, related_name="acceptor")
 
 class Groups(models.Model):
     groupID = models.IntegerField()

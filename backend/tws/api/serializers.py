@@ -50,9 +50,9 @@ class ForumPostSerializer(serializers.ModelSerializer):
         model = ForumPost
         fields = '__all__'
 
-class FriendsSerializer(serializers.ModelSerializer):
+class FriendShipSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Friends
+        model = FriendShip
         fields = '__all__'
 
 class CommentSerializer(serializers.ModelSerializer):

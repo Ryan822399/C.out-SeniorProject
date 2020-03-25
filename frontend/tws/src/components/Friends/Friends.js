@@ -11,6 +11,9 @@ class Friends extends Component{
   state = {
     info: [],
     token: this.props.cookies.get('tws-token'),
+    allFriendships:[],
+    userFriendships: [],
+    allUsers: [],
     users: {
       user: ["AD"],
       first: ["Anthony"],
@@ -20,15 +23,27 @@ class Friends extends Component{
 
   componentDidMount() {
 
-    fetch(`${process.env.REACT_APP_API_URL}/api/friendslist/`, {
+    fetch(`${process.env.REACT_APP_API_URL}/api/friendships/`, {
       method: 'GET',
       headers: {
-        'Accept': 'application/json'
+        'Authorization': `Token ${this.state.token}`
       }
     }).then( resp => resp.json())
-    .then( res => this.setState({info: res}))
+    .then( res => this.setState({allFriendships: res}))
     .catch(error => console.log(error))
-    console.log(this.state.info);
+
+    fetch(`${process.env.REACT_APP_API_URL}/api/profile/`, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Token ${this.state.token}`
+      }
+    }).then( resp => resp.json())
+    .then( res => this.setState({allUsers: res}))
+    .catch(error => console.log(error))
+
+    this.setState({info: this.props.user})
+
   }
 
 
@@ -88,9 +103,20 @@ class Friends extends Component{
   }
 
   friendList = evt => {
+    /*
+    let user = this.props.user;
+    { this.state.allFriendships.map(friendship => {
+      friendship.userOne === user ? (this.setState({userFriendships: this.state.userFriendships.concat(friendship.userTwo)}))
+      : friendship.userTwo === user ? (this.setState({userFriendships: this.state.userFriendships.concat(friendship.userOne)}))
+      : this.setState({users: null})
+      })
+    }
+    console.log("USER FRIENDSHIPS");
+    console.log(this.state.userFriendships);
+    */
     return (
       <div>
-        {this.state.info[0] ? (
+        {this.props.userFriendships ? (
 
             <Card style = {{color: "#222"}}>
               <Card.Header><h2>Friend's List</h2></Card.Header>
@@ -104,6 +130,7 @@ class Friends extends Component{
       </div>
     )
   }
+
 
 search = evt => {
   return (
@@ -123,7 +150,9 @@ search = evt => {
 
 
   render(){
-    console.log(this.state.info);
+    console.log("FRIENDS CODE");
+    console.log(this.props.user);
+
       return (
         <div style={{background: "#222"}}>
           <this.friendList/>
