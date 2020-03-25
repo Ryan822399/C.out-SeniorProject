@@ -146,13 +146,10 @@ class FriendShipViewSet(viewsets.ModelViewSet):
 
             for friend in friends:
                 friend_profiles.append(friend.friedID.id)
-                print(friend.friedID.id)
-            print("loop2")
+
             for friend in friends0:
                 friend_profiles.append(friend.userID)
-                print(friend.friedID.id)
-            print("look")
-            print(friend_profiles)
+
             profiles_data = Profile.objects.filter(id__in=friend_profiles)
             serializer = ProfileSerializer(profiles_data, many=True)
             response = { 'message': 'Request was successful compa', 'result': serializer.data}
