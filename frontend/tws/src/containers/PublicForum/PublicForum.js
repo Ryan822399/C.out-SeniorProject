@@ -91,7 +91,7 @@ class PublicForum extends Component {
       user: this.props.cookies.get('tws-id'),
       category: this.state.category
     }
-console.log(postBody)
+
 
     fetch(`${process.env.REACT_APP_API_URL}/api/forumposts/`, {
       method: 'POST',
@@ -103,7 +103,7 @@ console.log(postBody)
     }).then( resp => resp.json())
     .then( res => console.log(res))
     .catch( error => console.log(error))
-alert("stop")
+
   }
 
 render() {
