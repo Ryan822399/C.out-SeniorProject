@@ -11,9 +11,6 @@ class Friends extends Component{
   state = {
     info: [],
     token: this.props.cookies.get('tws-token'),
-    allFriendships:[],
-    userFriendships: [],
-    allUsers: [],
     users: {
       user: ["AD"],
       first: ["Anthony"],
@@ -21,30 +18,6 @@ class Friends extends Component{
     }
   }
 
-  componentDidMount() {
-
-    fetch(`${process.env.REACT_APP_API_URL}/api/friendships/`, {
-      method: 'GET',
-      headers: {
-        'Authorization': `Token ${this.state.token}`
-      }
-    }).then( resp => resp.json())
-    .then( res => this.setState({allFriendships: res}))
-    .catch(error => console.log(error))
-
-    fetch(`${process.env.REACT_APP_API_URL}/api/profile/`, {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Authorization': `Token ${this.state.token}`
-      }
-    }).then( resp => resp.json())
-    .then( res => this.setState({allUsers: res}))
-    .catch(error => console.log(error))
-
-    this.setState({info: this.props.user})
-
-  }
 
 
 
@@ -71,7 +44,7 @@ class Friends extends Component{
   existingFriend = evt => {
     return (
       <div>
-        { this.state.info.map(friend => {
+        { this.props.userFriendships.map(friend => {
           return (
             <div key={friend.id}>
               <ListGroup.Item style={{textAlign: "left"}}>
@@ -80,13 +53,13 @@ class Friends extends Component{
                     width={64}
                     height={64}
                     className="mr-3"
-                    src= {friend.picture}
+                    src= {`${process.env.REACT_APP_API_URL}${friend.picture}` }
                     alt="Profile Picture"
                   />
                   <Media.Body>
                     <h5><a>{friend.userName}</a></h5>
                     <p>{friend.firstName} {friend.lastName}</p>
-                    
+
                   </Media.Body>
                 </Media>
                 <Form>
@@ -103,17 +76,6 @@ class Friends extends Component{
   }
 
   friendList = evt => {
-    /*
-    let user = this.props.user;
-    { this.state.allFriendships.map(friendship => {
-      friendship.userOne === user ? (this.setState({userFriendships: this.state.userFriendships.concat(friendship.userTwo)}))
-      : friendship.userTwo === user ? (this.setState({userFriendships: this.state.userFriendships.concat(friendship.userOne)}))
-      : this.setState({users: null})
-      })
-    }
-    console.log("USER FRIENDSHIPS");
-    console.log(this.state.userFriendships);
-    */
     return (
       <div>
         {this.props.userFriendships ? (
@@ -150,8 +112,7 @@ search = evt => {
 
 
   render(){
-    console.log("FRIENDS CODE");
-    console.log(this.props.user);
+
 
       return (
         <div style={{background: "#222"}}>

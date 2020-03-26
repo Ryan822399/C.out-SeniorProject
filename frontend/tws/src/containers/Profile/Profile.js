@@ -15,6 +15,7 @@ class Profile extends Component {
   state = {
     info: [],
     posts: [],
+    userFriendships: [],
     token: this.props.cookies.get('tws-token'),
     currentID: this.props.cookies.get('tws-id')
   }
@@ -57,6 +58,23 @@ class Profile extends Component {
             posts: data2
         }));
     */
+    const id = { id: this.props.ID, userID: this.props.ID };
+    let friendsBody = {
+      userID: this.state.currentID
+    }
+    console.log("CALLING fetch")
+    console.log(friendsBody)
+    fetch(`${process.env.REACT_APP_API_URL}/api/friendships/${this.state.currentID}/get_friends/`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(friendsBody)
+    }).then( resp => resp.json())
+    .then( res => this.setState({userFriendships: res.result }))
+    .catch(error => console.log(error))
+//
   }
 
 
@@ -91,12 +109,12 @@ class Profile extends Component {
           <h4 style={{padding: "0"}}>
             { <h4>{this.state.info.firstName} {this.state.info.lastName}</h4> }
           </h4>
-          
+
             { <p> { this.state.info.location} </p> }
-          
-          
+
+
             { <p> {this.state.info.bio} </p> }
-        
+
         </Media.Body>
       </Media>
     )
@@ -167,32 +185,26 @@ class Profile extends Component {
   }
 
   render() {
-    console.log("User logged (Profile Page)");
-    console.log(this.state.info);
-
-    console.log("TOKEN");
-    console.log(this.props.cookies.get('tws-id'));
-
+console.log("WTFFFF")
+console.log(this.state.userFriendships)
     return (
       <div>
         { this.state.info ? (
           <Card border="info" style={{background: "#222", textAlign: "center", color: "#1BFFFF"}}>
             <Card.Body>
-              <Card.Title style={{textAlign: "center"}}><h1>Profile</h1></Card.Title>
-
                 <Row>
                   <Col xs="5">
                     <this.profile/>
                   </Col>
                   <Col>
-                    <Friends user={this.state.info}/>
+                    <Friends userFriendships={this.state.userFriendships}
+                    ID={this.state.currentID}/>
                   </Col>
                 </Row>
                 <Row>
                   <Col>
                     <TimelineDetails />
                   </Col>
-
                 </Row>
             </Card.Body>
           </Card>

@@ -136,7 +136,7 @@ class FriendShipViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.AllowAny]
     serializer_class = FriendShipSerializer
 
-    @action(detail=True, methods=['GET'])
+    @action(detail=True, methods=['POST'])
     def get_friends(self, request, pk=None):
         if 'userID' in request.data:
             user_id = request.data['userID']
