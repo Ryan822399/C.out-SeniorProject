@@ -16,7 +16,7 @@ function ForumPosts(props) {
       <Card.Text>
         {post.caption}
       </Card.Text>
-        <ForumComments />
+        
     </Card.Body>
     <Card.Footer>
       <small className="text-muted">Last updated 3 mins ago</small>

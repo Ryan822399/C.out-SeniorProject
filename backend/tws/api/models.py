@@ -28,7 +28,7 @@ class Profile(models.Model):
 
 
     def __str__(self):
-        return self.firstName + " " + self.lastName
+        return str(self.id)
 
 class FriendShip(models.Model):
     userID = models.IntegerField()
