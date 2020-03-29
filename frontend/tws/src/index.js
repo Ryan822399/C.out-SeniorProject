@@ -12,6 +12,7 @@ import Feed from './containers/Feed/Feed';
 import Graphs from './containers/Graphs/Graphs';
 import TimelineDetails from './components/TimelineDetails/TimelineDetails';
 import PublicForum from './containers/PublicForum/PublicForum';
+import Friend from './containers/Friend/Friend';
 
 
 //<Route exact path="/workouts" component={App}/>
@@ -28,9 +29,10 @@ const routing = (
       <Route exact path="/homepage/friends" component={SearchFriends}/>
       <Route exact path="/homepage/timeline" component={TimelineDetails}/>
       <Route exact path="/homepage/forum" component={PublicForum}/>
+      <Route exact path="/homepage/friend" component={Friend}/>
     </CookiesProvider>
 
-    <Footer />
+
 
   </BrowserRouter>
 );

@@ -24,24 +24,28 @@ class Profile(models.Model):
     location = models.CharField(max_length = 30, blank=True)
     picture = models.ImageField(upload_to='images/profileImages', null=True, blank=True)
     accountType = models.CharField(max_length = 10, choices=TYPES, default='private')
+    groupID = models.IntegerField(null=True, blank=True)
 
 
     def __str__(self):
-        return self.firstName + " " + self.lastName
+        return str(self.id)
+
+class FriendShip(models.Model):
+    userID = models.IntegerField()
+    friedID = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, blank=True)
+    class Meta:
+        unique_together = (('userID', 'friedID'),)
+        index_together = (('userID', 'friedID'),)
+
+class Groups(models.Model):
+    groupID = models.IntegerField()
+    userID = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, blank=True)
 
 @receiver(post_save, sender=User)
 def create_or_update_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance, firstName="temp")
     instance.profile.save()
-
-class FriendsList(models.Model):
-    userName = models.CharField(max_length = 15)
-    firstName = models.CharField(max_length = 30)
-    lastName = models.CharField(max_length = 30)
-    picture = models.ImageField(upload_to='images/profileImages', null=True, blank=True)
-    def __str__(self):
-        return self.userName
 
 class Workout(models.Model):
     title = models.CharField(max_length=32)
@@ -113,7 +117,7 @@ class Rating(models.Model):
 class ForumPost(models.Model):
     title = models.TextField()
     caption = models.TextField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE )
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE )
     category = models.CharField(max_length=10)
     def __str__(self):
         return self.title

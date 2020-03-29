@@ -22,10 +22,7 @@ class DummySerializer(serializers.ModelSerializer):
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ('user', 'userName',
-            'firstName', 'lastName', 'email', 'bio',
-            'heightFeet', 'heightInches', 'dob',
-            'location', 'picture')
+        fields = ('id', 'user', 'userName', 'firstName', 'lastName', 'email', 'bio', 'heightFeet', 'heightInches', 'dob', 'location', 'picture', 'accountType', 'groupID')
 
 
 class FeedPostSerializer(serializers.ModelSerializer):
@@ -53,9 +50,9 @@ class ForumPostSerializer(serializers.ModelSerializer):
         model = ForumPost
         fields = '__all__'
 
-class FriendsListSerializer(serializers.ModelSerializer):
+class FriendShipSerializer(serializers.ModelSerializer):
     class Meta:
-        model = FriendsList
+        model = FriendShip
         fields = '__all__'
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -67,3 +64,8 @@ class LikeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Like
         fields = ('title', 'caption', 'picture')
+
+class GroupsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Like
+        fields = ('__all__')

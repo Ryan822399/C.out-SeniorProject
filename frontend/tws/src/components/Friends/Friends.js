@@ -19,18 +19,6 @@ class Friends extends Component{
     }
   }
 
-  componentDidMount() {
-
-    fetch(`${process.env.REACT_APP_API_URL}/api/friendslist/`, {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json'
-      }
-    }).then( resp => resp.json())
-    .then( res => this.setState({info: res}))
-    .catch(error => console.log(error))
-    console.log(this.state.info);
-  }
 
 
 
@@ -57,7 +45,7 @@ class Friends extends Component{
   existingFriend = evt => {
     return (
       <div>
-        { this.state.info.map(friend => {
+        { this.props.userFriendships.map(friend => {
           return (
             <div key={friend.id}>
               <ListGroup.Item style={{textAlign: "left"}}>
@@ -66,13 +54,13 @@ class Friends extends Component{
                     width={64}
                     height={64}
                     className="mr-3"
-                    src= {friend.picture}
+                    src= {`${process.env.REACT_APP_API_URL}${friend.picture}` }
                     alt="Profile Picture"
                   />
                   <Media.Body>
-                    <h5>{friend.userName}</h5>
+                    <h5><a>{friend.userName}</a></h5>
                     <p>{friend.firstName} {friend.lastName}</p>
-                    <p></p>
+
                   </Media.Body>
                 </Media>
                 <Form>
@@ -91,7 +79,7 @@ class Friends extends Component{
   friendList = evt => {
     return (
       <div>
-        {this.state.info[0] ? (
+        {this.props.userFriendships ? (
 
             <Card style = {{color: "#222"}}>
               <Card.Header><h2>Friend's List</h2></Card.Header>
@@ -101,10 +89,11 @@ class Friends extends Component{
               </ListGroup>
             </Card>
 
-        ) : (<h3>No friends found! </h3>)}
+        ) : (<h3 style={{color: "#1BFFFF"}}>No friends found! </h3>)}
       </div>
     )
   }
+
 
 search = evt => {
   return (
@@ -119,7 +108,8 @@ search = evt => {
 
 
   render(){
-    console.log(this.state.info);
+
+
       return (
         <div style={{background: "#222"}}>
           <this.friendList/>
