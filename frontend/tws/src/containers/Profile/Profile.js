@@ -96,7 +96,6 @@ class Profile extends Component {
         className="mr-3"
         src= { this.state.info.picture }
         alt="Profile Picture"
-        class="center"
         style={{borderRadius: 300/2, padding: "2%"}}
       />
     )
@@ -161,14 +160,14 @@ class Profile extends Component {
 
   profile = evt => {
     return (
-        <Card style={{ background: "#1F2833", color: "#66FCF1" }}>
+        <Card style={{ background: "#A1D6E2", color: "#222" }}>
           <Card.Header><h2>@{this.state.info.userName}</h2></Card.Header>
           <Media>
             <this.profilePicture/>
             <Media.Body>
             <Card.Body style={{textAlign: "left"}}>
-              <Card style={{ background: "#0B0C10", color: "#66FCF1" }}>
-                <Card.Header><h3 style={{ color: "#66FCF1" }}>{this.state.info.firstName} {this.state.info.lastName}</h3></Card.Header>
+              <Card style={{ background: "#66A5AD", color: "#222" }}>
+                <Card.Header><h3 style={{ color: "#222" }}>{this.state.info.firstName} {this.state.info.lastName}</h3></Card.Header>
                 <Card.Body>
                   <Card.Subtitle><h4>{this.state.info.location}</h4></Card.Subtitle>
                   <Card.Text>
@@ -190,7 +189,7 @@ console.log(this.state.userFriendships)
     return (
       <div>
         { this.state.info ? (
-          <Card border="info" style={{background: "#0B0C10", textAlign: "center", color: "#5A4D4C"}}>
+          <Card border="info" style={{background: "#F1F1F2", textAlign: "center", color: "#222"}}>
             <Card.Body>
                 <Row>
                   <Col xs="5">

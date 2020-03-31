@@ -22,7 +22,7 @@ class DummySerializer(serializers.ModelSerializer):
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ('id', 'user', 'userName', 'firstName', 'lastName', 'email', 'bio', 'heightFeet', 'heightInches', 'dob', 'location', 'picture', 'accountType', 'groupID')
+        fields = ('id', 'user', 'userName', 'firstName', 'lastName', 'email', 'bio', 'heightFeet', 'heightInches', 'dob', 'location', 'picture', 'accountType')
 
 
 class FeedPostSerializer(serializers.ModelSerializer):

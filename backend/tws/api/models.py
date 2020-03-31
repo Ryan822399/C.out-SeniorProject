@@ -24,7 +24,6 @@ class Profile(models.Model):
     location = models.CharField(max_length = 30, blank=True)
     picture = models.ImageField(upload_to='images/profileImages', null=True, blank=True)
     accountType = models.CharField(max_length = 10, choices=TYPES, default='private')
-    groupID = models.IntegerField(null=True, blank=True)
 
 
     def __str__(self):
