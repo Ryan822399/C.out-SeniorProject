@@ -278,7 +278,7 @@ class EditProfile extends Component {
     console.log("THE USER");
     console.log(this.props.user);
     return (
-      <div style={{background: "#222", color: "#222", padding: "5%"}}>
+      <div style={{background: "#A1D6E2", color: "#222", padding: "5%"}}>
         <Card border="info" style={{marginLeft: "auto", marginRight: "auto" /*display: "flex", alignItems: "center", justifyContent: "center"*/ }}>
           <Card.Header>
             <h2>
