@@ -7,6 +7,7 @@ import { withCookies } from 'react-cookie';
 import ProgressTabs from '../../components/ProgressTabs/ProgressTabs';
 import GraphButton from '../../components/GraphButton/GraphButton';
 import {Spinner} from 'react-bootstrap'
+import PropTypes from 'prop-types'
 
 import {Image, Navbar, Nav, NavDropdown, Form, FormControl, Button, Media, Card, CardGroup} from 'react-bootstrap';
 import { Redirect, withRouter } from 'react-router-dom';
@@ -139,6 +140,51 @@ class Graphs extends Component {
 
   }
 
+//WIP Delete tab
+//  deleteForm = () => {
+//    let fromDelete = {
+//      title: this.state.title,
+//      description: this.state.description,
+//      weight: this.state.weight,
+//      date: this.state.date
+//    }
+
+//    if(this.state.currTab == "first")
+//    {
+//      fetch(`${process.env.REACT_APP_API_URL}/api/workouts/`, {
+//        method: 'DELETE',
+//        headers: {
+//          'Content-Type': 'application/json',
+//          'Authorization': `Token ${this.state.token}`
+//        },
+//        body: JSON.stringify(postBody)
+//      }).then( resp => resp.json())
+//      .then( res => this.props.editedWorkout(res))
+//      .catch( error => console.log(error))
+//      console.log(postBody.title);
+//      console.log(postBody.description);
+//      console.log(postBody.weight);
+//      console.log(postBody.date);
+//    }
+
+
+   
+//    else if(this.state.currTab == "second")
+//    {
+//      fetch(`${process.env.REACT_APP_API_URL}/api/groupworkout/`, {
+//        method: 'DELETE',
+//        headers: {
+//          'Content-Type': 'application/json',
+//          'Authorization': `Token ${this.state.token}`
+//        },
+//        body: JSON.stringify(postBody)
+//      }).then( resp => resp.json())
+//      .then( res => this.props.editedWorkout(res))
+//      .catch( error => console.log(error))
+//    }
+
+
+// }
 
   componentDidMount() {
     fetch(`${process.env.REACT_APP_API_URL}/api/workouts/`, {
@@ -351,6 +397,7 @@ class Graphs extends Component {
 
           <div dropdown>
             {this.loadWorkoutSelector()}
+
             <form onSubmit={this.handleSubmit}>
               <label>
                 Workout Titles: 
@@ -399,7 +446,17 @@ class Graphs extends Component {
             />
         </div>
       )
-      : (<div style={styles.spinners}> <Spinner  animation="border" variant="success" /> </div>)
+      : (
+      
+      <div style={styles.spinners}> <Spinner  animation="border" variant="success" />
+            <div style={styles.forbutton}>
+            <GraphButton  formSubmitted={this.formSubmitted}
+            updateDesc={this.updateDesc}
+            updateTitle={this.updateTitle}
+            updateWeight={this.updateWeight}
+            updateDate={this.updateDate}
+            post={this.state.newPost}/>
+          </div> </div>)
       }
     </div>
     )
