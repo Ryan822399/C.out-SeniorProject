@@ -18,7 +18,7 @@ class EditProfile extends Component {
     heightFeet: 0,
     heightInches: 0,
     picture: null,
-    accountType: null
+    accountType: "private"
     /*
     profile: {
       userName: this.props.user[0].userName,
@@ -36,39 +36,84 @@ class EditProfile extends Component {
 
   }
   change = val => evt => {
-    console.log("EVENT TARGET");
-    console.log(evt.target.value);
+    // console.log("EVENT TARGET");
+    // console.log(evt.target.value);
     if(val == "userName") {
-      this.setState({userName: evt.target.value});
+      // this.setState({userName: evt.target.value});
+      console.log("EVENT TARGET");
+      console.log(evt.target.value);
+      let att = this.state.userName;
+      att = evt.target.value;
+      this.setState({userName: att});
     }
     else if(val == "firstName") {
-      this.setState({firstName: evt.target.value});
+      // this.setState({firstName: evt.target.value});
+      console.log("EVENT TARGET");
+      console.log(evt.target.value);
+      let att = this.state.firstName;
+      att = evt.target.value;
+      this.setState({firstName: att});
     }
     else if(val == "lastName") {
-      this.setState({lastName: evt.target.value});
+      // this.setState({lastName: evt.target.value});
+      console.log("EVENT TARGET");
+      console.log(evt.target.value);
+      let att = this.state.lastName;
+      att = evt.target.value;
+      this.setState({lastName: att});
     }
     else if(val == "bio") {
-      this.setState({bio: evt.target.value});
+      // this.setState({bio: evt.target.value});
+      console.log("EVENT TARGET");
+      console.log(evt.target.value);
+      let att = this.state.bio;
+      att = evt.target.value;
+      this.setState({bio: att});
     }
     else if(val == "location") {
-      this.setState({location: evt.target.value});
+      // this.setState({location: evt.target.value});
+      // console.log(evt.target.value);
+      console.log("EVENT TARGET");
       console.log(evt.target.value);
+      let att = this.state.location;
+      att = evt.target.value;
+      this.setState({location: att});
     }
     else if(val == "image") {
-      this.setState({picture: evt.target.value});
-      console.log(evt.target.value);
+      // this.setState({picture: evt.target.value});
+      // console.log(evt.target.value);
+      console.log("EVENT TARGET");
+      console.log(evt.target.files[0]);
+      let att = this.state.picture;
+      att = evt.target.files[0];
+      this.setState({picture: att});
     }
     else if(val == "heightFeet") {
-      this.setState({heightFeet: evt.target.value});
+      // this.setState({heightFeet: evt.target.value});
+      // console.log(evt.target.value);
+      console.log("EVENT TARGET");
       console.log(evt.target.value);
+      let att = this.state.heightFeet;
+      att = evt.target.value;
+      this.setState({heightFeet: att});
     }
     else if(val == "heightInches") {
-      this.setState({heightInches: evt.target.value});
+      // this.setState({heightInches: evt.target.value});
+      // console.log(evt.target.value);
+      console.log("EVENT TARGET");
       console.log(evt.target.value);
+      let att = this.state.heightInches;
+      att = evt.target.value;
+      this.setState({heightInches: att});
     }
     else if(val == "accountType") {
-      this.setState({accountType: evt.target.value});
+      // this.setState({accountType: evt.target.value});
+      // console.log(evt.target.value);
+      console.log("EVENT TARGET");
       console.log(evt.target.value);
+      let att = this.state.accountType;
+      att = evt.target.value;
+      this.setState({accountType: att});
     }
     // console.log(this.state.firstName);
     // console.log(this.state.lastName);
@@ -101,6 +146,8 @@ class EditProfile extends Component {
 
 
   update = evt => {
+    // console.log("THIS PICTURE");
+    // console.log(this.state.user.picture);
     let profile = {
       userName: this.state.userName,
       firstName: this.state.firstName,
@@ -115,18 +162,81 @@ class EditProfile extends Component {
       picture: this.state.picture,
       accountType: this.state.accountType
     }
+
+    // console.log("PICTURE");
+    // console.log(this.props.user.picture);
+    // console.log(profile.picture);
+
+
+    if(profile.userName == "") {
+      profile.userName = this.props.user.userName;
+    }
+    if(profile.firstName == "") {
+      profile.firstName = this.props.user.firstName;
+    }
+    if(profile.lastName == "") {
+      profile.lastName = this.props.user.lastName;
+    }
+    if(profile.bio == "") {
+      profile.bio = this.props.user.bio;
+    }
+    if(profile.location == "") {
+      profile.location = this.props.user.location;
+    }
+    if(profile.picture == null) {
+      profile.picture = this.props.user.picture;
+    }
+    if(profile.heightFeet == 0) {
+      profile.heightFeet = this.props.user.heightFeet;
+    }
+    if(profile.heightInches == 0) {
+      profile.heightInches = this.props.user.heightInches;
+    }
+    if(profile.accountType == null) {
+      profile.accountType = this.props.user.accountType;
+    }
+
+    console.log("BEFORE FORM DATA");
+    console.log(profile.userName);
+    console.log(profile.firstName);
+    console.log(profile.lastName);
+    console.log(profile.bio);
+    console.log(profile.location);
+    console.log(profile.picture);
+    console.log(profile.heightFeet);
+    console.log(profile.heightInches);
+    console.log(profile.accountType);
+
+    alert("TESTING");
+
+    let form_data = new FormData();
+    form_data.append('userName', profile.userName);
+    form_data.append('firstrName', profile.firstName);
+    form_data.append('lastName', profile.lastName);
+    form_data.append('bio', profile.bio);
+    form_data.append('location', profile.location);
+    form_data.append('email', profile.email);
+    form_data.append('dob', profile.dob);
+    form_data.append('user', profile.user);
+    form_data.append('heightFeet', profile.heightFeet);
+    form_data.append('heightInches', profile.heightInches);
+    form_data.append('picture', profile.picture);
+    form_data.append('accountType', profile.accountType);
+
+
+    // console.log("UPDATED PICTURE");
+    // console.log(form_data);
     // console.log("TESTING PROFILE");
     // console.log(profile);
-    fetch(`${process.env.REACT_APP_API_URL}/api/profile/${profile.user}/`, {
+    fetch(`${process.env.REACT_APP_API_URL}/api/profile/3/`, {
       method: 'PUT',
       headers: {
-        'Content-Type': 'application/json'
+
       },
-      body: JSON.stringify(profile)
+      body: form_data
     }).then( resp => resp.json())
     .then( res => console.log(res))
     .catch(error => console.log(error))
-    // console.log(this.state.token);
     // console.log(profile.userName);
     // console.log(profile.firstName);
     // console.log(profile.lastName);
@@ -137,6 +247,11 @@ class EditProfile extends Component {
     // console.log(profile.user);
     // console.log(profile.heightFeet);
     // console.log(profile.heightInches);
+    // console.log(profile.picture);
+    // console.log(profile.accountType);
+    // console.log(this.state.user);
+    //console.log(profile);
+    //alert("HELLO");
   }
 
 
@@ -163,7 +278,7 @@ class EditProfile extends Component {
     console.log("THE USER");
     console.log(this.props.user);
     return (
-      <div style={{background: "#222", color: "#222", padding: "5%"}}>
+      <div style={{background: "#A1D6E2", color: "#222", padding: "5%"}}>
         <Card border="info" style={{marginLeft: "auto", marginRight: "auto" /*display: "flex", alignItems: "center", justifyContent: "center"*/ }}>
           <Card.Header>
             <h2>
@@ -207,6 +322,7 @@ class EditProfile extends Component {
                     id="picture"
                     name="picture"
                     accept="image/png, image/jpeg, image/JPG"  onChange={this.change("image")}/>
+
               </Form.Group>
 
               <Form.Row>
@@ -217,30 +333,6 @@ class EditProfile extends Component {
                 <Form.Group as={Col} controlId="formGridHeightInches">
                   <Form.Label>Height (inches)</Form.Label>
                   <Form.Control style={{background: "#222", color: "#1BFFFF"}} name="heightInches" type="heightInches" placeholder={heightInches} onChange={this.change("heightInches")}/>
-                </Form.Group>
-                <Form.Group as={Col} controlId="formGridState">
-                  <Form.Label>Account Type</Form.Label>
-                  <Form.Control as="select" style={{background: "#222", color: "#1BFFFF"}} onChange={this.change("accountType")}>
-
-                    /*
-                    { this.props.user.accountType === "private" ? (
-                      <div>
-                        <option>Private</option>
-                        <option>Public</option>
-                      </div> )
-                    : (
-                      <div>
-                        <option>Public</option>
-                        <option>Private</option>
-                      </div> )
-                    }
-                    */
-
-                    <option>Private</option>
-                    <option>Public</option>
-
-
-                  </Form.Control>
                 </Form.Group>
               </Form.Row>
 

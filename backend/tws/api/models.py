@@ -24,7 +24,6 @@ class Profile(models.Model):
     location = models.CharField(max_length = 30, blank=True)
     picture = models.ImageField(upload_to='images/profileImages', null=True, blank=True)
     accountType = models.CharField(max_length = 10, choices=TYPES, default='private')
-    groupID = models.IntegerField(null=True, blank=True)
 
 
     def __str__(self):
@@ -88,12 +87,14 @@ class Dummy(models.Model):
         return self.title
 
 class FeedPost(models.Model):
-    title = models.CharField(max_length=15)
-    caption = models.CharField(max_length=40)
-    user = models.ForeignKey(User, on_delete=models.CASCADE )
-    post = models.CharField(max_length=1000)
-    picture = models.ImageField(upload_to='images/')
+    title = models.CharField(max_length=15, null=True)
+    caption = models.CharField(max_length=40, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    post = models.CharField(max_length=1000, null=True)
+    picture = models.ImageField(upload_to='images/', null=True)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
+    likes =  models.FloatField(default=0, null=True)
+
 
     def __str__(self):
         return self.title

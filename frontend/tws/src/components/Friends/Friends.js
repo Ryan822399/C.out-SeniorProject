@@ -12,11 +12,7 @@ class Friends extends Component{
   state = {
     info: [],
     token: this.props.cookies.get('tws-token'),
-    users: {
-      user: ["AD"],
-      first: ["Anthony"],
-      last: ["Diaz"]
-    }
+    userFriends: null
   }
 
 
@@ -28,6 +24,15 @@ class Friends extends Component{
         {this.state.info[0].userName}
       </h4>
     )
+  }
+
+  updateFriends = id => evt => {
+    var array = [...this.state.userFriends]; // make a separate copy of the array
+    var index = array.indexOf(id);
+    if (index !== -1) {
+      array.splice(index, 1);
+      this.setState({userFriends: array});
+    }
   }
 
   profilePicture = evt => {
@@ -46,9 +51,11 @@ class Friends extends Component{
     return (
       <div>
         { this.props.userFriendships.map(friend => {
+          console.log("FRIEND ID");
+          console.log(friend.id);
           return (
             <div key={friend.id}>
-              <ListGroup.Item style={{textAlign: "left"}}>
+              <ListGroup.Item style={{textAlign: "left", background: "#A1D6E2"}}>
                 <Media>
                   <img
                     width={64}
@@ -58,13 +65,13 @@ class Friends extends Component{
                     alt="Profile Picture"
                   />
                   <Media.Body>
-                    <h5><a>{friend.userName}</a></h5>
+                    <h5>{friend.userName}</h5>
                     <p>{friend.firstName} {friend.lastName}</p>
-
+                    <p>{friend.bio}</p>
                   </Media.Body>
                 </Media>
                 <Form>
-                  <Button variant="dark" type="submit" block>
+                  <Button variant="dark" type="submit" onClick={this.updateFriends(friend.id)} block>
                     Remove Friend
                   </Button>
                 </Form>
@@ -81,7 +88,7 @@ class Friends extends Component{
       <div>
         {this.props.userFriendships ? (
 
-            <Card style = {{color: "#222"}}>
+            <Card style = {{background: "#A1D6E2", color: "#222"}}>
               <Card.Header><h2>Friend's List</h2></Card.Header>
               <this.search/>
               <ListGroup>
@@ -99,7 +106,16 @@ search = evt => {
   return (
     <div>
       <Form style={{padding: "5px"}}>
+<<<<<<< HEAD
           <AddFriend/>
+=======
+          <Form.Group as={Col} controlId="formGridUsername">
+            <Form.Control style={{background: "#66A5AD", color: "#222"}} type="userName" placeholder="Search Username" />
+          </Form.Group>
+        <Button variant="dark" type="submit">
+          Submit
+        </Button>
+>>>>>>> dev
       </Form>
     </div>
   )
@@ -108,10 +124,13 @@ search = evt => {
 
 
   render(){
-
+    console.log("COMING FROM FRIENDS");
+    console.log(this.props.userFriendships);
+    //this.setState({userFriends: this.props.userFriendships});
+    //console.log(this.state.userFriends);
 
       return (
-        <div style={{background: "#222"}}>
+        <div>
           <this.friendList/>
         </div>
       )
