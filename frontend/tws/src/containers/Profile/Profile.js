@@ -20,6 +20,10 @@ class Profile extends Component {
     currentID: this.props.cookies.get('tws-id')
   }
 
+  font = {
+    fontFamily: "Trebuchet MS, Helvetica, sans-serif",
+  };
+
   componentDidMount() {
 
     fetch(`${process.env.REACT_APP_API_URL}/api/profile/${this.state.currentID}/`, {
@@ -189,7 +193,7 @@ console.log(this.state.userFriendships)
     return (
       <div>
         { this.state.info ? (
-          <Card border="info" style={{background: "#F1F1F2", textAlign: "center", color: "#222"}}>
+          <Card border="info" style={{background: "#F1F1F2", textAlign: "center", color: "#222"}, this.font}>
             <Card.Body>
                 <Row>
                   <Col xs="5">
