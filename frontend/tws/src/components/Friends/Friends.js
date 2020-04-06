@@ -106,16 +106,15 @@ search = evt => {
   return (
     <div>
       <Form style={{padding: "5px"}}>
-<<<<<<< HEAD
           <AddFriend/>
-=======
+
           <Form.Group as={Col} controlId="formGridUsername">
             <Form.Control style={{background: "#66A5AD", color: "#222"}} type="userName" placeholder="Search Username" />
           </Form.Group>
         <Button variant="dark" type="submit">
           Submit
         </Button>
->>>>>>> dev
+
       </Form>
     </div>
   )
