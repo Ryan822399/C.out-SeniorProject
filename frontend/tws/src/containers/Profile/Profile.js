@@ -22,7 +22,15 @@ class Profile extends Component {
 
   componentDidMount() {
 
-    fetch(`${process.env.REACT_APP_API_URL}/api/profile/${this.state.currentID}/`, {
+    //parsing the passed in user id to display the proper profile
+    var currentLocation = window.location;
+    var url = new URL(currentLocation);
+    var urlId = url.searchParams.get("id");
+    if (currentLocation == "http://localhost:3000/homepage/profile/?id"){
+      urlId = this.props.cookies.get('tws-id');
+    }
+
+    fetch(`${process.env.REACT_APP_API_URL}/api/profile/${urlId}/`, {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
