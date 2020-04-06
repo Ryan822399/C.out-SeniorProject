@@ -22,7 +22,9 @@ function NavBar(props) {
               <Nav.Link style={{color: "#222"}} href="http://localhost:3000/homepage/forum">Public Forum</Nav.Link>
             </Nav>
             <Form inline>
-              <Button variant="dark">Sign out</Button>
+              <Button variant="dark">
+                <Nav.Link href="http://localhost:3000">Sign Out</Nav.Link>
+              </Button>
             </Form>
         </Navbar>
       </div>
