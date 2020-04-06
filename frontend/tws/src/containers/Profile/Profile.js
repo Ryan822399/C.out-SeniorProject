@@ -20,9 +20,21 @@ class Profile extends Component {
     currentID: this.props.cookies.get('tws-id')
   }
 
+  font = {
+    fontFamily: "Trebuchet MS, Helvetica, sans-serif",
+  };
+
   componentDidMount() {
 
-    fetch(`${process.env.REACT_APP_API_URL}/api/profile/${this.state.currentID}/`, {
+    //parsing the passed in user id to display the proper profile
+    var currentLocation = window.location;
+    var url = new URL(currentLocation);
+    var urlId = url.searchParams.get("id");
+    if (currentLocation == "http://localhost:3000/homepage/profile/?id"){
+      urlId = this.props.cookies.get('tws-id');
+    }
+
+    fetch(`${process.env.REACT_APP_API_URL}/api/profile/${urlId}/`, {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -189,7 +201,7 @@ console.log(this.state.userFriendships)
     return (
       <div>
         { this.state.info ? (
-          <Card border="info" style={{background: "#F1F1F2", textAlign: "center", color: "#222"}}>
+          <Card border="info" style={{background: "#F1F1F2", textAlign: "center", color: "#222"}, this.font}>
             <Card.Body>
                 <Row>
                   <Col xs="5">
