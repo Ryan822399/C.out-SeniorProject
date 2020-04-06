@@ -65,8 +65,8 @@ class TimelineDetails extends Component {
                       display: 'block',
                       float: 'left',
                       padding: '10px',
-                      background: 'rgb(150, 150, 150)',
-                      color: '#fff',
+                      background: '#A1D6E2',
+                      color: '#222',
                     }}
                   >
                   {this.state.info[0] ? (
@@ -85,32 +85,32 @@ class TimelineDetails extends Component {
                   </div>
                 )}
                 >
-                <Card style = {{ width: '35rem'}}>
+                <Card style = {{ width: '25rem'}}>
                 <ListGroup variant="flush">
-                  <ListGroup.Item>
-                  <CardGroup id="posts">
-                    <Card style={{background: "#222"}}>
-                      <Card.Img height={300} variant="top" src={post.picture} />
-                      <Card.Body>
-                        <Card.Title>{post.title}</Card.Title>
-                        <Card.Text>
-                          {post.caption}
-                        </Card.Text>
-                      </Card.Body>
-                      <Card.Footer>
-                        <small className="text-muted">Posted Today</small>
-                      </Card.Footer>
-                    </Card>
-                  </CardGroup>
+                  <ListGroup.Item  style={{background: "#A1D6E2"}}>
+                    <CardGroup id="posts">
+                      <Card style={{background: "#66A5AD"}}>
+                        <Card.Img height={300} variant="top" src={post.picture} />
+                        <Card.Body>
+                          <Card.Title>{post.title}</Card.Title>
+                          <Card.Text>
+                            {post.caption}
+                          </Card.Text>
+                        </Card.Body>
+                        <Card.Footer>
+                          <small className="text-muted">Posted Today</small>
+                        </Card.Footer>
+                      </Card>
+                    </CardGroup>
                   </ListGroup.Item>
-                  <ListGroup.Item>
+                  <ListGroup.Item  style={{background: "#A1D6E2"}}>
 
                     <ButtonToolbar>
                     <Button variant="outline-primary">Like</Button>
                     <Button variant="outline-secondary">Comment</Button>
                     <Button variant="outline-success">Share</Button>
                     </ButtonToolbar>
-                    
+
                   </ListGroup.Item>
                 </ListGroup>
                 </Card>
@@ -118,6 +118,7 @@ class TimelineDetails extends Component {
             </div>
           )
         }) }
+
       </div>
     )
   }
