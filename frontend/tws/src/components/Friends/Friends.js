@@ -6,6 +6,7 @@ import { withCookies } from 'react-cookie';
 import EditButton from '../../components/EditButton/EditButton';
 import AddFriendButton from '../../components/AddFriendButton/AddFriendButton';
 import RemoveFriendButton from '../../components/RemoveFriendButton/RemoveFriendButton';
+import AddFriend from '../../components/AddFriend/AddFriend';
 import axios from 'axios';
 class Friends extends Component{
   state = {
@@ -105,12 +106,15 @@ search = evt => {
   return (
     <div>
       <Form style={{padding: "5px"}}>
+          <AddFriend/>
+
           <Form.Group as={Col} controlId="formGridUsername">
             <Form.Control style={{background: "#66A5AD", color: "#222"}} type="userName" placeholder="Search Username" />
           </Form.Group>
         <Button variant="dark" type="submit">
           Submit
         </Button>
+
       </Form>
     </div>
   )
