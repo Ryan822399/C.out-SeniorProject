@@ -6,6 +6,7 @@ import "chartjs-plugin-lineheight-annotation";
 import { withCookies } from 'react-cookie';
 import ProgressTabs from '../../components/ProgressTabs/ProgressTabs';
 import GraphButton from '../../components/GraphButton/GraphButton';
+import DeleteButton from '../../components/GraphButton/DeleteButton';
 import {Spinner} from 'react-bootstrap'
 import PropTypes from 'prop-types'
 
@@ -414,6 +415,15 @@ class Graphs extends Component {
 
           <div style={styles.forbutton}>
             <GraphButton  formSubmitted={this.formSubmitted}
+            updateDesc={this.updateDesc}
+            updateTitle={this.updateTitle}
+            updateWeight={this.updateWeight}
+            updateDate={this.updateDate}
+            post={this.state.newPost}/>
+          </div>
+
+          <div style={styles.forbutton}>
+            <DeleteButton  formSubmitted={this.formSubmitted}
             updateDesc={this.updateDesc}
             updateTitle={this.updateTitle}
             updateWeight={this.updateWeight}
