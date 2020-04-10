@@ -18,5 +18,12 @@ h1 {
 
 .leftCard {
   opacity: .4;
+}
 
+h3 {
+  color: #222;
+}
+
+input {
+  width: 50%;
 }

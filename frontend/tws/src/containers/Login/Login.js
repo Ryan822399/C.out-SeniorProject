@@ -169,13 +169,13 @@ class Login extends Component{
                       <Card.Text>
                         <div style={{marginTop: "40px", color: "#222"}}>
                         <FontAwesome name="dumbbell"  style={{"font-size": "2rem", marginTop: "14px"}} />
-                          <span style={{marginLeft: "10px"}}> <strong>View workouts and post</strong> to the world in news feed.</span>
+                          <h3 style={{marginLeft: "10px"}}> <strong>View workouts and post</strong> to the world in news feed.</h3>
                         <br/>
                         <FontAwesome name="newspaper" style={{"font-size": "2rem", marginTop: "14px"}}/>
-                          <span style={{marginLeft: "10px"}}> <strong>Share what you</strong> like on your timeline.</span>
+                          <h3 style={{marginLeft: "10px"}}> <strong>Share what you</strong> like on your timeline.</h3>
                         <br/>
                         <FontAwesome name="chart-line" style={{"font-size": "2rem", marginTop: "14px"}} />
-                          <span style={{marginLeft: "10px"}}> <strong>Track all </strong> workouts and save.</span>
+                          <h3 style={{marginLeft: "10px"}}> <strong>Track all </strong> workouts and save.</h3>
                         <br/>
                         </div>
                       </Card.Text>
@@ -208,7 +208,7 @@ class Login extends Component{
                 <input type="password" name="password" value={this.state.credentials.password}
                   onChange={this.inputChanged}/><br/>
 
-                <button onClick={this.login} style={{margin: "10px", marginLeft: "60px", color: "#222"}}>
+                <button onClick={this.login} style={{margin: "10px", color: "#222"}}>
                   {this.state.isLoginView ? 'Login' : 'Register'}
                 </button>
                 <p onClick={this.toggleView}>

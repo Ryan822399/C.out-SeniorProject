@@ -7,7 +7,7 @@ var FontAwesome = require('react-fontawesome');
 function NavBar(props) {
     return (
       <div>
-        <Navbar style={{background: "#A1D6E2"}} bg="" variant="dark">
+        <Navbar style={{background: "white"}} bg="" variant="dark">
             <Navbar.Brand href="http://localhost:3000/homepage/feed">
             <h3>
               <FontAwesome name="heartbeat" />
@@ -22,8 +22,8 @@ function NavBar(props) {
               <Nav.Link style={{color: "#222"}} href="http://localhost:3000/homepage/forum">Public Forum</Nav.Link>
             </Nav>
             <Form inline>
-              <Button variant="dark">
-                <Nav.Link href="http://localhost:3000">Sign Out</Nav.Link>
+              <Button href="http://localhost:3000" variant="dark">
+                Sign Out
               </Button>
             </Form>
         </Navbar>
