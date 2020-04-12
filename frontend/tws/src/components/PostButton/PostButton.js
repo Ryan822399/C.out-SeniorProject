@@ -24,7 +24,6 @@ class PostButton extends Component {
     }
 
     handleImageChange = event => {
-      console.log("EVENT TARGET");
       console.log(event.target.files[0]);
       let att = this.state.attributes;
       att[event.target.name] = event.target.files[0];

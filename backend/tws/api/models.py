@@ -120,6 +120,7 @@ class ForumPost(models.Model):
     caption = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.CharField(max_length=10)
+    date = models.DateField(auto_now=False, null=True, blank=True)
 
     def curr_userpicture(self):
         pro = Profile.objects.get(user=self.user.id)
@@ -136,8 +137,21 @@ class ForumPost(models.Model):
 
 class Comment(models.Model):
     description = models.TextField()
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    forumPost = models.ForeignKey(ForumPost, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    forumPost = models.OneToOneField(ForumPost, on_delete=models.CASCADE)
+    date = models.DateField(auto_now=False, null=True, blank=True)
+    def curr_userpicture(self):
+        pro = Profile.objects.get(user=self.user.id)
+
+        return str(pro.picture)
+
+    def curr_username(self):
+        pro = Profile.objects.get(user=self.user.id)
+
+        return str(pro.userName)
+
+    def __str__(self):
+        return self.description
 
 class Like(models.Model):
     count = models.IntegerField()

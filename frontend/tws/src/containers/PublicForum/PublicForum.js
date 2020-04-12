@@ -15,6 +15,8 @@ class PublicForum extends Component {
     title: '',
     description: '',
     category: 'flex',
+    currForPost: '',
+    comDescription: '',
     flexposts: [],
     dietposts: [],
     cardioposts: [],
@@ -78,9 +80,20 @@ class PublicForum extends Component {
   }
 
   updateCat = event => {
-    console.log(event.target.name)
     this.setState({
       category: event.target.name
+    });
+  }
+
+  updateCommDesc = event => {
+
+     this.setState({
+      comDescription: event.target.value
+     });
+  }
+  updateCommId = id => {
+    this.setState({
+      currForPost: id
     });
   }
 
@@ -94,6 +107,32 @@ class PublicForum extends Component {
 
 
     fetch(`${process.env.REACT_APP_API_URL}/api/forumposts/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${this.state.token}`
+      },
+      body: JSON.stringify(postBody)
+    }).then( resp => resp.json())
+    .then( res => console.log(res))
+    .catch( error => console.log(error))
+
+
+  }
+  commentFormSubmitted = () => {
+    let currDate = new Date()
+    let month = currDate.getMonth() + 1;
+    let year = currDate.getFullYear();
+    let fullDate = year + "-" + month + "-" + currDate.getDate()
+
+    let postBody = {
+      description: this.state.comDescription,
+      user: this.props.cookies.get('tws-id'),
+      forumPost: this.state.currForPost,
+      date: fullDate
+    }
+
+    fetch(`${process.env.REACT_APP_API_URL}/api/comment/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -138,10 +177,12 @@ render() {
             />
           </div>
           <Row>
-            <Col >
+            <Col xs={6} md={4}>
+                <div style={{ position: "sticky", top: "0"}}>
                   <WordCloud/>
+                </div>
             </Col>
-            <Col>
+            <Col xs={12} md={8}>
               <Accordion  defaultActiveKey="0">
                   <Card style={styles.contentCard}>
                     <Card.Header>
@@ -155,12 +196,16 @@ render() {
                     || (this.state.dietposts[0] && this.state.currTab==="diet")
                     || (this.state.currTab==="cardio" && this.state.cardioposts[0])
                     || (this.state.currTab==="weight"&& this.state.weightposts[0]))
-                       ? <ForumPosts forumposts={content}/>
+                       ? <ForumPosts  commentFormSubmitted={this.commentFormSubmitted}
+                                updateCommId={this.updateCommId}
+                                updateCommDesc={this.updateCommDesc}
+                                forumposts={content}/>
                           :  <div style={styles.spinners}> <Spinner  animation="border" variant="success" /> </div>
                     }
                     </Card.Body>
                     </Accordion.Collapse>
                   </Card>
+
                   <Card>
                     <Card.Header>
                       <Accordion.Toggle as={Button} variant="link" eventKey="1">

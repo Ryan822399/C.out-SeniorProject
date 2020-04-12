@@ -48,7 +48,7 @@ class RatingSerializer(serializers.ModelSerializer):
 class ForumPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = ForumPost
-        fields = ('title', 'caption', 'user', 'category', 'curr_userpicture', 'curr_username')
+        fields = ('id', 'title', 'caption', 'user', 'category', 'date', 'curr_userpicture', 'curr_username')
 
 class FriendShipSerializer(serializers.ModelSerializer):
     class Meta:
