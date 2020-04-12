@@ -118,8 +118,19 @@ class Rating(models.Model):
 class ForumPost(models.Model):
     title = models.TextField()
     caption = models.TextField()
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE )
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.CharField(max_length=10)
+
+    def curr_userpicture(self):
+        pro = Profile.objects.get(user=self.user.id)
+
+        return str(pro.picture)
+
+    def curr_username(self):
+        pro = Profile.objects.get(user=self.user.id)
+
+        return str(pro.userName)
+
     def __str__(self):
         return self.title
 

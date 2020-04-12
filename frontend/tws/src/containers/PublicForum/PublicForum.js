@@ -88,7 +88,7 @@ class PublicForum extends Component {
     let postBody = {
       title: this.state.title,
       caption: this.state.description,
-      profile: this.props.cookies.get('tws-id'),
+      user: this.props.cookies.get('tws-id'),
       category: this.state.category
     }
 
@@ -151,10 +151,10 @@ render() {
                     </Card.Header>
                     <Accordion.Collapse eventKey="0">
                     <Card.Body>
-                    { (this.state.flexposts[0]
-                      && this.state.dietposts[0]
-                      && this.state.cardioposts[0]
-                      && this.state.weightposts[0])
+                    { ((this.state.flexposts[0] && this.state.currTab==="flex")
+                    || (this.state.dietposts[0] && this.state.currTab==="diet")
+                    || (this.state.currTab==="cardio" && this.state.cardioposts[0])
+                    || (this.state.currTab==="weight"&& this.state.weightposts[0]))
                        ? <ForumPosts forumposts={content}/>
                           :  <div style={styles.spinners}> <Spinner  animation="border" variant="success" /> </div>
                     }
