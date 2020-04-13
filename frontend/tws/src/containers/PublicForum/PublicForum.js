@@ -26,7 +26,7 @@ class PublicForum extends Component {
     alldietposts: [],
     allcardioposts: [],
     allweightposts: [],
-
+    filter: true,
     token: this.props.cookies.get('tws-token')
 
   }
@@ -76,6 +76,9 @@ class PublicForum extends Component {
       }).then( resp => resp.json())
       .then( res => this.setState({allposts: res}))
       .catch( error => console.log(error))
+      console.log("checking posts")
+      console.log(this.state.allposts)
+
   }
 
   changeTabs = tab =>  {
@@ -113,7 +116,6 @@ class PublicForum extends Component {
   }
 
   filterPosts = () => {
-    console.log("flitering")
       let x;
       for (x of this.state.allposts) {
         if(x.category === "flex") {
@@ -127,15 +129,21 @@ class PublicForum extends Component {
           this.state.allweightposts.push(x);
         }
       }
+      this.setState({filter: false})
 
   }
 
   formSubmitted = () => {
+      let currDate = new Date()
+      let month = currDate.getMonth() + 1;
+      let year = currDate.getFullYear();
+      let fullDate = year + "-" + month + "-" + currDate.getDate()
       let postBody = {
         title: this.state.title,
         caption: this.state.description,
         user: this.props.cookies.get('tws-id'),
-        category: this.state.category
+        category: this.state.category,
+        date: fullDate
       }
 
       fetch(`${process.env.REACT_APP_API_URL}/api/forumposts/`, {
@@ -156,7 +164,7 @@ class PublicForum extends Component {
     let month = currDate.getMonth() + 1;
     let year = currDate.getFullYear();
     let fullDate = year + "-" + month + "-" + currDate.getDate()
-
+    console.log("printing Data", fullDate)
     let postBody = {
       description: this.state.comDescription,
       user: this.props.cookies.get('tws-id'),
@@ -174,13 +182,18 @@ class PublicForum extends Component {
     }).then( resp => resp.json())
     .then( res => console.log(res))
     .catch( error => console.log(error))
-
+ alert("hello")
   }
 
 render() {
-    if(this.state.allposts[0]){
-      this.filterPosts();
-    }
+  let currDate = new Date()
+  let month = currDate.getMonth() + 1;
+  let year = currDate.getFullYear();
+  let fullDate = year + "-" + month + "-" + currDate.getDate()
+  console.log(fullDate)
+  if(this.state.allposts[0] && this.state.filter){
+    this.filterPosts();
+  }
 
     let content;
     let allcontent;
