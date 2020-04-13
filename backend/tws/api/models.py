@@ -140,6 +140,7 @@ class Comment(models.Model):
     forumPost = models.ForeignKey(ForumPost, on_delete=models.CASCADE)
 
 class Like(models.Model):
-    count = models.IntegerField()
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    count = models.IntegerField(null=True)
+    userID = models.IntegerField(null=True)
+    feedpost = models.ForeignKey(FeedPost, on_delete=models.CASCADE, null=True)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, null=True)

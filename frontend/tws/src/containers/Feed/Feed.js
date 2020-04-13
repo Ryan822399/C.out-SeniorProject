@@ -45,7 +45,7 @@ class Feed extends Component {
             <Container>
               <NewPost /> <br/>
                   { this.state.posts[0]
-                    && this.state.info[0] ? <Posts posts={this.state.posts} profile={this.state.info}/>
+                    && this.state.info[0] ? <Posts posts={this.state.posts} profile={this.state.info} userID = {this.state.token}/>
                         :  <div style={styles.spinners}> <Spinner  animation="border" variant="success" /> </div>
                   }
             </Container>

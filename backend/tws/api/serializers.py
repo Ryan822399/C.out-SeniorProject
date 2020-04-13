@@ -63,7 +63,7 @@ class CommentSerializer(serializers.ModelSerializer):
 class LikeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Like
-        fields = ('title', 'caption', 'picture')
+        fields = '__all__'
 
 class GroupsSerializer(serializers.ModelSerializer):
     class Meta:

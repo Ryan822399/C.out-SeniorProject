@@ -48,9 +48,9 @@ function Posts(props) {
                         </Card.Text>
                     </Card.Body>
                     <ButtonToolbar>
-                      <LikeButton postId = {post}/>
-                    <Button variant="outline-secondary">Comment</Button>
-                    <Button variant="outline-success">Share</Button>
+                      <LikeButton postId = {post} userId = {props.token}/>
+                      <Button variant="outline-secondary">Comment</Button>
+                      <Button variant="outline-success">Share</Button>
                     </ButtonToolbar>
                   </Card>
                 <br/>
