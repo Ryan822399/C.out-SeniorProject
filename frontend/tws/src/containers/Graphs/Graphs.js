@@ -64,7 +64,7 @@ class Graphs extends Component {
 
 
   handleChange = event => {
-    this.setState( {value: event.target.value} )  
+    this.setState( {value: event.target.value} )
    }
 
   handleSubmit(event){
@@ -104,7 +104,7 @@ class Graphs extends Component {
       weight: this.state.weight,
       date: this.state.date
     }
-    
+
     if(this.state.currTab == "first")
     {
       fetch(`${process.env.REACT_APP_API_URL}/api/workouts/`, {
@@ -169,7 +169,7 @@ class Graphs extends Component {
 //    }
 
 
-   
+
 //    else if(this.state.currTab == "second")
 //    {
 //      fetch(`${process.env.REACT_APP_API_URL}/api/groupworkout/`, {
@@ -241,7 +241,7 @@ class Graphs extends Component {
           var workoutTitle = this.state.workouts[filterIndex].title;
           seenTitles[filterIndex] = workoutTitle;
         }
-  
+
         const distinctTitles = Array.from(new Set(seenTitles));
         this.state.workoutTitles = distinctTitles
         return(<h3>Choose a Workout</h3>)
@@ -256,7 +256,7 @@ class Graphs extends Component {
           var workoutTitle = this.state.groupWorkouts[filterIndex].title;
           seenTitles[filterIndex] = workoutTitle;
         }
-  
+
         const distinctTitles = Array.from(new Set(seenTitles));
         this.state.workoutTitles = distinctTitles
         return(<h3>Choose a Workout</h3>)
@@ -264,7 +264,7 @@ class Graphs extends Component {
 
     }
 
-    
+
 
 
     getChartData = canvas => {
@@ -319,7 +319,7 @@ class Graphs extends Component {
 
         }
 
-        
+
         //Selects Group Progress Tab
         else if(this.state.currTab=="second")
         {
@@ -334,7 +334,7 @@ class Graphs extends Component {
           for(filterIndex = 0; filterIndex < this.state.groupWorkouts.length; filterIndex++)
           {
             var workoutTitle = this.state.groupWorkouts[filterIndex].title;
-            
+
             if(chosenWorkout == workoutTitle)
             {
               groupFilteredDataWeight[groupCounter] = this.state.groupWorkouts[filterIndex].weight;
@@ -358,7 +358,7 @@ class Graphs extends Component {
         }
 
 
-        
+
 
 
     }
@@ -382,12 +382,12 @@ class Graphs extends Component {
         color: 'black',
       };
     }
-    
-    
+
+
     return (
 
         //If a set of elements exist, render it
-    <div>
+    <div class="pro">
 
     <div style={styles.progress}>
     <ProgressTabs changeTabs={this.changeTabs} act={this.state.currTab}/>
@@ -402,7 +402,7 @@ class Graphs extends Component {
 
             <form onSubmit={this.handleSubmit}>
               <label>
-                Workout Titles: 
+                Workout Titles:
                 <select value={this.state.value} onChange={this.handleChange}>
                   {this.state.workoutTitles.map(workoutTitles => (
                     <option key = {workoutTitles} value ={workoutTitles}>
@@ -415,7 +415,7 @@ class Graphs extends Component {
             </div>
             </CardGroup>
 
-          <CardGroup style ={{background: "#222"}}>        
+          <CardGroup style ={{background: "#222"}}>
           <div style={styles.forbutton}>
             <GraphButton  formSubmitted={this.formSubmitted}
             updateDesc={this.updateDesc}
@@ -426,7 +426,7 @@ class Graphs extends Component {
           </div>
           </CardGroup>
 
-          <CardGroup style ={{background: "#222"}}>      
+          <CardGroup style ={{background: "#222"}}>
           <div style={styles.forbutton}>
             <DeleteButton  formSubmitted={this.formSubmitted}
             updateDesc={this.updateDesc}
@@ -437,7 +437,7 @@ class Graphs extends Component {
           </div>
           </CardGroup>
 
-          <CardGroup style ={{background: "#ccc7c6"}}>        
+          <CardGroup style ={{background: "#ccc7c6"}}>
             <Line
                 options ={{
                     title:{
@@ -465,7 +465,7 @@ class Graphs extends Component {
         </div>
       )
       : (
-      
+
       <div style={styles.spinners}> <Spinner  animation="border" variant="success" />
             <div style={styles.forbutton}>
             <GraphButton  formSubmitted={this.formSubmitted}
