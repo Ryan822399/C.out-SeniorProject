@@ -77,7 +77,7 @@ function NewPostButton(props) {
       </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
+        <Button style={{background: "#6c757d"}} onClick={props.onHide}>Close</Button>
       </Modal.Footer>
     </Modal>
   );
