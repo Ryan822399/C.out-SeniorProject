@@ -15,10 +15,18 @@ class PublicForum extends Component {
     title: '',
     description: '',
     category: 'flex',
+    currForPost: '',
+    comDescription: '',
     flexposts: [],
     dietposts: [],
     cardioposts: [],
     weightposts: [],
+    allposts: [],
+    allflexposts: [],
+    alldietposts: [],
+    allcardioposts: [],
+    allweightposts: [],
+    filter: true,
     token: this.props.cookies.get('tws-token')
 
   }
@@ -59,6 +67,18 @@ class PublicForum extends Component {
       }).then( resp => resp.json())
       .then( res => this.setState({weightposts: res}))
       .catch( error => console.log(error))
+
+      fetch(`${process.env.REACT_APP_API_URL}/api/forumposts/`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Token ${this.state.token}`
+        }
+      }).then( resp => resp.json())
+      .then( res => this.setState({allposts: res}))
+      .catch( error => console.log(error))
+      console.log("checking posts")
+      console.log(this.state.allposts)
+
   }
 
   changeTabs = tab =>  {
@@ -78,22 +98,81 @@ class PublicForum extends Component {
   }
 
   updateCat = event => {
-    console.log(event.target.name)
     this.setState({
       category: event.target.name
     });
   }
 
+  updateCommDesc = event => {
+
+     this.setState({
+      comDescription: event.target.value
+     });
+  }
+  updateCommId = id => {
+    this.setState({
+      currForPost: id
+    });
+  }
+
+  filterPosts = () => {
+      let x;
+      for (x of this.state.allposts) {
+        if(x.category === "flex") {
+
+          this.state.allflexposts.push(x);
+        }else if (x.category === "diet"){
+          this.state.alldietposts.push(x);
+        }else if (x.category === "cardio") {
+          this.state.allcardioposts.push(x);
+        }else {
+          this.state.allweightposts.push(x);
+        }
+      }
+      this.setState({filter: false})
+
+  }
+
   formSubmitted = () => {
+      let currDate = new Date()
+      let month = currDate.getMonth() + 1;
+      let year = currDate.getFullYear();
+      let fullDate = year + "-" + month + "-" + currDate.getDate()
+      let postBody = {
+        title: this.state.title,
+        caption: this.state.description,
+        user: this.props.cookies.get('tws-id'),
+        category: this.state.category,
+        date: fullDate
+      }
+
+      fetch(`${process.env.REACT_APP_API_URL}/api/forumposts/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Token ${this.state.token}`
+        },
+        body: JSON.stringify(postBody)
+      }).then( resp => resp.json())
+      .then( res => console.log(res))
+      .catch( error => console.log(error))
+
+
+  }
+  commentFormSubmitted = () => {
+    let currDate = new Date()
+    let month = currDate.getMonth() + 1;
+    let year = currDate.getFullYear();
+    let fullDate = year + "-" + month + "-" + currDate.getDate()
+    console.log("printing Data", fullDate)
     let postBody = {
-      title: this.state.title,
-      caption: this.state.description,
+      description: this.state.comDescription,
       user: this.props.cookies.get('tws-id'),
-      category: this.state.category
+      forumPost: this.state.currForPost,
+      date: fullDate
     }
 
-
-    fetch(`${process.env.REACT_APP_API_URL}/api/forumposts/`, {
+    fetch(`${process.env.REACT_APP_API_URL}/api/comment/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -103,24 +182,33 @@ class PublicForum extends Component {
     }).then( resp => resp.json())
     .then( res => console.log(res))
     .catch( error => console.log(error))
-
+ 
   }
 
 render() {
 
+  if(this.state.allposts[0] && this.state.filter){
+    this.filterPosts();
+  }
+
     let content;
+    let allcontent;
     if(this.state.currTab==="flex")
     {
       content = this.state.flexposts
+      allcontent = this.state.allflexposts
     }else if (this.state.currTab==="diet")
     {
       content = this.state.dietposts
+      allcontent = this.state.alldietposts
     }else if (this.state.currTab==="cardio")
     {
       content = this.state.cardioposts
+      allcontent = this.state.allcardioposts
     }else if (this.state.currTab==="weight")
     {
       content = this.state.weightposts
+      allcontent = this.state.allweightposts
     }
 
     return (
@@ -138,10 +226,12 @@ render() {
             />
           </div>
           <Row>
-            <Col >
+            <Col xs={6} md={4}>
+                <div style={{ position: "sticky", top: "0"}}>
                   <WordCloud/>
+                </div>
             </Col>
-            <Col>
+            <Col xs={12} md={8}>
               <Accordion  defaultActiveKey="0">
                   <Card style={styles.contentCard}>
                     <Card.Header>
@@ -155,12 +245,16 @@ render() {
                     || (this.state.dietposts[0] && this.state.currTab==="diet")
                     || (this.state.currTab==="cardio" && this.state.cardioposts[0])
                     || (this.state.currTab==="weight"&& this.state.weightposts[0]))
-                       ? <ForumPosts forumposts={content}/>
+                       ? <ForumPosts  commentFormSubmitted={this.commentFormSubmitted}
+                                updateCommId={this.updateCommId}
+                                updateCommDesc={this.updateCommDesc}
+                                forumposts={content}/>
                           :  <div style={styles.spinners}> <Spinner  animation="border" variant="success" /> </div>
                     }
                     </Card.Body>
                     </Accordion.Collapse>
                   </Card>
+
                   <Card>
                     <Card.Header>
                       <Accordion.Toggle as={Button} variant="link" eventKey="1">
@@ -168,7 +262,19 @@ render() {
                       </Accordion.Toggle>
                     </Card.Header>
                     <Accordion.Collapse eventKey="1">
-                      <Card.Body>Hello! I'm another body</Card.Body>
+                      <Card.Body>
+                      { ((this.state.allflexposts[0] && this.state.currTab==="flex")
+                      || (this.state.alldietposts[0] && this.state.currTab==="diet")
+                      || (this.state.currTab==="cardio" && this.state.allcardioposts[0])
+                      || (this.state.currTab==="weight"&& this.state.allweightposts[0]))
+                         ? <ForumPosts  commentFormSubmitted={this.commentFormSubmitted}
+                                  updateCommId={this.updateCommId}
+                                  updateCommDesc={this.updateCommDesc}
+                                  forumposts={allcontent}/>
+                            :  <div style={styles.spinners}> <Spinner  animation="border" variant="success" /> </div>
+                      }
+
+                      </Card.Body>
                     </Accordion.Collapse>
                   </Card>
               </Accordion>

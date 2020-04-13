@@ -71,13 +71,13 @@ function NewPostButton(props) {
              placeholder="Enter a Description"
              name="desc"/>
           </Form.Group>
-          <Button type="button" onClick={props.formSubmitted}  variant="primary" type="submit">
+          <Button type="button" onClick={props.formSubmitted} style={{background: "#6c757d"}} variant="primary" type="submit">
             Submit
           </Button>
       </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
+        <Button style={{background: "#6c757d"}} onClick={props.onHide}>Close</Button>
       </Modal.Footer>
     </Modal>
   );
@@ -124,6 +124,7 @@ const styles = {
       width: '100px'
     },
     forbutton: {
+        background: "#6c757d",
         width: '500px',
         marginBottom: '20px',
         marginTop: '25px',
