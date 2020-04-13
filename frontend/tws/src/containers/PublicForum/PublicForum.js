@@ -21,6 +21,12 @@ class PublicForum extends Component {
     dietposts: [],
     cardioposts: [],
     weightposts: [],
+    allposts: [],
+    allflexposts: [],
+    alldietposts: [],
+    allcardioposts: [],
+    allweightposts: [],
+
     token: this.props.cookies.get('tws-token')
 
   }
@@ -61,6 +67,15 @@ class PublicForum extends Component {
       }).then( resp => resp.json())
       .then( res => this.setState({weightposts: res}))
       .catch( error => console.log(error))
+
+      fetch(`${process.env.REACT_APP_API_URL}/api/forumposts/`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Token ${this.state.token}`
+        }
+      }).then( resp => resp.json())
+      .then( res => this.setState({allposts: res}))
+      .catch( error => console.log(error))
   }
 
   changeTabs = tab =>  {
@@ -97,25 +112,42 @@ class PublicForum extends Component {
     });
   }
 
+  filterPosts = () => {
+    console.log("flitering")
+      let x;
+      for (x of this.state.allposts) {
+        if(x.category === "flex") {
+
+          this.state.allflexposts.push(x);
+        }else if (x.category === "diet"){
+          this.state.alldietposts.push(x);
+        }else if (x.category === "cardio") {
+          this.state.allcardioposts.push(x);
+        }else {
+          this.state.allweightposts.push(x);
+        }
+      }
+
+  }
+
   formSubmitted = () => {
-    let postBody = {
-      title: this.state.title,
-      caption: this.state.description,
-      user: this.props.cookies.get('tws-id'),
-      category: this.state.category
-    }
+      let postBody = {
+        title: this.state.title,
+        caption: this.state.description,
+        user: this.props.cookies.get('tws-id'),
+        category: this.state.category
+      }
 
-
-    fetch(`${process.env.REACT_APP_API_URL}/api/forumposts/`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Token ${this.state.token}`
-      },
-      body: JSON.stringify(postBody)
-    }).then( resp => resp.json())
-    .then( res => console.log(res))
-    .catch( error => console.log(error))
+      fetch(`${process.env.REACT_APP_API_URL}/api/forumposts/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Token ${this.state.token}`
+        },
+        body: JSON.stringify(postBody)
+      }).then( resp => resp.json())
+      .then( res => console.log(res))
+      .catch( error => console.log(error))
 
 
   }
@@ -146,20 +178,28 @@ class PublicForum extends Component {
   }
 
 render() {
+    if(this.state.allposts[0]){
+      this.filterPosts();
+    }
 
     let content;
+    let allcontent;
     if(this.state.currTab==="flex")
     {
       content = this.state.flexposts
+      allcontent = this.state.allflexposts
     }else if (this.state.currTab==="diet")
     {
       content = this.state.dietposts
+      allcontent = this.state.alldietposts
     }else if (this.state.currTab==="cardio")
     {
       content = this.state.cardioposts
+      allcontent = this.state.allcardioposts
     }else if (this.state.currTab==="weight")
     {
       content = this.state.weightposts
+      allcontent = this.state.allweightposts
     }
 
     return (
@@ -213,7 +253,19 @@ render() {
                       </Accordion.Toggle>
                     </Card.Header>
                     <Accordion.Collapse eventKey="1">
-                      <Card.Body>Hello! I'm another body</Card.Body>
+                      <Card.Body>
+                      { ((this.state.allflexposts[0] && this.state.currTab==="flex")
+                      || (this.state.alldietposts[0] && this.state.currTab==="diet")
+                      || (this.state.currTab==="cardio" && this.state.allcardioposts[0])
+                      || (this.state.currTab==="weight"&& this.state.allweightposts[0]))
+                         ? <ForumPosts  commentFormSubmitted={this.commentFormSubmitted}
+                                  updateCommId={this.updateCommId}
+                                  updateCommDesc={this.updateCommDesc}
+                                  forumposts={allcontent}/>
+                            :  <div style={styles.spinners}> <Spinner  animation="border" variant="success" /> </div>
+                      }
+
+                      </Card.Body>
                     </Accordion.Collapse>
                   </Card>
               </Accordion>
