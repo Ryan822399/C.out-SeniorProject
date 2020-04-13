@@ -118,6 +118,7 @@ export default ForumButton;
 
 const styles = {
     forbutton: {
+      background: "#6c757d",
         width: '500px',
         marginBottom: '20px',
         marginTop: '25px',
