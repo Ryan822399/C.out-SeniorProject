@@ -55,7 +55,7 @@ class Friends extends Component{
           console.log(friend.id);
           return (
             <div key={friend.id}>
-              <ListGroup.Item style={{textAlign: "left", background: "#A1D6E2"}}>
+              <ListGroup.Item style={{textAlign: "left", background: "white"}}>
                 <Media>
                   <img
                     width={64}
@@ -88,8 +88,8 @@ class Friends extends Component{
       <div>
         {this.props.userFriendships ? (
 
-            <Card style = {{background: "#A1D6E2", color: "#222"}}>
-              <Card.Header><h2>Friend's List</h2></Card.Header>
+            <Card style = {{background: "white", color: "#222", opacity: "0.9"}}>
+              <Card.Header><h2>Friends</h2></Card.Header>
               <this.search/>
               <ListGroup>
                 <this.existingFriend/>
@@ -109,7 +109,7 @@ search = evt => {
           <AddFriend/>
 
           <Form.Group as={Col} controlId="formGridUsername">
-            <Form.Control style={{background: "#66A5AD", color: "#222"}} type="userName" placeholder="Search Username" />
+            <Form.Control style={{background: "white", color: "#222"}} type="userName" placeholder="Search Username" />
           </Form.Group>
         <Button variant="dark" type="submit">
           Submit

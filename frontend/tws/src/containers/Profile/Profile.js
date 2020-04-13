@@ -172,13 +172,13 @@ class Profile extends Component {
 
   profile = evt => {
     return (
-        <Card style={{ background: "#A1D6E2", color: "#222" }}>
-          <Card.Header><h2>@{this.state.info.userName}</h2></Card.Header>
-          <Media>
+        <Card style={{ background: "white", color: "#222", opacity: ".9" }}>
+          <Card.Header><h2 style={{textAlign: "center"}}>@{this.state.info.userName}</h2></Card.Header>
+          <Media style={{background: "white"}}>
             <this.profilePicture/>
             <Media.Body>
             <Card.Body style={{textAlign: "left"}}>
-              <Card style={{ background: "#66A5AD", color: "#222" }}>
+              <Card style={{ background: "white", color: "#222" }}>
                 <Card.Header><h3 style={{ color: "#222" }}>{this.state.info.firstName} {this.state.info.lastName}</h3></Card.Header>
                 <Card.Body>
                   <Card.Subtitle><h4>{this.state.info.location}</h4></Card.Subtitle>
@@ -201,23 +201,28 @@ console.log(this.state.userFriendships)
     return (
       <div>
         { this.state.info ? (
-          <Card border="info" style={{background: "#F1F1F2", textAlign: "center", color: "#222"}, this.font}>
-            <Card.Body>
-                <Row>
-                  <Col xs="5">
-                    <this.profile/>
-                  </Col>
-                  <Col>
-                    <Friends userFriendships={this.state.userFriendships}
-                    ID={this.state.currentID}/>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col>
-                    <TimelineDetails />
-                  </Col>
-                </Row>
-            </Card.Body>
+          <Card className="bg-dark text-white" style={this.font}>
+            <Card.Img src="https://www.planetfitness.com/sites/default/files/feature-image/break-workout_602724.jpg" alt="Card image" />
+            <Card.ImgOverlay>
+              {/*<Card border="info" style={{textAlign: "center", color: "#222"}, this.font}>*/}
+                <Card.Body>
+                    <Row>
+                      <Col xs="5">
+                        <this.profile/>
+                      </Col>
+                      <Col>
+                        <Friends userFriendships={this.state.userFriendships}
+                        ID={this.state.currentID}/>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col>
+                        <TimelineDetails />
+                      </Col>
+                    </Row>
+                </Card.Body>
+
+            </Card.ImgOverlay>
           </Card>
         )
           : <h3 style={{color: "#1BFFFF"}}>Loading</h3>
