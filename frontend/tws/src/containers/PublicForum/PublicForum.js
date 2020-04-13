@@ -182,15 +182,11 @@ class PublicForum extends Component {
     }).then( resp => resp.json())
     .then( res => console.log(res))
     .catch( error => console.log(error))
- alert("hello")
+ 
   }
 
 render() {
-  let currDate = new Date()
-  let month = currDate.getMonth() + 1;
-  let year = currDate.getFullYear();
-  let fullDate = year + "-" + month + "-" + currDate.getDate()
-  console.log(fullDate)
+
   if(this.state.allposts[0] && this.state.filter){
     this.filterPosts();
   }
