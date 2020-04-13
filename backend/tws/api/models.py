@@ -92,7 +92,7 @@ class FeedPost(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     post = models.CharField(max_length=1000, null=True)
     picture = models.ImageField(upload_to='images/', null=True)
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, blank=True)
     likes =  models.FloatField(default=0, null=True)
 
 
