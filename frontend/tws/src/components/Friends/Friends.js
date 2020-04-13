@@ -7,6 +7,7 @@ import EditButton from '../../components/EditButton/EditButton';
 import AddFriendButton from '../../components/AddFriendButton/AddFriendButton';
 import RemoveFriendButton from '../../components/RemoveFriendButton/RemoveFriendButton';
 import AddFriend from '../../components/AddFriend/AddFriend';
+import UserSearch from '../../components/UserSearch/UserSearch';
 import axios from 'axios';
 class Friends extends Component{
   state = {
@@ -107,14 +108,7 @@ search = evt => {
     <div>
       <Form style={{padding: "5px"}}>
           <AddFriend/>
-
-          <Form.Group as={Col} controlId="formGridUsername">
-            <Form.Control style={{background: "white", color: "#222"}} type="userName" placeholder="Search Username" />
-          </Form.Group>
-        <Button variant="dark" type="submit">
-          Submit
-        </Button>
-
+          <UserSearch/>
       </Form>
     </div>
   )
