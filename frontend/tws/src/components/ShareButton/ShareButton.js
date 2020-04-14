@@ -13,8 +13,8 @@ class ShareButton extends Component {
     form_data.append('title', this.props.postInfo.title);
     form_data.append('caption',this.props.postInfo.caption);
     form_data.append('post', this.props.postInfo.post);
-    form_data.append('picture', this.props.postInfo.picture);
-    form_data.append('user', this.state.token);
+    //form_data.append('picture', this.props.postInfo.picture);
+    form_data.append('user', this.props.userID);
 
     let url = 'http://localhost:8000/api/feedposts/';
 

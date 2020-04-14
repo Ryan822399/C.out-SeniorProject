@@ -17,7 +17,7 @@ function Posts(props) {
 
   return(
     <div>
-          { props.posts.map( post => {
+          { props.posts.reverse().map( post => {
           var u = 'http://localhost:3000/homepage/profile/?id=' + (props.profile.filter(({user}) => user === post.user))[0].user;
            return (
 
@@ -51,7 +51,7 @@ function Posts(props) {
                     <ButtonToolbar>
                       <LikeButton postId = {post}/>
                     <Button variant="outline-secondary">Comment</Button>
-                    <ShareButton postInfo = {post}/>
+                    <ShareButton postInfo = {post} userID = {props.userId}/>
                     </ButtonToolbar>
                   </Card>
                 <br/>

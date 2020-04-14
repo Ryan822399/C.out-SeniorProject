@@ -87,13 +87,13 @@ class Dummy(models.Model):
         return self.title
 
 class FeedPost(models.Model):
-    title = models.CharField(max_length=15, null=True)
-    caption = models.CharField(max_length=40, null=True)
+    title = models.CharField(max_length=15, null=True, blank=True)
+    caption = models.CharField(max_length=40, null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    post = models.CharField(max_length=1000, null=True)
+    post = models.CharField(max_length=1000, null=True, blank=True)
     picture = models.ImageField(upload_to='images/', null=True)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, blank=True)
-    likes =  models.FloatField(default=0, null=True)
+    likes =  models.FloatField(default=0, null=True, blank=True)
 
 
     def __str__(self):
