@@ -170,6 +170,6 @@ class LikeViewSet(viewsets.ModelViewSet):
     serializer_class = LikeSerializer
 
 class GroupsViewSet(viewsets.ModelViewSet):
-    queryset = Groups.objects.all()
+    queryset = Like.objects.all()
     permission_classes = [permissions.AllowAny]
     serializer_class = GroupsSerializer

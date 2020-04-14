@@ -11,7 +11,8 @@ class Feed extends Component {
   state = {
     posts: [],
     info: [],
-    token: this.props.cookies.get('tws-token')
+    token: this.props.cookies.get('tws-token'),
+    user: this.props.cookies.get('tws-id')
   }
 
   componentDidMount() {
@@ -45,7 +46,7 @@ class Feed extends Component {
             <Container>
               <NewPost /> <br/>
                   { this.state.posts[0]
-                    && this.state.info[0] ? <Posts posts={this.state.posts} profile={this.state.info} userID = {this.state.token}/>
+                    && this.state.info[0] ? <Posts posts={this.state.posts} profile={this.state.info} userId = {this.state.user}/>
                         :  <div style={styles.spinners}> <Spinner  animation="border" variant="success" /> </div>
                   }
             </Container>

@@ -1,5 +1,6 @@
 import React from 'react';
 import LikeButton from '../../components/LikeButton/LikeButton';
+import ShareButton from '../../components/ShareButton/ShareButton';
 import {Spinner, ListGroup,Container, Card, Button, Media, ButtonToolbar} from 'react-bootstrap';
 
 
@@ -16,7 +17,7 @@ function Posts(props) {
 
   return(
     <div>
-          { props.posts.map( post => {
+          { props.posts.reverse().map( post => {
           var u = 'http://localhost:3000/homepage/profile/?id=' + (props.profile.filter(({user}) => user === post.user))[0].user;
            return (
 
@@ -48,9 +49,9 @@ function Posts(props) {
                         </Card.Text>
                     </Card.Body>
                     <ButtonToolbar>
-                      <LikeButton postId = {post} userId = {props.token}/>
-                      <Button variant="outline-secondary">Comment</Button>
-                      <Button variant="outline-success">Share</Button>
+                      <LikeButton postId = {post}/>
+                    <Button variant="outline-secondary">Comment</Button>
+                    <ShareButton postInfo = {post} userID = {props.userId}/>
                     </ButtonToolbar>
                   </Card>
                 <br/>
