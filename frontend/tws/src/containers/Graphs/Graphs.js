@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../../css/Profile.css';
+import '../../css/Progress.css';
 import {Line} from 'react-chartjs-2'
 import "chartjs-plugin-lineheight-annotation";
 import { withCookies } from 'react-cookie';
 import ProgressTabs from '../../components/ProgressTabs/ProgressTabs';
 import GraphButton from '../../components/GraphButton/GraphButton';
+import DeleteButton from '../../components/GraphButton/DeleteButton';
 import {Spinner} from 'react-bootstrap'
+import PropTypes from 'prop-types'
 
 import {Image, Navbar, Nav, NavDropdown, Form, FormControl, Button, Media, Card, CardGroup} from 'react-bootstrap';
 import { Redirect, withRouter } from 'react-router-dom';
@@ -62,7 +64,7 @@ class Graphs extends Component {
 
 
   handleChange = event => {
-    this.setState( {value: event.target.value} )  
+    this.setState( {value: event.target.value} )
    }
 
   handleSubmit(event){
@@ -102,7 +104,7 @@ class Graphs extends Component {
       weight: this.state.weight,
       date: this.state.date
     }
-    
+
     if(this.state.currTab == "first")
     {
       fetch(`${process.env.REACT_APP_API_URL}/api/workouts/`, {
@@ -139,6 +141,51 @@ class Graphs extends Component {
 
   }
 
+//WIP Delete tab
+//  deleteForm = () => {
+//    let fromDelete = {
+//      title: this.state.title,
+//      description: this.state.description,
+//      weight: this.state.weight,
+//      date: this.state.date
+//    }
+
+//    if(this.state.currTab == "first")
+//    {
+//      fetch(`${process.env.REACT_APP_API_URL}/api/workouts/`, {
+//        method: 'DELETE',
+//        headers: {
+//          'Content-Type': 'application/json',
+//          'Authorization': `Token ${this.state.token}`
+//        },
+//        body: JSON.stringify(postBody)
+//      }).then( resp => resp.json())
+//      .then( res => this.props.editedWorkout(res))
+//      .catch( error => console.log(error))
+//      console.log(postBody.title);
+//      console.log(postBody.description);
+//      console.log(postBody.weight);
+//      console.log(postBody.date);
+//    }
+
+
+
+//    else if(this.state.currTab == "second")
+//    {
+//      fetch(`${process.env.REACT_APP_API_URL}/api/groupworkout/`, {
+//        method: 'DELETE',
+//        headers: {
+//          'Content-Type': 'application/json',
+//          'Authorization': `Token ${this.state.token}`
+//        },
+//        body: JSON.stringify(postBody)
+//      }).then( resp => resp.json())
+//      .then( res => this.props.editedWorkout(res))
+//      .catch( error => console.log(error))
+//    }
+
+
+// }
 
   componentDidMount() {
     fetch(`${process.env.REACT_APP_API_URL}/api/workouts/`, {
@@ -194,7 +241,7 @@ class Graphs extends Component {
           var workoutTitle = this.state.workouts[filterIndex].title;
           seenTitles[filterIndex] = workoutTitle;
         }
-  
+
         const distinctTitles = Array.from(new Set(seenTitles));
         this.state.workoutTitles = distinctTitles
         return(<h3>Choose a Workout</h3>)
@@ -209,7 +256,7 @@ class Graphs extends Component {
           var workoutTitle = this.state.groupWorkouts[filterIndex].title;
           seenTitles[filterIndex] = workoutTitle;
         }
-  
+
         const distinctTitles = Array.from(new Set(seenTitles));
         this.state.workoutTitles = distinctTitles
         return(<h3>Choose a Workout</h3>)
@@ -217,7 +264,7 @@ class Graphs extends Component {
 
     }
 
-    
+
 
 
     getChartData = canvas => {
@@ -272,7 +319,7 @@ class Graphs extends Component {
 
         }
 
-        
+
         //Selects Group Progress Tab
         else if(this.state.currTab=="second")
         {
@@ -287,7 +334,7 @@ class Graphs extends Component {
           for(filterIndex = 0; filterIndex < this.state.groupWorkouts.length; filterIndex++)
           {
             var workoutTitle = this.state.groupWorkouts[filterIndex].title;
-            
+
             if(chosenWorkout == workoutTitle)
             {
               groupFilteredDataWeight[groupCounter] = this.state.groupWorkouts[filterIndex].weight;
@@ -311,7 +358,7 @@ class Graphs extends Component {
         }
 
 
-        
+
 
 
     }
@@ -335,12 +382,13 @@ class Graphs extends Component {
         color: 'black',
       };
     }
-    
-    
+
+
     return (
 
         //If a set of elements exist, render it
-    <div>
+    <div class="pro">
+
     <div style={styles.progress}>
     <ProgressTabs changeTabs={this.changeTabs} act={this.state.currTab}/>
     </div>
@@ -348,12 +396,13 @@ class Graphs extends Component {
         <div style = {{position: "relative", width: 700, height: 550}}>
 
 
-
+          <CardGroup style ={{background: "#222"}}>
           <div dropdown>
             {this.loadWorkoutSelector()}
+
             <form onSubmit={this.handleSubmit}>
               <label>
-                Workout Titles: 
+                Workout Titles:
                 <select value={this.state.value} onChange={this.handleChange}>
                   {this.state.workoutTitles.map(workoutTitles => (
                     <option key = {workoutTitles} value ={workoutTitles}>
@@ -364,7 +413,9 @@ class Graphs extends Component {
               </label>
               </form>
             </div>
+            </CardGroup>
 
+          <CardGroup style ={{background: "#222"}}>
           <div style={styles.forbutton}>
             <GraphButton  formSubmitted={this.formSubmitted}
             updateDesc={this.updateDesc}
@@ -373,8 +424,20 @@ class Graphs extends Component {
             updateDate={this.updateDate}
             post={this.state.newPost}/>
           </div>
+          </CardGroup>
 
+          <CardGroup style ={{background: "#222"}}>
+          <div style={styles.forbutton}>
+            <DeleteButton  formSubmitted={this.formSubmitted}
+            updateDesc={this.updateDesc}
+            updateTitle={this.updateTitle}
+            updateWeight={this.updateWeight}
+            updateDate={this.updateDate}
+            post={this.state.newPost}/>
+          </div>
+          </CardGroup>
 
+          <CardGroup style ={{background: "#ccc7c6"}}>
             <Line
                 options ={{
                     title:{
@@ -393,13 +456,25 @@ class Graphs extends Component {
                         hover: true,
                         color: 'white',
                       //  noDash: true
-                    }
+                    },
+                    backgroundColor: 'white'
                 }}
                 data = {this.getChartData}
             />
+          </CardGroup>
         </div>
       )
-      : (<div style={styles.spinners}> <Spinner  animation="border" variant="success" /> </div>)
+      : (
+
+      <div style={styles.spinners}> <Spinner  animation="border" variant="success" />
+            <div style={styles.forbutton}>
+            <GraphButton  formSubmitted={this.formSubmitted}
+            updateDesc={this.updateDesc}
+            updateTitle={this.updateTitle}
+            updateWeight={this.updateWeight}
+            updateDate={this.updateDate}
+            post={this.state.newPost}/>
+          </div> </div>)
       }
     </div>
     )
@@ -409,7 +484,8 @@ const styles = {
     progress: {
         display: "flex",
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        background: "white"
     }}
 
 export default withCookies(Graphs);

@@ -3,7 +3,7 @@ import { Form, Modal, Button, ButtonToolbar  } from 'react-bootstrap';
 
 
 
-function NewPostButton(props) {
+function DeletePostButton(props) {
 
   const postTitleSubmited = event => {
   props.updateTitle(event.target.value)
@@ -31,7 +31,7 @@ function NewPostButton(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Post a Workout!
+          Delete a Workout!
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -95,9 +95,9 @@ const [modalShow, setModalShow] = React.useState(false);
     <div>
         <ButtonToolbar>
         <Button  style={styles.forbutton} variant="primary" onClick={() => setModalShow(true)}>
-          Post a Workout
+          Delete a Workout
         </Button>
-        <NewPostButton
+        <DeletePostButton
           formSubmitted={props.formSubmitted}
           updateTitle={props.updateTitle}
           updateDesc={props.updateDesc}
@@ -118,7 +118,6 @@ export default ForumButton;
 
 const styles = {
     forbutton: {
-      background: "#6c757d",
         width: '500px',
         marginBottom: '20px',
         marginTop: '25px',
