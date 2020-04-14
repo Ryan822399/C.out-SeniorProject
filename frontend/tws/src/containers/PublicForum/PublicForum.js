@@ -15,7 +15,7 @@ class PublicForum extends Component {
     title: '',
     description: '',
     category: 'flex',
-    currForPost: '',
+    currForPost: null,
     comDescription: '',
     flexposts: [],
     dietposts: [],
@@ -182,7 +182,7 @@ class PublicForum extends Component {
     }).then( resp => resp.json())
     .then( res => console.log(res))
     .catch( error => console.log(error))
- 
+
   }
 
 render() {
@@ -245,7 +245,8 @@ render() {
                     || (this.state.dietposts[0] && this.state.currTab==="diet")
                     || (this.state.currTab==="cardio" && this.state.cardioposts[0])
                     || (this.state.currTab==="weight"&& this.state.weightposts[0]))
-                       ? <ForumPosts  commentFormSubmitted={this.commentFormSubmitted}
+                       ? <ForumPosts  currForPost={this.state.currForPost}
+                                commentFormSubmitted={this.commentFormSubmitted}
                                 updateCommId={this.updateCommId}
                                 updateCommDesc={this.updateCommDesc}
                                 forumposts={content}/>
@@ -267,7 +268,8 @@ render() {
                       || (this.state.alldietposts[0] && this.state.currTab==="diet")
                       || (this.state.currTab==="cardio" && this.state.allcardioposts[0])
                       || (this.state.currTab==="weight"&& this.state.allweightposts[0]))
-                         ? <ForumPosts  commentFormSubmitted={this.commentFormSubmitted}
+                         ? <ForumPosts  currForPost={this.state.currForPost}
+                                  commentFormSubmitted={this.commentFormSubmitted}
                                   updateCommId={this.updateCommId}
                                   updateCommDesc={this.updateCommDesc}
                                   forumposts={allcontent}/>
