@@ -47,22 +47,23 @@ class Login extends Component{
       .then( res => {
         this.props.cookies.set('tws-token', res.token);
         this.props.cookies.set('tws-id', res.id);
-        let flag = false
-              fetch(`${process.env.REACT_APP_API_URL}/api/profile/${this.props.cookies.get('tws-id')}`, {
-                method: 'GET',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(this.state.credentials)
-              }).then( resp => resp.json())
-              .then( res => {console.log(res); this.setState({userData: res})})
-              .catch( error => console.log(error))
+        // let flag = false
+        //       fetch(`${process.env.REACT_APP_API_URL}/api/profile/${this.props.cookies.get('tws-id')}`, {
+        //         method: 'GET',
+        //         headers: {
+        //           'Content-Type': 'application/json'
+        //         },
+        //         body: JSON.stringify(this.state.credentials)
+        //       }).then( resp => resp.json())
+        //       .then( res => {console.log(res); this.setState({userData: res})})
+        //       .catch( error => console.log(error))
+        //
+        //
+        // if(this.state.userData.firstName === "temp")
+        // {   window.location.href = "/survey/";}
+        // else {
+       window.location.href = "/homepage/feed";
 
-        if(this.state.userData.firstName == undefined)
-        {   window.location.href = "/survey/";}
-        else {
-        window.location.href = "/homepage/feed";
-        }
       })
       .catch( error => console.log(error))
     } else {

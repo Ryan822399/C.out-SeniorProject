@@ -11,6 +11,7 @@ class Feed extends Component {
   state = {
     posts: [],
     info: [],
+    userData: [],
     token: this.props.cookies.get('tws-token'),
     user: this.props.cookies.get('tws-id')
   }
@@ -34,12 +35,26 @@ class Feed extends Component {
       .then( res => this.setState({info: res}))
       .catch(error => console.log(error))
 
+      let flag = false;
+      fetch(`${process.env.REACT_APP_API_URL}/api/profile/${this.props.cookies.get('tws-id')}/`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then( resp => resp.json())
+      .then( res => this.setState({userData: res}))
+      .catch( error => console.log(error))
+
 
   }
 
   render() {
-    console.log("posts", this.state.posts)
-    console.log("info", this.state.info)
+    console.log("USER DATA", this.state.userData)
+    console.log(this.state.userData)
+    if((this.state.userData.firstName === "temp")) {
+      console.log("in CONDITION", this.state.userData)
+      window.location.href = "/survey";
+    }
       return (
         <div>
           <br/>
