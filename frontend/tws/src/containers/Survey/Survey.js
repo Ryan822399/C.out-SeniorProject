@@ -21,7 +21,7 @@ export default class Survey extends Component {
               endAngle: this.state.x * (2*Math.PI)
           }})
           progress = <DonutChart status={this.state.status}/>
-          console.log("value of x", this.state.x)
+          
           this.state.x += .1
 
         if(this.state.x >= 1) {
