@@ -61,25 +61,7 @@ class Survey extends Component {
         .catch(err => console.log(err))
   };
 
-  update = () =>
-  {
-      let progress = <DonutChart status={this.state.status}/>
-    setInterval(() => {
-        console.log('This will run every second!');
-        this.setState({status: {
-              startAngle: 0,
-              endAngle: this.state.x * (2*Math.PI)
-          }})
-          progress = <DonutChart status={this.state.status}/>
 
-          this.state.x += .1
-
-        if(this.state.x >= 1) {
-          this.setState({x:0})
-        }
-      }, 10000);
-      return progress
-  }
 
   inputChanged = event => {
     let att = this.state.attributes;
@@ -97,6 +79,9 @@ class Survey extends Component {
   };
 
   transition = val => () => {
+    if(val === "next") {
+    this.update()
+    }else { this.redo();}
     if(val == "next") {
       if(this.state.card1) {
         this.setState({card1: false})
@@ -158,7 +143,7 @@ class Survey extends Component {
             </Button>
           </Col>
           <Col sm={{ size: 'auto', offset: 1 }}>
-          <Button variant="dark" onClick={this.transition("next")}>
+          <Button variant="dark" onClick={ this.transition("next")}>
             Next
           </Button>
           </Col>
@@ -185,7 +170,7 @@ class Survey extends Component {
             </Button>
           </Col>
           <Col sm={{ size: 'auto', offset: 1 }}>
-          <Button variant="dark" onClick={this.transition("next")}>
+          <Button variant="dark" onClick={ this.transition("next")}>
             Next
           </Button>
           </Col>
@@ -216,7 +201,7 @@ class Survey extends Component {
             </Button>
           </Col>
           <Col sm={{ size: 'auto', offset: 1 }}>
-          <Button variant="dark" onClick={this.transition("next")}>
+          <Button variant="dark" onClick={ this.transition("next")}>
             Next
           </Button>
           </Col>
@@ -247,7 +232,7 @@ class Survey extends Component {
             </Button>
           </Col>
           <Col sm={{ size: 'auto', offset: 1 }}>
-          <Button variant="dark" onClick={this.handleFormSubmit}>
+          <Button variant="dark" onClick={ this.handleFormSubmit}>
             Submit
           </Button>
           </Col>
@@ -315,6 +300,36 @@ class Survey extends Component {
       </div>
     )
   }
+  update = () =>
+  {
+        console.log('This will run every second!');
+
+          console.log("value of x", this.state.x)
+          this.state.x += .33
+          this.setState({status: {
+                startAngle: 0,
+                endAngle: this.state.x * (2*Math.PI)
+            }})
+
+        if(this.state.x > 1) {
+          this.setState({x:0})
+        }
+  }
+  redo = () =>
+  {
+        console.log('This will run every second!');
+
+          console.log("value of x", this.state.x)
+          this.state.x -= .33
+          this.setState({status: {
+                startAngle: 0,
+                endAngle: this.state.x * (2*Math.PI)
+            }})
+
+        if(this.state.x > 1) {
+          this.setState({x:0})
+        }
+  }
   render () {
 
     let content;
@@ -332,16 +347,19 @@ class Survey extends Component {
     }
 
     return (
-      <div>
-      <NavBar/>
-      <Row>
-        <Col>
-          {content}
-        </Col>
-        <Col>
-          {this.update()}
-        </Col>
-      </Row>
+      <div style={{ height: "740px", backgroundColor: "#A9A9A9"}} >
+        <NavBar/>
+        <div style={{display: "flex", justifyContent: "center",
+                      alignItems: "center", margin: "40px"}}>
+            <Row>
+              <Col xs={12} md={8}>
+                {content}
+              </Col>
+              <Col xs={6} md={4}>
+                <DonutChart status={this.state.status}/>
+              </Col>
+            </Row>
+        </div>
       </div>
     );
   }

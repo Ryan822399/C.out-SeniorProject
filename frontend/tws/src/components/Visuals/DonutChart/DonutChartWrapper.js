@@ -7,9 +7,9 @@ export default class DonutChartWrapper extends Component {
     chart: new DonutChart(this.refs.chart, this.props.status)
     })
   }
-  // shouldComponentUpdate() {
-  //   return false;
-  // }
+  shouldComponentUpdate() {
+    return false;
+  }
   componentWillReceiveProps(nextProps) {
         this.state.chart.update(nextProps.status)
     }

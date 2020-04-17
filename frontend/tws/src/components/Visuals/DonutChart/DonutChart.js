@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
-const MARGIN = { TOP: 50, BOTTOM: 50, LEFT: 80, RIGHT: 10}
-const WIDTH = 500 - MARGIN.LEFT - MARGIN.RIGHT;
-const HEIGHT = 500 - MARGIN.TOP - MARGIN.BOTTOM;
+const MARGIN = { TOP: 10, BOTTOM: 10, LEFT: 10, RIGHT: 10}
+const WIDTH = 300 - MARGIN.LEFT - MARGIN.RIGHT;
+const HEIGHT = 400 - MARGIN.TOP - MARGIN.BOTTOM;
 
 export default class DonutChart {
 
@@ -32,12 +32,12 @@ export default class DonutChart {
         .innerRadius(radius- 78);
 
         vis.svg.append("path")
-        .attr("fill", 'black')
+        .attr("fill", '#6c757d')
         .attr("d", outerArc({startAngle: 0, endAngle: 2*Math.PI}))
         .style("stroke-width", 5);
 
         vis.svg.append("path")
-        .attr("fill", 'black')
+        .attr("fill", '#6c757d')
         .attr("d", innerArc({startAngle: 0, endAngle: 2*Math.PI}))
         .style("stroke-width", 5);
 
@@ -56,12 +56,13 @@ export default class DonutChart {
           };
       }
     update(status) {
-          const data = [status ]
+          const data = [status]
 
           const vis = this
 
           //join
           vis.path = vis.svg.selectAll(".main").data(data);
+console.log("STATUS", data[0].endAngle)
 
           //exit
           vis.path.exit()
@@ -81,7 +82,7 @@ export default class DonutChart {
               .attr("class", "main")
               .attr("fill", 'cyan')
               .transition()
-              .duration(7500)
+              .duration(750)
               .attr("d", vis.arc(data));
 
     }
