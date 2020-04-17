@@ -9,8 +9,13 @@ export default class Survey extends Component {
       startAngle: 0,
       endAngle: 0
     },
-    x: 0
+    x: 0,
+    card1: true,
+    card2: false,
+    card3: false,
+    card4: false
   }
+
   update = () =>
   {
       let progress = <DonutChart status={this.state.status}/>
@@ -40,14 +45,14 @@ export default class Survey extends Component {
         </Form.Group>
         <Row>
           <Col sm={{ size: 'auto', offset: 1 }}>
-            <Button variant="primary" type="back">
+            <p>
               Back
-            </Button>
+            </p>
           </Col>
           <Col sm={{ size: 'auto', offset: 1 }}>
-            <Button variant="primary" type="next">
-              Next
-            </Button>
+          <p>
+            Next
+          </p>
           </Col>
         </Row>
       </Form>
@@ -56,7 +61,8 @@ export default class Survey extends Component {
 
   card = () => {
     return (
-      <Card style={{ width: '' }}>
+      <div style={{ paddingTop: '30px' }}>
+      <Card>
         <Card.Body>
           <Card.Title>What is your Username?</Card.Title>
           <Card.Text>
@@ -64,17 +70,16 @@ export default class Survey extends Component {
           </Card.Text>
         </Card.Body>
       </Card>
+      </div>
     )
   }
   render () {
 
-
+    let content = <this.card />
 
     return (
       <div>
       <NavBar/>
-      <Card>
-        <Card.Body>
           <Row>
             <Col>
               <this.card />
@@ -83,8 +88,6 @@ export default class Survey extends Component {
                   {this.update()}
             </Col>
           </Row>
-        </Card.Body>
-      </Card>
       </div>
     );
   }
