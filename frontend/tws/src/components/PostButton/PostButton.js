@@ -23,12 +23,7 @@ class PostButton extends Component {
       this.setState({attributes: att});
     }
 
-    handleImageChange = event => {
-      console.log(event.target.files[0]);
-      let att = this.state.attributes;
-      att[event.target.name] = event.target.files[0];
-      this.setState({attributes: att});
-    };
+
 
   handleFormSubmit = event => {
     //event.preventDefault()
