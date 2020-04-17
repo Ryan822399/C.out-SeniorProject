@@ -13,7 +13,7 @@ import Graphs from './containers/Graphs/Graphs';
 import TimelineDetails from './components/TimelineDetails/TimelineDetails';
 import PublicForum from './containers/PublicForum/PublicForum';
 import Friend from './containers/Friend/Friend';
-
+import Survey from './containers/Survey/Survey';
 
 //<Route exact path="/workouts" component={App}/>
 import Footer from './components/Footer/Footer';
@@ -23,6 +23,7 @@ const routing = (
     <CookiesProvider>
       <Route exact path="/" component={Login}/>
       <Route path="/homepage" component={App}/>
+      <Route path="/survey" component={Survey}/>
       <Route exact path="/homepage/feed" component={Feed}/>
       <Route exact path="/homepage/profile" component={Profile}/>
       <Route exact path="/homepage/graphs" component={Graphs}/>

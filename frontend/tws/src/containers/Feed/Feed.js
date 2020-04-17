@@ -34,6 +34,7 @@ class Feed extends Component {
       .then( res => this.setState({info: res}))
       .catch(error => console.log(error))
 
+
   }
 
   render() {
