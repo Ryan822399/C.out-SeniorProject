@@ -43,7 +43,7 @@ export default class DonutChart {
 
 
         const data0 = d3.nest().entries(status);
-        console.log("data", data0)
+
         vis.update(status);
 
     }
@@ -57,12 +57,13 @@ export default class DonutChart {
       }
     update(status) {
           const data = [status ]
-          console.log("status1", data)
+
           const vis = this
 
-
+          //join
           vis.path = vis.svg.selectAll(".main").data(data);
 
+          //exit
           vis.path.exit()
                 .transition()
                 .duration(750)
