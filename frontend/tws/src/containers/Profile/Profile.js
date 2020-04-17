@@ -179,8 +179,8 @@ class Profile extends Component {
             <Media.Body>
             <Card.Body style={{textAlign: "left"}}>
               <Card style={{ background: "white", color: "#222" }}>
-                <Card.Header><h3 style={{ color: "#222" }}>{this.state.info.firstName} {this.state.info.lastName}</h3></Card.Header>
                 <Card.Body>
+                  <Card.Title><h3 style={{ color: "#222" }}>{this.state.info.firstName} {this.state.info.lastName}</h3></Card.Title>
                   <Card.Subtitle><h4>{this.state.info.location}</h4></Card.Subtitle>
                   <Card.Text>
                     {this.state.info.bio}
