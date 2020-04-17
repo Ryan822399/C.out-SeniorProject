@@ -48,7 +48,7 @@ class Login extends Component{
         this.props.cookies.set('tws-token', res.token);
         this.props.cookies.set('tws-id', res.id);
         let flag = false
-              fetch(`${process.env.REACT_APP_API_URL}/api/users/${this.props.cookies.get('tws-id')}`, {
+              fetch(`${process.env.REACT_APP_API_URL}/api/profile/${this.props.cookies.get('tws-id')}`, {
                 method: 'GET',
                 headers: {
                   'Content-Type': 'application/json'
@@ -58,7 +58,7 @@ class Login extends Component{
               .then( res => {console.log(res); this.setState({userData: res})})
               .catch( error => console.log(error))
 
-        if(this.state.userData.FirstName == undefined)
+        if(this.state.userData.firstName == undefined)
         {   window.location.href = "/survey/";}
         else {
         window.location.href = "/homepage/feed";
@@ -128,7 +128,7 @@ class Login extends Component{
                       </Card.Text>
                     </Card.Body>
                   </Card>
-                  
+
                 </Col>
 
                 <Col>
