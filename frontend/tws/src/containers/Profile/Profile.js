@@ -30,7 +30,7 @@ class Profile extends Component {
     var currentLocation = window.location;
     var url = new URL(currentLocation);
     var urlId = url.searchParams.get("id");
-    if (currentLocation == "http://localhost:3000/homepage/profile/?id"){
+    if (currentLocation == "http://localhost:3000/homepage/profile/"){
       urlId = this.props.cookies.get('tws-id');
     }
 

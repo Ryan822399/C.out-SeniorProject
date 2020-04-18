@@ -15,7 +15,7 @@ function NavBar(props) {
             </h3>
             </Navbar.Brand>
             <Nav className="mr-auto">
-              <Nav.Link style={{color: "#222"}} href="http://localhost:3000/homepage/profile/?id">Profile</Nav.Link>
+              <Nav.Link style={{color: "#222"}} href="http://localhost:3000/homepage/profile/">Profile</Nav.Link>
               <Nav.Link style={{color: "#222"}} href="http://localhost:3000/homepage/graphs">Progress</Nav.Link>
 
               <Nav.Link style={{color: "#222"}} href="http://localhost:3000/homepage/forum">Public Forum</Nav.Link>
