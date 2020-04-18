@@ -278,7 +278,7 @@ class EditProfile extends Component {
     console.log("THE USER");
     console.log(this.props.user);
     return (
-      <div style={{background: "#A1D6E2", color: "#222", padding: "5%"}}>
+      <div style={{background: "#222", color: "#222", padding: "5%"}}>
         <Card border="info" style={{marginLeft: "auto", marginRight: "auto" /*display: "flex", alignItems: "center", justifyContent: "center"*/ }}>
           <Card.Header>
             <h2>
@@ -289,28 +289,28 @@ class EditProfile extends Component {
             <Form>
               <Form.Group controlId="formGridUserName">
                 <Form.Label>Username</Form.Label>
-                <Form.Control style={{background: "#222", color: "#1BFFFF"}} name="userName" type="userName" placeholder={userName} onChange={this.change("userName")}/>
+                <Form.Control style={{background: "#222", color: "white"}} name="userName" type="userName" placeholder={userName} onChange={this.change("userName")}/>
               </Form.Group>
 
               <Form.Row>
                 <Form.Group as={Col} controlId="formGridFirstName">
                   <Form.Label>First name</Form.Label>
-                  <Form.Control style={{background: "#222", color: "#1BFFFF"}} name="firstName" type="firstName" placeholder={firstName} onChange={this.change("firstName")}/>
+                  <Form.Control style={{background: "#222", color: "white"}} name="firstName" type="firstName" placeholder={firstName} onChange={this.change("firstName")}/>
                 </Form.Group>
                 <Form.Group as={Col} controlId="formGridLastName">
                   <Form.Label>Last name</Form.Label>
-                  <Form.Control style={{background: "#222", color: "#1BFFFF"}} name="lastName" type="lastName" placeholder={lastName} onChange={this.change("lastName")}/>
+                  <Form.Control style={{background: "#222", color: "white"}} name="lastName" type="lastName" placeholder={lastName} onChange={this.change("lastName")}/>
                 </Form.Group>
               </Form.Row>
 
               <Form.Group controlId="formGridBio">
                 <Form.Label>Bio</Form.Label>
-                <Form.Control style={{background: "#222", color: "#1BFFFF"}} name="bio" placeholder={bio} onChange={this.change("bio")}/>
+                <Form.Control style={{background: "#222", color: "white"}} name="bio" placeholder={bio} onChange={this.change("bio")}/>
               </Form.Group>
 
               <Form.Group controlId="formGridLocation">
                 <Form.Label>Location</Form.Label>
-                <Form.Control style={{background: "#222", color: "#1BFFFF"}} name="location" placeholder={location} onChange={this.change("location")}/>
+                <Form.Control style={{background: "#222", color: "white"}} name="location" placeholder={location} onChange={this.change("location")}/>
               </Form.Group>
 
               <Form.Group controlId="formGridPicture">
@@ -328,11 +328,11 @@ class EditProfile extends Component {
               <Form.Row>
                 <Form.Group as={Col} controlId="formGridHeightFeet">
                   <Form.Label>Height (Feet)</Form.Label>
-                  <Form.Control style={{background: "#222", color: "#1BFFFF"}} name="heightFeet" type="heightFeet" placeholder={heightFeet} onChange={this.change("heightFeet")}/>
+                  <Form.Control style={{background: "#222", color: "white"}} name="heightFeet" type="heightFeet" placeholder={heightFeet} onChange={this.change("heightFeet")}/>
                 </Form.Group>
                 <Form.Group as={Col} controlId="formGridHeightInches">
                   <Form.Label>Height (inches)</Form.Label>
-                  <Form.Control style={{background: "#222", color: "#1BFFFF"}} name="heightInches" type="heightInches" placeholder={heightInches} onChange={this.change("heightInches")}/>
+                  <Form.Control style={{background: "#222", color: "white"}} name="heightInches" type="heightInches" placeholder={heightInches} onChange={this.change("heightInches")}/>
                 </Form.Group>
               </Form.Row>
 

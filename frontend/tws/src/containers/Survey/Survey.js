@@ -232,7 +232,7 @@ class Survey extends Component {
             </Button>
           </Col>
           <Col sm={{ size: 'auto', offset: 1 }}>
-          <Button variant="dark" onClick={ this.handleFormSubmit}>
+          <Button variant="dark" onClick={ this.handleFormSubmit} href="http://localhost:3000/homepage/feed">
             Submit
           </Button>
           </Col>
