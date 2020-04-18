@@ -83,7 +83,7 @@ console.log("STATUS", data[0].endAngle)
               .attr("fill", 'cyan')
               .transition()
               .duration(750)
-              .attr("d", vis.arc(data));
+              .attr("d", vis.arcTween);
 
     }
 
