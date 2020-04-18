@@ -347,7 +347,7 @@ class Survey extends Component {
     }
 
     return (
-      <div style={{ height: "740px", backgroundColor: "#A9A9A9"}} >
+      <div style={{ height: "940px", backgroundColor: "#A9A9A9"}} >
         <NavBar/>
         <div style={{display: "flex", justifyContent: "center",
                       alignItems: "center", margin: "40px"}}>
