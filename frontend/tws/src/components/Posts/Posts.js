@@ -1,6 +1,7 @@
 import React from 'react';
 import LikeButton from '../../components/LikeButton/LikeButton';
 import ShareButton from '../../components/ShareButton/ShareButton';
+import CommentButton from '../../components/CommentButton/CommentButton';
 import {Spinner, ListGroup,Container, Card, Button, Media, ButtonToolbar} from 'react-bootstrap';
 
 
@@ -50,8 +51,8 @@ function Posts(props) {
                     </Card.Body>
                     <ButtonToolbar>
                       <LikeButton postId = {post}/>
-                    <Button variant="outline-secondary">Comment</Button>
-                    <ShareButton postInfo = {post} userID = {props.userId}/>
+                      <CommentButton postInfo = {post} userID = {props.userId}/>
+                      <ShareButton postInfo = {post} userID = {props.userId}/>
                     </ButtonToolbar>
                   </Card>
                 <br/>
