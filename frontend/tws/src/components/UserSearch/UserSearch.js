@@ -18,11 +18,7 @@ function UserSearch(props){
 
     <Modal size="lg" show={show} onHide={handleClose}>
       <Modal.Body >
-      <Row>
-        <Col>
-          <UserSearchButton/>
-        </Col>
-      </Row>
+        <UserSearchButton/>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="dark" onClick={handleClose}>
