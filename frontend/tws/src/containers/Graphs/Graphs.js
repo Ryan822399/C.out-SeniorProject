@@ -12,6 +12,7 @@ import PropTypes from 'prop-types'
 
 import {Image, Navbar, Nav, NavDropdown, Form, FormControl, Button, Media, Card, CardGroup} from 'react-bootstrap';
 import { Redirect, withRouter } from 'react-router-dom';
+import Particles from 'react-particles-js';
 
 
 class Graphs extends Component {
@@ -389,20 +390,50 @@ class Graphs extends Component {
         //If a set of elements exist, render it
     <div class="pro">
 
+
+
+
     <div style={styles.progress}>
     <ProgressTabs changeTabs={this.changeTabs} act={this.state.currTab}/>
     </div>
+
+    <div style={styles.forbutton}>
+            <GraphButton  formSubmitted={this.formSubmitted}
+            updateDesc={this.updateDesc}
+            updateTitle={this.updateTitle}
+            updateWeight={this.updateWeight}
+            updateDate={this.updateDate}
+            post={this.state.newPost}/>
+          </div>
+
+
+    <Particles canvasClassName="example2"
+             params={{
+               particles: {
+                 number: {
+                  value:100,
+                  density:{
+                    enable: true,
+                    value_area: 750
+                  }
+                 }
+               },
+                polygon: {
+                  enable: true,
+                  type: 'inside',
+                  move: {
+                    radius: 20
+                    }
+                  }
+              }} />
       {this.state.workouts[0] ? (
         <div style = {{position: "relative", width: 700, height: 550}}>
 
-
-          <CardGroup style ={{background: "#222"}}>
           <div dropdown>
             {this.loadWorkoutSelector()}
 
             <form onSubmit={this.handleSubmit}>
-              <label>
-                Workout Titles:
+              <label>r
                 <select value={this.state.value} onChange={this.handleChange}>
                   {this.state.workoutTitles.map(workoutTitles => (
                     <option key = {workoutTitles} value ={workoutTitles}>
@@ -413,31 +444,8 @@ class Graphs extends Component {
               </label>
               </form>
             </div>
-            </CardGroup>
 
-          <CardGroup style ={{background: "#222"}}>
-          <div style={styles.forbutton}>
-            <GraphButton  formSubmitted={this.formSubmitted}
-            updateDesc={this.updateDesc}
-            updateTitle={this.updateTitle}
-            updateWeight={this.updateWeight}
-            updateDate={this.updateDate}
-            post={this.state.newPost}/>
-          </div>
-          </CardGroup>
 
-          <CardGroup style ={{background: "#222"}}>
-          <div style={styles.forbutton}>
-            <DeleteButton  formSubmitted={this.formSubmitted}
-            updateDesc={this.updateDesc}
-            updateTitle={this.updateTitle}
-            updateWeight={this.updateWeight}
-            updateDate={this.updateDate}
-            post={this.state.newPost}/>
-          </div>
-          </CardGroup>
-
-          <CardGroup style ={{background: "#ccc7c6"}}>
             <Line
                 options ={{
                     title:{
@@ -461,20 +469,14 @@ class Graphs extends Component {
                 }}
                 data = {this.getChartData}
             />
-          </CardGroup>
+          
         </div>
       )
       : (
-
       <div style={styles.spinners}> <Spinner  animation="border" variant="success" />
-            <div style={styles.forbutton}>
-            <GraphButton  formSubmitted={this.formSubmitted}
-            updateDesc={this.updateDesc}
-            updateTitle={this.updateTitle}
-            updateWeight={this.updateWeight}
-            updateDate={this.updateDate}
-            post={this.state.newPost}/>
-          </div> </div>)
+
+           </div>)
+          
       }
     </div>
     )
