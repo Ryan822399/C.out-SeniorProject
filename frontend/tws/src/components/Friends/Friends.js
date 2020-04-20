@@ -8,6 +8,7 @@ import AddFriendButton from '../../components/AddFriendButton/AddFriendButton';
 import RemoveFriendButton from '../../components/RemoveFriendButton/RemoveFriendButton';
 import AddFriend from '../../components/AddFriend/AddFriend';
 import UserSearch from '../../components/UserSearch/UserSearch';
+import RemoveFriend from '../../components/RemoveFriend/RemoveFriend';
 import axios from 'axios';
 class Friends extends Component{
   state = {
@@ -72,9 +73,12 @@ class Friends extends Component{
                   </Media.Body>
                 </Media>
                 <Form>
+                {/*
                   <Button variant="dark" type="submit" onClick={this.updateFriends(friend.id)} block>
                     Remove Friend
                   </Button>
+                  */}
+                  <RemoveFriend/>
                 </Form>
               </ListGroup.Item>
             </div>
