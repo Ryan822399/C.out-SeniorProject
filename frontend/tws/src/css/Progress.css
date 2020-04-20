@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-.pro{
+/* .pro{
     width: 100%;
     height: 100vh;
     color: #fff;
@@ -12,7 +12,34 @@
     background-size: 400% 400%;
     position: relative;
     animation: change 10s ease-in-out infinite;
+} */
+
+.pro{
+    background: black;
+    height: 125vh;
+    background-size: 100% 100%;
+
 }
+.example{
+    position: absolute !important;
+    width: 100%;
+    height: 100%;
+
+}
+.example2{
+    position: absolute !important;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+
+
+}
+
+h3
+{
+  color:white;
+}
+
 
 
 @keyframes change {
