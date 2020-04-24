@@ -469,14 +469,14 @@ class Graphs extends Component {
                 }}
                 data = {this.getChartData}
             />
-          
+
         </div>
       )
       : (
       <div style={styles.spinners}> <Spinner  animation="border" variant="success" />
 
            </div>)
-          
+
       }
     </div>
     )
