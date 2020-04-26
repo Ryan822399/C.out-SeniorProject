@@ -15,6 +15,7 @@ class Profile extends Component {
   state = {
     info: [],
     posts: [],
+    usersPosts: [],
     userFriendships: [],
     token: this.props.cookies.get('tws-token'),
     currentID: this.props.cookies.get('tws-id')
@@ -41,9 +42,12 @@ class Profile extends Component {
         'Authorization': `Token ${this.state.token}`
       }
     }).then( resp => resp.json())
-    .then( res => this.setState({info: res}))
+    .then( (res) => this.setState({info: res}))
     .catch(error => console.log(error))
     //console.log(this.state.info);
+
+    console.log("CHECKING FOR ID:");
+    console.log(this.state.currentID);
 
     fetch(`${process.env.REACT_APP_API_URL}/api/feedposts/`, {
       method: 'GET',
@@ -86,6 +90,7 @@ class Profile extends Component {
     }).then( resp => resp.json())
     .then( res => this.setState({userFriendships: res.result }))
     .catch(error => console.log(error))
+
 //
   }
 
@@ -200,6 +205,8 @@ class Profile extends Component {
   console.log(this.state.userFriendships)
   console.log(this.state.posts);
   let profilePosts = this.state.posts.map(post => {
+    console.log("PROFILEPOST");
+    console.log(post.profile);
     return (
 
         <Col xs="6" sm="3" key={post.id} style={{display: "flex", alignItems: "stretch"}}>
