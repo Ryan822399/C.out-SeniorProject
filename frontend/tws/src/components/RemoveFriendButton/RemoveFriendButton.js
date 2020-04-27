@@ -26,7 +26,7 @@ class RemoveFriendButton extends Component {
     let form_data = new FormData();
     form_data.append('userID', this.state.attributes.userID);
     form_data.append('friedID', this.state.attributes.friedID);
-    let url = {process.env.REACT_APP_API_URL} + '/api/friendships/{this.state.friedID}';
+    let url = process.env.REACT_APP_API_URL + '/api/friendships/{this.state.friedID}';
 
     axios.delete(url, {
     })

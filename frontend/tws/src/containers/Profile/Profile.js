@@ -31,7 +31,7 @@ class Profile extends Component {
     var currentLocation = window.location;
     var url = new URL(currentLocation);
     var urlId = url.searchParams.get("id");
-    var link = {process.env.FRONTEND_WEB} + "/api/profile/" + {urlId};
+    var link = process.env.FRONTEND_WEB + "/api/profile/" + {urlId};
     if (currentLocation == link){
       urlId = this.props.cookies.get('tws-id');
     }

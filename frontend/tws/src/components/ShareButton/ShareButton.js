@@ -16,7 +16,7 @@ class ShareButton extends Component {
     //form_data.append('picture', this.props.postInfo.picture);
     form_data.append('user', this.props.userID);
 
-    let url = {process.env.REACT_APP_API_URL} + '/api/feedposts/';
+    let url = process.env.REACT_APP_API_URL + '/api/feedposts/';
 
     console.log(form_data);
     axios.post(url, form_data, {
