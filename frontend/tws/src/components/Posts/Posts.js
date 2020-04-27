@@ -19,7 +19,7 @@ function Posts(props) {
   return(
     <div>
           { props.posts.reverse().map( post => {
-          var u = 'http://localhost:3000/homepage/profile/?id=' + (props.profile.filter(({user}) => user === post.user))[0].user;
+          var u = {process.env.FRONTEND_WEB} + '/homepage/profile/?id=' + (props.profile.filter(({user}) => user === post.user))[0].user;
            return (
 
              <div key={post.id} className="post-item">

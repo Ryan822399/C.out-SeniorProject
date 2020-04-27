@@ -34,7 +34,7 @@ class PostButton extends Component {
     form_data.append('post', this.state.attributes.post);
     form_data.append('picture', this.state.attributes.picture);
     form_data.append('user', this.state.attributes.user);
-    let url = 'http://localhost:8000/api/feedposts/';
+    let url = {process.env.REACT_APP_API_URL} + '/api/feedposts/';
 
     axios.post(url, form_data, {
       headers: {

@@ -45,7 +45,7 @@ class AddFriendButton extends Component {
     form_data.append('picture', this.state.attributes.picture);
     let url = 'http://localhost:8000/api/friendslist/';
     */
-    let url = 'http://localhost:8000/api/friendships/';
+    let url = {process.env.REACT_APP_API_URL} + '/api/friendships/';
 
     axios.post(url, form_data, {
       headers: {
