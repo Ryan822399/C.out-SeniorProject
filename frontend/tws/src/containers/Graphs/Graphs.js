@@ -63,41 +63,48 @@ class Graphs extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
       }
 
-
+  //Handles changes in tab value
   handleChange = event => {
     this.setState( {value: event.target.value} )
    }
 
+
+  //Handles submit event when inputting new workout
   handleSubmit(event){
     alert("This is a test alert: " + this.state.value);
     this.state.data.update();
     event.preventDefault();
   }
 
+  //Handles title on Post prompt
   updateTitle = title =>  {
     this.setState({
       title: title
     });
 }
 
+  //Handles desc on Post prompt
   updateDesc = desc =>  {
     this.setState({
         description: desc
     });
   }
 
+  //Handles weight on Post prompt
   updateWeight = weight =>  {
     this.setState({
         weight: weight
     });
   }
 
+  //Handles date on Post prompt
   updateDate = date =>  {
     this.setState({
         date: date
     });
   }
 
+  //Handles entire Post form being submitted
   formSubmitted = () => {
     let postBody = {
       title: this.state.title,
@@ -106,6 +113,7 @@ class Graphs extends Component {
       date: this.state.date
     }
 
+    //Post on Personal workout database if it is on First Tab
     if(this.state.currTab == "first")
     {
       fetch(`${process.env.REACT_APP_API_URL}/api/workouts/`, {
@@ -125,7 +133,7 @@ class Graphs extends Component {
     }
 
 
-        //IMPLEMENT ONCE GROUP WORKOUT TABLE IS CREATED AND POST IS WORKING
+    //Post on Group Workout database if it is on Second tab
     else if(this.state.currTab == "second")
     {
       fetch(`${process.env.REACT_APP_API_URL}/api/groupworkout/`, {
@@ -188,6 +196,7 @@ class Graphs extends Component {
 
 // }
 
+  //Obtain information from database
   componentDidMount() {
     fetch(`${process.env.REACT_APP_API_URL}/api/workouts/`, {
       method: 'GET',
@@ -201,7 +210,7 @@ class Graphs extends Component {
   //  .then (resp => this.setState({workoutTitle: }))
     .catch( error => console.log(error))
 
-  //  UNCOMMENT ONCE GROUPWORKOUT TABLE IS WORKING
+  // Obtain information from Group Workout database
     fetch(`${process.env.REACT_APP_API_URL}/api/groupworkout/`, {
       method: 'GET',
       headers: {
@@ -217,11 +226,12 @@ class Graphs extends Component {
    }
 
 
-
+  //Handles the changes between first and second tab
   changeTabs = tab =>  {
       this.setState({currTab: tab});
   }
 
+    //Sets the color of the gradient of the graph
     setGradientColor = (canvas, color) => {
         const context = canvas.getContext('2d');
         const gradient = context.createLinearGradient(0, 0, 200, 400);
@@ -231,7 +241,7 @@ class Graphs extends Component {
         return gradient;
     }
 
-
+    //Loads the workout via Workout title 
     loadWorkoutSelector(){
       if(this.state.currTab == "first")
       {
@@ -248,6 +258,7 @@ class Graphs extends Component {
         return(<h3>Choose a Workout</h3>)
 
       }
+      //Loads the Group Workout via workout title
       else if(this.state.currTab == "second")
       {
         var filterIndex;
@@ -326,12 +337,14 @@ class Graphs extends Component {
         {
           data = this.state.groupData;
 
+          //Initializes variables to be used
           var chosenWorkout = this.state.value;
           var filterIndex;
           var groupFilteredDataWeight = [];
           var groupfilteredDataDate = [];
           var groupCounter = 0;
 
+          //Filters data by parsing through the specific workout title
           for(filterIndex = 0; filterIndex < this.state.groupWorkouts.length; filterIndex++)
           {
             var workoutTitle = this.state.groupWorkouts[filterIndex].title;
@@ -344,6 +357,7 @@ class Graphs extends Component {
             }
           }
 
+          //Puts desired information in the data variables to be displayed
           this.state.groupData.labels = groupfilteredDataDate;
           if(data.datasets){
             let colors = ["rgba(255, 0, 255, 0.75", "rgba(0, 0, 255, 0.75)"];
