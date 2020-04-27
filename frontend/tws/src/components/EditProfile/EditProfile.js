@@ -380,7 +380,7 @@ class EditProfile extends Component {
       accountType = this.props.user.accountType;
     }
 
-    let url = 'http://localhost:3000/api/profile/';
+    let url = process.env.FRONTEND_WEB + '/api/profile/';
     // console.log("THE USER");
     // console.log(this.props.user);
     return (

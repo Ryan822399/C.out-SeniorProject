@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Timeline, TimelineItem }  from 'vertical-timeline-component-for-react';
-import {Container, Image, ListGroup, Button, ButtonToolbar, Card, CardGroup, Form, FormControl, Media, Navbar, Nav, NavDropdown} from 'react-bootstrap';
+import {Container, Image, ListGroup, Button, ButtonToolbar, Card, CardGroup, Form, FormControl, Media, Navbar, Nav, NavDropdown, ListGroupItem, Row, Col} from 'react-bootstrap';
 //import Fri from '../src/components/Friends.js';
 import { withCookies } from 'react-cookie';
 
@@ -65,7 +65,7 @@ class TimelineDetails extends Component {
                       display: 'block',
                       float: 'left',
                       padding: '10px',
-                      background: '#A1D6E2',
+                      background: 'white',
                       color: '#222',
                     }}
                   >
@@ -122,11 +122,31 @@ class TimelineDetails extends Component {
       </div>
     )
   }
+
+  post = post => evt => {
+      return (
+            <Card>
+              <Card.Img variant="top" src={post.picture}/>
+              <Card.Body>
+                <Card.Title>{post.title}</Card.Title>
+                <Card.Text>
+                  <ListGroup className="list-group-flush">
+                    <ListGroupItem>{this.props.post.caption}</ListGroupItem>
+                    <ListGroupItem>{this.props.post.post}</ListGroupItem>
+                  </ListGroup>
+                </Card.Text>
+              </Card.Body>
+            </Card>
+
+      )
+  }
+
   render(){
+    console.log(this.props.post);
     return (
       <div>
       <Timeline lineColor={'#ddd'}>
-        <this.profilePost />
+        <this.post post={this.props.post}/>
       </Timeline>
       </div>
     )

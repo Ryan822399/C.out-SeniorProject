@@ -1,7 +1,7 @@
 import React, {Component, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/Profile.css';
-import {Image, Navbar, Nav, NavDropdown, Form, FormControl, Button, Media, Card, CardGroup, ButtonToolbar, Modal, Carousel, Row, Col, ListGroup, ListGroupItem} from 'react-bootstrap';
+import {Image, Navbar, Nav, NavDropdown, Form, FormControl, Button, Media, Card, CardGroup, ButtonToolbar, Modal, Carousel, Row, Col, ListGroup, ListGroupItem, Container} from 'react-bootstrap';
 //import Fri from '../src/components/Friends.js';
 import EditButton from '../../components/EditButton/EditButton';
 import CarouselPics from '../../components/CarouselPics/CarouselPics';
@@ -15,6 +15,7 @@ class Profile extends Component {
   state = {
     info: [],
     posts: [],
+    usersPosts: [],
     userFriendships: [],
     token: this.props.cookies.get('tws-token'),
     currentID: this.props.cookies.get('tws-id')
@@ -30,7 +31,8 @@ class Profile extends Component {
     var currentLocation = window.location;
     var url = new URL(currentLocation);
     var urlId = url.searchParams.get("id");
-    if (currentLocation == "http://localhost:3000/homepage/profile/"){
+    var link = process.env.FRONTEND_WEB + "/api/profile/" + {urlId};
+    if (currentLocation == link){
       urlId = this.props.cookies.get('tws-id');
     }
 
@@ -41,9 +43,12 @@ class Profile extends Component {
         'Authorization': `Token ${this.state.token}`
       }
     }).then( resp => resp.json())
-    .then( res => this.setState({info: res}))
+    .then( (res) => this.setState({info: res}))
     .catch(error => console.log(error))
     //console.log(this.state.info);
+
+    console.log("CHECKING FOR ID:");
+    console.log(this.state.currentID);
 
     fetch(`${process.env.REACT_APP_API_URL}/api/feedposts/`, {
       method: 'GET',
@@ -86,6 +91,7 @@ class Profile extends Component {
     }).then( resp => resp.json())
     .then( res => this.setState({userFriendships: res.result }))
     .catch(error => console.log(error))
+
 //
   }
 
@@ -196,13 +202,40 @@ class Profile extends Component {
   }
 
   render() {
-console.log("WTFFFF")
-console.log(this.state.userFriendships)
+  console.log("WTFFFF")
+  console.log(this.state.userFriendships)
+  console.log(this.state.posts);
+  let profilePosts = this.state.posts.map(post => {
+    console.log("PROFILEPOST");
+    console.log(post.profile);
+    return (
+
+        <Col xs="6" sm="3" key={post.id} style={{display: "flex", alignItems: "stretch"}}>
+          <Card style={{color: "#222"}}>
+            <Card.Img variant="top" src={post.picture} style={{height: "50%"}}/>
+            <Card.Body>
+              <Card.Title>{post.title}</Card.Title>
+              <Card.Text>
+              <ListGroup className="list-group-flush">
+                <ListGroupItem>{post.caption}</ListGroupItem>
+                <ListGroupItem>{post.post}</ListGroupItem>
+              </ListGroup>
+              </Card.Text>
+            </Card.Body>
+            <ButtonToolbar>
+            <Button variant="dark">Like</Button>
+            <Button variant="dark">Comment</Button>
+            </ButtonToolbar>
+          </Card>
+        </Col>
+
+    )
+  })
     return (
       <div>
         { this.state.info ? (
-          <Card className="bg-dark text-white" style={this.font}>
-            <Card.Img src="https://www.planetfitness.com/sites/default/files/feature-image/break-workout_602724.jpg" alt="Card image" />
+          <Card className="bg-dark text-white" style={this.font} style={{background: "black"}}>
+            <Card.Img src="https://www.planetfitness.com/sites/default/files/feature-image/break-workout_602724.jpg" alt="Card image"/>
             <Card.ImgOverlay>
               {/*<Card border="info" style={{textAlign: "center", color: "#222"}, this.font}>*/}
                 <Card.Body>
@@ -215,17 +248,19 @@ console.log(this.state.userFriendships)
                         ID={this.state.currentID}/>
                       </Col>
                     </Row>
-                    <Row>
-                      <Col>
-                        <TimelineDetails />
-                      </Col>
+
+                    <Row style={{paddingTop: "2%"}}>
+                      <CardGroup>
+                        {profilePosts}
+                      </CardGroup>
                     </Row>
+
                 </Card.Body>
 
             </Card.ImgOverlay>
           </Card>
         )
-          : <h3 style={{color: "#1BFFFF"}}>Loading</h3>
+          : <h3 style={{color: "#222"}}>Loading</h3>
         }
       </div>
     )

@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import { Route, BrowserRouter} from 'react-router-dom';
 import Login from './containers/Login/Login';
 import Profile from './containers/Profile/Profile';
-import SearchFriends from './containers/SearchFriends/SearchFriends';
+import SearchFriends from './components/SearchFriends/SearchFriends';
 import { CookiesProvider } from 'react-cookie';
 import Feed from './containers/Feed/Feed';
 import Graphs from './containers/Graphs/Graphs';
