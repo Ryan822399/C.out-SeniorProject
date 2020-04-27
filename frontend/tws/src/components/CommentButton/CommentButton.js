@@ -1,12 +1,16 @@
 import React, {Component}  from "react";
 import {Spinner, ListGroup,Container, Card, Button, Media, ButtonToolbar, DropdownButton, Dropdown} from 'react-bootstrap';
+import Comment from '../../components/Comment/Comment';
 import axios from 'axios';
 
 class CommentButton extends Component {
 
   state = {
+    comments: []
   }
-
+  //         { this.state.comments[0] ? <Comment comments={this.state.comments} postInfo = {this.props.postInfo} userID = {this.props.userID}/>
+  //              :  <div> <Spinner  animation="border" variant="success" /> </div>
+  //        }
   handleLike = event => {
     console.log(this.props.postInfo.title);
     //let form_data = new FormData();
@@ -34,20 +38,9 @@ class CommentButton extends Component {
 
 
   render(){
-    const wor = this.props;
     return (
       <DropdownButton id="dropdown-basic-button" title="Comment" variant="outline-secondary">
-        <Card style={{ width: '18rem' }}>
-          <Card.Img variant="top" src="holder.js/100px180" />
-          <Card.Body>
-            <Card.Title>Card Title</Card.Title>
-            <Card.Text>
-              Some quick example text to build on the card title and make up the bulk of
-              the card's content.
-            </Card.Text>
-            <Button variant="primary">Go somewhere</Button>
-          </Card.Body>
-        </Card>
+        <Comment comments={this.state.comments} postInfo = {this.props.postInfo} userID = {this.props.userID}/>
       </DropdownButton>
     )
   }
