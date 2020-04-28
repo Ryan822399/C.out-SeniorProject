@@ -30,6 +30,11 @@ class FeedPostSerializer(serializers.ModelSerializer):
         model = FeedPost
         fields = '__all__'
 
+class FeedCommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FeedComment
+        fields = '__all__'
+
 class WorkoutSerializer(serializers.ModelSerializer):
     class Meta:
         model = Workout

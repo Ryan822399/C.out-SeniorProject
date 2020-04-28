@@ -180,7 +180,6 @@ class Friend extends Component {
                 </Row>
                 <Row>
                   <Col>
-                    <TimelineDetails />
                   </Col>
 
                 </Row>
