@@ -34,9 +34,9 @@ class Login extends Component{
         this.props.cookies.set('tws-token', res.token);
         this.props.cookies.set('tws-id', res.id);
         if(res["non_field_errors"])
-        {console.log("ERROR: Bad Login attempt!", res)}
+        {alert("ERROR: Invalid Credentials, bad login attempt!")}
         else {window.location.href = "/homepage/feed";}
-      
+
       })
       .catch( error => console.log(error))
     } else {
