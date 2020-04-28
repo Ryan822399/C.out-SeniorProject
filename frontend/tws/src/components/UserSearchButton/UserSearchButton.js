@@ -2,7 +2,6 @@ import React, {useState, useRef,Component} from "react";
 import { Container, Navbar, Nav, NavDropdown, Form, FormControl, Button, Overlay, Tooltip, Modal, Row, Col, Card, CardGroup, Media, Carousel} from 'react-bootstrap';
 import { withCookies } from 'react-cookie';
 import EditButton from '../../components/EditButton/EditButton';
-import CarouselPics from '../../components/CarouselPics/CarouselPics';
 import axios from 'axios';
 
 class UserSearchButton extends Component {

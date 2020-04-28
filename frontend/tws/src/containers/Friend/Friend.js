@@ -3,7 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/Profile.css';
 import {Image, Navbar, Nav, NavDropdown, Form, FormControl, Button, Media, Card, CardGroup, ButtonToolbar, Modal, Carousel, Row, Col, ListGroup, ListGroupItem} from 'react-bootstrap';
 //import Fri from '../src/components/Friends.js';
-import CarouselPics from '../../components/CarouselPics/CarouselPics';
 import { withCookies } from 'react-cookie';
 import TimelineDetails from '../../components/TimelineDetails/TimelineDetails';
 import Friends from '../../components/Friends/Friends';
@@ -128,16 +127,7 @@ class Friend extends Component {
   }
 
 
-  carousel = evt => {
-    return (
-      <div>
-        <Carousel>
-          <CarouselPics posts={this.state.posts}/>
-        </Carousel>
 
-      </div>
-    )
-  }
 
   profile = evt => {
     return (
@@ -164,6 +154,7 @@ class Friend extends Component {
   }
 
   render() {
+
     console.log("User logged (Profile Page)");
     console.log(this.state.info);
 

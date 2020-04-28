@@ -1,10 +1,9 @@
 import React, {Component, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/Profile.css';
-import {Image, Navbar, Nav, NavDropdown, Form, FormControl, Button, Media, Card, CardGroup, ButtonToolbar, Modal, Carousel, Row, Col, ListGroup, ListGroupItem, Container} from 'react-bootstrap';
+import {Image, Navbar, Nav, NavDropdown, Form, FormControl, Button, Media, Card, CardGroup, ButtonToolbar, Modal, Row, Col, ListGroup, ListGroupItem, Container} from 'react-bootstrap';
 //import Fri from '../src/components/Friends.js';
 import EditButton from '../../components/EditButton/EditButton';
-import CarouselPics from '../../components/CarouselPics/CarouselPics';
 import { withCookies } from 'react-cookie';
 import TimelineDetails from '../../components/TimelineDetails/TimelineDetails';
 import Friends from '../../components/Friends/Friends';
@@ -36,7 +35,7 @@ class Profile extends Component {
       urlId = this.props.cookies.get('tws-id');
     }
 
-    fetch(`${process.env.REACT_APP_API_URL}/api/profile/${urlId}/`, {
+    fetch(`${process.env.REACT_APP_API_URL}/api/profile/${this.props.cookies.get('tws-id')}/`, {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -97,6 +96,7 @@ class Profile extends Component {
 
 
   profileUserName = evt => {
+
     return (
       <Media>
         <Media.Body>
@@ -165,16 +165,7 @@ class Profile extends Component {
   }
 
 
-  carousel = evt => {
-    return (
-      <div>
-        <Carousel>
-          <CarouselPics posts={this.state.posts}/>
-        </Carousel>
 
-      </div>
-    )
-  }
 
   profile = evt => {
     return (
@@ -203,6 +194,7 @@ class Profile extends Component {
 
   render() {
   console.log("WTFFFF")
+  console.log("ASDFASDF", this.state.info)
   console.log(this.state.userFriendships)
   console.log(this.state.posts);
   let profilePosts = this.state.posts.map(post => {
