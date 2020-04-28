@@ -39,6 +39,7 @@ class EditProfile extends Component {
 
   }
 
+  /*
   inputChanged = event => {
     let att = this.state.attributes;
     att[event.target.name] = event.target.value;
@@ -52,7 +53,7 @@ class EditProfile extends Component {
     att[event.target.name] = event.target.files[0];
     this.setState({attributes: att});
   };
-
+  */
   handleFormSubmit = event => {
 
     let profile = {
@@ -127,7 +128,7 @@ class EditProfile extends Component {
   };
 
 
-  /*
+
   change = val => evt => {
     // console.log("EVENT TARGET");
     // console.log(evt.target.value);
@@ -213,8 +214,9 @@ class EditProfile extends Component {
     // console.log(this.state.bio);
     // console.log(this.state.location);
   }
-  */
-/*
+
+
+  /*
   change = val => evt => {
     console.log("EVENT TARGET");
     console.log(evt.target.value);
@@ -238,7 +240,8 @@ class EditProfile extends Component {
   }
   */
 
-  /*
+
+
   update = evt => {
     // console.log("THIS PICTURE");
     // console.log(this.state.user.picture);
@@ -261,29 +264,32 @@ class EditProfile extends Component {
     // console.log(this.props.user.picture);
     // console.log(profile.picture);
 
+    console.log("PROFILE");
+    console.log(profile);
 
-    if(profile.userName == "") {
+
+    if(profile.userName == null) {
       profile.userName = this.props.user.userName;
     }
-    if(profile.firstName == "") {
+    if(profile.firstName == null) {
       profile.firstName = this.props.user.firstName;
     }
-    if(profile.lastName == "") {
+    if(profile.lastName == null) {
       profile.lastName = this.props.user.lastName;
     }
-    if(profile.bio == "") {
+    if(profile.bio == null) {
       profile.bio = this.props.user.bio;
     }
-    if(profile.location == "") {
+    if(profile.location == null) {
       profile.location = this.props.user.location;
     }
     if(profile.picture == null) {
       profile.picture = this.props.user.picture;
     }
-    if(profile.heightFeet == 0) {
+    if(profile.heightFeet == null) {
       profile.heightFeet = this.props.user.heightFeet;
     }
-    if(profile.heightInches == 0) {
+    if(profile.heightInches == null) {
       profile.heightInches = this.props.user.heightInches;
     }
     if(profile.accountType == null) {
@@ -303,60 +309,61 @@ class EditProfile extends Component {
 
     alert("TESTING");
 
-    let form_data = new FormData();
-    form_data.append('userName', profile.userName);
-    form_data.append('firstrName', profile.firstName);
-    form_data.append('lastName', profile.lastName);
-    form_data.append('bio', profile.bio);
-    form_data.append('location', profile.location);
-    form_data.append('email', profile.email);
-    form_data.append('dob', profile.dob);
-    form_data.append('user', profile.user);
-    form_data.append('heightFeet', profile.heightFeet);
-    form_data.append('heightInches', profile.heightInches);
-    form_data.append('picture', profile.picture);
-    form_data.append('accountType', profile.accountType);
+    // let form_data = new FormData();
+    // form_data.append('userName', profile.userName);
+    // form_data.append('firstrName', profile.firstName);
+    // form_data.append('lastName', profile.lastName);
+    // form_data.append('bio', profile.bio);
+    // form_data.append('location', profile.location);
+    // form_data.append('email', profile.email);
+    // form_data.append('dob', profile.dob);
+    // form_data.append('user', profile.user);
+    // form_data.append('heightFeet', profile.heightFeet);
+    // form_data.append('heightInches', profile.heightInches);
+    // form_data.append('picture', profile.picture);
+    // form_data.append('accountType', profile.accountType);
+    //
+    // axios.put(`${process.env.REACT_APP_API_URL}/api/profile/${profile.user}/`, form_data, {
+    //   headers: {
+    //     'content-type': 'multipart/form-data'
+    //   }
+    // })
+    //     .then(res => {
+    //       console.log(res.data);
+    //     })
+    //     .catch(err => console.log(err))
 
-    axios.put(`${process.env.REACT_APP_API_URL}/api/profile/${profile.user}/`, form_data, {
-      headers: {
-        'content-type': 'multipart/form-data'
-      }
-    })
-        .then(res => {
-          console.log(res.data);
-        })
-        .catch(err => console.log(err))
 
     // console.log("UPDATED PICTURE");
     // console.log(form_data);
-    // console.log("TESTING PROFILE");
-    // console.log(profile);
-    // fetch(`${process.env.REACT_APP_API_URL}/api/profile/3/`, {
-    //   method: 'PUT',
-    //   headers: {
-    //
-    //   },
-    //   body: form_data
-    // }).then( resp => resp.json())
-    // .then( res => console.log(res))
-    // .catch(error => console.log(error))
-    // console.log(profile.userName);
-    // console.log(profile.firstName);
-    // console.log(profile.lastName);
-    // console.log(profile.bio);
-    // console.log(profile.location);
-    // console.log(profile.email);
-    // console.log(profile.dob);
-    // console.log(profile.user);
-    // console.log(profile.heightFeet);
-    // console.log(profile.heightInches);
-    // console.log(profile.picture);
-    // console.log(profile.accountType);
-    // console.log(this.state.user);
-    //console.log(profile);
-    //alert("HELLO");
+    console.log("TESTING PROFILE");
+    console.log(profile);
+    fetch(`${process.env.REACT_APP_API_URL}/api/profile/3/`, {
+      method: 'PUT',
+      headers: {
+
+      },
+      body: profile
+    }).then( resp => resp.json())
+    .then( res => console.log(res))
+    .catch(error => console.log(error))
+    console.log(profile.userName);
+    console.log(profile.firstName);
+    console.log(profile.lastName);
+    console.log(profile.bio);
+    console.log(profile.location);
+    console.log(profile.email);
+    console.log(profile.dob);
+    console.log(profile.user);
+    console.log(profile.heightFeet);
+    console.log(profile.heightInches);
+    console.log(profile.picture);
+    console.log(profile.accountType);
+    console.log(this.state.user);
+    console.log(profile);
+    alert("HELLO");
   }
-  */
+
 
 
   submit = evt => {
@@ -395,28 +402,28 @@ class EditProfile extends Component {
             <Form>
               <Form.Group controlId="formGridUserName">
                 <Form.Label>Username</Form.Label>
-                <Form.Control style={{background: "#222", color: "white"}} as="input" name="userName" type="userName" placeholder={userName} value={this.state.userName} onChange={this.inputChanged}/>
+                <Form.Control style={{background: "#222", color: "white"}} as="input" name="userName" type="userName" placeholder={userName} value={this.state.userName} onChange={this.change("userName")}/>
               </Form.Group>
 
               <Form.Row>
                 <Form.Group as={Col} controlId="formGridFirstName">
                   <Form.Label>First name</Form.Label>
-                  <Form.Control style={{background: "#222", color: "white"}} as="input" name="firstName" type="firstName" placeholder={firstName} value={this.state.firstName} onChange={this.inputChanged}/>
+                  <Form.Control style={{background: "#222", color: "white"}} as="input" name="firstName" type="firstName" placeholder={firstName} value={this.state.firstName} onChange={this.change("firstName")}/>
                 </Form.Group>
                 <Form.Group as={Col} controlId="formGridLastName">
                   <Form.Label>Last name</Form.Label>
-                  <Form.Control style={{background: "#222", color: "white"}} as="input" name="lastName" type="lastName" placeholder={lastName} value={this.state.lastName} onChange={this.inputChanged}/>
+                  <Form.Control style={{background: "#222", color: "white"}} as="input" name="lastName" type="lastName" placeholder={lastName} value={this.state.lastName} onChange={this.change("lastName")}/>
                 </Form.Group>
               </Form.Row>
 
               <Form.Group controlId="formGridBio">
                 <Form.Label>Bio</Form.Label>
-                <Form.Control style={{background: "#222", color: "white"}} as="input" name="bio" type="bio" placeholder={bio} value={this.state.bio} onChange={this.inputChanged}/>
+                <Form.Control style={{background: "#222", color: "white"}} as="input" name="bio" type="bio" placeholder={bio} value={this.state.bio} onChange={this.change("bio")}/>
               </Form.Group>
 
               <Form.Group controlId="formGridLocation">
                 <Form.Label>Location</Form.Label>
-                <Form.Control style={{background: "#222", color: "white"}} as="input" name="location" type="location" placeholder={location} value={this.state.location} onChange={this.inputChanged}/>
+                <Form.Control style={{background: "#222", color: "white"}} as="input" name="location" type="location" placeholder={location} value={this.state.location} onChange={this.change("location")}/>
               </Form.Group>
 
               <Form.Group controlId="formGridPicture">
@@ -427,22 +434,22 @@ class EditProfile extends Component {
                     type="file"
                     id="picture"
                     name="picture"
-                    accept="image/png, image/jpeg, image/JPG"  onChange={this.handleImageChange}/>
+                    accept="image/png, image/jpeg, image/JPG"  onChange={this.change("picture")}/>
 
               </Form.Group>
 
               <Form.Row>
                 <Form.Group as={Col} controlId="formGridHeightFeet">
                   <Form.Label>Height (Feet)</Form.Label>
-                  <Form.Control style={{background: "#222", color: "white"}} as="input" name="heightFeet" type="heightFeet" placeholder={heightFeet} value={this.state.heightFeet} onChange={this.inputChanged}/>
+                  <Form.Control style={{background: "#222", color: "white"}} as="input" name="heightFeet" type="heightFeet" placeholder={heightFeet} value={this.state.heightFeet} onChange={this.change("heightFeet")}/>
                 </Form.Group>
                 <Form.Group as={Col} controlId="formGridHeightInches">
                   <Form.Label>Height (inches)</Form.Label>
-                  <Form.Control style={{background: "#222", color: "white"}} as="input" name="heightInches" type="heightInches" placeholder={heightInches} value={this.state.heightInches} onChange={this.inputChanged}/>
+                  <Form.Control style={{background: "#222", color: "white"}} as="input" name="heightInches" type="heightInches" placeholder={heightInches} value={this.state.heightInches} onChange={this.change("heightInches")}/>
                 </Form.Group>
               </Form.Row>
 
-              <Button variant="dark" type="submit" onClick={this.handleFormSubmit}>
+              <Button variant="dark" type="submit" onClick={this.update}>
                 Submit
               </Button>
             </Form>
