@@ -124,6 +124,7 @@ const styles = {
       width: '100px'
     },
     forbutton: {
+        backgroundColor: "#6c757d",
         width: '500px',
         marginBottom: '20px',
         marginTop: '25px',
