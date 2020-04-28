@@ -11,36 +11,35 @@ class CommentButton extends Component {
   //         { this.state.comments[0] ? <Comment comments={this.state.comments} postInfo = {this.props.postInfo} userID = {this.props.userID}/>
   //              :  <div> <Spinner  animation="border" variant="success" /> </div>
   //        }
-  handleLike = event => {
-    console.log(this.props.postInfo.title);
-    //let form_data = new FormData();
-    //form_data.append('title', this.props.postInfo.title);
-    //form_data.append('caption',this.props.postInfo.caption);
-    //form_data.append('post', this.props.postInfo.post);
-    //form_data.append('picture', this.props.postInfo.picture);
-    //form_data.append('user', this.props.userID);
 
-    //let url = 'http://localhost:8000/api/feedposts/';
+  componentDidMount(){
+    console.log("DEBUG", this.props.postInfo.id);
+    const postId = this.props.postInfo.id;
 
-    //console.log(form_data);
-    //axios.post(url, form_data, {
-    //  headers: {
-    //    'content-type': 'multipart/form-data'
-    //  }
-    //})
-    //    .then(res => {
-    //      console.log(res.data);
-    //    })
-    //    .catch(err => console.log(err))
-    //<Button variant="outline-secondary" onClick={this.handleLike}> Comment</Button>
-   }
+    fetch(`${process.env.REACT_APP_API_URL}/api/feedcomment/`, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json'
+      }
+    }).then( resp => resp.json())
+    .then( res => this.setState({comments: res}))
+    .then(res => console.log("GET DEBUG", this.state.comments))
+    .catch( error => console.log(error))
 
+  }
+
+  getData = event => {
+    console.log("Current State", this.state.comments);
+  }
 
 
   render(){
     return (
-      <DropdownButton id="dropdown-basic-button" title="Comment" variant="outline-secondary">
-        <Comment comments={this.state.comments} postInfo = {this.props.postInfo} userID = {this.props.userID}/>
+      <DropdownButton id="dropdown-basic-button" title="Comment" variant="outline-secondary" onClick={this.getData}>
+        {this.state.comments ?
+          <Comment postComments={this.state.comments} postInfo = {this.props.postInfo} userID = {this.props.userID}/>
+          :  <div style={styles.spinners}> <Spinner  animation="border" variant="success" /> </div>
+        }
       </DropdownButton>
     )
   }
@@ -48,3 +47,10 @@ class CommentButton extends Component {
 
 
 export default CommentButton;
+
+const styles = {
+  spinners: {
+    display: "flex",
+    justifyContent: "center"
+  }
+}
