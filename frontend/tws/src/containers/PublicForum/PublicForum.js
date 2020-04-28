@@ -6,7 +6,6 @@ import { Spinner, ButtonToolbar, Row, Col, Tab, Card, Button, Accordion } from '
 
 import ForumPosts from '../../components/ForumPosts/ForumPosts';
 import ForumButton from '../../components/ForumButton/ForumButton';
-import WordCloud from '../../components/Visuals/WordCloud/WordCloud';
 
 class PublicForum extends Component {
 
@@ -225,13 +224,8 @@ render() {
             updateCat={this.updateCat}
             />
           </div>
-          <Row>
-            <Col xs={6} md={4}>
-                <div style={{ position: "sticky", top: "0"}}>
-                  <WordCloud/>
-                </div>
-            </Col>
-            <Col xs={12} md={8}>
+
+
               <Accordion  defaultActiveKey="0">
                   <Card style={styles.contentCard}>
                     <Card.Header>
@@ -280,8 +274,8 @@ render() {
                     </Accordion.Collapse>
                   </Card>
               </Accordion>
-            </Col>
-          </Row>
+
+
         </div>
     );
   }

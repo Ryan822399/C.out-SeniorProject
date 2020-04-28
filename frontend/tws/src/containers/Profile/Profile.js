@@ -1,10 +1,9 @@
 import React, {Component, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/Profile.css';
-import {Image, Navbar, Nav, NavDropdown, Form, FormControl, Button, Media, Card, CardGroup, ButtonToolbar, Modal, Carousel, Row, Col, ListGroup, ListGroupItem, Container} from 'react-bootstrap';
+import {Image, Navbar, Nav, NavDropdown, Form, FormControl, Button, Media, Card, CardGroup, ButtonToolbar, Modal, Row, Col, ListGroup, ListGroupItem, Container} from 'react-bootstrap';
 //import Fri from '../src/components/Friends.js';
 import EditButton from '../../components/EditButton/EditButton';
-import CarouselPics from '../../components/CarouselPics/CarouselPics';
 import { withCookies } from 'react-cookie';
 import TimelineDetails from '../../components/TimelineDetails/TimelineDetails';
 import Friends from '../../components/Friends/Friends';
@@ -36,7 +35,7 @@ class Profile extends Component {
       urlId = this.props.cookies.get('tws-id');
     }
 
-    fetch(`${process.env.REACT_APP_API_URL}/api/profile/${urlId}/`, {
+    fetch(`${process.env.REACT_APP_API_URL}/api/profile/${this.props.cookies.get('tws-id')}/`, {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -45,10 +44,7 @@ class Profile extends Component {
     }).then( resp => resp.json())
     .then( (res) => this.setState({info: res}))
     .catch(error => console.log(error))
-    //console.log(this.state.info);
 
-    console.log("CHECKING FOR ID:");
-    console.log(this.state.currentID);
 
     fetch(`${process.env.REACT_APP_API_URL}/api/feedposts/`, {
       method: 'GET',
@@ -59,22 +55,7 @@ class Profile extends Component {
     .then( res => this.setState({posts: res}))
     .catch(error => console.log(error))
 
-    // console.log("TESTING");
-    // console.log(this.state.posts);
-    // console.log("TOKEN");
-    // console.log(this.state.token);
 
-    /*
-    Promise.all([
-            fetch('${process.env.REACT_APP_API_URL}/api/profile/'),
-            fetch('${process.env.REACT_APP_API_UR}/api/feedpost/')
-        ])
-        .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
-        .then(([data1, data2]) => this.setState({
-            info: data1,
-            posts: data2
-        }));
-    */
     const id = { id: this.props.ID, userID: this.props.ID };
     let friendsBody = {
       userID: this.state.currentID
@@ -97,6 +78,7 @@ class Profile extends Component {
 
 
   profileUserName = evt => {
+
     return (
       <Media>
         <Media.Body>
@@ -165,16 +147,7 @@ class Profile extends Component {
   }
 
 
-  carousel = evt => {
-    return (
-      <div>
-        <Carousel>
-          <CarouselPics posts={this.state.posts}/>
-        </Carousel>
 
-      </div>
-    )
-  }
 
   profile = evt => {
     return (
@@ -202,12 +175,9 @@ class Profile extends Component {
   }
 
   render() {
-  console.log("WTFFFF")
-  console.log(this.state.userFriendships)
-  console.log(this.state.posts);
+
   let profilePosts = this.state.posts.map(post => {
-    console.log("PROFILEPOST");
-    console.log(post.profile);
+
     return (
 
         <Col xs="6" sm="3" key={post.id} style={{display: "flex", alignItems: "stretch"}}>
@@ -237,7 +207,6 @@ class Profile extends Component {
           <Card className="bg-dark text-white" style={this.font} style={{background: "black"}}>
             <Card.Img src="https://www.planetfitness.com/sites/default/files/feature-image/break-workout_602724.jpg" alt="Card image"/>
             <Card.ImgOverlay>
-              {/*<Card border="info" style={{textAlign: "center", color: "#222"}, this.font}>*/}
                 <Card.Body>
                     <Row>
                       <Col xs="5">
@@ -266,5 +235,4 @@ class Profile extends Component {
     )
   }
 }
-//<this.profilePost />
 export default withCookies(Profile);

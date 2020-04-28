@@ -45,6 +45,11 @@ class FeedPostViewSet(viewsets.ModelViewSet):
     #authentication_classes = (TokenAuthentication,)
     #permission_classes = (IsAuthenticated, )
 
+class FeedCommentViewSet(viewsets.ModelViewSet):
+    queryset = FeedComment.objects.all()
+    serializer_class = FeedCommentSerializer
+    permission_classes = [permissions.AllowAny]
+
 class TopThreeFlexForumViewSet(viewsets.ModelViewSet):
     queryset = ForumPost.objects.filter(category="flex")[:3]
     serializer_class = ForumPostSerializer

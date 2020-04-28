@@ -100,9 +100,9 @@ class FeedPost(models.Model):
         return self.title
 
 class FeedComment(models.Model):
-    description = models.TextField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    feedpost = models.ForeignKey(FeedPost, on_delete=models.CASCADE)
+    description = models.TextField(null=True, blank=True)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, blank=True)
+    feedpost = models.ForeignKey(FeedPost, on_delete=models.CASCADE, null=True, blank=True)
 
 class Rating(models.Model):
     workout = models.ForeignKey(Workout, on_delete=models.CASCADE)
