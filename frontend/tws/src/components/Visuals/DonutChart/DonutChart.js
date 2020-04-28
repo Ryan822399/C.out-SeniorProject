@@ -1,4 +1,5 @@
-import * as d3 from 'd3';
+//Created and maintained by andreology
+import {scaleOrdinal, pie, arc, interpolate, select, nest, schemeCategory10 } from 'd3';
 const MARGIN = { TOP: 10, BOTTOM: 10, LEFT: 10, RIGHT: 10}
 const WIDTH = 300 - MARGIN.LEFT - MARGIN.RIGHT;
 const HEIGHT = 400 - MARGIN.TOP - MARGIN.BOTTOM;
@@ -9,25 +10,25 @@ export default class DonutChart {
 
         const vis = this
         const radius = Math.min(WIDTH, HEIGHT) /2;
-        vis.svg = d3.select(element)
+        vis.svg = select(element)
            .append("svg")
                .attr("width", WIDTH)
            .attr("height", HEIGHT)
            .append("g").attr("transform", "translate(" + WIDTH / 2 + "," + HEIGHT /2 + ")");
 
-        const color = d3.scaleOrdinal(d3.schemeCategory10);
+        const color = scaleOrdinal(schemeCategory10);
 
-        const pie = d3.pie().sort(null).value(40);
+        const pies = pie().sort(null).value(40);
 
-        vis.arc = d3.arc()
+        vis.arc = arc()
         .outerRadius(radius - 30)
         .innerRadius(radius- 70);
 
-        const outerArc = d3.arc()
+        const outerArc = arc()
         .outerRadius(radius - 23)
         .innerRadius(radius- 30);
 
-        const innerArc = d3.arc()
+        const innerArc = arc()
         .outerRadius(radius - 70)
         .innerRadius(radius- 78);
 
@@ -42,14 +43,14 @@ export default class DonutChart {
         .style("stroke-width", 5);
 
 
-        const data0 = d3.nest().entries(status);
+        const data0 = nest().entries(status);
 
         vis.update(status);
 
     }
      arcTween = a => {
          const vis = this
-          var i = d3.interpolate(this._current, a);
+          var i = interpolate(this._current, a);
           this._current = i(0);
           return function(t) {
            return vis.arc(i(t));

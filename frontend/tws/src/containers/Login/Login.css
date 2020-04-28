@@ -1,5 +1,6 @@
 .login-container {
-    background: #A1D6E2;
+    background-image: url("https://www.planetfitness.com/sites/default/files/feature-image/break-workout_602724.jpg");
+    height: 1000px
 }
 
 h1 span.fa {

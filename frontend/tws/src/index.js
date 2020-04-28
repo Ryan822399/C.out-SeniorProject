@@ -15,8 +15,6 @@ import PublicForum from './containers/PublicForum/PublicForum';
 import Friend from './containers/Friend/Friend';
 import Survey from './containers/Survey/Survey';
 
-//<Route exact path="/workouts" component={App}/>
-import Footer from './components/Footer/Footer';
 
 const routing = (
   <BrowserRouter>
