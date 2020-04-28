@@ -116,7 +116,7 @@ class EditProfile extends Component {
     form_data.append('accountType', profile.accountType);
     form_data.append('user', profile.user);
 
-    axios.put(`${process.env.REACT_APP_API_URL}/api/profile/${profile.user}/`, form_data, {
+    axios.put(`${process.env.REACT_APP_API_URL}/api/profile/${this.props.cookies.get('tws-id')}/`, form_data, {
       headers: {
         'content-type': 'multipart/form-data'
       }
