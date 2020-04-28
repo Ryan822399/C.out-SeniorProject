@@ -89,12 +89,12 @@ class Friend extends Component {
           <h4 style={{padding: "0"}}>
             { <h4>{this.state.info.firstName} {this.state.info.lastName}</h4> }
           </h4>
-          
+
             { <p> { this.state.info.location} </p> }
-          
-          
+
+
             { <p> {this.state.info.bio} </p> }
-        
+
         </Media.Body>
       </Media>
     )
@@ -189,7 +189,6 @@ class Friend extends Component {
                 </Row>
                 <Row>
                   <Col>
-                    <TimelineDetails />
                   </Col>
 
                 </Row>
