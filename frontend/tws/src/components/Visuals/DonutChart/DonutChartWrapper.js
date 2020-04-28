@@ -1,3 +1,4 @@
+//Created and maintained by andreology
 import React, { Component } from 'react';
 import DonutChart from './DonutChart';
 
