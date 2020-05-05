@@ -63,7 +63,7 @@ class FriendShipSerializer(serializers.ModelSerializer):
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        fields = '__all__'
+        fields = ('description', 'user', 'forumPost', 'date', 'curr_userpicture', 'curr_username')
 
 class LikeSerializer(serializers.ModelSerializer):
     class Meta:

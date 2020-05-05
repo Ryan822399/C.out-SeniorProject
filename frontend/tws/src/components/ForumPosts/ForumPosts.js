@@ -3,6 +3,7 @@ import {Form, Modal, Row, Col, Image, FormControl, CardGroup, Card, Accordion, B
 import ForumComments from '../ForumComments/ForumComments';
 var FontAwesome = require('react-fontawesome');
 
+
 function ForumPosts(props) {
 
   const [show, setShow] = useState(false);
@@ -69,8 +70,7 @@ function ForumPosts(props) {
                             <Button onClick={props.commentFormSubmitted} style={{height: "31px"}} variant="primary">Submit</Button>
                           </InputGroup.Append>
                         </InputGroup>
-                          <h3 style={{border: "solid", borderTop: "3px #fff"}}>hello</h3>
-                          <h3 style={{border: "solid", borderTop: "3px #fff"}}>hello</h3>
+                            <ForumComments postComments={props.comments}/> 
                         </Modal.Body>
                       </Modal>
                 ): <div></div>
