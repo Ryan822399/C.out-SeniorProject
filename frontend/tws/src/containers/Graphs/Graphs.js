@@ -31,7 +31,7 @@ class Graphs extends Component {
                     {
                         label: "Workout #1",
                         backgroundColor: "rgba(255, 0, 255, 0.75)",
-                        pointHoberBackgroundColor: 'white',
+                        pointHoberBackgroundColor: 'black',
                     //    data: [4, 5, 1, 12, 20, 2, 16],
                         data: [10, 15, 20, 25]
                     }
@@ -241,7 +241,7 @@ class Graphs extends Component {
         return gradient;
     }
 
-    //Loads the workout via Workout title 
+    //Loads the workout via Workout title
     loadWorkoutSelector(){
       if(this.state.currTab == "first")
       {
@@ -321,7 +321,7 @@ class Graphs extends Component {
             let colors = ["rgba(255, 0, 255, 0.75", "rgba(0, 0, 255, 0.75)"];
             data.datasets.forEach((set, i) => {
                 set.backgroundColor = this.setGradientColor(canvas, colors[i]);
-                set.borderColor = "white";
+                set.borderColor = "black";
                 set.borderWidth = 2;
                 set.label = chosenWorkout;
                 set.data = filteredDataWeight;
@@ -363,7 +363,7 @@ class Graphs extends Component {
             let colors = ["rgba(255, 0, 255, 0.75", "rgba(0, 0, 255, 0.75)"];
             data.datasets.forEach((set, i) => {
               set.backgroundColor = this.setGradientColor(canvas, colors[i]);
-              set.borderColor = "white";
+              set.borderColor = "black";
               set.borderWidth = 2;
               set.label = chosenWorkout;
               set.data = groupFilteredDataWeight
@@ -466,20 +466,20 @@ class Graphs extends Component {
                         display: true,
                         text: 'Workout Routine',
                         fontSize: 25,
-                        fontColor: 'white'
+                        fontColor: 'black'
                     },
                     label:{
                         display: true,
-                        fontColor: 'white'
+                        fontColor: 'black'
                     },
                     responsive: true,
                     lineHeightAnnotation: {
                         always: false,
                         hover: true,
-                        color: 'white',
+                        color: 'black',
                       //  noDash: true
                     },
-                    backgroundColor: 'white'
+                    backgroundColor: 'black'
                 }}
                 data = {this.getChartData}
             />

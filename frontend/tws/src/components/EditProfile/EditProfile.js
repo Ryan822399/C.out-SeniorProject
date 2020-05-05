@@ -116,7 +116,7 @@ class EditProfile extends Component {
     form_data.append('accountType', profile.accountType);
     form_data.append('user', profile.user);
 
-    axios.put(`${process.env.REACT_APP_API_URL}/api/profile/${this.props.cookies.get('tws-id')}/`, form_data, {
+    axios.put(`${process.env.REACT_APP_API_URL}/api/profile/${profile.user}/`, form_data, {
       headers: {
         'content-type': 'multipart/form-data'
       }
@@ -338,11 +338,8 @@ class EditProfile extends Component {
     // console.log(form_data);
     console.log("TESTING PROFILE");
     console.log(profile);
-    fetch(`${process.env.REACT_APP_API_URL}/api/profile/3/`, {
+    fetch(`${process.env.REACT_APP_API_URL}/api/profile/${this.props.cookies.get('tws-id')}/`, {
       method: 'PUT',
-      headers: {
-
-      },
       body: profile
     }).then( resp => resp.json())
     .then( res => console.log(res))
