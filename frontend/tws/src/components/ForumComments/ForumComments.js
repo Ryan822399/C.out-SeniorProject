@@ -9,7 +9,7 @@ export default function ForumComments(props) {
     ( props.postComments.map( comment => {
      return (
        <div key={comment.id}>
-       <Row style={{border: "solid", borderTop: "3px #fff", borderWidth: "1px"}}>
+       <Row style={{margin: "4px", borderStyle: "outset", borderWidth: "1px"}}>
        <Col sm={4}>
           <Row>
                <Col >
