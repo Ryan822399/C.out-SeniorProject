@@ -3,21 +3,21 @@ import {Spinner, ListGroup,Container, Card, Button, Media, ButtonToolbar} from '
 
 
 function Comment(props) {
-   console.log("Comment DEBUUG", props.postComments);
    return(
      <div>
            { props.postComments.map( comment => {
+             console.log("Comment DEBUUG", props.profileList[comment.profile]);
             return (
               <div key="temp" className="comment-item">
-              <Card bg="dark" style={{ padding: '10px', border: '3px solid black', width: '40rem' }}>
+              <Card bg="dark" style={{ padding: '10px', border: '3px solid black', width: '30rem' }}>
                 <Card.Body>
                     <Media>
                       <a href={""}>
                           <img
-                            width={50}
-                            height={50}
+                            width={40}
+                            height={40}
                             className="mr-3"
-                            src= {"https://vignette.wikia.nocookie.net/lucifer/images/0/02/S3_promo_-_Lucifer_Morningstar.jpg/revision/latest?cb=20180529224917"}
+                            src= {props.profileList[comment.profile].picture}
                             alt="Profile Picture"
                             allign="right"
                             style={{borderRadius: 30/2}}/>
