@@ -25,6 +25,7 @@ class PublicForum extends Component {
     alldietposts: [],
     allcardioposts: [],
     allweightposts: [],
+    allComments: [],
     filter: true,
     token: this.props.cookies.get('tws-token')
 
@@ -112,6 +113,21 @@ class PublicForum extends Component {
     this.setState({
       currForPost: id
     });
+
+    let postBody = {
+      commId: id
+    }
+
+    fetch(`${process.env.REACT_APP_API_URL}/api/forumposts/${id}/get_comments/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${this.state.token}`
+      },
+      body: JSON.stringify(postBody)
+    }).then( resp => resp.json())
+    .then( res => this.setState({allComments: res.result}))
+    .catch( error => console.log(error))
   }
 
   filterPosts = () => {
@@ -243,7 +259,8 @@ render() {
                                 commentFormSubmitted={this.commentFormSubmitted}
                                 updateCommId={this.updateCommId}
                                 updateCommDesc={this.updateCommDesc}
-                                forumposts={content}/>
+                                forumposts={content}
+                                comments={this.state.allComments}/>
                           :  <div style={styles.spinners}> <Spinner  animation="border" variant="success" /> </div>
                     }
                     </Card.Body>
@@ -266,7 +283,8 @@ render() {
                                   commentFormSubmitted={this.commentFormSubmitted}
                                   updateCommId={this.updateCommId}
                                   updateCommDesc={this.updateCommDesc}
-                                  forumposts={allcontent}/>
+                                  forumposts={allcontent}
+                                  comments={this.state.allComments}/>
                             :  <div style={styles.spinners}> <Spinner  animation="border" variant="success" /> </div>
                       }
 

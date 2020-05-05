@@ -130,6 +130,21 @@ class ForumPostViewSet(viewsets.ModelViewSet):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated, )
 
+    @action(detail=True, methods=['POST'])
+    def get_comments(self, request, pk=None):
+        if 'commId' in request.data:
+            id = request.data['commId']
+            comments = Comment.objects.filter(forumPost=id)
+
+            serializer = CommentSerializer(comments, many=True)
+            response = { 'message': 'Request was successful compa', 'result': serializer.data}
+            return Response(response, status=status.HTTP_200_OK)
+
+        else:
+            response = {'message': 'Forum post ID must be provided compa'}
+            return Response(response, status=status.HTTP_400_BAD_REQUEST)
+
+
 class RatingViewSet(viewsets.ModelViewSet):
     queryset = Rating.objects.all()
     serializer_class = RatingSerializer

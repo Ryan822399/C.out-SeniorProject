@@ -138,7 +138,7 @@ class ForumPost(models.Model):
 class Comment(models.Model):
     description = models.TextField()
     user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
-    forumPost = models.OneToOneField(ForumPost, on_delete=models.CASCADE)
+    forumPost = models.ForeignKey(ForumPost, on_delete=models.CASCADE)
     date = models.DateField(auto_now=False, null=True, blank=True)
     def curr_userpicture(self):
         pro = Profile.objects.get(user=self.user.id)

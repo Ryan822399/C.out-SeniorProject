@@ -1,32 +1,39 @@
 import React from 'react';
-import { Card, Accordion, Button, InputGroup, FormControl} from 'react-bootstrap';
+import { Card, Image, Button, Row, Col} from 'react-bootstrap';
 
 export default function ForumComments(props) {
-  return(
-    <Accordion >
-          <Card >
-          <Card.Header >
-            <Accordion.Toggle as={Button} variant="link" eventKey="0">
-              Comments
-            </Accordion.Toggle>
-          </Card.Header>
-          <Accordion.Collapse eventKey="0">
-            <Card.Body>
-            <InputGroup className="mb-3">
-            <FormControl
-              placeholder="Enter a nice comment"
-              aria-label="Enter a nice comment"
-              aria-describedby="basic-addon2"
-            />
-            <InputGroup.Append>
-              <Button variant="outline-secondary">Submit</Button>
-            </InputGroup.Append>
-          </InputGroup>
-            Hello! I'm the body
 
-            </Card.Body>
-          </Accordion.Collapse>
-          </Card>
-      </Accordion>
+  return(
+  <div>
+  { props.postComments.length > 1  ?
+    ( props.postComments.map( comment => {
+     return (
+       <div key={comment.id}>
+       <Row style={{border: "solid", borderTop: "3px #fff", borderWidth: "1px"}}>
+       <Col sm={4}>
+          <Row>
+               <Col >
+
+                 <Image style={{marginRight: "100px"}} src={`${process.env.REACT_APP_MEDIA_API_URL}/${comment.curr_userpicture}/`} width="15" height="15" roundedCircle fluid />
+                 <span style={{marginLeft: "2px"}}> {comment.curr_username}</span>
+                 </Col>
+
+           </Row>
+           <Row>
+              <small className="text-muted" style={{marginLeft: "7px", fontSize: "10px"}}>Posted on {comment.date}</small>
+           </Row>
+          </Col>
+           <Col sm={8}>
+              <p style={{color: "black"}}>{comment.description}</p>
+           </Col>
+       </Row>
+       </div>
+    );})
+  ) :
+    <p style={{color: "black", border: "solid", borderTop: "3px #fff"}}>{props.postComments.description}</p>
+
+  }
+  </div>
+
   );
 }
