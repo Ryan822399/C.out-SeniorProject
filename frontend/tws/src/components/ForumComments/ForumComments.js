@@ -12,12 +12,10 @@ export default function ForumComments(props) {
        <Row style={{margin: "4px", borderStyle: "outset", borderWidth: "1px"}}>
        <Col sm={4}>
           <Row>
-               <Col >
-
+               <Col>
                  <Image style={{marginRight: "100px"}} src={`${process.env.REACT_APP_MEDIA_API_URL}/${comment.curr_userpicture}/`} width="15" height="15" roundedCircle fluid />
                  <span style={{marginLeft: "2px"}}> {comment.curr_username}</span>
                  </Col>
-
            </Row>
            <Row>
               <small className="text-muted" style={{marginLeft: "7px", fontSize: "10px"}}>Posted on {comment.date}</small>
@@ -29,8 +27,7 @@ export default function ForumComments(props) {
        </Row>
        </div>
     );})
-  ) :
-    <p style={{color: "black", border: "solid", borderTop: "3px #fff"}}>{props.postComments.description}</p>
+  ) : <p style={{color: "black", border: "solid", borderTop: "3px #fff"}}>{props.postComments.description}</p>
 
   }
   </div>

@@ -5,10 +5,8 @@ var FontAwesome = require('react-fontawesome');
 
 
 function ForumPosts(props) {
-
   const [show, setShow] = useState(false);
   return (
-
 
           <CardGroup>
           { props.forumposts.map( post => {
@@ -20,14 +18,11 @@ function ForumPosts(props) {
             <Card.Header>
               <Row>
                 <Col >
-
                   <Image src={`${process.env.REACT_APP_MEDIA_API_URL}/${post.curr_userpicture}/`} width="40" height="40" roundedCircle fluid />
-
                 </Col>
                 <span style={{marginLeft: "2px"}}> {post.curr_username}</span>
                   <small className="text-muted" style={{marginLeft: "7px"}}>Posted on {post.date}</small>
                 <Col>
-
                 </Col>
               </Row>
             </Card.Header>
@@ -60,17 +55,19 @@ function ForumPosts(props) {
                             { props.forumposts.find(x => x.id == props.currForPost).caption}
                           </p>
                           <InputGroup className="mb-3">
-
                           <Form>
                             <Form.Group controlId="formGroupTitle">
                               <Form.Control as="input" size="sm" name="description" type="title" placeholder="Respond here"  onChange={props.updateCommDesc}/>
                             </Form.Group>
                           </Form>
                           <InputGroup.Append>
-                            <Button onClick={props.commentFormSubmitted} style={{height: "31px"}} variant="primary">Submit</Button>
+                            <Button onClick={() => {
+                              props.commentFormSubmitted()
+                              setShow(false)
+                            }} style={{height: "31px"}} variant="primary">Submit</Button>
                           </InputGroup.Append>
                         </InputGroup>
-                            <ForumComments postComments={props.comments}/> 
+                            <ForumComments postComments={props.comments}/>
                         </Modal.Body>
                       </Modal>
                 ): <div></div>

@@ -150,6 +150,10 @@ class Comment(models.Model):
 
         return str(pro.userName)
 
+    class Meta:
+        unique_together = (('user', 'description'),)
+        index_together = (('user', 'description'),)
+
     def __str__(self):
         return self.description
 
