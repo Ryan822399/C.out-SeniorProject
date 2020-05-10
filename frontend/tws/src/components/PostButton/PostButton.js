@@ -11,7 +11,9 @@ class PostButton extends Component {
         caption: "",
         post: "",
         picture: null,
-        user: this.props.cookies.get('tws-id')
+        user: this.props.cookies.get('tws-id'),
+        likes: 0,
+        profile: this.props.cookies.get('tws-id')
       },
       token: this.props.cookies.get('tws-token'),
       username: ""
@@ -21,6 +23,7 @@ class PostButton extends Component {
       let att = this.state.attributes;
       att[event.target.name] = event.target.value;
       this.setState({attributes: att});
+      console.log(this.state);
     }
 
 
@@ -28,26 +31,50 @@ class PostButton extends Component {
   handleFormSubmit = event => {
     //event.preventDefault()
     //console.log(this.state.attributes);
-    let form_data = new FormData();
+    let form_data =  {
+      title: this.state.attributes.title,
+      caption: this.state.attributes.caption,
+      post: this.state.attributes.post,
+      picture: this.state.attributes.picture,
+      likes: this.state.attributes.likes,
+      user: parseInt(this.state.attributes.user),
+      profile: parseInt(this.state.attributes.profile)
+    }
+    new FormData();
     form_data.append('title', this.state.attributes.title);
     form_data.append('caption', this.state.attributes.caption);
     form_data.append('post', this.state.attributes.post);
     form_data.append('picture', this.state.attributes.picture);
-    form_data.append('user', this.state.attributes.user);
+    form_data.append('user', parseInt(this.state.attributes.user));
+    form_data.append('likes', this.state.attributes.likes);
+    form_data.append('profile', parseInt(this.state.attributes.profile));
     let url = process.env.REACT_APP_API_URL + '/api/feedposts/';
-
+    console.log(form_data)
     axios.post(url, form_data, {
       headers: {
-        'content-type': 'multipart/form-data'
+         'content-type': 'multipart/form-data'
       }
     })
         .then(res => {
           console.log(res.data);
         })
         .catch(err => console.log(err))
+
+
+        // fetch(`${process.env.REACT_APP_API_URL}/api/feedposts/`, {
+        //   method: 'POST',
+        //   headers: {
+        //     'Accept': 'application/json'
+        //   },
+        //   body: form_data
+        // }).then( resp => resp.json())
+        // .then( res => console.log(res))
+        // .catch( error => console.log(error))
+
   };
 
   render(){
+
     return (
       <div style={{background: "#999", padding: "5%"}}>
         <Form>

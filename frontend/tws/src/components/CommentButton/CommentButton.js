@@ -43,12 +43,11 @@ class CommentButton extends Component {
     console.log("Current State", this.state.comments);
   }
 
-
+//<NewFeedComment /> <br/>
   render(){
     return (
 
       <DropdownButton id="dropdown-basic-button" title="Comment" variant="outline-secondary" onClick={this.getData}>
-        <NewFeedComment /> <br/>
         {this.state.comments ?
           <Comment postComments={this.state.comments} postInfo = {this.props.postInfo} userID = {this.props.userID} profileList = {this.state.profiles}/>
           :  <div style={styles.spinners}> <Spinner  animation="border" variant="success" /> </div>

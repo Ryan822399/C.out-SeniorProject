@@ -36,7 +36,9 @@ class NewPostCommentButton extends Component {
         })
         .catch(err => console.log(err))
   };
-
+  //
+  //
+  //
   render(){
     return (
       <div style={{background: "#999", padding: "5%"}}>
