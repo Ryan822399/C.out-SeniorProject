@@ -112,7 +112,6 @@ search = evt => {
     <div>
       <Form style={{padding: "5px"}}>
           <AddFriend/>
-          <UserSearch/>
       </Form>
     </div>
   )

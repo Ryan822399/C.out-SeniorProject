@@ -192,10 +192,6 @@ class Profile extends Component {
               </ListGroup>
               </Card.Text>
             </Card.Body>
-            <ButtonToolbar>
-            <Button variant="dark">Like</Button>
-            <Button variant="dark">Comment</Button>
-            </ButtonToolbar>
           </Card>
         </Col>
 
