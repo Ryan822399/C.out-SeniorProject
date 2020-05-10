@@ -39,7 +39,7 @@ class EditProfile extends Component {
 
   }
 
-  /*
+
   inputChanged = event => {
     let att = this.state.attributes;
     att[event.target.name] = event.target.value;
@@ -53,7 +53,7 @@ class EditProfile extends Component {
     att[event.target.name] = event.target.files[0];
     this.setState({attributes: att});
   };
-  */
+
   handleFormSubmit = event => {
 
     let profile = {
@@ -71,6 +71,7 @@ class EditProfile extends Component {
       accountType: this.state.attributes.accountType
     }
 
+    console.log("PROFILE");
     console.log(profile);
 
 
@@ -243,16 +244,16 @@ class EditProfile extends Component {
 
 
   update = evt => {
-    // console.log("THIS PICTURE");
-    // console.log(this.state.user.picture);
+    console.log("THIS EMAIL");
+    console.log(this.state.editedProfile);
     let profile = {
       userName: this.state.userName,
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       bio: this.state.bio,
       location: this.state.location,
-      email: this.state.email,
-      dob: this.state.dob,
+      email: this.state.editedProfile.email,
+      dob: this.state.editedProfile.dob,
       user: this.props.cookies.get('tws-id'),
       heightFeet: this.state.heightFeet,
       heightInches: this.state.heightInches,
@@ -306,6 +307,8 @@ class EditProfile extends Component {
     console.log(profile.heightFeet);
     console.log(profile.heightInches);
     console.log(profile.accountType);
+    console.log(profile.email);
+    console.log(profile.dob);
 
     alert("TESTING");
 
@@ -399,28 +402,28 @@ class EditProfile extends Component {
             <Form>
               <Form.Group controlId="formGridUserName">
                 <Form.Label>Username</Form.Label>
-                <Form.Control style={{background: "#222", color: "white"}} as="input" name="userName" type="userName" placeholder={userName} value={this.state.userName} onChange={this.change("userName")}/>
+                <Form.Control style={{background: "#222", color: "white"}} as="input" name="userName" type="userName" placeholder={userName} value={this.state.userName} onChange={this.inputChanged}/>
               </Form.Group>
 
               <Form.Row>
                 <Form.Group as={Col} controlId="formGridFirstName">
                   <Form.Label>First name</Form.Label>
-                  <Form.Control style={{background: "#222", color: "white"}} as="input" name="firstName" type="firstName" placeholder={firstName} value={this.state.firstName} onChange={this.change("firstName")}/>
+                  <Form.Control style={{background: "#222", color: "white"}} as="input" name="firstName" type="firstName" placeholder={firstName} value={this.state.firstName} onChange={this.inputChanged}/>
                 </Form.Group>
                 <Form.Group as={Col} controlId="formGridLastName">
                   <Form.Label>Last name</Form.Label>
-                  <Form.Control style={{background: "#222", color: "white"}} as="input" name="lastName" type="lastName" placeholder={lastName} value={this.state.lastName} onChange={this.change("lastName")}/>
+                  <Form.Control style={{background: "#222", color: "white"}} as="input" name="lastName" type="lastName" placeholder={lastName} value={this.state.lastName} onChange={this.inputChanged}/>
                 </Form.Group>
               </Form.Row>
 
               <Form.Group controlId="formGridBio">
                 <Form.Label>Bio</Form.Label>
-                <Form.Control style={{background: "#222", color: "white"}} as="input" name="bio" type="bio" placeholder={bio} value={this.state.bio} onChange={this.change("bio")}/>
+                <Form.Control style={{background: "#222", color: "white"}} as="input" name="bio" type="bio" placeholder={bio} value={this.state.bio} onChange={this.inputChanged}/>
               </Form.Group>
 
               <Form.Group controlId="formGridLocation">
                 <Form.Label>Location</Form.Label>
-                <Form.Control style={{background: "#222", color: "white"}} as="input" name="location" type="location" placeholder={location} value={this.state.location} onChange={this.change("location")}/>
+                <Form.Control style={{background: "#222", color: "white"}} as="input" name="location" type="location" placeholder={location} value={this.state.location} onChange={this.inputChanged}/>
               </Form.Group>
 
               <Form.Group controlId="formGridPicture">
@@ -431,22 +434,22 @@ class EditProfile extends Component {
                     type="file"
                     id="picture"
                     name="picture"
-                    accept="image/png, image/jpeg, image/JPG"  onChange={this.change("picture")}/>
+                    accept="image/png, image/jpeg, image/JPG"  onChange={this.handleImageChange}/>
 
               </Form.Group>
 
               <Form.Row>
                 <Form.Group as={Col} controlId="formGridHeightFeet">
                   <Form.Label>Height (Feet)</Form.Label>
-                  <Form.Control style={{background: "#222", color: "white"}} as="input" name="heightFeet" type="heightFeet" placeholder={heightFeet} value={this.state.heightFeet} onChange={this.change("heightFeet")}/>
+                  <Form.Control style={{background: "#222", color: "white"}} as="input" name="heightFeet" type="heightFeet" placeholder={heightFeet} value={this.state.heightFeet} onChange={this.inputChanged}/>
                 </Form.Group>
                 <Form.Group as={Col} controlId="formGridHeightInches">
                   <Form.Label>Height (inches)</Form.Label>
-                  <Form.Control style={{background: "#222", color: "white"}} as="input" name="heightInches" type="heightInches" placeholder={heightInches} value={this.state.heightInches} onChange={this.change("heightInches")}/>
+                  <Form.Control style={{background: "#222", color: "white"}} as="input" name="heightInches" type="heightInches" placeholder={heightInches} value={this.state.heightInches} onChange={this.inputChanged}/>
                 </Form.Group>
               </Form.Row>
 
-              <Button variant="dark" type="submit" onClick={this.update}>
+              <Button variant="dark" type="submit" onClick={this.handleFormSubmit}>
                 Submit
               </Button>
             </Form>
