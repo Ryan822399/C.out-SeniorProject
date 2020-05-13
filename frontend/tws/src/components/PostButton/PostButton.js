@@ -10,10 +10,10 @@ class PostButton extends Component {
         title: "",
         caption: "",
         post: "",
-        picture: null,
+        picture: "",
         user: this.props.cookies.get('tws-id'),
-        likes: 0,
-        profile: this.props.cookies.get('tws-id')
+        likes: 0.0,
+        profile: null
       },
       token: this.props.cookies.get('tws-token'),
       username: ""
@@ -26,29 +26,38 @@ class PostButton extends Component {
       console.log(this.state);
     }
 
+    handleImageChange = event => {
+      console.log(event.target.files[0]);
+      let att = this.state.attributes;
+      att[event.target.name] = event.target.files[0];
+      this.setState({attributes: att});
+      console.log(this.state);
+    };
+
 
 
   handleFormSubmit = event => {
     //event.preventDefault()
     //console.log(this.state.attributes);
-    let form_data =  {
-      title: this.state.attributes.title,
-      caption: this.state.attributes.caption,
-      post: this.state.attributes.post,
-      picture: this.state.attributes.picture,
-      likes: this.state.attributes.likes,
-      user: parseInt(this.state.attributes.user),
-      profile: parseInt(this.state.attributes.profile)
-    }
-    new FormData();
+    //let form_data =  {
+    //  title: this.state.attributes.title,
+    //  caption: this.state.attributes.caption,
+    //  post: this.state.attributes.post,
+    //  picture: this.state.attributes.picture,
+    //  likes: this.state.attributes.likes,
+    //  user: this.state.attributes.user,
+    //  profile: this.state.attributes.profile
+    //}
+    let form_data = new FormData();
     form_data.append('title', this.state.attributes.title);
-    form_data.append('caption', this.state.attributes.caption);
+    form_data.append('caption',this.state.attributes.caption);
     form_data.append('post', this.state.attributes.post);
     form_data.append('picture', this.state.attributes.picture);
-    form_data.append('user', parseInt(this.state.attributes.user));
-    form_data.append('likes', this.state.attributes.likes);
-    form_data.append('profile', parseInt(this.state.attributes.profile));
-    let url = process.env.REACT_APP_API_URL + '/api/feedposts/';
+    //form_data.append('user', this.props.userID);
+    form_data.append('user', this.state.attributes.user);
+
+    //let url = process.env.REACT_APP_API_URL + '/api/feedposts/';
+    let url = 'http://localhost:8000/api/feedposts/';
     console.log(form_data)
     axios.post(url, form_data, {
       headers: {
